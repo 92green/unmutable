@@ -1,50 +1,60 @@
 import React from 'react';
-import {Map, List} from 'immutable';
-import {from} from 'unmutable';
+import {fromJS, Map, List} from 'immutable';
+import {Wrap} from 'unmutable';
 
 export default function Page(props) {
-    const str = from("string");
-    const obj = from({
+    const str = "string";
+
+    const obj = {
         hello: "obj"
-    })
+    };
 
-    const map = from(Map({
-        hello: "map"
-    }))
+    const map = Map(obj);
 
-    const nestedObj = from({
+    const nestedObj = {
         hi: {
             ahoy: "hey"
         }
-    })
+    };
 
-    console.log(str.done());
-    console.log(obj.done());
-    console.log(map.done());
-    console.log(nestedObj.get('hi').done());
-    console.log(nestedObj.get('hi').get('ahoy').done());
-    console.log(nestedObj.get('hi').get('none').done());
+    const nestedMaps = fromJS(nestedObj);
 
-    const lots = {
+    const objectInMap = Map(nestedObj);
+
+    console.log(str, Wrap(str).done());
+    console.log(obj, Wrap(obj).done());
+    console.log(map, Wrap(map).done());
+
+    console.log("");
+    console.log(nestedObj, "get('hi')", Wrap(nestedObj).get('hi').done());
+    console.log(nestedObj, "get('hi').get('ahoy')", Wrap(nestedObj).get('hi').get('ahoy').done());
+    console.log(nestedObj, "get('hi').get('none')", Wrap(nestedObj).get('hi').get('none').done());
+
+    console.log("");
+    console.log(nestedMaps, "get('hi')", Wrap(nestedMaps).get('hi').done());
+    console.log(nestedMaps, "get('hi').get('ahoy')", Wrap(nestedMaps).get('hi').get('ahoy').done());
+    console.log(nestedMaps, "get('hi').get('none')", Wrap(nestedMaps).get('hi').get('none').done());
+
+    console.log("");
+    console.log(objectInMap, "get('hi')", Wrap(objectInMap).get('hi').done());
+    console.log(objectInMap, "get('hi').get('ahoy')", Wrap(objectInMap).get('hi').get('ahoy').done());
+    console.log(objectInMap, "get('hi').get('none')", Wrap(objectInMap).get('hi').get('none').done());
+
+
+    const lotsObj = {
         a: "A",
         b: "B",
         c: "C"
     };
 
-    const lotsObj = from(lots);
-    const lotsMap = from(Map(lots));
+    const lotsMap = Map(lotsObj);
 
+    console.log("");
+    const lotsMapStuff = Wrap(lotsMap).map(ii => ii + "!").filter((ii, kk) => kk !== "b").done();
+    console.log(lotsMap, "add '!' ... filter out b", lotsMapStuff);
 
-    const lotsMapStuff = lotsMap.map(ii => ii + "!").filter((ii, kk) => kk !== "b").done();
-    console.log(lotsMapStuff);
-
-    const someObjStuff = lotsObj.map(ii => ii + "!");
-    console.log(someObjStuff);
-
-    const lotsObjStuff = lotsObj.map(ii => ii + "!").filter((ii, kk) => kk !== "b").done();
-    console.log(lotsObjStuff);
-
-
+    const lotsObjStuff = Wrap(lotsObj).map(ii => ii + "!").filter((ii, kk) => kk !== "b").done();
+    console.log(lotsObj, "add '!' ... filter out b", lotsObjStuff);
 
     return <p>Yeah cool and all that</p>;
 }

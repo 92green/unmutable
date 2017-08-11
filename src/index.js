@@ -3,17 +3,27 @@ import isPlainObject from 'is-plain-object';
 import listMethodNames from './listMethodNames';
 
 class UnmutableWrapper {
-    constructor(item) {
+    constructor(item, options = {}) {
+        const {methodConstructors = {}} = options;
+
         // copy methods if applicable
         try {
-            listMethodNames(item).forEach(name => {
-                let method = item[name];
-                this[name] = (...args) => {
-                    return from(method.bind(item)(...args));
-                };
-            });
+            listMethodNames(item)
+                .forEach(name => {
+                    let method = item[name];
+                    this[name] = (...args) => {
+                        const result = method.bind(item)(...args);
+
+                        const CustomConstructor = methodConstructors[name];
+                        if(CustomConstructor) {
+                            return CustomConstructor(result);
+                        }
+                        return Wrap(result);
+                    };
+                });
         } catch(e) {
         }
+
         this.__item = item;
     }
 
@@ -29,34 +39,30 @@ class UnmutableMapWrapper extends UnmutableWrapper {
 }
 
 class UnmutableObjectWrapper extends UnmutableMapWrapper {
-    constructor(item) {
-        super(Map(item));
+    constructor(item, options) {
+        const obj = ii => new UnmutableObjectWrapper(ii);
 
-        // methods that should return an object
-        const backToObject = [
-            'set',
-            'delete',
-            'deleteAll',
-            'clear',
-            'update',
-            'merge',
-            'mergeWith',
-            'concat',
-            'map',
-            'mapKeys',
-            'mapEntries',
-            'flatMap',
-            'filter',
-            'filterNot',
-            'reverse',
-            'sort',
-            'sortBy'
-        ];
+        const methodConstructors = {
+            set: obj,
+            delete: obj,
+            deleteAll: obj,
+            clear: obj,
+            update: obj,
+            merge: obj,
+            mergeWith: obj,
+            concat: obj,
+            map: obj,
+            mapKeys: obj,
+            mapEntries: obj,
+            flatMap: obj,
+            filter: obj,
+            filterNot: obj,
+            reverse: obj,
+            sort: obj,
+            sortBy: obj
+        };
 
-        backToObject.forEach(name => {
-            let method = this[name];
-            this[name] = (...args) => method(...args).done();
-        })
+        super(Map(item), {methodConstructors}, options);
 
         // remove deep operations for now
         // rewrite them in future
@@ -74,15 +80,19 @@ class UnmutableObjectWrapper extends UnmutableMapWrapper {
             delete this[name];
         })
     }
+
+    done() {
+        return this.__item.toObject();
+    }
 }
 
 
-export const from = (item) => {
+export const Wrap = (item, options) => {
     if(isPlainObject(item)) {
-        return new UnmutableObjectWrapper(item);
+        return new UnmutableObjectWrapper(item, options);
     }
     if(Map.isMap(item)) {
-        return new UnmutableMapWrapper(item);
+        return new UnmutableMapWrapper(item, options);
     }
-    return new UnmutableWrapper(item)
+    return new UnmutableWrapper(item, options);
 };
