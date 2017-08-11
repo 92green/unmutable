@@ -32,6 +32,7 @@
     "test-all": "NODE_ENV=test yarn run lint && yarn run flow && yarn run test"
   },
   "devDependencies": {
+    "app-module-path": "^2.2.0",
     "ava": "0.19.1",
     "babel-cli": "^6.23.0",
     "babel-core": "^6.23.0",
