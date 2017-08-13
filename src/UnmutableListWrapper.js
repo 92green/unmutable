@@ -1,11 +1,11 @@
 import UnmutableWrapper from './UnmutableWrapper';
 
-export default class UnmutableMapWrapper extends UnmutableWrapper {
+export default class UnmutableListWrapper extends UnmutableWrapper {
     get size() {
         return this.__item.size;
     }
 
-    isKeyed() {
+    isIndexed() {
         return true;
     }
 }

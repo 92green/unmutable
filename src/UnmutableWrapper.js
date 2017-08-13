@@ -28,4 +28,12 @@ export default class UnmutableWrapper {
     done() {
         return this.__item;
     }
+
+    isKeyed() {
+        return false;
+    }
+
+    isIndexed() {
+        return false;
+    }
 }
