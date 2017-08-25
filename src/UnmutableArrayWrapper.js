@@ -3,26 +3,28 @@ import UnmutableListWrapper from './UnmutableListWrapper';
 
 export default class UnmutableArrayWrapper extends UnmutableListWrapper {
     constructor(item, options) {
-        const obj = ii => new UnmutableArrayWrapper(ii);
+        const arr = ii => new UnmutableArrayWrapper(ii);
 
         const methodConstructors = {
-            set: obj,
-            delete: obj,
-            deleteAll: obj,
-            clear: obj,
-            update: obj,
-            merge: obj,
-            mergeWith: obj,
-            concat: obj,
-            map: obj,
-            mapKeys: obj,
-            mapEntries: obj,
-            flatMap: obj,
-            filter: obj,
-            filterNot: obj,
-            reverse: obj,
-            sort: obj,
-            sortBy: obj
+            set: arr,
+            delete: arr,
+            insert: arr,
+            clear: arr,
+            push: arr,
+            pop: arr,
+            unshift: arr,
+            shift: arr,
+            update: arr,
+            merge: arr,
+            mergeWith: arr,
+            concat: arr,
+            map: arr,
+            flatMap: arr,
+            filter: arr,
+            filterNot: arr,
+            reverse: arr,
+            sort: arr,
+            sortBy: arr
         };
 
         super(List(item), {methodConstructors}, options);
@@ -59,6 +61,15 @@ export default class UnmutableArrayWrapper extends UnmutableListWrapper {
         delete this.updateIn;
         delete this.mergeIn;
         delete this.mergeDeepIn;
+
+        // also delete untested methods
+        delete this.zip;
+        delete this.zipWith;
+        delete this.groupBy;
+        delete this.interpose;
+        delete this.interleave;
+        delete this.splice;
+        delete this.flatten;
     }
 
     done() {
