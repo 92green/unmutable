@@ -1,3 +1,4 @@
+// @flow
 import {Map, List} from 'immutable';
 import isPlainObject from 'is-plain-object';
 
@@ -7,7 +8,7 @@ import UnmutableListWrapper from './UnmutableListWrapper';
 import UnmutableObjectWrapper from './UnmutableObjectWrapper';
 import UnmutableArrayWrapper from './UnmutableArrayWrapper';
 
-export default function Wrap(item, options) {
+export default function Wrap(item: *, options: Options = {}): UnmutableWrapper {
     if(isPlainObject(item)) {
         return new UnmutableObjectWrapper(item, options);
     }
@@ -21,4 +22,4 @@ export default function Wrap(item, options) {
         return new UnmutableListWrapper(item, options);
     }
     return new UnmutableWrapper(item, options);
-};
+}

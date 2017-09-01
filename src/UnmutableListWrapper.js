@@ -1,11 +1,12 @@
+// @flow
 import UnmutableWrapper from './UnmutableWrapper';
 
 export default class UnmutableListWrapper extends UnmutableWrapper {
-    get size() {
+    get size(): number {
         return this.__item.size;
     }
 
-    isIndexed() {
+    isIndexed(): boolean {
         return true;
     }
 }

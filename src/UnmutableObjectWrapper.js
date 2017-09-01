@@ -1,8 +1,9 @@
+// @flow
 import {Map} from 'immutable';
 import UnmutableMapWrapper from './UnmutableMapWrapper';
 
 export default class UnmutableObjectWrapper extends UnmutableMapWrapper {
-    constructor(item, options) {
+    constructor(item: *, options: Options = {}) {
         const obj = ii => new UnmutableObjectWrapper(ii);
 
         const methodConstructors = {
@@ -27,8 +28,10 @@ export default class UnmutableObjectWrapper extends UnmutableMapWrapper {
 
         super(Map(item), {methodConstructors}, options);
 
-        this.getIn = (keyPath, notFoundValue = undefined) => {
-            var item = this;
+        var _this = (this: any);
+
+        _this.getIn = (keyPath: string[], notFoundValue: * = undefined): * => {
+            var item = _this;
             for(let key of keyPath) {
                 if(!item.has(key)) {
                     return notFoundValue;
@@ -38,9 +41,9 @@ export default class UnmutableObjectWrapper extends UnmutableMapWrapper {
             return item;
         };
 
-        this.setIn = (keyPath, value) => {
+        _this.setIn = (keyPath: string[], value: *): UnmutableObjectWrapper => {
             for(var i = keyPath.length - 1; i >= 0; i--) {
-                value = this
+                value = _this
                     .getIn(keyPath.slice(0, i))
                     .set(keyPath[i], value);
 
@@ -53,15 +56,15 @@ export default class UnmutableObjectWrapper extends UnmutableMapWrapper {
 
         // remove deep operations
         // rewrite them in future
-        delete this.mergeDeep;
-        delete this.mergeDeepWith;
-        delete this.deleteIn;
-        delete this.updateIn;
-        delete this.mergeIn;
-        delete this.mergeDeepIn;
+        delete _this.mergeDeep;
+        delete _this.mergeDeepWith;
+        delete _this.deleteIn;
+        delete _this.updateIn;
+        delete _this.mergeIn;
+        delete _this.mergeDeepIn;
     }
 
-    done() {
+    done(): * {
         return this.__item.toObject();
     }
 }
