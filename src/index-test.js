@@ -100,49 +100,142 @@ var sampleObject2: Object = {
     }
 };
 
-var sampleMapTests: Array<Object> = [
-    {
-        desc: "set new key",
-        method: "set",
-        args: ['d', 789]
-    },
-    {
-        desc: "set existing key",
-        method: "set",
-        args: ['a', 789]
-    },
-    {
-        desc: "delete non existant key",
-        method: "set",
-        args: ['d']
-    },
-    {
-        desc: "delete existing key",
-        method: "set",
-        args: ['a']
-    },
-    {
-        desc: "clear",
-        method: "clear",
-        args: []
-    },
-    {
-        desc: "update whole collection",
-        method: "update",
-        args: [ii => ii.set('a', 'a')]
-    },
-    {
-        desc: "update key",
-        method: "update",
-        args: ['a', ii => ii + 100]
-    },
-    {
-        desc: "update nonexistent key",
-        method: "update",
-        args: ['z', 500, ii => ii]
-    }
-    // size, merge, mergeWith etc...
-];
+var sampleMapTests: Function = (config: Object): Array<Object> => {
+    const {thingToMerge} = config;
+
+    return [
+        {
+            desc: "set non existent key",
+            method: "set",
+            args: ['d', 789]
+        },
+        {
+            desc: "set existing key",
+            method: "set",
+            args: ['a', 789]
+        },
+        {
+            desc: "delete non existent key",
+            method: "delete",
+            args: ['d']
+        },
+        {
+            desc: "delete existing key",
+            method: "delete",
+            args: ['a']
+        },
+        {
+            desc: "clear",
+            method: "clear",
+            args: []
+        },
+        {
+            desc: "update whole collection",
+            method: "update",
+            args: [ii => ii.set('a', 'a')]
+        },
+        {
+            desc: "update key",
+            method: "update",
+            args: ['a', ii => ii + 100]
+        },
+        {
+            desc: "update nonexistent key",
+            method: "update",
+            args: ['z', 500, ii => ii]
+        },
+        {
+            desc: "merge",
+            method: "merge",
+            args: [thingToMerge]
+        },
+        {
+            desc: "mergeWith",
+            method: "mergeWith",
+            args: [(oldVal, newVal) => oldVal / newVal, thingToMerge]
+        },
+        // {
+        //     desc: "mergeDeep",
+        //     method: "mergeDeep",
+        //     args: [thingToMerge]
+        // },
+        // {
+        //     desc: "mergeDeepWith",
+        //     method: "mergeDeepWith",
+        //     args: [(oldVal, newVal) => oldVal / newVal, thingToMerge]
+        // },
+        // {
+        //     desc: "setIn non existent key",
+        //     method: "setIn",
+        //     args: [['b', 'z'], 789]
+        // },
+        // {
+        //     desc: "set existing key",
+        //     method: "setIn",
+        //     args: [['b', 'x'], 789]
+        // },
+        // {
+        //     desc: "set non existent path",
+        //     method: "setIn",
+        //     args: [['aaa', 'bbb'], 789]
+        // },
+        // {
+        //     desc: "deleteIn non existent key",
+        //     method: "deleteIn",
+        //     args: [['zzz']]
+        // },
+        // {
+        //     desc: "deleteIn existing key",
+        //     method: "deleteIn",
+        //     args: [['b', 'x']]
+        // },
+        // {
+        //     desc: "updateIn key",
+        //     method: "updateIn",
+        //     args: [['a'], ii => ii + 100]
+        // },
+        // {
+        //     desc: "updateIn nonexistent key",
+        //     method: "updateIn",
+        //     args: [['b','z'], 500, ii => ii]
+        // },
+        // {
+        //     desc: "updateIn nonexistent path",
+        //     method: "updateIn",
+        //     args: [['aaa','bbb'], 500, ii => ii]
+        // },
+        // {
+        //     desc: "mergeIn",
+        //     method: "mergeIn",
+        //     args: [['b', 'x'], thingToMerge]
+        // },
+        // {
+        //     desc: "mergeDeepIn",
+        //     method: "mergeDeepIn",
+        //     args: [['b', 'x'], thingToMerge]
+        // },
+        {
+            desc: "concat",
+            method: "concat",
+            args: [thingToMerge]
+        },
+        {
+            desc: "map",
+            method: "map",
+            args: [(value, key, iter) => `${value} ${key} ${iter.size}`]
+        },
+        {
+            desc: "mapKeys",
+            method: "mapKeys",
+            args: [(value, key, iter) => `${value} ${key} ${iter.size}`]
+        },
+        {
+            desc: "mapEntries",
+            method: "mapEntries",
+            args: [([key, value], index, iter) => [key, `${value} ${index} ${iter.size}`]]
+        }
+    ];
+};
 
 test('all types should be able to be wrapped and unwrapped', (tt: *) => {
     types.forEach(({value, name}: Object) => {
@@ -162,41 +255,40 @@ test('all types should return correct values for isIndexed()', (tt: *) => {
     });
 });
 
-// test('object methods should still be callable', (tt: *) => {
-//     var obj = {
-//         thing: (a, b) => 123 + a + b
-//     };
-
-//     console.log(Wrap(obj));
-
-//     tt.is(Wrap(obj).thing(1, 2), 126);
-// });
-
-test('Wrapped Maps should behave like Maps normally do', (tt: *) => {
+test('Wrapped Maps have a size', (tt: *) => {
     var map: Map<string,*> = fromJS(sampleObject);
-
     tt.is(Wrap(map).size, map.size, 'size returns correct size');
-
-    sampleMapTests.forEach(({desc, method, args}: Object) => {
-        tt.true(
-            is(
-                Wrap(map)[method](...args).done(),
-                map[method](...args)
-            ),
-            `"${method}" should ${desc} like Map`
-        );
-    });
 });
 
-test('Objects can be used like Maps', (tt: *) => {
+sampleMapTests({
+    thingToMerge: fromJS(sampleObject2)
+})
+    .forEach(({desc, method, args}: Object) => {
+        test(`"Map.${method}" should ${desc} like Map`, (tt: *) => {
+            var map: Map<string,*> = fromJS(sampleObject);
+            tt.true(
+                is(
+                    Wrap(map)[method](...args).done(),
+                    // $FlowFixMe: Flow doesnt know how to deal with calling computed properties
+                    map[method](...args)
+                )
+            );
+        });
+    });
 
+test('Objects have a size', (tt: *) => {
     tt.is(Wrap(sampleObject).size, Map(sampleObject).size, 'size returns correct size');
-
-    sampleMapTests.forEach(({desc, method, args}: Object) => {
-        tt.deepEqual(
-            Wrap(sampleObject)[method](...args).done(),
-            Map(sampleObject)[method](...args).toObject(),
-            `"${method}" should ${desc} like Map`
-        );
-    });
 });
+
+sampleMapTests({
+    thingToMerge: sampleObject2
+})
+    .forEach(({desc, method, args}: Object) => {
+        test(`"Object.${method}" should ${desc} like Map`, (tt: *) => {
+            tt.deepEqual(
+                Wrap(sampleObject)[method](...args).done(),
+                // $FlowFixMe: Flow doesnt know how to deal with calling computed properties
+                Map(sampleObject)[method](...args).toObject()
+            );
+        });
+    });

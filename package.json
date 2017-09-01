@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "app-module-path": "^2.2.0",
-    "ava": "0.19.1",
+    "ava": "^0.22.0",
     "babel-cli": "^6.23.0",
     "babel-core": "^6.23.0",
     "babel-plugin-istanbul": "4.1.1",

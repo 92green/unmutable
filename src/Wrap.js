@@ -8,7 +8,7 @@ import UnmutableListWrapper from './UnmutableListWrapper';
 import UnmutableObjectWrapper from './UnmutableObjectWrapper';
 import UnmutableArrayWrapper from './UnmutableArrayWrapper';
 
-export default function Wrap(item: *, options: Options = {}): UnmutableWrapper {
+export default function Wrap(item: *, options: Options = {}): UnmutableWrapperType {
     if(isPlainObject(item)) {
         return new UnmutableObjectWrapper(item, options);
     }
