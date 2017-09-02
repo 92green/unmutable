@@ -23,6 +23,8 @@ export default class UnmutableArrayWrapper extends UnmutableListWrapper {
             has: plain,
             hasIn: plain,
             insert: self,
+            interleave: self,
+            interpose: self,
             map: self,
             merge: self,
             mergeWith: self,
