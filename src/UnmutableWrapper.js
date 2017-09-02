@@ -7,7 +7,7 @@ export default class UnmutableWrapper {
     __item: *;
 
     constructor(item: *, options: Options = {}) {
-        const {methodConstructors = {}} = options;
+        const {methodConstructors = null} = options;
 
         var _this = (this: any);
 
@@ -15,15 +15,18 @@ export default class UnmutableWrapper {
             // copy methods if applicable
             listMethodNames(item)
                 .forEach((name: string) => {
+                    const constructor = methodConstructors
+                        ? methodConstructors[name]
+                        : Wrap;
+
+                    if(!constructor) {
+                        return;
+                    }
+
                     let method = item[name];
                     _this[name] = (...args: *): UnmutableWrapper => {
                         const result = method.bind(item)(...args);
-
-                        const CustomConstructor = methodConstructors[name];
-                        if(CustomConstructor) {
-                            return CustomConstructor(result);
-                        }
-                        return Wrap(result);
+                        return constructor(result);
                     };
                 });
         }
