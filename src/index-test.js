@@ -100,7 +100,18 @@ var sampleObject2: Object = {
     }
 };
 
-var unmutableTests: Function = (config: Object): Array<Object> => {
+var sampleArray: Array<*> = [
+    "one",
+    2,
+    "THREE"
+];
+
+var sampleArray2: Array<*> = [
+    4,
+    5
+];
+
+var mapTests: Function = (config: Object): Array<Object> => {
     const {thingToMerge, only} = config;
 
     var tests = [
@@ -397,60 +408,208 @@ var unmutableTests: Function = (config: Object): Array<Object> => {
     return tests;
 };
 
-var mapTests: Array = [
+var mapTestNames: Array = [
+    //asImmutable
+    //asMutable
+    //butLast
     "clear",
     "concat",
+    //count
+    //countBy
     "delete",
     "deleteAll",
+    //deleteIn
+    //entries
+    //entrySeq
+    //equals
+    //every
     "filter",
     "filterNot",
+    //find
+    //findEntry
+    //findKey
+    //findLast
+    //findLastEntry
+    //findLastKey
     "first",
     "flatMap",
+    //flatten
+    //flip
+    //forEach
     "get",
     "getIn",
+    //groupBy
     "has",
+    //hashCode
     "hasIn",
     "includes",
+    //isEmpty
+    //isSubset
+    //isSuperset
+    //join
+    //keyOf
+    //keys
+    //keySeq
     "last",
+    //lastKeyOf
     "map",
     "mapEntries",
     "mapKeys",
+    //max
+    //maxBy
     "merge",
+    //mergeDeep
+    //mergeDeepIn
+    //mergeDeepWith
+    //mergeIn
     "mergeWith",
+    //min
+    //minBy
+    //reduce
+    //reduceRight
+    //rest
     "reverse",
     "set",
     "setIn",
+    //skip
+    //skipLast
+    //skipUntil
+    //skipWhile
+    //slice
+    //some
     "sort",
     "sortBy",
-    "update"
+    //take
+    //takeLast
+    //takeUntil
+    //takeWhile
+    //toArray
+    //toIndexedSeq
+    //toJS
+    //toJSON
+    //toKeyedSeq
+    //toList
+    //toMap
+    //toObject
+    //toOrderedMap
+    //toOrderedSet
+    //toSeq
+    //toSet
+    //toSetSeq
+    //toStack
+    "update",
+    //updateIn
+    //values
+    //valueSeq
+    //withMutations
 ];
 
-var listTests: Array = [
+var listTestNames: Array = [
+    //asImmutable
+    //asMutable
+    //butLast
     "clear",
     "concat",
+    //count
+    //countBy
     "delete",
-    "deleteAll",
+    //deleteIn
+    //entries
+    //entrySeq
+    //equals
+    //every
     "filter",
     "filterNot",
+    //find
+    //findEntry
+    //findIndex
+    //findKey
+    //findLast
+    //findLastEntry
+    //findLastIndex
+    //findLastKey
     "first",
     "flatMap",
+    //flatten
+    //forEach
+    //fromEntrySeq
     "get",
     "getIn",
+    //groupBy
     "has",
+    //hashCode
     "hasIn",
     "includes",
+    //indexOf
+    //insert
+    //interleave
+    //interpose
+    //isEmpty
+    //isSubset
+    //isSuperset
+    //join
+    //keyOf
+    //keys
+    //keySeq
     "last",
+    //lastIndexOf
+    //lastKeyOf
     "map",
-    "mapEntries",
-    "mapKeys",
+    //max
+    //maxBy
     "merge",
+    //mergeDeep
+    //mergeDeepIn
+    //mergeDeepWith
+    //mergeIn
     "mergeWith",
+    //min
+    //minBy
+    //pop
+    //push
+    //reduce
+    //reduceRight
+    //rest
     "reverse",
     "set",
     "setIn",
+    //setSize
+    //shift
+    //skip
+    //skipLast
+    //skipUntil
+    //skipWhile
+    //slice
+    //some
     "sort",
     "sortBy",
+    //splice
+    //take
+    //takeLast
+    //takeUntil
+    //takeWhile
+    //toArray
+    //toIndexedSeq
+    //toJS
+    //toJSON
+    //toKeyedSeq
+    //toList
+    //toMap
+    //toObject
+    //toOrderedMap
+    //toOrderedSet
+    //toSeq
+    //toSet
+    //toSetSeq
+    //toStack
+    //unshift
     "update"
+    //updateIn
+    //values
+    //valueSeq
+    //withMutations
+    //zip
+    //zipWith
 ];
 
 test('all types should be able to be wrapped and unwrapped', (tt: *) => {
@@ -476,9 +635,9 @@ test('Wrapped Maps have a size', (tt: *) => {
     tt.is(Wrap(map).size, map.size, 'size returns correct size');
 });
 
-unmutableTests({
+mapTests({
     thingToMerge: fromJS(sampleObject2),
-    only: mapTests
+    only: mapTestNames
 })
     .forEach(({desc, method, args}: Object) => {
         test(`"Map.${method}" should ${desc}. Args: ${JSON.stringify(args)}`, (tt: *) => {
@@ -493,13 +652,35 @@ unmutableTests({
         });
     });
 
+// test('Wrapped Lists have a size', (tt: *) => {
+//     var map: List<string,*> = fromJS(sampleArray);
+//     tt.is(Wrap(map).size, map.size, 'size returns correct size');
+// });
+
+// listTests({
+//     thingToMerge: fromJS(sampleArray2),
+//     only: listTestNames
+// })
+//     .forEach(({desc, method, args}: Object) => {
+//         test(`"List.${method}" should ${desc}. Args: ${JSON.stringify(args)}`, (tt: *) => {
+//             var list: List<*> = fromJS(sampleArray);
+//             tt.true(
+//                 is(
+//                     Wrap(list)[method](...args).done(),
+//                     // $FlowFixMe: Flow doesnt know how to deal with calling computed properties
+//                     list[method](...args)
+//                 )
+//             );
+//         });
+//     });
+
 test('Objects have a size', (tt: *) => {
     tt.is(Wrap(sampleObject).size, Map(sampleObject).size, 'size returns correct size');
 });
 
-unmutableTests({
+mapTests({
     thingToMerge: sampleObject2,
-    only: mapTests
+    only: mapTestNames
 })
     .forEach((testConfig: Object) => {
         var {
@@ -533,3 +714,44 @@ unmutableTests({
             tt.deepEqual(mapResult, unmutableResult);
         });
     });
+
+// test('Arrays have a size', (tt: *) => {
+//     tt.is(Wrap(sampleArray).size, List(sampleArray).size, 'size returns correct size');
+// });
+
+// listTests({
+//     thingToMerge: sampleArray2,
+//     only: listTestNames
+// })
+//     .forEach((testConfig: Object) => {
+//         var {
+//             desc,
+//             method,
+//             args,
+//             returnType,
+//             // "self" if the thing being returned is a modified version of the original thing
+//             // "wrapped" if the thing being returned is to be in an unmutable wrapper
+//             // "plain" if the thing being returned is just the value (for 'status' methods like .has())
+//             deep = false // true if we're testing a deep method
+//         } = testConfig;
+
+//         test(`"Array.${method}" should ${desc}. Args: ${JSON.stringify(args)}`, (tt: *) => {
+
+//             var collection = deep ? fromJS(sampleArray) : List(sampleArray);
+
+//             // $FlowFixMe: Flow doesnt know how to deal with calling computed properties
+//             var listResult = collection[method](...args);
+
+//             if(returnType === "self") {
+//                 listResult = deep ? listResult.toJS() : listResult.toArray();
+//             }
+
+//             var unmutableResult = Wrap(sampleObject)[method](...args);
+
+//             if(returnType !== "plain") {
+//                 unmutableResult = unmutableResult.done();
+//             }
+
+//             tt.deepEqual(listResult, unmutableResult);
+//         });
+//     });
