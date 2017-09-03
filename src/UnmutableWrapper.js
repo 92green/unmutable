@@ -1,23 +1,32 @@
+// @flow
 import listMethodNames from './util/listMethodNames';
 import Wrap from './Wrap';
 
 export default class UnmutableWrapper {
-    constructor(item, options = {}) {
-        const {methodConstructors = {}} = options;
+
+    __item: *;
+
+    constructor(item: *, options: Options = {}) {
+        const {methodConstructors = null} = options;
+
+        var _this = (this: any);
 
         if(typeof item === "object") {
             // copy methods if applicable
             listMethodNames(item)
-                .forEach(name => {
-                    let method = item[name];
-                    this[name] = (...args) => {
-                        const result = method.bind(item)(...args);
+                .forEach((name: string) => {
+                    const constructor = methodConstructors
+                        ? methodConstructors[name]
+                        : Wrap;
 
-                        const CustomConstructor = methodConstructors[name];
-                        if(CustomConstructor) {
-                            return CustomConstructor(result);
-                        }
-                        return Wrap(result);
+                    if(!constructor) {
+                        return;
+                    }
+
+                    let method = item[name];
+                    _this[name] = (...args: *): UnmutableWrapper => {
+                        const result = method.bind(item)(...args);
+                        return constructor(result);
                     };
                 });
         }
@@ -25,15 +34,15 @@ export default class UnmutableWrapper {
         this.__item = item;
     }
 
-    done() {
+    done(): * {
         return this.__item;
     }
 
-    isKeyed() {
+    isKeyed(): boolean {
         return false;
     }
 
-    isIndexed() {
+    isIndexed(): boolean {
         return false;
     }
 }

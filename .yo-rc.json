@@ -2,8 +2,8 @@
   "generator-bigdatr-startr": {
     "promptValues": {
       "name": "unmutable",
-      "description": "Immutable.js functions for collections that may or may not be Immutable",
-      "version": "0.0.0",
+      "description": "Immutable.js functions for collections that may or may not be Immutable.",
+      "version": "0.2.0",
       "license": "MIT",
       "private": false,
       "author": "Damien Clarke",

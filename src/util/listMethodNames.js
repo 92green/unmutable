@@ -1,9 +1,9 @@
-export default function listMethodNames (object, downToClass = Object)
-{
+// @flow
+export default function listMethodNames (object: Object): string[] {
     // based on code by Muhammad Umer, https://stackoverflow.com/a/31055217/441899
     let props = [];
 
-    for (let obj = object; obj !== null && obj !== downToClass.prototype; obj = Object.getPrototypeOf(obj))
+    for (let obj = object; obj !== null && obj !== Object.prototype; obj = Object.getPrototypeOf(obj))
     {
         props = props.concat(Object.getOwnPropertyNames(obj));
     }
