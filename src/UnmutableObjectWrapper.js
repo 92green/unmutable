@@ -15,6 +15,7 @@ export default class UnmutableObjectWrapper extends UnmutableMapWrapper {
             concat: self,
             delete: self,
             deleteAll: self,
+            every: plain,
             filter: self,
             filterNot: self,
             first: wrapped,
@@ -24,6 +25,7 @@ export default class UnmutableObjectWrapper extends UnmutableMapWrapper {
             has: plain,
             hasIn: plain,
             includes: plain,
+            isEmpty: plain,
             last: wrapped,
             map: self,
             mapEntries: self,
@@ -33,6 +35,7 @@ export default class UnmutableObjectWrapper extends UnmutableMapWrapper {
             reverse: self,
             set: self,
             setIn: wrapped,
+            some: plain,
             sort: self,
             sortBy: self,
             update: self

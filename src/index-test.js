@@ -398,7 +398,32 @@ var mapTests: Function = (config: Object): Array<Object> => {
             method: "hasIn",
             args: [['z', 'g']],
             returnType: "plain"
+        },
+        {
+            desc: "return true if a key returns true",
+            method: "some",
+            args: [ii => ii === 789],
+            returnType: "plain"
+        },
+        {
+            desc: "return false only if no keys return true",
+            method: "some",
+            args: [ii => ii === 123123123],
+            returnType: "plain"
+        },
+        {
+            desc: "return false if a key returns false",
+            method: "every",
+            args: [ii => ii === 789123],
+            returnType: "plain"
+        },
+        {
+            desc: "return true only if all keys return true",
+            method: "every",
+            args: [ii => ii],
+            returnType: "plain"
         }
+        // ^ every and some arent yet testing their callback args...
     ];
 
     if(only) {
@@ -422,7 +447,7 @@ var mapTestNames: Array = [
     //entries
     //entrySeq
     //equals
-    //every
+    "every",
     "filter",
     "filterNot",
     //find
@@ -476,7 +501,7 @@ var mapTestNames: Array = [
     //skipUntil
     //skipWhile
     //slice
-    //some
+    "some",
     "sort",
     "sortBy",
     //take
@@ -517,7 +542,7 @@ var listTestNames: Array = [
     //entries
     //entrySeq
     //equals
-    //every
+    "every",
     "filter",
     "filterNot",
     //find
@@ -580,7 +605,7 @@ var listTestNames: Array = [
     //skipUntil
     //skipWhile
     //slice
-    //some
+    "some",
     "sort",
     "sortBy",
     //splice
