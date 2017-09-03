@@ -23,7 +23,7 @@
     "prepublish": "yarn run build",
     "watch": "yarn run build -- -w",
     "ava": "NODE_ENV=test ava",
-    "check-coverage": "NODE_ENV=test nyc check-coverage --branches 100.0  --functions 100.0 --lines 100.0",
+    "check-coverage": "NODE_ENV=test nyc check-coverage --branches 80.0  --functions 80.0 --lines 80.0",
     "docs": "jsdoc -c jsdoc.json",
     "flow": "flow check",
     "lint": "eslint src --ext js,jsx",

@@ -433,7 +433,7 @@ var mapTests: Function = (config: Object): Array<Object> => {
     return tests;
 };
 
-var mapTestNames: Array = [
+var mapTestNames: Array<string> = [
     //asImmutable
     //asMutable
     //butLast
@@ -529,7 +529,7 @@ var mapTestNames: Array = [
     //withMutations
 ];
 
-var listTestNames: Array = [
+var listTestNames: Array<string> = [
     //asImmutable
     //asMutable
     //butLast
@@ -692,7 +692,6 @@ mapTests({
 //             tt.true(
 //                 is(
 //                     Wrap(list)[method](...args).done(),
-//                     // $FlowFixMe: Flow doesnt know how to deal with calling computed properties
 //                     list[method](...args)
 //                 )
 //             );
@@ -764,7 +763,6 @@ mapTests({
 
 //             var collection = deep ? fromJS(sampleArray) : List(sampleArray);
 
-//             // $FlowFixMe: Flow doesnt know how to deal with calling computed properties
 //             var listResult = collection[method](...args);
 
 //             if(returnType === "self") {

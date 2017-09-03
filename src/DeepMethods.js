@@ -1,3 +1,4 @@
+// @flow
 export const getIn = (_this: UnmutableWrapperType, Wrap: Function) => (keyPath: string[], notFoundValue: * = undefined): * => {
     var item = _this;
     for(let key of keyPath) {
@@ -9,7 +10,7 @@ export const getIn = (_this: UnmutableWrapperType, Wrap: Function) => (keyPath: 
     return item;
 };
 
-export const setIn = (_this: UnmutableWrapperType, Wrap: Function) => (keyPath: string[], value: *): UnmutableObjectWrapper => {
+export const setIn = (_this: UnmutableWrapperType) => (keyPath: string[], value: *): UnmutableObjectWrapper => {
     for(var i = keyPath.length - 1; i >= 0; i--) {
         value = _this
             .getIn(keyPath.slice(0, i), {})
