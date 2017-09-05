@@ -2,7 +2,7 @@
 import {Map} from 'immutable';
 import UnmutableMapWrapper from './UnmutableMapWrapper';
 import Wrap from './Wrap';
-import {getIn, setIn} from './DeepMethods';
+import {deleteIn, getIn, hasIn, setIn, updateIn} from './DeepMethods';
 
 export default class UnmutableObjectWrapper extends UnmutableMapWrapper {
     constructor(item: *, options: Options = {}) {
@@ -15,6 +15,7 @@ export default class UnmutableObjectWrapper extends UnmutableMapWrapper {
             concat: self,
             delete: self,
             deleteAll: self,
+            deleteIn: self,
             every: plain,
             filter: self,
             filterNot: self,
@@ -34,18 +35,22 @@ export default class UnmutableObjectWrapper extends UnmutableMapWrapper {
             mergeWith: self,
             reverse: self,
             set: self,
-            setIn: wrapped,
+            setIn: self,
             some: plain,
             sort: self,
             sortBy: self,
-            update: self
+            update: self,
+            updateIn: self
         };
 
         super(Map(item), {methodConstructors}, options);
 
         var _this = (this: any);
+        _this.deleteIn = deleteIn(_this, Wrap);
+        _this.hasIn = hasIn(_this, Wrap);
         _this.getIn = getIn(_this, Wrap);
         _this.setIn = setIn(_this, Wrap);
+        _this.updateIn = updateIn(_this, Wrap);
     }
 
     done(): * {

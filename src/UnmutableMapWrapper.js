@@ -6,6 +6,10 @@ export default class UnmutableMapWrapper extends UnmutableWrapper {
         return this.__item.size;
     }
 
+    isCollection(): boolean {
+        return true;
+    }
+
     isKeyed(): boolean {
         return true;
     }
