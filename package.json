@@ -98,5 +98,8 @@
   },
   "dependencies": {
     "is-plain-object": "^2.0.4"
+  },
+  "peerDependencies": {
+    "immutable": "^3.8.1"
   }
 }
