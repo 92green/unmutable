@@ -476,14 +476,14 @@ var mapTestNames: Array<string> = [
     //count
     //countBy
     "delete",
-    "deleteAll",
+    //deleteAll,
     "deleteIn",
     //entries
     //entrySeq
     //equals
     "every",
-    "filter",
-    "filterNot",
+    //filter,
+    //filterNot,
     //find
     //findEntry
     //findKey
@@ -491,7 +491,7 @@ var mapTestNames: Array<string> = [
     //findLastEntry
     //findLastKey
     "first",
-    "flatMap",
+    //flatMap,
     //flatten
     //flip
     //forEach
@@ -528,7 +528,7 @@ var mapTestNames: Array<string> = [
     //reduce
     //reduceRight
     //rest
-    "reverse",
+    //reverse,
     "set",
     "setIn",
     //skip
@@ -537,8 +537,8 @@ var mapTestNames: Array<string> = [
     //skipWhile
     //slice
     "some",
-    "sort",
-    "sortBy",
+    //sort,
+    //sortBy,
     //take
     //takeLast
     //takeUntil
@@ -671,8 +671,8 @@ var listTestNames: Array<string> = [
     //entrySeq
     //equals
     "every",
-    "filter",
-    "filterNot",
+    //filter,
+    //filterNot,
     //find
     //findEntry
     //findIndex
@@ -682,7 +682,7 @@ var listTestNames: Array<string> = [
     //findLastIndex
     //findLastKey
     "first",
-    "flatMap",
+    //flatMap,
     //flatten
     //forEach
     //fromEntrySeq
@@ -723,7 +723,7 @@ var listTestNames: Array<string> = [
     //reduce
     //reduceRight
     //rest
-    "reverse",
+    //reverse,
     "set",
     "setIn",
     //setSize
@@ -734,8 +734,8 @@ var listTestNames: Array<string> = [
     //skipWhile
     //slice
     "some",
-    "sort",
-    "sortBy",
+    //sort,
+    //sortBy,
     //splice
     //take
     //takeLast
