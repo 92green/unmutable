@@ -6,6 +6,10 @@ export default class UnmutableListWrapper extends UnmutableWrapper {
         return this.__item.size;
     }
 
+    isCollection(): boolean {
+        return true;
+    }
+
     isIndexed(): boolean {
         return true;
     }

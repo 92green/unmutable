@@ -6,7 +6,7 @@ export default class UnmutableWrapper {
 
     __item: *;
 
-    constructor(item: *, options: Options = {}) {
+    constructor(item: *, options: Options) {
         const {methodConstructors = null} = options;
 
         var _this = (this: any);
@@ -36,6 +36,10 @@ export default class UnmutableWrapper {
 
     done(): * {
         return this.__item;
+    }
+
+    isCollection(): boolean {
+        return false;
     }
 
     isKeyed(): boolean {

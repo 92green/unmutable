@@ -7,48 +7,56 @@ var types: Array<Object> = [
     {
         value: undefined,
         name: "undefined",
+        shouldBeCollection: false,
         shouldBeKeyed: false,
         shouldBeIndexed: false
     },
     {
         value: null,
         name: "null",
+        shouldBeCollection: false,
         shouldBeKeyed: false,
         shouldBeIndexed: false
     },
     {
         value: "string",
         name: "string",
+        shouldBeCollection: false,
         shouldBeKeyed: false,
         shouldBeIndexed: false
     },
     {
         value: 123,
         name: "number",
+        shouldBeCollection: false,
         shouldBeKeyed: false,
         shouldBeIndexed: false
     },
     {
         value: 0,
         name: "zero number",
+        shouldBeCollection: false,
         shouldBeKeyed: false,
         shouldBeIndexed: false
     },
     {
         value: true,
         name: "true boolean",
+        shouldBeCollection: false,
         shouldBeKeyed: false,
         shouldBeIndexed: false
     },
     {
         value: false,
         name: "false boolean",
+        shouldBeCollection: false,
         shouldBeKeyed: false,
         shouldBeIndexed: false
     },
     {
         value: () => {},
         name: "function",
+        shouldBeCollection: false,
         shouldBeKeyed: false,
         shouldBeIndexed: false
     },
@@ -58,12 +66,14 @@ var types: Array<Object> = [
             b: 2
         },
         name: "object",
+        shouldBeCollection: true,
         shouldBeKeyed: true,
         shouldBeIndexed: false
     },
     {
         value: [1,2,3],
         name: "array",
+        shouldBeCollection: true,
         shouldBeKeyed: false,
         shouldBeIndexed: true
     },
@@ -73,72 +83,60 @@ var types: Array<Object> = [
             b: 2
         }),
         name: "immutable map",
+        shouldBeCollection: true,
         shouldBeKeyed: true,
         shouldBeIndexed: false
     },
     {
         value: List([1,2,3]),
         name: "immutable list",
+        shouldBeCollection: true,
         shouldBeKeyed: false,
         shouldBeIndexed: true
     }
 ];
 
-var sampleObject: Object = {
-    a: 123,
-    b: {
-        x: 456,
-        y: 321
-    },
-    c: 789
-};
 
-var sampleObject2: Object = {
-    c: 1000,
-    b: {
-        y: 123123
-    }
-};
+test('all types should be able to be wrapped and unwrapped', (tt: *) => {
+    types.forEach(({value, name}: Object) => {
+        tt.deepEqual(Wrap(value).done(), value, `${name} should be able to be wrapped and unwrapped`);
+    });
+});
 
-var sampleArray: Array<*> = [
-    "one",
-    2,
-    "THREE"
-];
+test('all types should return correct values for isCollection()', (tt: *) => {
+    types.forEach(({value, shouldBeCollection, name}: Object) => {
+        tt.is(Wrap(value).isCollection(), shouldBeCollection, `${name} ${shouldBeCollection ? "should" : "should not"} be collection`);
+    });
+});
 
-var sampleArray2: Array<*> = [
-    4,
-    5
-];
+test('all types should return correct values for isKeyed()', (tt: *) => {
+    types.forEach(({value, shouldBeKeyed, name}: Object) => {
+        tt.is(Wrap(value).isKeyed(), shouldBeKeyed, `${name} ${shouldBeKeyed ? "should" : "should not"} be keyed`);
+    });
+});
 
-var mapTests: Function = (config: Object): Array<Object> => {
-    const {thingToMerge, only} = config;
+test('all types should return correct values for isIndexed()', (tt: *) => {
+    types.forEach(({value, shouldBeIndexed, name}: Object) => {
+        tt.is(Wrap(value).isIndexed(), shouldBeIndexed, `${name} ${shouldBeIndexed ? "should" : "should not"} be indexed`);
+    });
+});
+
+var tests: Function = (config: Object): Array<Object> => {
+    const {
+        only,
+        sampleValue,
+        existingValue,
+        nonExistingValue,
+        item,
+        itemToMerge,
+        key,
+        keyPath,
+        nonExistingKey,
+        partiallyExistingKeyPath,
+        nonExistingKeyPath
+    } = config;
 
     var tests = [
-        {
-            desc: "set non existent key",
-            method: "set",
-            args: ['d', 789],
-            returnType: "self"
-        },
-        {
-            desc: "set existing key",
-            method: "set",
-            args: ['a', 789],
-            returnType: "self"
-        },
-        {
-            desc: "delete non existent key",
-            method: "delete",
-            args: ['d'],
-            returnType: "self"
-        },
-        {
-            desc: "delete existing key",
-            method: "delete",
-            args: ['a'],
-            returnType: "self"
-        },
         {
             desc: "clear",
             method: "clear",
@@ -146,185 +144,47 @@ var mapTests: Function = (config: Object): Array<Object> => {
             returnType: "self"
         },
         {
-            desc: "update whole collection",
-            method: "update",
-            args: [ii => ii.set('a', 'a')],
-            returnType: "self"
-        },
-        {
-            desc: "update key",
-            method: "update",
-            args: ['a', ii => ii + 100],
-            returnType: "self"
-        },
-        {
-            desc: "update nonexistent key",
-            method: "update",
-            args: ['z', 500, ii => ii],
-            returnType: "self"
-        },
-        {
-            desc: "merge",
-            method: "merge",
-            args: [thingToMerge],
-            returnType: "self"
-        },
-        {
-            desc: "mergeWith",
-            method: "mergeWith",
-            args: [(oldVal, newVal) => oldVal / newVal, thingToMerge],
-            returnType: "self"
-        },
-        // {
-        //     desc: "mergeDeep",
-        //     method: "mergeDeep",
-        //     args: [thingToMerge]
-        // },
-        // {
-        //     desc: "mergeDeepWith",
-        //     method: "mergeDeepWith",
-        //     args: [(oldVal, newVal) => oldVal / newVal, thingToMerge]
-        // },
-        {
-            desc: "set existing key",
-            method: "setIn",
-            args: [['b', 'x'], 789],
-            returnType: "self",
-            deep: true
-        },
-        {
-            desc: "setIn non existent key",
-            method: "setIn",
-            args: [['p'], 789],
-            returnType: "self",
-            deep: true
-        },
-        {
-            desc: "setIn partially non existent key",
-            method: "setIn",
-            args: [['b', 'z'], 789],
-            returnType: "self",
-            deep: true
-        },
-        {
-            desc: "set non existent path",
-            method: "setIn",
-            args: [['aaa', 'bbb'], 789],
-            returnType: "self",
-            deep: true
-        },
-        // {
-        //     desc: "deleteIn non existent key",
-        //     method: "deleteIn",
-        //     args: [['zzz']]
-        // },
-        // {
-        //     desc: "deleteIn existing key",
-        //     method: "deleteIn",
-        //     args: [['b', 'x']]
-        // },
-        // {
-        //     desc: "updateIn key",
-        //     method: "updateIn",
-        //     args: [['a'], ii => ii + 100]
-        // },
-        // {
-        //     desc: "updateIn nonexistent key",
-        //     method: "updateIn",
-        //     args: [['b','z'], 500, ii => ii]
-        // },
-        // {
-        //     desc: "updateIn nonexistent path",
-        //     method: "updateIn",
-        //     args: [['aaa','bbb'], 500, ii => ii]
-        // },
-        // {
-        //     desc: "mergeIn",
-        //     method: "mergeIn",
-        //     args: [['b', 'x'], thingToMerge]
-        // },
-        // {
-        //     desc: "mergeDeepIn",
-        //     method: "mergeDeepIn",
-        //     args: [['b', 'x'], thingToMerge]
-        // },
-        {
             desc: "concat",
             method: "concat",
-            args: [thingToMerge],
+            args: [itemToMerge],
             returnType: "self"
         },
         {
-            desc: "map",
-            method: "map",
-            args: [(value, key, iter) => `${value} ${key} ${iter.size}`],
+            desc: "delete key",
+            method: "delete",
+            args: [key],
             returnType: "self"
         },
         {
-            desc: "mapKeys",
-            method: "mapKeys",
-            args: [(value, key, iter) => `${value} ${key} ${iter.size}`],
+            desc: "delete non-existing key",
+            method: "delete",
+            args: [nonExistingKey],
             returnType: "self"
         },
         {
-            desc: "mapEntries",
-            method: "mapEntries",
-            args: [([key, value], index, iter) => [key, `${value} ${index} ${iter.size}`]],
-            returnType: "self"
-        },
-        // flatMap
-        // filter
-        // filterNot
-        // reverse
-        // sort
-        // sortBy
-        // groupBy
-        {
-            desc: "get non existent key",
-            method: "get",
-            args: ['z'],
-            returnType: "wrapped"
+            desc: "deleteIn keyPath",
+            method: "deleteIn",
+            args: [keyPath],
+            returnType: "self",
+            deep: true
         },
         {
-            desc: "get non existent key with default value",
-            method: "get",
-            args: ['z', 'not set'],
-            returnType: "wrapped"
+            desc: "deleteIn non-existing keyPath",
+            method: "deleteIn",
+            args: [nonExistingKeyPath],
+            returnType: "self",
+            deep: true
         },
         {
-            desc: "get existent key",
-            method: "get",
-            args: ['a'],
-            returnType: "wrapped"
-        },
-        {
-            desc: "get existent key with default value",
-            method: "get",
-            args: ['a', 'not set'],
-            returnType: "wrapped"
-        },
-        {
-            desc: "has non existent key",
-            method: "has",
-            args: ['z'],
+            desc: "return false if a key returns false",
+            method: "every",
+            args: [ii => ii === nonExistingValue],
             returnType: "plain"
         },
         {
-            desc: "has existent key",
-            method: "has",
-            args: ['a'],
-            returnType: "plain"
-        },
-        {
-            desc: "includes non existent value",
-            method: "includes",
-            args: [123123],
-            returnType: "plain"
-        },
-        {
-            desc: "includes existent value",
-            method: "includes",
-            args: [123],
+            desc: "return true only if all keys return true",
+            method: "every",
+            args: [ii => ii !== nonExistingValue],
             returnType: "plain"
         },
         {
@@ -334,103 +194,277 @@ var mapTests: Function = (config: Object): Array<Object> => {
             returnType: "wrapped"
         },
         {
+            desc: "get existing key",
+            method: "get",
+            args: [key],
+            returnType: "wrapped"
+        },
+        {
+            desc: "get key with default value",
+            method: "get",
+            args: [key, sampleValue],
+            returnType: "wrapped"
+        },
+        {
+            desc: "get non-existing key",
+            method: "get",
+            args: [nonExistingKey],
+            returnType: "wrapped"
+        },
+        {
+            desc: "get non-existing key with default value",
+            method: "get",
+            args: [nonExistingKey, sampleValue],
+            returnType: "wrapped"
+        },
+        {
+            desc: "getIn keyPath",
+            method: "getIn",
+            args: [keyPath],
+            returnType: "wrapped",
+            deep: true
+        },
+        {
+            desc: "getIn keyPath with default value",
+            method: "getIn",
+            args: [keyPath, sampleValue],
+            returnType: "wrapped",
+            deep: true
+        },
+        {
+            desc: "getIn non-existing keyPath",
+            method: "getIn",
+            args: [nonExistingKeyPath],
+            returnType: "wrapped",
+            deep: true
+        },
+        {
+            desc: "getIn non-existing keyPath with default value",
+            method: "getIn",
+            args: [nonExistingKeyPath, sampleValue],
+            returnType: "wrapped",
+            deep: true
+        },
+        {
+            desc: "getIn partially non-existing keyPath",
+            method: "getIn",
+            args: [partiallyExistingKeyPath],
+            returnType: "wrapped",
+            deep: true
+        },
+        {
+            desc: "getIn partially non-existing keyPath with default value",
+            method: "getIn",
+            args: [partiallyExistingKeyPath, sampleValue],
+            returnType: "wrapped",
+            deep: true
+        },
+        {
+            desc: "has key",
+            method: "has",
+            args: [key],
+            returnType: "plain"
+        },
+        {
+            desc: "has non-existing key",
+            method: "has",
+            args: [nonExistingKey],
+            returnType: "plain"
+        },
+        {
+            desc: "hasIn keyPath",
+            method: "hasIn",
+            args: [keyPath],
+            returnType: "plain",
+            deep: true
+        },
+        {
+            desc: "hasIn partially non-existing keyPath",
+            method: "hasIn",
+            args: [partiallyExistingKeyPath],
+            returnType: "plain",
+            deep: true
+        },
+        {
+            desc: "hasIn non-existing keyPath",
+            method: "hasIn",
+            args: [nonExistingKeyPath],
+            returnType: "plain",
+            deep: true
+        },
+        {
+            desc: "includes existing value",
+            method: "includes",
+            args: [existingValue],
+            returnType: "plain"
+        },
+        {
+            desc: "includes non-existing value",
+            method: "includes",
+            args: [nonExistingValue],
+            returnType: "plain"
+        },
+        {
             desc: "can get last value",
             method: "last",
             args: [],
             returnType: "wrapped"
         },
         {
-            desc: "getIn existent keyPath",
-            method: "getIn",
-            args: [['b', 'x']],
-            returnType: "wrapped",
+            desc: "map",
+            method: "map",
+            args: [ii => `${ii}!`],
+            returnType: "self"
+        },
+        {
+            desc: "mapEntries",
+            method: "mapEntries",
+            args: [([key, value]) => [key, `${value}!`]],
+            returnType: "self"
+        },
+        {
+            desc: "mapKeys",
+            method: "mapKeys",
+            args: [ii => `${ii}!`],
+            returnType: "self"
+        },
+        {
+            desc: "merge",
+            method: "merge",
+            args: [itemToMerge],
+            returnType: "self"
+        },
+        // {
+        //     desc: "mergeDeep",
+        //     method: "mergeDeep",
+        //     args: [itemToMerge]
+        // },
+        // {
+        //     desc: "mergeDeepWith",
+        //     method: "mergeDeepWith",
+        //     args: [(oldVal, newVal) => oldVal / newVal, itemToMerge]
+        // },
+                // {
+        //     desc: "mergeIn",
+        //     method: "mergeIn",
+        //     args: [['b', 'x'], itemToMerge]
+        // },
+        // {
+        //     desc: "mergeDeepIn",
+        //     method: "mergeDeepIn",
+        //     args: [['b', 'x'], itemToMerge]
+        // },
+        {
+            desc: "mergeWith",
+            method: "mergeWith",
+            args: [(oldVal, newVal) => oldVal / newVal, itemToMerge],
+            returnType: "self"
+        },
+        {
+            desc: "set key",
+            method: "set",
+            args: [key, sampleValue],
+            returnType: "self"
+        },
+        {
+            desc: "set non-existing key",
+            method: "set",
+            args: [nonExistingKey, sampleValue],
+            returnType: "self"
+        },
+        {
+            desc: "setIn keyPath",
+            method: "setIn",
+            args: [keyPath, sampleValue],
+            returnType: "self",
             deep: true
         },
         {
-            desc: "getIn existent keyPath with default value",
-            method: "getIn",
-            args: [['b', 'x'], 'not set'],
-            returnType: "wrapped",
+            desc: "setIn partially non-existing keyPath",
+            method: "setIn",
+            args: [keyPath, sampleValue],
+            returnType: "self",
             deep: true
         },
         {
-            desc: "getIn non existent keyPath",
-            method: "getIn",
-            args: [['z']],
-            returnType: "wrapped",
+            desc: "setIn non-existing keyPath",
+            method: "setIn",
+            args: [nonExistingKeyPath, sampleValue],
+            returnType: "self",
             deep: true
-        },
-        {
-            desc: "getIn non existent keyPath with default value",
-            method: "getIn",
-            args: [['z'], 'not set'],
-            returnType: "wrapped",
-            deep: true
-        },
-        {
-            desc: "getIn partially non existent keyPath",
-            method: "getIn",
-            args: [['b', 'woo']],
-            returnType: "wrapped",
-            deep: true
-        },
-        {
-            desc: "getIn partially non existent keyPath with default value",
-            method: "getIn",
-            args: [['b', 'woo'], 'not set'],
-            returnType: "wrapped",
-            deep: true
-        },
-        {
-            desc: "hasIn existent keyPath",
-            method: "hasIn",
-            args: ['a'],
-            returnType: "plain"
-        },
-        {
-            desc: "hasIn partially non existent keyPath",
-            method: "hasIn",
-            args: ['b', 'rrr'],
-            returnType: "plain"
-        },
-        {
-            desc: "hasIn non existent keyPath",
-            method: "hasIn",
-            args: [['z', 'g']],
-            returnType: "plain"
         },
         {
             desc: "return true if a key returns true",
             method: "some",
-            args: [ii => ii === 789],
+            args: [ii => ii === existingValue],
             returnType: "plain"
         },
         {
             desc: "return false only if no keys return true",
             method: "some",
-            args: [ii => ii === 123123123],
+            args: [ii => ii === nonExistingValue],
             returnType: "plain"
         },
         {
-            desc: "return false if a key returns false",
-            method: "every",
-            args: [ii => ii === 789123],
-            returnType: "plain"
+            desc: "update whole collection",
+            method: "update",
+            args: [ii => ii.set(key, existingValue)],
+            returnType: "self"
         },
         {
-            desc: "return true only if all keys return true",
-            method: "every",
-            args: [ii => ii],
-            returnType: "plain"
+            desc: "update key",
+            method: "update",
+            args: [key, ii => ii + 100],
+            returnType: "self"
+        },
+        {
+            desc: "update non-existing key",
+            method: "update",
+            args: [nonExistingKey, sampleValue, ii => ii],
+            returnType: "self"
+        },
+        {
+            desc: "updateIn keyPath",
+            method: "updateIn",
+            args: [keyPath, ii => ii + 100],
+            returnType: "self",
+            deep: true
+        },
+        {
+            desc: "updateIn non-existing keyPath",
+            method: "updateIn",
+            args: [nonExistingKeyPath, ii => ii],
+            returnType: "self",
+            deep: true
+        },
+        {
+            desc: "updateIn non-existing keyPath with notSetValue",
+            method: "updateIn",
+            args: [nonExistingKeyPath, sampleValue, ii => ii],
+            returnType: "self",
+            deep: true
+        },
+        {
+            desc: "updateIn parially existing keyPath",
+            method: "updateIn",
+            args: [partiallyExistingKeyPath, sampleValue, ii => ii],
+            returnType: "self",
+            deep: true
         }
-        // ^ every and some arent yet testing their callback args...
+        // flatMap
+        // filter
+        // filterNot
+        // reverse
+        // sort
+        // sortBy
+        // groupBy
     ];
 
     if(only) {
-        tests = tests.filter(ii => only.indexOf(ii.method) !== -1)
+        tests = tests.filter(ii => only.indexOf(ii.method) !== -1);
     }
 
-    return tests;
+    return tests.map(ii => ({...ii, item}));
 };
 
 var mapTestNames: Array<string> = [
@@ -442,14 +476,14 @@ var mapTestNames: Array<string> = [
     //count
     //countBy
     "delete",
-    "deleteAll",
-    //deleteIn
+    //deleteAll,
+    "deleteIn",
     //entries
     //entrySeq
     //equals
     "every",
-    "filter",
-    "filterNot",
+    //filter,
+    //filterNot,
     //find
     //findEntry
     //findKey
@@ -457,7 +491,7 @@ var mapTestNames: Array<string> = [
     //findLastEntry
     //findLastKey
     "first",
-    "flatMap",
+    //flatMap,
     //flatten
     //flip
     //forEach
@@ -465,6 +499,7 @@ var mapTestNames: Array<string> = [
     "getIn",
     //groupBy
     "has",
+    "hasIn",
     //hashCode
     "hasIn",
     "includes",
@@ -493,7 +528,7 @@ var mapTestNames: Array<string> = [
     //reduce
     //reduceRight
     //rest
-    "reverse",
+    //reverse,
     "set",
     "setIn",
     //skip
@@ -502,8 +537,8 @@ var mapTestNames: Array<string> = [
     //skipWhile
     //slice
     "some",
-    "sort",
-    "sortBy",
+    //sort,
+    //sortBy,
     //take
     //takeLast
     //takeUntil
@@ -523,11 +558,104 @@ var mapTestNames: Array<string> = [
     //toSetSeq
     //toStack
     "update",
-    //updateIn
+    "updateIn"
     //values
     //valueSeq
     //withMutations
 ];
+
+var sampleObject: Object = {
+    a: 123,
+    b: {
+        x: 456,
+        y: 321
+    },
+    c: 789
+};
+
+var sampleObject2: Object = {
+    c: 1000,
+    b: {
+        y: 123123
+    }
+};
+
+test('Wrapped Maps have a size', (tt: *) => {
+    var map: Map<string,*> = fromJS(sampleObject);
+    tt.is(Wrap(map).size, map.size, 'size returns correct size');
+});
+
+var objectMapTestConfig: Object = {
+    only: mapTestNames,
+    item: sampleObject,
+    itemToMerge: sampleObject2,
+    sampleValue: 789,
+    existingValue: 123,
+    nonExistingValue: 555,
+    key: 'a',
+    keyPath: ['b', 'x'],
+    nonExistingKey: ['z'],
+    partiallyExistingKeyPath: ['b', 'z'],
+    nonExistingKeyPath: ['z', 'zz']
+};
+
+tests({
+    ...objectMapTestConfig
+})
+    .forEach(({desc, method, args}: Object) => {
+        test(`"Map.${method}" should ${desc}. Args: ${JSON.stringify(args)}`, (tt: *) => {
+            var map: Map<string,*> = fromJS(sampleObject);
+            tt.true(
+                is(
+                    Wrap(map)[method](...args).done(),
+                    // $FlowFixMe: Flow doesnt know how to deal with calling computed properties
+                    map[method](...args)
+                )
+            );
+        });
+    });
+
+test('Objects have a size', (tt: *) => {
+    tt.is(Wrap(sampleObject).size, Map(sampleObject).size, 'size returns correct size');
+});
+
+tests({
+    ...objectMapTestConfig
+})
+    .forEach((testConfig: Object) => {
+        var {
+            item,
+            desc,
+            method,
+            args,
+            returnType,
+            // "self" if the thing being returned is a modified version of the original thing
+            // "wrapped" if the thing being returned is to be in an unmutable wrapper
+            // "plain" if the thing being returned is just the value (for 'status' methods like .has())
+            deep = false // true if we're testing a deep method
+        } = testConfig;
+
+        test(`"Object.${method}" should ${desc}. Args: ${JSON.stringify(args)}`, (tt: *) => {
+
+            var collection = deep ? fromJS(item) : Map(item);
+
+            // $FlowFixMe: Flow doesnt know how to deal with calling computed properties
+            var mapResult = collection[method](...args);
+
+            if(returnType === "self") {
+                mapResult = deep ? mapResult.toJS() : mapResult.toObject();
+            }
+
+            var unmutableResult = Wrap(item)[method](...args);
+
+            if(returnType !== "plain") {
+                unmutableResult = unmutableResult.done();
+            }
+
+            tt.deepEqual(mapResult, unmutableResult);
+        });
+    });
+
 
 var listTestNames: Array<string> = [
     //asImmutable
@@ -538,13 +666,13 @@ var listTestNames: Array<string> = [
     //count
     //countBy
     "delete",
-    //deleteIn
+    "deleteIn",
     //entries
     //entrySeq
     //equals
     "every",
-    "filter",
-    "filterNot",
+    //filter,
+    //filterNot,
     //find
     //findEntry
     //findIndex
@@ -554,7 +682,7 @@ var listTestNames: Array<string> = [
     //findLastIndex
     //findLastKey
     "first",
-    "flatMap",
+    //flatMap,
     //flatten
     //forEach
     //fromEntrySeq
@@ -595,7 +723,7 @@ var listTestNames: Array<string> = [
     //reduce
     //reduceRight
     //rest
-    "reverse",
+    //reverse,
     "set",
     "setIn",
     //setSize
@@ -606,8 +734,8 @@ var listTestNames: Array<string> = [
     //skipWhile
     //slice
     "some",
-    "sort",
-    "sortBy",
+    //sort,
+    //sortBy,
     //splice
     //take
     //takeLast
@@ -628,8 +756,8 @@ var listTestNames: Array<string> = [
     //toSetSeq
     //toStack
     //unshift
-    "update"
-    //updateIn
+    "update",
+    "updateIn"
     //values
     //valueSeq
     //withMutations
@@ -637,77 +765,62 @@ var listTestNames: Array<string> = [
     //zipWith
 ];
 
-test('all types should be able to be wrapped and unwrapped', (tt: *) => {
-    types.forEach(({value, name}: Object) => {
-        tt.deepEqual(Wrap(value).done(), value, `${name} should be able to be wrapped and unwrapped`);
-    });
+test('Wrapped Lists have a size', (tt: *) => {
+    var list: List<*> = fromJS(sampleArray);
+    tt.is(Wrap(list).size, list.size, 'size returns correct size');
 });
 
-test('all types should return correct values for isKeyed()', (tt: *) => {
-    types.forEach(({value, shouldBeKeyed, name}: Object) => {
-        tt.is(Wrap(value).isKeyed(), shouldBeKeyed, `${name} ${shouldBeKeyed ? "should" : "should not"} be keyed`);
-    });
-});
+var sampleArray: Array<*> = [
+    70,
+    2,
+    [0, 1]
+];
 
-test('all types should return correct values for isIndexed()', (tt: *) => {
-    types.forEach(({value, shouldBeIndexed, name}: Object) => {
-        tt.is(Wrap(value).isIndexed(), shouldBeIndexed, `${name} ${shouldBeIndexed ? "should" : "should not"} be indexed`);
-    });
-});
+var sampleArray2: Array<*> = [
+    4,
+    5
+];
 
-test('Wrapped Maps have a size', (tt: *) => {
-    var map: Map<string,*> = fromJS(sampleObject);
-    tt.is(Wrap(map).size, map.size, 'size returns correct size');
-});
+var arrayListTestConfig: Object = {
+    only: listTestNames,
+    item: sampleArray,
+    itemToMerge: sampleArray2,
+    sampleValue: 789,
+    existingValue: 2,
+    nonExistingValue: 555,
+    key: 1,
+    keyPath: [2,1],
+    nonExistingKey: [3],
+    partiallyExistingKeyPath: [2,10],
+    nonExistingKeyPath: [100, 200]
+};
 
-mapTests({
-    thingToMerge: fromJS(sampleObject2),
-    only: mapTestNames
+tests({
+    ...arrayListTestConfig
 })
     .forEach(({desc, method, args}: Object) => {
-        test(`"Map.${method}" should ${desc}. Args: ${JSON.stringify(args)}`, (tt: *) => {
-            var map: Map<string,*> = fromJS(sampleObject);
+        test(`"List.${method}" should ${desc}. Args: ${JSON.stringify(args)}`, (tt: *) => {
+            var list: List<*> = fromJS(sampleArray);
             tt.true(
                 is(
-                    Wrap(map)[method](...args).done(),
+                    Wrap(list)[method](...args).done(),
                     // $FlowFixMe: Flow doesnt know how to deal with calling computed properties
-                    map[method](...args)
+                    list[method](...args)
                 )
             );
         });
     });
 
-// test('Wrapped Lists have a size', (tt: *) => {
-//     var map: List<string,*> = fromJS(sampleArray);
-//     tt.is(Wrap(map).size, map.size, 'size returns correct size');
-// });
-
-// listTests({
-//     thingToMerge: fromJS(sampleArray2),
-//     only: listTestNames
-// })
-//     .forEach(({desc, method, args}: Object) => {
-//         test(`"List.${method}" should ${desc}. Args: ${JSON.stringify(args)}`, (tt: *) => {
-//             var list: List<*> = fromJS(sampleArray);
-//             tt.true(
-//                 is(
-//                     Wrap(list)[method](...args).done(),
-//                     list[method](...args)
-//                 )
-//             );
-//         });
-//     });
-
-test('Objects have a size', (tt: *) => {
-    tt.is(Wrap(sampleObject).size, Map(sampleObject).size, 'size returns correct size');
+test('Arrays have a size', (tt: *) => {
+    tt.is(Wrap(sampleArray).size, List(sampleArray).size, 'size returns correct size');
 });
 
-mapTests({
-    thingToMerge: sampleObject2,
-    only: mapTestNames
+tests({
+    ...arrayListTestConfig
 })
     .forEach((testConfig: Object) => {
         var {
+            item,
             desc,
             method,
             args,
@@ -718,63 +831,23 @@ mapTests({
             deep = false // true if we're testing a deep method
         } = testConfig;
 
-        test(`"Object.${method}" should ${desc}. Args: ${JSON.stringify(args)}`, (tt: *) => {
+        test(`"Array.${method}" should ${desc}. Args: ${JSON.stringify(args)}`, (tt: *) => {
 
-            var collection = deep ? fromJS(sampleObject) : Map(sampleObject);
+            var collection = deep ? fromJS(item) : List(item);
 
             // $FlowFixMe: Flow doesnt know how to deal with calling computed properties
-            var mapResult = collection[method](...args);
+            var listResult = collection[method](...args);
 
             if(returnType === "self") {
-                mapResult = deep ? mapResult.toJS() : mapResult.toObject();
+                listResult = deep ? listResult.toJS() : listResult.toArray();
             }
 
-            var unmutableResult = Wrap(sampleObject)[method](...args);
+            var unmutableResult = Wrap(item)[method](...args);
 
             if(returnType !== "plain") {
                 unmutableResult = unmutableResult.done();
             }
 
-            tt.deepEqual(mapResult, unmutableResult);
+            tt.deepEqual(listResult, unmutableResult);
         });
     });
-
-// test('Arrays have a size', (tt: *) => {
-//     tt.is(Wrap(sampleArray).size, List(sampleArray).size, 'size returns correct size');
-// });
-
-// listTests({
-//     thingToMerge: sampleArray2,
-//     only: listTestNames
-// })
-//     .forEach((testConfig: Object) => {
-//         var {
-//             desc,
-//             method,
-//             args,
-//             returnType,
-//             // "self" if the thing being returned is a modified version of the original thing
-//             // "wrapped" if the thing being returned is to be in an unmutable wrapper
-//             // "plain" if the thing being returned is just the value (for 'status' methods like .has())
-//             deep = false // true if we're testing a deep method
-//         } = testConfig;
-
-//         test(`"Array.${method}" should ${desc}. Args: ${JSON.stringify(args)}`, (tt: *) => {
-
-//             var collection = deep ? fromJS(sampleArray) : List(sampleArray);
-
-//             var listResult = collection[method](...args);
-
-//             if(returnType === "self") {
-//                 listResult = deep ? listResult.toJS() : listResult.toArray();
-//             }
-
-//             var unmutableResult = Wrap(sampleObject)[method](...args);
-
-//             if(returnType !== "plain") {
-//                 unmutableResult = unmutableResult.done();
-//             }
-
-//             tt.deepEqual(listResult, unmutableResult);
-//         });
-//     });
