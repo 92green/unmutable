@@ -51,9 +51,9 @@ var newMap = Wrap(map).set('abc', 456).done();
 
 ```
 
-`Wrap` can actually wrap around any data type, not just collections. You won't be able to use any collection manipulation methods, but you will be able to call the wrapper's `isCollection()`, `isKeyed()` and `isIndexed()` on any wrapped data.
+`Wrap` can actually wrap around any data type, not just collections. If your data isn't a collection then you won't be able to use any collection manipulation methods, but you will be able to call the wrapper's `isCollection()`, `isKeyed()` and `isIndexed()` on any wrapped data.
 
-Please note that while you can pass Immutable collections other than `Map` and `List`, right now they won't be recognised as collections so you won't get their methods on the wrapper. As this library grows, the plan is to bring in more Immutable types.
+Please note that while you *can* wrap Immutable collections other than `Map` and `List`, right now they won't be recognised as collections so you won't get their methods on the wrapper. As this library grows, the plan is to bring in more Immutable types.
 
 ```
 import {Wrap} from 'unmutable';
