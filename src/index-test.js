@@ -136,6 +136,8 @@ var tests: Function = (config: Object): Array<Object> => {
         nonExistingKeyPath
     } = config;
 
+    const emptyKeyPath = [];
+
     var tests = [
         {
             desc: "clear",
@@ -173,6 +175,13 @@ var tests: Function = (config: Object): Array<Object> => {
             method: "deleteIn",
             args: [nonExistingKeyPath],
             returnType: "self",
+            deep: true
+        },
+        {
+            desc: "deleteIn empty keyPath",
+            method: "deleteIn",
+            args: [emptyKeyPath],
+            returnType: "wrapped",
             deep: true
         },
         {
@@ -260,6 +269,13 @@ var tests: Function = (config: Object): Array<Object> => {
             deep: true
         },
         {
+            desc: "getIn empty keyPath",
+            method: "getIn",
+            args: [emptyKeyPath],
+            returnType: "self",
+            deep: true
+        },
+        {
             desc: "has key",
             method: "has",
             args: [key],
@@ -289,6 +305,13 @@ var tests: Function = (config: Object): Array<Object> => {
             desc: "hasIn non-existing keyPath",
             method: "hasIn",
             args: [nonExistingKeyPath],
+            returnType: "plain",
+            deep: true
+        },
+        {
+            desc: "hasIn empty keyPath",
+            method: "hasIn",
+            args: [emptyKeyPath],
             returnType: "plain",
             deep: true
         },
@@ -394,6 +417,13 @@ var tests: Function = (config: Object): Array<Object> => {
             deep: true
         },
         {
+            desc: "setIn empty keyPath",
+            method: "setIn",
+            args: [emptyKeyPath, sampleValue],
+            returnType: "wrapped",
+            deep: true
+        },
+        {
             desc: "return true if a key returns true",
             method: "some",
             args: [ii => ii === existingValue],
@@ -445,12 +475,20 @@ var tests: Function = (config: Object): Array<Object> => {
             deep: true
         },
         {
-            desc: "updateIn parially existing keyPath",
+            desc: "updateIn partially existing keyPath",
             method: "updateIn",
             args: [partiallyExistingKeyPath, sampleValue, ii => ii],
             returnType: "self",
             deep: true
+        },
+        {
+            desc: "updateIn empty keyPath",
+            method: "updateIn",
+            args: [emptyKeyPath, ii => ii],
+            returnType: "self",
+            deep: true
         }
+
         // flatMap
         // filter
         // filterNot
