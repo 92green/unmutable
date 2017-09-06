@@ -11,10 +11,11 @@ export default class UnmutableObjectWrapper extends UnmutableMapWrapper {
         const wrapped = Wrap;
 
         const methodConstructors = {
+            butLast: self,
             clear: self,
             concat: self,
+            count: plain,
             delete: self,
-            deleteAll: self,
             deleteIn: self,
             every: plain,
             filter: self,
@@ -34,11 +35,21 @@ export default class UnmutableObjectWrapper extends UnmutableMapWrapper {
             merge: self,
             mergeWith: self,
             reverse: self,
+            rest: self,
             set: self,
             setIn: self,
+            skip: self,
+            skipLast: self,
+            skipUntil: self,
+            skipWhile: self,
+            slice: self,
             some: plain,
             sort: self,
             sortBy: self,
+            take: self,
+            takeLast: self,
+            takeUntil: self,
+            takeWhile: self,
             update: self,
             updateIn: self
         };

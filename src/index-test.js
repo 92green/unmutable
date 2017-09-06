@@ -128,7 +128,7 @@ var tests: Function = (config: Object): Array<Object> => {
         existingValue,
         nonExistingValue,
         item,
-        itemToMerge,
+        itemAlternative,
         key,
         keyPath,
         nonExistingKey,
@@ -136,7 +136,15 @@ var tests: Function = (config: Object): Array<Object> => {
         nonExistingKeyPath
     } = config;
 
+    const emptyKeyPath = [];
+
     var tests = [
+        {
+            desc: "butLast",
+            method: "butLast",
+            args: [],
+            returnType: "self"
+        },
         {
             desc: "clear",
             method: "clear",
@@ -146,8 +154,14 @@ var tests: Function = (config: Object): Array<Object> => {
         {
             desc: "concat",
             method: "concat",
-            args: [itemToMerge],
+            args: [itemAlternative],
             returnType: "self"
+        },
+        {
+            desc: "count",
+            method: "count",
+            args: [],
+            returnType: "plain"
         },
         {
             desc: "delete key",
@@ -159,6 +173,13 @@ var tests: Function = (config: Object): Array<Object> => {
             desc: "delete non-existing key",
             method: "delete",
             args: [nonExistingKey],
+            returnType: "self"
+        },
+        {
+            // will exist in v4
+            desc: "deleteAll",
+            method: "deleteAll",
+            args: [[key, nonExistingKey]],
             returnType: "self"
         },
         {
@@ -176,6 +197,13 @@ var tests: Function = (config: Object): Array<Object> => {
             deep: true
         },
         {
+            desc: "deleteIn empty keyPath",
+            method: "deleteIn",
+            args: [emptyKeyPath],
+            returnType: "wrapped",
+            deep: true
+        },
+        {
             desc: "return false if a key returns false",
             method: "every",
             args: [ii => ii === nonExistingValue],
@@ -186,6 +214,18 @@ var tests: Function = (config: Object): Array<Object> => {
             method: "every",
             args: [ii => ii !== nonExistingValue],
             returnType: "plain"
+        },
+        {
+            desc: "filter",
+            method: "filter",
+            args: [ii => ii === existingValue],
+            returnType: "self"
+        },
+        {
+            desc: "filterNot",
+            method: "filterNot",
+            args: [ii => ii === existingValue],
+            returnType: "self"
         },
         {
             desc: "can get first value",
@@ -260,6 +300,13 @@ var tests: Function = (config: Object): Array<Object> => {
             deep: true
         },
         {
+            desc: "getIn empty keyPath",
+            method: "getIn",
+            args: [emptyKeyPath],
+            returnType: "self",
+            deep: true
+        },
+        {
             desc: "has key",
             method: "has",
             args: [key],
@@ -293,6 +340,13 @@ var tests: Function = (config: Object): Array<Object> => {
             deep: true
         },
         {
+            desc: "hasIn empty keyPath",
+            method: "hasIn",
+            args: [emptyKeyPath],
+            returnType: "plain",
+            deep: true
+        },
+        {
             desc: "includes existing value",
             method: "includes",
             args: [existingValue],
@@ -302,6 +356,24 @@ var tests: Function = (config: Object): Array<Object> => {
             desc: "includes non-existing value",
             method: "includes",
             args: [nonExistingValue],
+            returnType: "plain"
+        },
+        {
+            desc: "interpose",
+            method: "interpose",
+            args: [sampleValue],
+            returnType: "self"
+        },
+        {
+            desc: "interleave",
+            method: "interleave",
+            args: [itemAlternative],
+            returnType: "self"
+        },
+        {
+            desc: "isEmpty",
+            method: "isEmpty",
+            args: [],
             returnType: "plain"
         },
         {
@@ -331,33 +403,45 @@ var tests: Function = (config: Object): Array<Object> => {
         {
             desc: "merge",
             method: "merge",
-            args: [itemToMerge],
+            args: [itemAlternative],
             returnType: "self"
         },
         // {
         //     desc: "mergeDeep",
         //     method: "mergeDeep",
-        //     args: [itemToMerge]
+        //     args: [itemAlternative]
         // },
         // {
         //     desc: "mergeDeepWith",
         //     method: "mergeDeepWith",
-        //     args: [(oldVal, newVal) => oldVal / newVal, itemToMerge]
+        //     args: [(oldVal, newVal) => oldVal / newVal, itemAlternative]
         // },
                 // {
         //     desc: "mergeIn",
         //     method: "mergeIn",
-        //     args: [['b', 'x'], itemToMerge]
+        //     args: [['b', 'x'], itemAlternative]
         // },
         // {
         //     desc: "mergeDeepIn",
         //     method: "mergeDeepIn",
-        //     args: [['b', 'x'], itemToMerge]
+        //     args: [['b', 'x'], itemAlternative]
         // },
         {
             desc: "mergeWith",
             method: "mergeWith",
-            args: [(oldVal, newVal) => oldVal / newVal, itemToMerge],
+            args: [(oldVal, newVal) => oldVal / newVal, itemAlternative],
+            returnType: "self"
+        },
+        {
+            desc: "reverse",
+            method: "reverse",
+            args: [],
+            returnType: "self"
+        },
+        {
+            desc: "rest",
+            method: "rest",
+            args: [],
             returnType: "self"
         },
         {
@@ -394,6 +478,79 @@ var tests: Function = (config: Object): Array<Object> => {
             deep: true
         },
         {
+            desc: "setIn empty keyPath",
+            method: "setIn",
+            args: [emptyKeyPath, sampleValue],
+            returnType: "wrapped",
+            deep: true
+        },
+        {
+            desc: "skip",
+            method: "skip",
+            args: [1],
+            returnType: "self"
+        },
+        {
+            desc: "skipLast",
+            method: "skipLast",
+            args: [1],
+            returnType: "self"
+        },
+        {
+            desc: "skipWhile (match existing value)",
+            method: "skipWhile",
+            args: [ii => ii === existingValue],
+            returnType: "self"
+        },
+        {
+            desc: "skipUntil (match existing value)",
+            method: "skipUntil",
+            args: [ii => ii === existingValue],
+            returnType: "self"
+        },
+        {
+            desc: "skipWhile (match nonExisting value)",
+            method: "skipWhile",
+            args: [ii => ii === nonExistingValue],
+            returnType: "self"
+        },
+        {
+            desc: "skipUntil (match nonExisting value)",
+            method: "skipUntil",
+            args: [ii => ii === nonExistingValue],
+            returnType: "self"
+        },
+        {
+            desc: "slice with no args",
+            method: "slice",
+            args: [],
+            returnType: "self"
+        },
+        {
+            desc: "slice with begin",
+            method: "slice",
+            args: [1],
+            returnType: "self"
+        },
+        {
+            desc: "slice with begin and end",
+            method: "slice",
+            args: [1, 2],
+            returnType: "self"
+        },
+        {
+            desc: "slice with negative begin",
+            method: "slice",
+            args: [-1],
+            returnType: "self"
+        },
+        {
+            desc: "slice with negative end",
+            method: "slice",
+            args: [0, -1],
+            returnType: "self"
+        },
+        {
             desc: "return true if a key returns true",
             method: "some",
             args: [ii => ii === existingValue],
@@ -404,6 +561,54 @@ var tests: Function = (config: Object): Array<Object> => {
             method: "some",
             args: [ii => ii === nonExistingValue],
             returnType: "plain"
+        },
+        {
+            desc: "sort",
+            method: "sort",
+            args: [],
+            returnType: "self"
+        },
+        {
+            desc: "sortBy",
+            method: "sortBy",
+            args: [ii => ii],
+            returnType: "self"
+        },
+        {
+            desc: "take",
+            method: "take",
+            args: [1],
+            returnType: "self"
+        },
+        {
+            desc: "takeLast",
+            method: "takeLast",
+            args: [1],
+            returnType: "self"
+        },
+        {
+            desc: "takeWhile (match existing value)",
+            method: "takeWhile",
+            args: [ii => ii === existingValue],
+            returnType: "self"
+        },
+        {
+            desc: "takeUntil (match existing value)",
+            method: "takeUntil",
+            args: [ii => ii === existingValue],
+            returnType: "self"
+        },
+        {
+            desc: "takeWhile (match nonExisting value)",
+            method: "takeWhile",
+            args: [ii => ii === nonExistingValue],
+            returnType: "self"
+        },
+        {
+            desc: "takeUntil (match nonExisting value)",
+            method: "takeUntil",
+            args: [ii => ii === nonExistingValue],
+            returnType: "self"
         },
         {
             desc: "update whole collection",
@@ -445,18 +650,21 @@ var tests: Function = (config: Object): Array<Object> => {
             deep: true
         },
         {
-            desc: "updateIn parially existing keyPath",
+            desc: "updateIn partially existing keyPath",
             method: "updateIn",
             args: [partiallyExistingKeyPath, sampleValue, ii => ii],
             returnType: "self",
             deep: true
+        },
+        {
+            desc: "updateIn empty keyPath",
+            method: "updateIn",
+            args: [emptyKeyPath, ii => ii],
+            returnType: "self",
+            deep: true
         }
+
         // flatMap
-        // filter
-        // filterNot
-        // reverse
-        // sort
-        // sortBy
         // groupBy
     ];
 
@@ -470,20 +678,19 @@ var tests: Function = (config: Object): Array<Object> => {
 var mapTestNames: Array<string> = [
     //asImmutable
     //asMutable
-    //butLast
+    "butLast",
     "clear",
     "concat",
-    //count
+    "count",
     //countBy
     "delete",
-    //deleteAll,
     "deleteIn",
     //entries
     //entrySeq
     //equals
     "every",
-    //filter,
-    //filterNot,
+    "filter",
+    "filterNot",
     //find
     //findEntry
     //findKey
@@ -527,18 +734,18 @@ var mapTestNames: Array<string> = [
     //minBy
     //reduce
     //reduceRight
-    //rest
-    //reverse,
+    "rest",
+    "reverse",
     "set",
     "setIn",
-    //skip
-    //skipLast
-    //skipUntil
-    //skipWhile
-    //slice
+    "skip",
+    "skipLast",
+    "skipUntil",
+    "skipWhile",
+    "slice",
     "some",
-    //sort,
-    //sortBy,
+    "sort",
+    "sortBy",
     //take
     //takeLast
     //takeUntil
@@ -588,13 +795,13 @@ test('Wrapped Maps have a size', (tt: *) => {
 var objectMapTestConfig: Object = {
     only: mapTestNames,
     item: sampleObject,
-    itemToMerge: sampleObject2,
+    itemAlternative: sampleObject2,
     sampleValue: 789,
     existingValue: 123,
     nonExistingValue: 555,
     key: 'a',
     keyPath: ['b', 'x'],
-    nonExistingKey: ['z'],
+    nonExistingKey: 'z',
     partiallyExistingKeyPath: ['b', 'z'],
     nonExistingKeyPath: ['z', 'zz']
 };
@@ -660,10 +867,10 @@ tests({
 var listTestNames: Array<string> = [
     //asImmutable
     //asMutable
-    //butLast
+    "butLast",
     "clear",
     "concat",
-    //count
+    "count",
     //countBy
     "delete",
     "deleteIn",
@@ -671,8 +878,8 @@ var listTestNames: Array<string> = [
     //entrySeq
     //equals
     "every",
-    //filter,
-    //filterNot,
+    "filter",
+    "filterNot",
     //find
     //findEntry
     //findIndex
@@ -694,10 +901,10 @@ var listTestNames: Array<string> = [
     "hasIn",
     "includes",
     //indexOf
-    //insert
-    //interleave
-    //interpose
-    //isEmpty
+    "insert",
+    "interleave",
+    "interpose",
+    "isEmpty",
     //isSubset
     //isSuperset
     //join
@@ -718,24 +925,24 @@ var listTestNames: Array<string> = [
     "mergeWith",
     //min
     //minBy
-    //pop
-    //push
+    "pop",
+    "push",
     //reduce
     //reduceRight
-    //rest
-    //reverse,
+    "rest",
+    "reverse",
     "set",
     "setIn",
     //setSize
-    //shift
-    //skip
-    //skipLast
-    //skipUntil
-    //skipWhile
-    //slice
+    "shift",
+    "skip",
+    "skipLast",
+    "skipUntil",
+    "skipWhile",
+    "slice",
     "some",
-    //sort,
-    //sortBy,
+    "sort",
+    "sortBy",
     //splice
     //take
     //takeLast
@@ -755,7 +962,7 @@ var listTestNames: Array<string> = [
     //toSet
     //toSetSeq
     //toStack
-    //unshift
+    "unshift",
     "update",
     "updateIn"
     //values
@@ -784,7 +991,7 @@ var sampleArray2: Array<*> = [
 var arrayListTestConfig: Object = {
     only: listTestNames,
     item: sampleArray,
-    itemToMerge: sampleArray2,
+    itemAlternative: sampleArray2,
     sampleValue: 789,
     existingValue: 2,
     nonExistingValue: 555,

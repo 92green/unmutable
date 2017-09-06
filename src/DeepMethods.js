@@ -26,13 +26,10 @@ export const getIn = (_this: UnmutableWrapperType, Wrap: Function) => (keyPath: 
 export const setIn = (_this: UnmutableWrapperType, Wrap: Function) => (keyPath: string[], value: *): UnmutableObjectWrapper => {
     for(var i = keyPath.length - 1; i >= 0; i--) {
         value = getIn(_this, Wrap)(keyPath.slice(0, i), {})
-            .set(keyPath[i], value);
-
-        if(i > 0) {
-            value = value.done();
-        }
+            .set(keyPath[i], value)
+            .done();
     }
-    return value;
+    return Wrap(value);
 };
 
 export const updateIn = (_this: UnmutableWrapperType, Wrap: Function) => (keyPath: string[], notFoundOrUpdater: *, updater: ?Updater): UnmutableObjectWrapper => {
@@ -48,10 +45,14 @@ export const updateIn = (_this: UnmutableWrapperType, Wrap: Function) => (keyPat
     }
 
     var originalValue: * = getIn(_this, Wrap)(keyPath, notFoundValue);
+
     return setIn(_this, Wrap)(keyPath, updater(originalValue.done()));
 };
 
 export const deleteIn = (_this: UnmutableWrapperType, Wrap: Function) => (keyPath: string[]): UnmutableObjectWrapper => {
+    if(keyPath.length === 0) {
+        return Wrap(undefined);
+    }
     return updateIn(_this, Wrap)(
         keyPath.slice(0, -1),
         ii => Wrap(ii).delete(keyPath[keyPath.length - 1]).done()
