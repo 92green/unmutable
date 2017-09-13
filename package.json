@@ -1,27 +1,10 @@
 {
-  "main": "lib/index.js",
-  "files": [
-    "lib"
-  ],
-  "name": "unmutable",
-  "version": "0.6.0",
-  "description": "Immutable.js functions for collections that may or may not be Immutable.",
-  "license": "MIT",
-  "author": "Damien Clarke",
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:blueflag/unmutable.git"
-  },
-  "bugs": {
-    "url": "https://github.com/blueflag/unmutable/issues"
-  },
-  "private": false,
+  "name": "unmutable-repo",
+  "private": true,
   "scripts": {
-    "build": "rm -rf lib && node ./scripts/flow.js && babel src --out-dir lib",
-    "build-examples": "cd example && yarn install && yarn run build && cd -",
-    "deploy-to-gh-pages": "yarn run build && yarn run build-examples && yarn run docs && node scripts/publish.js",
-    "prepublish": "yarn run build",
-    "watch": "yarn run build -- -w",
+    "build": "lerna run build",
+    "prepublish": "lerna run prepublish",
+    "watch": "lerna run --parallel watch",
     "ava": "NODE_ENV=test ava",
     "check-coverage": "NODE_ENV=test nyc check-coverage --branches 100.0  --functions 100.0 --lines 100.0",
     "docs": "jsdoc -c jsdoc.json",
@@ -47,13 +30,12 @@
     "fs-extra": "^4.0.1",
     "gh-pages": "^0.11.0",
     "git-url-parse": "^6.0.1",
-    "jsdoc": "^3.4.3",
-    "jsdoc-babel": "^0.3.0",
-    "jsdoc-react-proptypes": "^1.0.2",
-    "jsdonk": "^0.7.0",
+    "immutable": "^3.8.1",
+    "lerna": "^2.1.2",
     "nyc": "^10.0.0",
     "proxyquire": "^1.7.10",
-    "sinon": "^2.1.0"
+    "sinon": "^2.1.0",
+    "is-plain-object": "^2.0.4"
   },
   "ava": {
     "require": [
@@ -70,7 +52,7 @@
       "sourceMaps": "inline"
     },
     "files": [
-      "src/**/*-test.js"
+      "packages/*/src/**/*-test.js"
     ]
   },
   "nyc": {
@@ -78,10 +60,10 @@
     "sourceMap": false,
     "instrument": false,
     "include": [
-      "src/**"
+      "packages/*/src/**"
     ],
     "exclude": [
-      "src/**/*-test.js",
+      "packages/*/src/**/*-test.js",
       "dist"
     ],
     "reporter": [
@@ -96,10 +78,7 @@
       "babel-register"
     ]
   },
-  "dependencies": {
-    "is-plain-object": "^2.0.4"
-  },
-  "peerDependencies": {
-    "immutable": "^3.8.1"
-  }
+  "workspaces": [
+    "packages/*"
+  ]
 }

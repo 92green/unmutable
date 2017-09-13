@@ -1,13 +1,12 @@
 // @flow
-import {List} from 'immutable';
-import UnmutableListWrapper from './UnmutableListWrapper';
+import {Map} from 'immutable';
+import UnmutableWrapper from './UnmutableWrapper';
 import Wrap from './Wrap';
 import {deleteIn, getIn, hasIn, setIn, updateIn} from './DeepMethods';
 
-export default class UnmutableArrayWrapper extends UnmutableListWrapper {
-
+export default class UnmutableObjectWrapper extends UnmutableWrapper {
     constructor(item: *, options: Options = {}) {
-        const self = ii => new UnmutableArrayWrapper(ii);
+        const self = ii => new UnmutableObjectWrapper(ii);
         const plain = ii => ii;
         const wrapped = Wrap;
 
@@ -28,25 +27,21 @@ export default class UnmutableArrayWrapper extends UnmutableListWrapper {
             has: plain,
             hasIn: plain,
             includes: plain,
-            insert: self,
-            interleave: self,
-            interpose: self,
             isEmpty: plain,
             last: wrapped,
             map: self,
+            mapEntries: self,
+            mapKeys: self,
             merge: self,
             mergeWith: self,
-            pop: self,
-            push: self,
             reverse: self,
             rest: self,
+            set: self,
+            setIn: self,
             skip: self,
             skipLast: self,
             skipUntil: self,
             skipWhile: self,
-            set: self,
-            setIn: self,
-            shift: self,
             slice: self,
             some: plain,
             sort: self,
@@ -55,12 +50,11 @@ export default class UnmutableArrayWrapper extends UnmutableListWrapper {
             takeLast: self,
             takeUntil: self,
             takeWhile: self,
-            unshift: self,
             update: self,
             updateIn: self
         };
 
-        super(List(item), {methodConstructors}, options);
+        super(Map(item), {methodConstructors}, options);
 
         var _this = (this: any);
         _this.deleteIn = deleteIn(_this, Wrap);
@@ -71,6 +65,18 @@ export default class UnmutableArrayWrapper extends UnmutableListWrapper {
     }
 
     done(): * {
-        return (this: any).__item.toArray();
+        return this.__item.toObject();
+    }
+
+    get size(): number {
+        return this.__item.size;
+    }
+
+    isCollection(): boolean {
+        return true;
+    }
+
+    isKeyed(): boolean {
+        return true;
     }
 }

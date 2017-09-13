@@ -1,0 +1,35 @@
+{
+  "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
+  "name": "unmutable-core",
+  "version": "0.0.0",
+  "description": "Immutable.js functions for collections that may or may not be Immutable (contains a dependency on Immutable.js).",
+  "license": "MIT",
+  "author": "Damien Clarke",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:blueflag/unmutable.git"
+  },
+  "bugs": {
+    "url": "https://github.com/blueflag/unmutable/issues"
+  },
+  "private": false,
+  "scripts": {
+    "build": "rm -rf lib && babel src --out-dir lib",
+    "prepublish": "yarn run build",
+    "watch": "yarn run build -- -w"
+  },
+  "dependencies": {
+    "immutable": "^3.8.1",
+    "unmutable-core": "v0.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.23.0",
+    "babel-core": "^6.23.0",
+    "babel-plugin-istanbul": "4.1.1",
+    "babel-preset-blueflag": "^0.3.0",
+    "babel-register": "^6.23.0"
+  }
+}

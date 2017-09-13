@@ -1,5 +1,5 @@
 // @flow
-import listMethodNames from './util/listMethodNames';
+import {ListMethodNames} from 'unmutable-core';
 import Wrap from './Wrap';
 
 export default class UnmutableWrapper {
@@ -13,7 +13,7 @@ export default class UnmutableWrapper {
 
         if(typeof item === "object") {
             // copy methods if applicable
-            listMethodNames(item)
+            ListMethodNames(item)
                 .forEach((name: string) => {
                     const constructor = methodConstructors
                         ? methodConstructors[name]
