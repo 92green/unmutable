@@ -11,7 +11,7 @@
     "flow": "flow check",
     "lint": "eslint src --ext js,jsx",
     "lint-fix": "eslint src --ext js,jsx --fix",
-    "test": "NODE_ENV=test nyc --report-dir=./coverage ava && yarn run check-coverage",
+    "test": "yarn run build && NODE_ENV=test nyc --report-dir=./coverage ava && yarn run check-coverage",
     "test-all": "NODE_ENV=test yarn run lint && yarn run flow && yarn run test",
     "view-coverage": "yarn run check-coverage; open ./coverage/lcov-report/index.html"
   },
@@ -60,10 +60,11 @@
     "sourceMap": false,
     "instrument": false,
     "include": [
-      "packages/*/src/**"
+      "packages/**/src/**"
     ],
     "exclude": [
-      "packages/*/src/**/*-test.js",
+      "packages/**/src/**/*-test.js",
+      "packages/**/src/**/*-testUtil.js",
       "dist"
     ],
     "reporter": [

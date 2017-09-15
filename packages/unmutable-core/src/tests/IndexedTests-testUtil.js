@@ -1,6 +1,6 @@
 // @flow
 import {fromJS, List, is} from 'immutable';
-import CollectionTestDefinitions from './CollectionTestDefinitions';
+import CollectionTestDefinitions from './CollectionTestDefinitions-testUtil';
 
 export default function(test: Function, Wrap: Function, indexedTests: Array<Object>) {
     test('Wrapped Lists have a size', (tt: *) => {
@@ -29,8 +29,8 @@ export default function(test: Function, Wrap: Function, indexedTests: Array<Obje
         key: 1,
         keyPath: [2,1],
         nonExistingKey: 3,
-        partiallyExistingKeyPath: [2,10],
-        nonExistingKeyPath: [100, 200],
+        partiallyExistingKeyPath: [2,5],
+        nonExistingKeyPath: [5,2],
         negativeKey: -3,
         nonExistingNegativeKey: -4
     };
@@ -65,7 +65,8 @@ export default function(test: Function, Wrap: Function, indexedTests: Array<Obje
                 // "self" if the thing being returned is a modified version of the original thing
                 // "wrapped" if the thing being returned is to be in an unmutable-lite wrapper
                 // "plain" if the thing being returned is just the value (for 'status' methods like .has())
-                deep = false // true if we're testing a deep method
+                deep = false, // true if we're testing a deep method
+                shouldReturnSelf = false
             } = testConfig;
 
             test(`"Array.${method}" should ${desc}. Args: ${JSON.stringify(args)}`, (tt: *) => {
@@ -79,7 +80,6 @@ export default function(test: Function, Wrap: Function, indexedTests: Array<Obje
                     listResult = deep ? listResult.toJS() : listResult.toArray();
                 }
 
-
                 var unmutableMethod = Wrap(item)[method];
                 if(!unmutableMethod) {
                     throw new Error(`${Wrap(item).wrapperType()}.${method}" does not exist`);
@@ -91,7 +91,10 @@ export default function(test: Function, Wrap: Function, indexedTests: Array<Obje
                     unmutableLiteResult = unmutableLiteResult.done();
                 }
 
-                tt.deepEqual(listResult, unmutableLiteResult);
+                tt.deepEqual(listResult, unmutableLiteResult, "Result shoud be correct");
+                if(!shouldReturnSelf && typeof listResult !== "undefined" && returnType === "self") {
+                    tt.not(item, unmutableLiteResult, "Method should be immutable");
+                }
             });
         });
 

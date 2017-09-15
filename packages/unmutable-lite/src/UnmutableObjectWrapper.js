@@ -10,16 +10,16 @@ export default class UnmutableObjectWrapper extends UnmutableWrapper {
 
         // define shallow methods
         let _this = (this: any);
-        _this.clear = () => ({});
-        _this.concat = (newItem: Object) => ({...item, ...newItem});
-        _this.count = () => _this.size;
+        _this.clear = (): Object => ({});
+        _this.concat = (newItem: Object): Object => ({...item, ...newItem});
+        _this.count = (): number => _this.size;
         _this.delete = (key: *): Object => {
             let clone = {...item};
             delete clone[key];
             return clone;
         };
-        _this.get = (key: *, notFoundValue: undefined) => _this.has(key) ? item[key] : notFoundValue;
-        _this.has = (key: *) => item.hasOwnProperty(key);
+        _this.get = (key: *, notFoundValue: * = undefined): * => _this.has(key) ? item[key] : notFoundValue;
+        _this.has = (key: *): boolean => item.hasOwnProperty(key);
         _this.includes = (value: *): boolean => {
             for(let key in item) {
                 if(item[key] === value) {
@@ -28,8 +28,8 @@ export default class UnmutableObjectWrapper extends UnmutableWrapper {
             }
             return false;
         };
-        _this.isEmpty = () => item.size === 0;
-        _this.set = (key: *, value: *) => ({...item, [key]: value});
+        _this.isEmpty = (): boolean => item.size === 0;
+        _this.set = (key: *, value: *): Object => ({...item, [key]: value});
 
         // wrap shallow methods in constructors
         this._addMethods(
@@ -37,7 +37,7 @@ export default class UnmutableObjectWrapper extends UnmutableWrapper {
             CreateMethodConstructors(Wrap, ii => new UnmutableObjectWrapper(ii))
         );
 
-        // define deep methods
+        // define composite methods
         _this.deleteIn = deleteIn(_this, Wrap);
         _this.hasIn = hasIn(_this, Wrap);
         _this.getIn = getIn(_this, Wrap);

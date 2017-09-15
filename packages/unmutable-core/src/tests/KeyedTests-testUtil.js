@@ -1,6 +1,6 @@
 // @flow
 import {fromJS, Map, is} from 'immutable';
-import CollectionTestDefinitions from './CollectionTestDefinitions';
+import CollectionTestDefinitions from './CollectionTestDefinitions-testUtil';
 
 var sampleObject: Object = {
     a: 123,
@@ -69,7 +69,8 @@ export default function(test: Function, Wrap: Function, keyedTests: Array<Object
                 // "self" if the thing being returned is a modified version of the original thing
                 // "wrapped" if the thing being returned is to be in an unmutable-lite wrapper
                 // "plain" if the thing being returned is just the value (for 'status' methods like .has())
-                deep = false // true if we're testing a deep method
+                deep = false, // true if we're testing a deep method,
+                shouldReturnSelf = false
             } = testConfig;
 
             test(`"Object.${method}" should ${desc}. Args: ${JSON.stringify(args)}`, (tt: *) => {
@@ -93,7 +94,10 @@ export default function(test: Function, Wrap: Function, keyedTests: Array<Object
                     unmutableLiteResult = unmutableLiteResult.done();
                 }
 
-                tt.deepEqual(mapResult, unmutableLiteResult);
+                tt.deepEqual(mapResult, unmutableLiteResult, "Result shoud be correct");
+                if(!shouldReturnSelf && typeof mapResult !== "undefined" && returnType === "self") {
+                    tt.not(item, unmutableLiteResult, "Method should be immutable");
+                }
             });
         });
 }

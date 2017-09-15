@@ -3,8 +3,8 @@
   "files": [
     "lib"
   ],
-  "name": "unmutable-core",
-  "version": "0.0.0",
+  "name": "unmutable",
+  "version": "0.7.0",
   "description": "Immutable.js functions for collections that may or may not be Immutable (contains a dependency on Immutable.js).",
   "license": "MIT",
   "author": "Damien Clarke",
@@ -22,8 +22,10 @@
     "watch": "yarn run build -- -w"
   },
   "dependencies": {
-    "immutable": "^3.8.1",
-    "unmutable-core": "v0.0.0"
+    "unmutable-core": "v0.7.0"
+  },
+  "peerDependencies": {
+    "immutable": "^3.8.1"
   },
   "devDependencies": {
     "babel-cli": "^6.23.0",

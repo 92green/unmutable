@@ -6,32 +6,30 @@ export default class UnmutableWrapper {
 
     __item: *;
 
-    constructor(item: *, options: Options) {
-        const {methodConstructors = null} = options;
+    constructor(item: *) {
+        this.__item = item;
+    }
 
+    _addMethods(obj: *, methodConstructors: ?Object = null) {
         var _this = (this: any);
 
-        if(typeof item === "object") {
-            // copy methods if applicable
-            ListMethodNames(item)
-                .forEach((name: string) => {
-                    const constructor = methodConstructors
-                        ? methodConstructors[name]
-                        : Wrap;
+        // copy methods if applicable
+        ListMethodNames(obj)
+            .forEach((name: string) => {
+                const constructor = methodConstructors
+                    ? methodConstructors[name]
+                    : Wrap;
 
-                    if(!constructor) {
-                        return;
-                    }
+                if(!constructor) {
+                    return;
+                }
 
-                    let method = item[name];
-                    _this[name] = (...args: *): UnmutableWrapper => {
-                        const result = method.bind(item)(...args);
-                        return constructor(result);
-                    };
-                });
-        }
-
-        this.__item = item;
+                let method = obj[name];
+                _this[name] = (...args: *): UnmutableWrapper => {
+                    const result = method.bind(obj)(...args);
+                    return constructor(result);
+                };
+            });
     }
 
     done(): * {
@@ -48,5 +46,9 @@ export default class UnmutableWrapper {
 
     isIndexed(): boolean {
         return false;
+    }
+
+    wrapperType(): string {
+        return "UnmutableWrapper";
     }
 }

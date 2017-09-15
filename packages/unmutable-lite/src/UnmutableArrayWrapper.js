@@ -11,32 +11,34 @@ export default class UnmutableArrayWrapper extends UnmutableWrapper {
 
         // define shallow methods
         let _this = (this: any);
-        _this.clear = () => [];
-        _this.concat = (newItem: Object) => ([...item, ...newItem]);
-        _this.count = () => _this.size;
-        _this.delete = (key: *): Object => {
+        _this.clear = (): Array<*> => [];
+        _this.concat = (newItem: Object): Array<*> => item.concat(newItem);
+        _this.count = (): number => _this.size;
+        _this.delete = (key: *): Array<*> => {
             let clone = [...item];
             clone.splice(key, 1);
             return clone;
         };
-        _this.first = () => item[0];
-        _this.get = (key: *, notFoundValue: undefined): * => {
+        _this.first = (): * => item[0];
+        _this.get = (key: *, notFoundValue: * = undefined): * => {
             if(!_this.has(key)) {
                 return notFoundValue;
             }
             return key < 0 ? item[key + item.length] : item[key];
         };
-        _this.has = (key: *) => key < item.length && key >= -item.length;
-        _this.includes = (value: *): boolean => {
-            return item.indexOf(value) !== -1;
-        };
-        _this.isEmpty = () => item.size === 0;
-        _this.last = () => item[item.length - 1];
+        _this.has = (key: *): boolean => key < item.length && key >= -item.length;
+        _this.includes = (value: *): boolean => item.indexOf(value) !== -1;
+        _this.isEmpty = (): boolean => item.size === 0;
+        _this.last = (): * => item[item.length - 1];
+        _this.push = (value: *): Array<*> => [...item, value];
+        _this.pop = (): Array<*> => item.slice(0, -1);
         _this.set = (key: *, value: *): Array<*> => {
             let clone = [...item];
             clone[key] = value;
             return clone;
         };
+        _this.shift = (): Array<*> => item.slice(1);
+        _this.unshift = (value: *): Array<*> => [value, ...item];
 
         // wrap shallow methods in constructors
         this._addMethods(
@@ -44,7 +46,7 @@ export default class UnmutableArrayWrapper extends UnmutableWrapper {
             CreateMethodConstructors(Wrap, ii => new UnmutableArrayWrapper(ii))
         );
 
-        // define deep methods
+        // define composite methods
         _this.deleteIn = deleteIn(_this, Wrap);
         _this.hasIn = hasIn(_this, Wrap);
         _this.getIn = getIn(_this, Wrap);

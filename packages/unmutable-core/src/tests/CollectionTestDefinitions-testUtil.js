@@ -74,7 +74,8 @@ export default function(config: Object): Array<Object> {
             method: "deleteIn",
             args: [nonExistingKeyPath],
             returnType: "self",
-            deep: true
+            deep: true,
+            shouldReturnSelf: true
         },
         {
             desc: "deleteIn empty keyPath",
@@ -198,7 +199,8 @@ export default function(config: Object): Array<Object> {
             method: "getIn",
             args: [emptyKeyPath],
             returnType: "self",
-            deep: true
+            deep: true,
+            shouldReturnSelf: true
         },
         {
             desc: "has key",
@@ -251,6 +253,18 @@ export default function(config: Object): Array<Object> {
             method: "includes",
             args: [nonExistingValue],
             returnType: "plain"
+        },
+        {
+            desc: "insert",
+            method: "insert",
+            args: [1, sampleValue],
+            returnType: "self"
+        },
+        {
+            desc: "insert negative index",
+            method: "insert",
+            args: [-1, sampleValue],
+            returnType: "self"
         },
         {
             desc: "interpose",
@@ -327,6 +341,18 @@ export default function(config: Object): Array<Object> {
             returnType: "self"
         },
         {
+            desc: "push",
+            method: "push",
+            args: [sampleValue],
+            returnType: "self"
+        },
+        {
+            desc: "pop",
+            method: "pop",
+            args: [],
+            returnType: "self"
+        },
+        {
             desc: "reverse",
             method: "reverse",
             args: [],
@@ -377,6 +403,12 @@ export default function(config: Object): Array<Object> {
             args: [emptyKeyPath, sampleValue],
             returnType: "wrapped",
             deep: true
+        },
+        {
+            desc: "shift",
+            method: "shift",
+            args: [],
+            returnType: "self"
         },
         {
             desc: "skip",
@@ -505,6 +537,12 @@ export default function(config: Object): Array<Object> {
             returnType: "self"
         },
         {
+            desc: "unshift",
+            method: "unshift",
+            args: [sampleValue],
+            returnType: "self"
+        },
+        {
             desc: "update key",
             method: "update",
             args: [key, ii => ii + 100],
@@ -528,35 +566,39 @@ export default function(config: Object): Array<Object> {
             method: "updateIn",
             args: [nonExistingKeyPath, ii => ii],
             returnType: "self",
-            deep: true
+            deep: true,
+            shouldReturnSelf: true
         },
         {
             desc: "updateIn non-existing keyPath with notSetValue",
             method: "updateIn",
             args: [nonExistingKeyPath, sampleValue, ii => ii],
             returnType: "self",
-            deep: true
+            deep: true,
+            shouldReturnSelf: true
         },
         {
             desc: "updateIn partially existing keyPath",
             method: "updateIn",
             args: [partiallyExistingKeyPath, sampleValue, ii => ii],
             returnType: "self",
-            deep: true
+            deep: true,
+            shouldReturnSelf: true
         },
         {
             desc: "updateIn empty keyPath",
             method: "updateIn",
             args: [emptyKeyPath, ii => ii],
             returnType: "self",
-            deep: true
+            deep: true,
+            shouldReturnSelf: true
         }
 
         // flatMap
         // groupBy
     ];
 
-    tests = tests.filter(ii => !ii.hasOwnProperty('doWhen') || ii.doWhen);
+    tests = tests.filter((ii: Object) => !ii.hasOwnProperty('doWhen') || ii.doWhen);
 
     if(only) {
         tests = only.reduce((filteredTests: Array<Object>, methodName: string): Array<Object> => {

@@ -43,8 +43,12 @@ var indexedTests: Array<string> = [
     "includes",
     "isEmpty",
     "last",
+    "push",
+    "pop",
     "set",
     "setIn",
+    "shift",
+    "unshift",
     "update",
     "updateIn"
 ];
