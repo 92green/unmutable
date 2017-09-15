@@ -4,7 +4,7 @@
   "scripts": {
     "build": "lerna run build",
     "postinstall": "lerna bootstrap",
-    "prepublish": "lerna run prepublish",
+    "prepublish": "lerna run prepublish && cp README.md packages/unmutable && cp README.md packages/unmutable-lite",
     "watch": "lerna run --parallel watch",
     "ava": "NODE_ENV=test ava",
     "check-coverage": "NODE_ENV=test nyc check-coverage --branches 100.0  --functions 100.0 --lines 100.0",
