@@ -1,6 +1,6 @@
 // @flow
 import test from 'ava';
-import listMethodNames from './listMethodNames';
+import ListMethodNames from './ListMethodNames';
 
 test('list method names should list method names', (tt: *) => {
     var thing = {
@@ -10,5 +10,5 @@ test('list method names should list method names', (tt: *) => {
         d: () => 4
     };
 
-    tt.deepEqual(listMethodNames(thing), ["c", "d"], "Correct method names should be found on object");
+    tt.deepEqual(ListMethodNames(thing), ["c", "d"], "Correct method names should be found on object");
 });

@@ -4,6 +4,7 @@
 .DS_Store
 .env
 .nyc_output
+**/lerna-debug.log
 
 # Folders
 coverage

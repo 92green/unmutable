@@ -1,5 +1,5 @@
 // @flow
-export default function listMethodNames (object: Object): string[] {
+export default function ListMethodNames(object: Object): string[] {
     // based on code by Muhammad Umer, https://stackoverflow.com/a/31055217/441899
     let props = [];
 

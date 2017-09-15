@@ -1,0 +1,33 @@
+{
+  "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
+  "name": "unmutable-core",
+  "version": "0.7.0",
+  "license": "MIT",
+  "author": "Damien Clarke",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:blueflag/unmutable.git"
+  },
+  "bugs": {
+    "url": "https://github.com/blueflag/unmutable/issues"
+  },
+  "private": true,
+  "scripts": {
+    "build": "rm -rf lib && babel src --out-dir lib",
+    "prepublish": "yarn run build",
+    "watch": "yarn run build -- -w"
+  },
+  "dependencies": {
+    "is-plain-object": "^2.0.4"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.23.0",
+    "babel-core": "^6.23.0",
+    "babel-plugin-istanbul": "4.1.1",
+    "babel-preset-blueflag": "^0.3.0",
+    "babel-register": "^6.23.0"
+  }
+}
