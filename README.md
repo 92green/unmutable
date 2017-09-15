@@ -121,7 +121,7 @@ So far, these are the methods on `Map`s and `List`s have been implemented for ob
 | **first** ✔︎ | **first** ✔︎ | first | **first** ✔︎ |
 | flatMap | flatMap | flatMap | flatMap |
 | flatten | flatten | flatten | flatten |
-| flip | | flip | |
+| flip | - | flip | - |
 | forEach | forEach | forEach | forEach |
 |  - | fromEntrySeq | - | fromEntrySeq |
 | **get** ✔︎ | **get** ✔︎ | **get** ✔︎ | **get** ✔︎ |
