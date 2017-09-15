@@ -95,111 +95,111 @@ So far, these are the methods on `Map`s and `List`s have been implemented for ob
 
 | `unmutable` Object / Map | `unmutable` Array / List | `unmutable-list` Object / Map | `unmutable-list` Array / List |
 | --- | --- | --- | --- |
-| - [ ] asImmutable | - [ ] asImmutable | - [ ] asImmutable | - [ ] asImmutable |
-| - [ ] asMutable | - [ ] asMutable | - [ ] asMutable | - [ ] asMutable |
-| - [x] **butLast** | - [x] **butLast** | - [ ] butLast | - [ ] butLast |
-| - [x] **clear** | - [x] **clear** | - [x] **clear** | - [x] **clear** |
-| - [x] **concat** | - [x] **concat** | - [x] **concat** | - [x] **concat** |
-| - [x] **count** | - [x] **count** | - [x] **count** | - [x] **count** |
-| - [ ] countBy | - [ ] countBy | - [ ] countBy | - [ ] countBy |
-| - [x] **delete** | - [x] **delete** | - [x] **delete** | - [x] **delete** |
-| - [x] **deleteIn** | - [x] **deleteIn** | - [x] **deleteIn** | - [x] **deleteIn** |
-| - [ ] entries | - [ ] entries | - [ ] entries | - [ ] entries |
-| - [ ] entrySeq | - [ ] entrySeq | - [ ] entrySeq | - [ ] entrySeq |
-| - [ ] equals | - [ ] equals | - [ ] equals | - [ ] equals |
-| - [x] **every** | - [x] **every** | - [ ] every | - [ ] every |
-| - [x] **filter** | - [x] **filter** | - [ ] filter | - [ ] filter |
-| - [x] **filterNot** | - [x] **filterNot** | - [ ] filterNot | - [x] filterNot |
-| - [ ] find | - [ ] find | - [ ] find | - [ ] find |
-| - [ ] findEntry | - [ ] findEntry | - [ ] findEntry | - [ ] findEntry |
-| | - [ ] findIndex | | - [ ] findIndex |
-| - [ ] findKey | - [ ] findKey | - [ ] findKey | - [ ] findKey |
-| - [ ] findLast | - [ ] findLast | - [ ] findLast | - [ ] findLast |
-| - [ ] findLastEntry | - [ ] findLastEntry | - [ ] findLastEntry | - [ ] findLastEntry |
-| - [ ] findLastIndex | - [ ] findLastIndex | - [ ] findLastIndex | - [ ] findLastIndex |
-| - [ ] findLastKey | - [ ] findLastKey | - [ ] findLastKey | - [ ] findLastKey |
-| - [x] **first** | - [x] **first** | - [ ] first | - [x] **first** |
-| - [ ] flatMap | - [ ] flatMap | - [ ] flatMap | - [ ] flatMap |
-| - [ ] flatten | - [ ] flatten | - [ ] flatten | - [ ] flatten |
-| - [ ] flip | | - [ ] flip | |
-| - [ ] forEach | - [ ] forEach | - [ ] forEach | - [ ] forEach |
-|  | - [ ] fromEntrySeq |  | - [ ] fromEntrySeq |
-| - [x] **get** | - [x] **get** | - [x] **get** | - [x] **get** |
-| - [x] **getIn** | - [x] **getIn** | - [x] **getIn** | - [x] **getIn** |
-| - [ ] groupBy | - [ ] groupBy | - [ ] groupBy | - [ ] groupBy |
-| - [x] **has** | - [x] **has** | - [x] **has** | - [x] **has** |
-| - [ ] hashCode | - [ ] hashCode | - [ ] hashCode | - [ ] hashCode |
-| - [x] **hasIn** | - [x] **hasIn** | - [x] **hasIn** | - [x] **hasIn** |
-| - [x] **includes** | - [x] **includes** | - [x] **includes** | - [x] **includes** |
-| | - [ ] indexOf | | - [ ] indexOf |
-| | - [x] **insert** | | - [ ] insert |
-| | - [x] **interleave** | | - [ ] interleave |
-| | - [x] **interpose** | | - [ ] interpose |
-| - [x] **isEmpty** | - [x] **isEmpty** | - [x] **isEmpty** | - [x] **isEmpty** |
-| - [ ] isSubset | - [ ] isSubset | - [ ] isSubset | - [ ] isSubset |
-| - [ ] isSuperset | - [ ] isSuperset | - [ ] isSuperset | - [ ] isSuperset |
-| - [ ] join | - [ ] join | - [ ] join | - [ ] join |
-| - [ ] keyOf | - [ ] keyOf | - [ ] keyOf | - [ ] keyOf |
-| - [ ] keys | - [ ] keys | - [ ] keys | - [ ] keys |
-| - [ ] keySeq | - [ ] keySeq | - [ ] keySeq | - [ ] keySeq |
-| - [x] **last** | - [x] **last** | - [ ] last | - [x] **last** |
-| | - [ ] lastIndexOf | | - [ ] lastIndexOf |
-| - [ ] lastKeyOf | - [ ] lastKeyOf | - [ ] lastKeyOf | - [ ] lastKeyOf |
-| - [x] **map** | - [x] **map** | - [ ] map | - [ ] map |
-| - [x] **mapEntries** | | - [ ] mapEntries | |
-| - [ ] max | - [ ] max | - [ ] max | - [ ] max |
-| - [ ] maxBy | - [ ] maxBy | - [ ] maxBy | - [ ] maxBy |
-| - [x] **merge** | - [x] **merge** | - [ ] merge | - [] merge |
-| - [ ] mergeDeep | - [ ] mergeDeep | - [ ] mergeDeep | - [ ] mergeDeep |
-| - [ ] mergeDeepIn | - [ ] mergeDeepIn | - [ ] mergeDeepIn | - [ ] mergeDeepIn |
-| - [ ] mergeDeepWith | - [ ] mergeDeepWith | - [ ] mergeDeepWith | - [ ] mergeDeepWith |
-| - [ ] mergeIn | - [ ] mergeIn | - [ ] mergeIn | - [ ] mergeIn |
-| - [x] **mergeWith** | - [x] **mergeWith** | - [ ] mergeWith | - [ ] mergeWith |
-| - [ ] min | - [ ] min | - [ ] min | - [ ] min |
-| - [ ] minBy | - [ ] minBy | - [ ] minBy | - [ ] minBy |
-| | - [x] **pop** | | - [x] **pop** |
-| | - [x] **push** | | - [x] **push** |
-| - [ ] reduce | - [ ] reduce | - [ ] reduce | - [ ] reduce |
-| - [ ] reduceRight | - [ ] reduceRight | - [ ] reduceRight | - [ ] reduceRight |
-| - [x] **rest** | - [x] **rest** | - [ ] rest | - [ ] rest |
-| - [x] **reverse** | - [x] **reverse** | - [ ] reverse | - [ ] reverse |
-| - [x] **set** | - [x] **set** | - [x] **set** | - [x] **set** |
-| - [x] **setIn** | - [x] **setIn** | - [x] **setIn** | - [x] **setIn** |
-| | - [ ] setSize | | - [ ] setSize |
-| | - [x] **shift** | | - [x] **shift** |
-| - [x] **skip** | - [x] **skip** | - [ ] skip | - [ ] skip |
-| - [x] **skipLast** | - [x] **skipLast** | - [ ] skipLast | - [ ] skipLast |
-| - [x] **skipUntil** | - [x] **skipUntil** | - [ ] skipUntil | - [ ] skipUntil |
-| - [x] **skipWhile** | - [x] **skipWhile** | - [ ] skipWhile | - [ ] skipWhile |
-| - [x] **slice** | - [x] **slice** | - [x] **slice** | - [x] **slice** |
-| - [x] **some** | - [x] **some** | - [ ] some | - [ ] some |
-| - [x] **sort** | - [x] **sort** | - [ ] sort | - [ ] sort |
-| - [x] **sortBy** | - [x] **sortBy** | - [ ] sortBy | - [ ] sortBy |
-|  | - [ ] splice |  | - [ ] splice |
-| - [ ] take | - [ ] take | - [ ] take | - [ ] take |
-| - [ ] takeLast | - [ ] takeLast | - [ ] takeLast | - [ ] takeLast |
-| - [ ] takeUntil | - [ ] takeUntil | - [ ] takeUntil | - [ ] takeUntil |
-| - [ ] takeWhile | - [ ] takeWhile | - [ ] takeWhile | - [ ] takeWhile |
-| - [ ] toArray | - [ ] toArray | - [ ] toArray | - [ ] toArray |
-| - [ ] toIndexedSeq | - [ ] toIndexedSeq | - [ ] toIndexedSeq | - [ ] toIndexedSeq |
-| - [ ] toJS | - [ ] toJS | - [ ] toJS | - [ ] toJS |
-| - [ ] toJSON | - [ ] toJSON | - [ ] toJSON | - [ ] toJSON |
-| - [ ] toKeyedSeq | - [ ] toKeyedSeq | - [ ] toKeyedSeq | - [ ] toKeyedSeq |
-| - [ ] toList | - [ ] toList | - [ ] toList | - [ ] toList |
-| - [ ] toMap | - [ ] toMap | - [ ] toMap | - [ ] toMap |
-| - [ ] toObject | - [ ] toObject | - [ ] toObject | - [ ] toObject |
-| - [ ] toOrderedMap | - [ ] toOrderedMap | - [ ] toOrderedMap | - [ ] toOrderedMap |
-| - [ ] toOrderedSet | - [ ] toOrderedSet | - [ ] toOrderedSet | - [ ] toOrderedSet |
-| - [ ] toSeq | - [ ] toSeq | - [ ] toSeq | - [ ] toSeq |
-| - [ ] toSet | - [ ] toSet | - [ ] toSet | - [ ] toSet |
-| - [ ] toSetSeq | - [ ] toSetSeq | - [ ] toSetSeq | - [ ] toSetSeq |
-| - [ ] toStack | - [ ] toStack | - [ ] toStack | - [ ] toStack |
-| | - [x] **unshift** | | - [x] **unshift** |
-| - [x] **update** | - [x] **update** | - [x] **update** | - [x] **update** |
-| - [x] **updateIn** | - [x] **updateIn** | - [x] **updateIn** | - [x] **updateIn** |
-| - [ ] values | - [ ] values | - [ ] values | - [ ] values |
-| - [ ] valueSeq | - [ ] valueSeq | - [ ] valueSeq | - [ ] valueSeq |
-| - [ ] withMutations | - [ ] withMutations | - [ ] withMutations | - [ ] withMutations |
-|  | - [ ] zip |  | - [ ] zip |
-|  | - [ ] zipWith |  | - [ ] zipWith |
+| ✘ asImmutable | ✘ asImmutable | ✘ asImmutable | ✘ asImmutable |
+| ✘ asMutable | ✘ asMutable | ✘ asMutable | ✘ asMutable |
+| ✔︎ **butLast** | ✔︎ **butLast** | ✘ butLast | ✘ butLast |
+| ✔︎ **clear** | ✔︎ **clear** | ✔︎ **clear** | ✔︎ **clear** |
+| ✔︎ **concat** | ✔︎ **concat** | ✔︎ **concat** | ✔︎ **concat** |
+| ✔︎ **count** | ✔︎ **count** | ✔︎ **count** | ✔︎ **count** |
+| ✘ countBy | ✘ countBy | ✘ countBy | ✘ countBy |
+| ✔︎ **delete** | ✔︎ **delete** | ✔︎ **delete** | ✔︎ **delete** |
+| ✔︎ **deleteIn** | ✔︎ **deleteIn** | ✔︎ **deleteIn** | ✔︎ **deleteIn** |
+| ✘ entries | ✘ entries | ✘ entries | ✘ entries |
+| ✘ entrySeq | ✘ entrySeq | ✘ entrySeq | ✘ entrySeq |
+| ✘ equals | ✘ equals | ✘ equals | ✘ equals |
+| ✔︎ **every** | ✔︎ **every** | ✘ every | ✘ every |
+| ✔︎ **filter** | ✔︎ **filter** | ✘ filter | ✘ filter |
+| ✔︎ **filterNot** | ✔︎ **filterNot** | ✘ filterNot | ✔︎ filterNot |
+| ✘ find | ✘ find | ✘ find | ✘ find |
+| ✘ findEntry | ✘ findEntry | ✘ findEntry | ✘ findEntry |
+| - | ✘ findIndex | - | ✘ findIndex |
+| ✘ findKey | ✘ findKey | ✘ findKey | ✘ findKey |
+| ✘ findLast | ✘ findLast | ✘ findLast | ✘ findLast |
+| ✘ findLastEntry | ✘ findLastEntry | ✘ findLastEntry | ✘ findLastEntry |
+| ✘ findLastIndex | ✘ findLastIndex | ✘ findLastIndex | ✘ findLastIndex |
+| ✘ findLastKey | ✘ findLastKey | ✘ findLastKey | ✘ findLastKey |
+| ✔︎ **first** | ✔︎ **first** | ✘ first | ✔︎ **first** |
+| ✘ flatMap | ✘ flatMap | ✘ flatMap | ✘ flatMap |
+| ✘ flatten | ✘ flatten | ✘ flatten | ✘ flatten |
+| ✘ flip | | ✘ flip | |
+| ✘ forEach | ✘ forEach | ✘ forEach | ✘ forEach |
+|  - | ✘ fromEntrySeq | - | ✘ fromEntrySeq |
+| ✔︎ **get** | ✔︎ **get** | ✔︎ **get** | ✔︎ **get** |
+| ✔︎ **getIn** | ✔︎ **getIn** | ✔︎ **getIn** | ✔︎ **getIn** |
+| ✘ groupBy | ✘ groupBy | ✘ groupBy | ✘ groupBy |
+| ✔︎ **has** | ✔︎ **has** | ✔︎ **has** | ✔︎ **has** |
+| ✘ hashCode | ✘ hashCode | ✘ hashCode | ✘ hashCode |
+| ✔︎ **hasIn** | ✔︎ **hasIn** | ✔︎ **hasIn** | ✔︎ **hasIn** |
+| ✔︎ **includes** | ✔︎ **includes** | ✔︎ **includes** | ✔︎ **includes** |
+| - | ✘ indexOf | - | ✘ indexOf |
+| - | ✔︎ **insert** | - | ✘ insert |
+| - | ✔︎ **interleave** | - | ✘ interleave |
+| - | ✔︎ **interpose** | - | ✘ interpose |
+| ✔︎ **isEmpty** | ✔︎ **isEmpty** | ✔︎ **isEmpty** | ✔︎ **isEmpty** |
+| ✘ isSubset | ✘ isSubset | ✘ isSubset | ✘ isSubset |
+| ✘ isSuperset | ✘ isSuperset | ✘ isSuperset | ✘ isSuperset |
+| ✘ join | ✘ join | ✘ join | ✘ join |
+| ✘ keyOf | ✘ keyOf | ✘ keyOf | ✘ keyOf |
+| ✘ keys | ✘ keys | ✘ keys | ✘ keys |
+| ✘ keySeq | ✘ keySeq | ✘ keySeq | ✘ keySeq |
+| ✔︎ **last** | ✔︎ **last** | ✘ last | ✔︎ **last** |
+| | ✘ lastIndexOf | | ✘ lastIndexOf |
+| ✘ lastKeyOf | ✘ lastKeyOf | ✘ lastKeyOf | ✘ lastKeyOf |
+| ✔︎ **map** | ✔︎ **map** | ✘ map | ✘ map |
+| ✔︎ **mapEntries** | | ✘ mapEntries | |
+| ✘ max | ✘ max | ✘ max | ✘ max |
+| ✘ maxBy | ✘ maxBy | ✘ maxBy | ✘ maxBy |
+| ✔︎ **merge** | ✔︎ **merge** | ✘ merge | ✘ merge |
+| ✘ mergeDeep | ✘ mergeDeep | ✘ mergeDeep | ✘ mergeDeep |
+| ✘ mergeDeepIn | ✘ mergeDeepIn | ✘ mergeDeepIn | ✘ mergeDeepIn |
+| ✘ mergeDeepWith | ✘ mergeDeepWith | ✘ mergeDeepWith | ✘ mergeDeepWith |
+| ✘ mergeIn | ✘ mergeIn | ✘ mergeIn | ✘ mergeIn |
+| ✔︎ **mergeWith** | ✔︎ **mergeWith** | ✘ mergeWith | ✘ mergeWith |
+| ✘ min | ✘ min | ✘ min | ✘ min |
+| ✘ minBy | ✘ minBy | ✘ minBy | ✘ minBy |
+| - | ✔︎ **pop** | - | ✔︎ **pop** |
+| - | ✔︎ **push** | - | ✔︎ **push** |
+| ✘ reduce | ✘ reduce | ✘ reduce | ✘ reduce |
+| ✘ reduceRight | ✘ reduceRight | ✘ reduceRight | ✘ reduceRight |
+| ✔︎ **rest** | ✔︎ **rest** | ✘ rest | ✘ rest |
+| ✔︎ **reverse** | ✔︎ **reverse** | ✘ reverse | ✘ reverse |
+| ✔︎ **set** | ✔︎ **set** | ✔︎ **set** | ✔︎ **set** |
+| ✔︎ **setIn** | ✔︎ **setIn** | ✔︎ **setIn** | ✔︎ **setIn** |
+| - | ✘ setSize | - | ✘ setSize |
+| - | ✔︎ **shift** | - | ✔︎ **shift** |
+| ✔︎ **skip** | ✔︎ **skip** | ✘ skip | ✘ skip |
+| ✔︎ **skipLast** | ✔︎ **skipLast** | ✘ skipLast | ✘ skipLast |
+| ✔︎ **skipUntil** | ✔︎ **skipUntil** | ✘ skipUntil | ✘ skipUntil |
+| ✔︎ **skipWhile** | ✔︎ **skipWhile** | ✘ skipWhile | ✘ skipWhile |
+| ✔︎ **slice** | ✔︎ **slice** | ✔︎ **slice** | ✔︎ **slice** |
+| ✔︎ **some** | ✔︎ **some** | ✘ some | ✘ some |
+| ✔︎ **sort** | ✔︎ **sort** | ✘ sort | ✘ sort |
+| ✔︎ **sortBy** | ✔︎ **sortBy** | ✘ sortBy | ✘ sortBy |
+| - | ✘ splice | - | ✘ splice |
+| ✘ take | ✘ take | ✘ take | ✘ take |
+| ✘ takeLast | ✘ takeLast | ✘ takeLast | ✘ takeLast |
+| ✘ takeUntil | ✘ takeUntil | ✘ takeUntil | ✘ takeUntil |
+| ✘ takeWhile | ✘ takeWhile | ✘ takeWhile | ✘ takeWhile |
+| ✘ toArray | ✘ toArray | ✘ toArray | ✘ toArray |
+| ✘ toIndexedSeq | ✘ toIndexedSeq | ✘ toIndexedSeq | ✘ toIndexedSeq |
+| ✘ toJS | ✘ toJS | ✘ toJS | ✘ toJS |
+| ✘ toJSON | ✘ toJSON | ✘ toJSON | ✘ toJSON |
+| ✘ toKeyedSeq | ✘ toKeyedSeq | ✘ toKeyedSeq | ✘ toKeyedSeq |
+| ✘ toList | ✘ toList | ✘ toList | ✘ toList |
+| ✘ toMap | ✘ toMap | ✘ toMap | ✘ toMap |
+| ✘ toObject | ✘ toObject | ✘ toObject | ✘ toObject |
+| ✘ toOrderedMap | ✘ toOrderedMap | ✘ toOrderedMap | ✘ toOrderedMap |
+| ✘ toOrderedSet | ✘ toOrderedSet | ✘ toOrderedSet | ✘ toOrderedSet |
+| ✘ toSeq | ✘ toSeq | ✘ toSeq | ✘ toSeq |
+| ✘ toSet | ✘ toSet | ✘ toSet | ✘ toSet |
+| ✘ toSetSeq | ✘ toSetSeq | ✘ toSetSeq | ✘ toSetSeq |
+| ✘ toStack | ✘ toStack | ✘ toStack | ✘ toStack |
+| - | ✔︎ **unshift** | - | ✔︎ **unshift** |
+| ✔︎ **update** | ✔︎ **update** | ✔︎ **update** | ✔︎ **update** |
+| ✔︎ **updateIn** | ✔︎ **updateIn** | ✔︎ **updateIn** | ✔︎ **updateIn** |
+| ✘ values | ✘ values | ✘ values | ✘ values |
+| ✘ valueSeq | ✘ valueSeq | ✘ valueSeq | ✘ valueSeq |
+| ✘ withMutations | ✘ withMutations | ✘ withMutations | ✘ withMutations |
+| - | ✘ zip | - | ✘ zip |
+| - | ✘ zipWith | - | ✘ zipWith |
 
