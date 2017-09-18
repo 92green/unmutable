@@ -93,11 +93,11 @@ console.log(Wrap("string").isCollection()); // false
 
 So far, these are the methods on `Map`s and `List`s have been implemented for objects and arrays, in `unmutable` and `unmutable-lite` respectively. New ones will be added over time.
 
-| `unmutable` Object / Map | `unmutable` Array / List | `unmutable-list` Object / Map | `unmutable-list` Array / List |
+| `unmutable` Object / Map | `unmutable` Array / List | `unmutable-lite` Object / Map | `unmutable-lite` Array / List |
 | --- | --- | --- | --- |
 | asImmutable | asImmutable | asImmutable | asImmutable |
 | asMutable | asMutable | asMutable | asMutable |
-| **butLast** ✔︎ | **butLast** ✔︎ | butLast | butLast |
+| **butLast** ✔︎ | **butLast** ✔︎ | - | **butLast** ✔︎ |
 | **clear** ✔︎ | **clear** ✔︎ | **clear** ✔︎ | **clear** ✔︎ |
 | **concat** ✔︎ | **concat** ✔︎ | **concat** ✔︎ | **concat** ✔︎ |
 | **count** ✔︎ | **count** ✔︎ | **count** ✔︎ | **count** ✔︎ |
@@ -107,7 +107,7 @@ So far, these are the methods on `Map`s and `List`s have been implemented for ob
 | entries | entries | entries | entries |
 | entrySeq | entrySeq | entrySeq | entrySeq |
 | equals | equals | equals | equals |
-| **every** ✔︎ | **every** ✔︎ | every | every |
+| **every** ✔︎ | **every** ✔︎ | every | **every** ✔︎ |
 | **filter** ✔︎ | **filter** ✔︎ | filter | filter |
 | **filterNot** ✔︎ | **filterNot** ✔︎ | filterNot | filterNot |
 | find | find | find | find |
@@ -118,7 +118,7 @@ So far, these are the methods on `Map`s and `List`s have been implemented for ob
 | findLastEntry | findLastEntry | findLastEntry | findLastEntry |
 | findLastIndex | findLastIndex | findLastIndex | findLastIndex |
 | findLastKey | findLastKey | findLastKey | findLastKey |
-| **first** ✔︎ | **first** ✔︎ | first | **first** ✔︎ |
+| **first** ✔︎ | **first** ✔︎ | - | **first** ✔︎ |
 | flatMap | flatMap | flatMap | flatMap |
 | flatten | flatten | flatten | flatten |
 | flip | - | flip | - |
@@ -142,8 +142,8 @@ So far, these are the methods on `Map`s and `List`s have been implemented for ob
 | keyOf | keyOf | keyOf | keyOf |
 | keys | keys | keys | keys |
 | keySeq | keySeq | keySeq | keySeq |
-| **last** ✔︎ | **last** ✔︎ | last | **last** ✔︎ |
-| | lastIndexOf | | lastIndexOf |
+| **last** ✔︎ | **last** ✔︎ | - | **last** ✔︎ |
+| - | lastIndexOf | - | lastIndexOf |
 | lastKeyOf | lastKeyOf | lastKeyOf | lastKeyOf |
 | **map** ✔︎ | **map** ✔︎ | map | map |
 | **mapEntries** ✔︎ | - | mapEntries | - |
@@ -161,22 +161,22 @@ So far, these are the methods on `Map`s and `List`s have been implemented for ob
 | - | **push** ✔︎ | - | **push** ✔︎ |
 | reduce | reduce | reduce | reduce |
 | reduceRight | reduceRight | reduceRight | reduceRight |
-| **rest** ✔︎ | **rest** ✔︎ | rest | rest |
+| **rest** ✔︎ | **rest** ✔︎ | - | **rest** ✔︎ |
 | **reverse** ✔︎ | **reverse** ✔︎ | reverse | reverse |
 | **set** ✔︎ | **set** ✔︎ | **set** ✔︎ | **set** ✔︎ |
 | **setIn** ✔︎ | **setIn** ✔︎ | **setIn** ✔︎ | **setIn** ✔︎ |
 | - | setSize | - | setSize |
 | - | **shift** ✔︎ | - | **shift** ✔︎ |
-| **skip** ✔︎ | **skip** ✔︎ | skip | skip |
-| **skipLast** ✔︎ | **skipLast** ✔︎ | skipLast | skipLast |
-| **skipUntil** ✔︎ | **skipUntil** ✔︎ | skipUntil | skipUntil |
-| **skipWhile** ✔︎ | **skipWhile** ✔︎ | skipWhile | skipWhile |
+| **skip** ✔︎ | **skip** ✔︎ | - | **skip** ✔︎ |
+| **skipLast** ✔︎ | **skipLast** ✔︎ | - | **skipLast** ✔︎ |
+| **skipUntil** ✔︎ | **skipUntil** ✔︎ | - | skipUntil |
+| **skipWhile** ✔︎ | **skipWhile** ✔︎ | - | skipWhile |
 | **slice** ✔︎ | **slice** ✔︎ | **slice** ✔︎ | **slice** ✔︎ |
-| **some** ✔︎ | **some** ✔︎ | some | some |
+| **some** ✔︎ | **some** ✔︎ | some | **some** ✔︎ |
 | **sort** ✔︎ | **sort** ✔︎ | sort | sort |
 | **sortBy** ✔︎ | **sortBy** ✔︎ | sortBy | sortBy |
 | - | splice | - | splice |
-| take | take | take | take |
+| take | take | - | take |
 | takeLast | takeLast | takeLast | takeLast |
 | takeUntil | takeUntil | takeUntil | takeUntil |
 | takeWhile | takeWhile | takeWhile | takeWhile |
