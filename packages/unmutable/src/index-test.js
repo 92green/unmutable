@@ -80,10 +80,10 @@ var keyedTests: Array<string> = [
     "some",
     "sort",
     "sortBy",
-    //take
-    //takeLast
-    //takeUntil
-    //takeWhile
+    "take",
+    "takeLast",
+    "takeUntil",
+    "takeWhile",
     //toArray
     //toIndexedSeq
     //toJS
@@ -187,10 +187,10 @@ var indexedTests: Array<string> = [
     "sort",
     "sortBy",
     //splice
-    //take
-    //takeLast
-    //takeUntil
-    //takeWhile
+    "take",
+    "takeLast",
+    "takeUntil",
+    "takeWhile",
     //toArray
     //toIndexedSeq
     //toJS
