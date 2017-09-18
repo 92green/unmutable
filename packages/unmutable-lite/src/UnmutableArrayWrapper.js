@@ -11,6 +11,7 @@ export default class UnmutableArrayWrapper extends UnmutableWrapper {
 
         // define shallow methods
         let _this = (this: any);
+        _this.butLast = (): Array<*> => item.slice(0, -1);
         _this.clear = (): Array<*> => [];
         _this.concat = (newItem: Object): Array<*> => item.concat(newItem);
         _this.count = (): number => _this.size;
@@ -19,6 +20,7 @@ export default class UnmutableArrayWrapper extends UnmutableWrapper {
             clone.splice(key, 1);
             return clone;
         };
+        _this.every = (condition: Function): * => item.every(condition);
         _this.first = (): * => item[0];
         _this.get = (key: *, notFoundValue: * = undefined): * => {
             if(!_this.has(key)) {
@@ -32,12 +34,16 @@ export default class UnmutableArrayWrapper extends UnmutableWrapper {
         _this.last = (): * => item[item.length - 1];
         _this.push = (value: *): Array<*> => [...item, value];
         _this.pop = (): Array<*> => item.slice(0, -1);
+        _this.rest = (): Array<*> => item.slice(1);
         _this.set = (key: *, value: *): Array<*> => {
             let clone = [...item];
             clone[key] = value;
             return clone;
         };
         _this.shift = (): Array<*> => item.slice(1);
+        _this.skip = (amount: number): Array<*> => item.slice(amount);
+        _this.skipLast = (amount: number): Array<*> => item.slice(0, -amount);
+        _this.some = (condition: Function): * => item.some(condition);
         _this.unshift = (value: *): Array<*> => [value, ...item];
 
         // wrap shallow methods in constructors

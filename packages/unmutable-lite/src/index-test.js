@@ -30,11 +30,13 @@ var keyedTests: Array<string> = [
 KeyedTests(test, Wrap, keyedTests);
 
 var indexedTests: Array<string> = [
+    "butLast",
     "clear",
     "concat",
     "count",
     "delete",
     "deleteIn",
+    "every",
     "first",
     "get",
     "getIn",
@@ -45,9 +47,13 @@ var indexedTests: Array<string> = [
     "last",
     "push",
     "pop",
+    "rest",
     "set",
     "setIn",
     "shift",
+    "skip",
+    "skipLast",
+    "some",
     "unshift",
     "update",
     "updateIn"
