@@ -4,7 +4,7 @@
     "lib"
   ],
   "name": "unmutable",
-  "version": "0.7.3",
+  "version": "0.9.0",
   "description": "Immutable.js functions for collections that may or may not be Immutable (contains a dependency on Immutable.js).",
   "license": "MIT",
   "author": "Damien Clarke",
@@ -22,7 +22,7 @@
     "watch": "yarn run build -- -w"
   },
   "dependencies": {
-    "unmutable-core": "^0.7.3"
+    "unmutable-core": "^0.9.0"
   },
   "peerDependencies": {
     "immutable": "^3.8.1"
