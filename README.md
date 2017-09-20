@@ -162,7 +162,7 @@ So far, these are the methods on `Map`s and `List`s have been implemented for ob
 | reduce | reduce | reduce | reduce |
 | reduceRight | reduceRight | reduceRight | reduceRight |
 | **rest** ✔︎ | **rest** ✔︎ | - | **rest** ✔︎ |
-| **reverse** ✔︎ | **reverse** ✔︎ | reverse | reverse |
+| **reverse** ✔︎ | **reverse** ✔︎ | - | **reverse** ✔︎ |
 | **set** ✔︎ | **set** ✔︎ | **set** ✔︎ | **set** ✔︎ |
 | **setIn** ✔︎ | **setIn** ✔︎ | **setIn** ✔︎ | **setIn** ✔︎ |
 | - | setSize | - | setSize |
@@ -176,10 +176,10 @@ So far, these are the methods on `Map`s and `List`s have been implemented for ob
 | **sort** ✔︎ | **sort** ✔︎ | sort | sort |
 | **sortBy** ✔︎ | **sortBy** ✔︎ | sortBy | sortBy |
 | - | splice | - | splice |
-| take | take | - | take |
-| takeLast | takeLast | takeLast | takeLast |
-| takeUntil | takeUntil | takeUntil | takeUntil |
-| takeWhile | takeWhile | takeWhile | takeWhile |
+| **take** ✔︎ | **take** ✔︎ | - | **take** ✔︎ |
+| **takeLast** ✔︎ | **takeLast** ✔︎ | - | **takeLast** ✔︎ |
+| **takeUntil** ✔︎ | **takeUntil** ✔︎ | - | takeUntil |
+| **takeWhile** ✔︎ | **takeWhile** ✔︎ | - | takeWhile |
 | toArray | toArray | toArray | toArray |
 | toIndexedSeq | toIndexedSeq | toIndexedSeq | toIndexedSeq |
 | toJS | toJS | toJS | toJS |

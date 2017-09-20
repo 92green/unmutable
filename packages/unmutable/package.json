@@ -18,7 +18,7 @@
   "private": false,
   "scripts": {
     "build": "rm -rf lib && babel src --out-dir lib",
-    "prepublish": "yarn run build",
+    "prepublish": "yarn run build && cp ../../README.md ./README.md",
     "watch": "yarn run build -- -w"
   },
   "dependencies": {
