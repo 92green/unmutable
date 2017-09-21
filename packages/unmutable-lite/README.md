@@ -6,7 +6,7 @@ Immutable.js has a fantastic API, but sometimes you don't want to turn everythin
 
 ### Quick example
 
-`Wrap` will wrap your data in an `UnmutableWrapper`. You can then use Immutable.js style methods on it, then call `done()` when you want to get the contents of your wrapper back out again.
+`Wrap` will wrap your data in an `UnmutableWrapper`. You can then use Immutable.js style methods on it, then access `.value` when you want to get the contents of your wrapper back out again.
 
 ```
 import {Wrap} from 'unmutable';
@@ -17,7 +17,7 @@ var wrappedObject = Wrap({
     }
 })
 
-console.log(wrappedObject.getIn(['a', 'b']).value); // logs out "hi"
+console.log(wrappedObject.getIn(['a', 'b'])value); // logs out "hi"
 
 ```
 
@@ -27,21 +27,19 @@ There are two packages you can choose from, `unmutable` or `unmutable-lite`.
 
 ### unmutable
 
-Unmutable requires `immutable@v3.8.1` as a peer depencency, and will allow you to use almost all of Immutable.js' methods on your Unmutable collections. Use this if you already have Immutable.js as a dependency or want to take advantage of Immutable.js' large set of `Map` and `List` features.
+Unmutable requires `immutable@v3.8.1` as a peer depencency, and will allow you to use almost all of Immutable.js' methods on your Unmutable collections. Use this if you already have Immutable.js as a dependency or want to take advantage of Immutable.js' large set of `Map` and `List` features on objects and arrays.
 
 Refer to the [Methods](#Methods) section to see which methods you can use on Unmutable collections.
 
 
 ```
-yarn add immutable
-yarn add unmutable
+yarn add immutable && yarn add unmutable
 ```
 
 or 
 
 ```
-npm install immutable
-npm install unmutable
+npm install immutable && npm install unmutable
 ```
 
 ### unmutable-lite
@@ -62,36 +60,44 @@ npm install unmutable-lite
 
 ## More examples
 
-Data types are preserved through the wrapping process. Pass in an object and you'll get back an object. Pass in a `Map`? A `Map` is what you'll get back. Same goes for Arrays vs `Lists`.
+Data types are preserved through the wrapping process. Pass in an object and you'll get back an object. Pass in a `Map`? You'll get a `Map` back. Same goes for Arrays vs `Lists`.
 
 ```
 import {Wrap} from 'unmutable';
 import {Map} from 'immutable';
 
 var obj = {abc: 123};
-var newObj = Wrap(obj).set('abc', 456).value;
+var newObj = Wrap(obj).set('abc', 456)value;
 // newObj is an object {abc: 456}
 
 var map = Map({abc: 123});
-var newMap = Wrap(map).set('abc', 456).value;
+var newMap = Wrap(map).set('abc', 456)value;
 // newMap is a Map {abc: 456}
 
 ```
 
-`Wrap` can actually wrap around any data type, not just collections. If your data isn't a collection then you won't be able to use any collection manipulation methods, but you will be able to call the wrapper's `isCollection()`, `isKeyed()` and `isIndexed()` on any wrapped data.
+`Wrap` can actually wrap around any data type, not just collections. If your data isn't a collection then you won't be able to use any collection manipulation methods, but you will be able to access the wrapper's `.value` property and the methods `isCollection()`, `isKeyed()` and `isIndexed()`.
 
 Please note that while you *can* wrap Immutable collections other than `Map` and `List`, right now they won't be recognised as collections so you won't be able to access their methods on the Unmutable wrapper. As this library grows, the plan is to bring in more Immutable types.
 
 ```
 import {Wrap} from 'unmutable';
 
-console.log(Wrap("string").value); // logs out "string"
+console.log(Wrap("string")value); // logs out "string"
 console.log(Wrap("string").isCollection()); // false
 ```
 
 ## Methods
 
-So far, these are the methods on `Map`s and `List`s have been implemented for objects and arrays, in `unmutable` and `unmutable-lite` respectively. New ones will be added over time.
+All unmutable wrappers will have the following member variables and methods:
+
+- `.value: *` - Returns the data contained inside the unmutable wrapper.
+- `.isCollection(): boolean` - Returns true if the wrapped data is a collection. If it is it will have the methods listed below, depending on the type of wrapper.
+- `.isIndexed(): boolean` - Returns true if the wrapped data is an `Array` or `List`, or false otherwise.
+- `.isKeyed(): boolean` - Returns true if the wrapped data is an `Object` or `Map`, or false otherwise.
+- `.wrapperType(): string` - Returns the name of the unmutable wrapper type.
+
+Objects, Arrays, Lists and Maps will also have the following methods, depending on whether `unmutable` or `unmutable-lite` is being used. New methods will be added over time.
 
 | `unmutable` Object / Map | `unmutable` Array / List | `unmutable-lite` Object / Map | `unmutable-lite` Array / List |
 | --- | --- | --- | --- |
@@ -202,4 +208,6 @@ So far, these are the methods on `Map`s and `List`s have been implemented for ob
 | withMutations | withMutations | withMutations | withMutations |
 | - | zip | - | zip |
 | - | zipWith | - | zipWith |
+
+
 
