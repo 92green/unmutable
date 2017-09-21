@@ -9,7 +9,7 @@ const update = (_this: UnmutableWrapperType) => (key: *, ...args: *): Object => 
         .set(
             key,
             updater(
-                _this.get(key, notSetValue).done()
+                _this.get(key, notSetValue).value
             )
         );
 };
@@ -36,16 +36,15 @@ const getIn = (_this: UnmutableWrapperType, Wrap: Function) => (keyPath: string[
     return item;
 };
 
-const setIn = (_this: UnmutableWrapperType, Wrap: Function) => (keyPath: string[], value: *): UnmutableObjectWrapper => {
+const setIn = (_this: UnmutableWrapperType, Wrap: Function) => (keyPath: string[], value: *, notFoundValueCreator: Function = () => ({})): UnmutableObjectWrapper => {
     for(var i = keyPath.length - 1; i >= 0; i--) {
-        value = getIn(_this, Wrap)(keyPath.slice(0, i), {})
-            .set(keyPath[i], value)
-            .done();
+        const partialKeyPath = keyPath.slice(0, i);
+        value = getIn(_this, Wrap)(partialKeyPath, notFoundValueCreator(partialKeyPath)).set(keyPath[i], value).value;
     }
     return Wrap(value);
 };
 
-const updateIn = (_this: UnmutableWrapperType, Wrap: Function) => (keyPath: string[], notFoundOrUpdater: *, updater: ?Updater): UnmutableObjectWrapper => {
+const updateIn = (_this: UnmutableWrapperType, Wrap: Function) => (keyPath: string[], notFoundOrUpdater: *, updater: ?Updater, notFoundValueCreator: Function = () => ({})): UnmutableObjectWrapper => {
     var notFoundValue: * = undefined;
     if(updater) {
         notFoundValue = notFoundOrUpdater;
@@ -59,7 +58,7 @@ const updateIn = (_this: UnmutableWrapperType, Wrap: Function) => (keyPath: stri
 
     var originalValue: * = getIn(_this, Wrap)(keyPath, notFoundValue);
 
-    return setIn(_this, Wrap)(keyPath, updater(originalValue.done()));
+    return setIn(_this, Wrap)(keyPath, updater(originalValue.value), notFoundValueCreator);
 };
 
 const deleteIn = (_this: UnmutableWrapperType, Wrap: Function) => (keyPath: string[]): UnmutableObjectWrapper => {
@@ -68,9 +67,7 @@ const deleteIn = (_this: UnmutableWrapperType, Wrap: Function) => (keyPath: stri
     }
     return updateIn(_this, Wrap)(
         keyPath.slice(0, -1),
-        ii => Wrap(ii)
-            .delete(keyPath[keyPath.length - 1])
-            .done()
+        ii => Wrap(ii).delete(keyPath[keyPath.length - 1]).value
     );
 };
 

@@ -32,7 +32,7 @@ export default class UnmutableWrapper {
             });
     }
 
-    done(): * {
+    get value(): * {
         return this.__item;
     }
 

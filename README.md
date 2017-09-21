@@ -6,7 +6,7 @@ Immutable.js has a fantastic API, but sometimes you don't want to turn everythin
 
 ### Quick example
 
-`Wrap` will wrap your data in an `UnmutableWrapper`. You can then use Immutable.js style methods on it, then call `done()` when you want to get the contents of your wrapper back out again.
+`Wrap` will wrap your data in an `UnmutableWrapper`. You can then use Immutable.js style methods on it, then access `.value` when you want to get the contents of your wrapper back out again.
 
 ```
 import {Wrap} from 'unmutable';
@@ -17,7 +17,7 @@ var wrappedObject = Wrap({
     }
 })
 
-console.log(wrappedObject.getIn(['a', 'b']).done()); // logs out "hi"
+console.log(wrappedObject.getIn(['a', 'b'])value); // logs out "hi"
 
 ```
 
@@ -67,11 +67,11 @@ import {Wrap} from 'unmutable';
 import {Map} from 'immutable';
 
 var obj = {abc: 123};
-var newObj = Wrap(obj).set('abc', 456).done();
+var newObj = Wrap(obj).set('abc', 456)value;
 // newObj is an object {abc: 456}
 
 var map = Map({abc: 123});
-var newMap = Wrap(map).set('abc', 456).done();
+var newMap = Wrap(map).set('abc', 456)value;
 // newMap is a Map {abc: 456}
 
 ```
@@ -83,7 +83,7 @@ Please note that while you *can* wrap Immutable collections other than `Map` and
 ```
 import {Wrap} from 'unmutable';
 
-console.log(Wrap("string").done()); // logs out "string"
+console.log(Wrap("string")value); // logs out "string"
 console.log(Wrap("string").isCollection()); // false
 ```
 

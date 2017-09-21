@@ -27,7 +27,7 @@ var keyedTests: Array<string> = [
     "updateIn"
 ];
 
-KeyedTests(test, Wrap, keyedTests);
+//KeyedTests(test, Wrap, keyedTests);
 
 var indexedTests: Array<string> = [
     "butLast",
@@ -62,4 +62,4 @@ var indexedTests: Array<string> = [
     "updateIn"
 ];
 
-IndexedTests(test, Wrap, indexedTests);
+//IndexedTests(test, Wrap, indexedTests);
