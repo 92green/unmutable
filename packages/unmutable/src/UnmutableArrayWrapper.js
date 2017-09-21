@@ -26,7 +26,7 @@ export default class UnmutableArrayWrapper extends UnmutableWrapper {
         _this.updateIn = updateIn(_this, Wrap);
     }
 
-    done(): * {
+    get value(): * {
         return (this: any).__item.toArray();
     }
 

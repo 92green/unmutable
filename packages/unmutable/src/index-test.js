@@ -105,7 +105,7 @@ var keyedTests: Array<string> = [
     //withMutations
 ];
 
-//KeyedTests(test, Wrap, keyedTests);
+KeyedTests(test, Wrap, keyedTests);
 
 var indexedTests: Array<string> = [
     //asImmutable
@@ -215,4 +215,4 @@ var indexedTests: Array<string> = [
     //zipWith
 ];
 
-//IndexedTests(test, Wrap, indexedTests);
+IndexedTests(test, Wrap, indexedTests);

@@ -89,13 +89,13 @@ console.log(Wrap("string").isCollection()); // false
 
 ## Methods
 
-All unmutable wrappers will have the following methods:
+All unmutable wrappers will have the following member variables and methods:
 
-- `done(): *` - Returns the data contained inside the unmutable wrapper.
-- `isCollection(): boolean` - Returns true if the wrapped data is a collection. If it is it will have the methods listed below, depending on the type of wrapper.
-- `isIndexed(): boolean` - Returns true if the wrapped data is an `Array` or `List`, or false otherwise.
-- `isKeyed(): boolean` - Returns true if the wrapped data is an `Object` or `Map`, or false otherwise.
-- `wrapperType(): string` - Returns the name of the unmutable wrapper type.
+- `.value: *` - Returns the data contained inside the unmutable wrapper.
+- `.isCollection(): boolean` - Returns true if the wrapped data is a collection. If it is it will have the methods listed below, depending on the type of wrapper.
+- `.isIndexed(): boolean` - Returns true if the wrapped data is an `Array` or `List`, or false otherwise.
+- `.isKeyed(): boolean` - Returns true if the wrapped data is an `Object` or `Map`, or false otherwise.
+- `.wrapperType(): string` - Returns the name of the unmutable wrapper type.
 
 Objects, Arrays, Lists and Maps will also have the following methods, depending on whether `unmutable` or `unmutable-lite` is being used. New methods will be added over time.
 

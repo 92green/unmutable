@@ -76,10 +76,6 @@ export default class UnmutableArrayWrapper extends UnmutableWrapper {
         return true;
     }
 
-    done(): * {
-        return (this: any).__item;
-    }
-
     wrapperType(): string {
         return "UnmutableArrayWrapper";
     }

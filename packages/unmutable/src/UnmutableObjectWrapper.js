@@ -25,7 +25,7 @@ export default class UnmutableObjectWrapper extends UnmutableWrapper {
         _this.updateIn = updateIn(_this, Wrap);
     }
 
-    done(): * {
+    get value(): * {
         return this.__item.toObject();
     }
 
