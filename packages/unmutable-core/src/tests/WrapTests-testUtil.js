@@ -109,7 +109,7 @@ var types: Array<Object> = [
 export default function(test: Function, Wrap: Function) {
     test('all types should be able to be wrapped and unwrapped', (tt: *) => {
         types.forEach(({value, name}: Object) => {
-            tt.deepEqual(Wrap(value).done(), value, `${name} should be able to be wrapped and unwrapped`);
+            tt.deepEqual(Wrap(value).value, value, `${name} should be able to be wrapped and unwrapped`);
         });
     });
 

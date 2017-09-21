@@ -45,7 +45,7 @@ export default function(test: Function, Wrap: Function, indexedTests: Array<Obje
                 if(!unmutableMethod) {
                     throw new Error(`${Wrap(map).wrapperType()}.${method}" does not exist`);
                 }
-                var unmutableResult = unmutableMethod(...args).done();
+                var unmutableResult = unmutableMethod(...args).value;
                 tt.true(is(unmutableResult, immutableResult));
             });
         });
@@ -88,7 +88,7 @@ export default function(test: Function, Wrap: Function, indexedTests: Array<Obje
                 var unmutableLiteResult = unmutableMethod(...args);
 
                 if(returnType !== "plain") {
-                    unmutableLiteResult = unmutableLiteResult.done();
+                    unmutableLiteResult = unmutableLiteResult.value;
                 }
 
                 tt.deepEqual(listResult, unmutableLiteResult, "Result shoud be correct");

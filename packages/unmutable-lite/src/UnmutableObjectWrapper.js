@@ -58,10 +58,6 @@ export default class UnmutableObjectWrapper extends UnmutableWrapper {
         return true;
     }
 
-    done(): * {
-        return this.__item;
-    }
-
     wrapperType(): string {
         return "UnmutableObjectWrapper";
     }
