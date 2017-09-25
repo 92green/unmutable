@@ -29,7 +29,6 @@
     "babel-core": "^6.23.0",
     "babel-plugin-istanbul": "4.1.1",
     "babel-preset-blueflag": "^0.3.0",
-    "babel-register": "^6.23.0",
-    "immutable": "^3.8.1"
+    "babel-register": "^6.23.0"
   }
 }
