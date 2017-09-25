@@ -1,11 +1,9 @@
 // @flow
 import test from 'ava';
 import {Wrap} from './index';
-import {
-    IndexedTests,
-    KeyedTests,
-    WrapTests
-} from 'unmutable-core';
+import IndexedTests from 'unmutable-core/lib/tests/IndexedTests-testUtil';
+import KeyedTests from 'unmutable-core/lib/tests/KeyedTests-testUtil';
+import WrapTests from 'unmutable-core/lib/tests/WrapTests-testUtil';
 
 WrapTests(test, Wrap);
 

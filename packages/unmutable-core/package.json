@@ -20,9 +20,6 @@
     "prepublish": "yarn run build && cp ../../README.md ./README.md",
     "watch": "yarn run build -- -w"
   },
-  "dependencies": {
-    "is-plain-object": "^2.0.4"
-  },
   "devDependencies": {
     "babel-cli": "^6.23.0",
     "babel-core": "^6.23.0",
