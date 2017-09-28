@@ -47,6 +47,7 @@ const methodReturnTypes: Object = {
     takeWhile: "self",
     unshift: "self",
     update: "self",
+    updateSelf: "wrapped",
     updateIn: "self"
 };
 

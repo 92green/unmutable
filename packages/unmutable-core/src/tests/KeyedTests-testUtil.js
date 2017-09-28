@@ -33,6 +33,7 @@ export default function(test: Function, Wrap: Function, keyedTests: Array<Object
         existingValue: 123,
         nonExistingValue: 555,
         key: 'a',
+        itemAtKey: sampleObject.a,
         keyPath: ['b', 'x'],
         nonExistingKey: 'z',
         partiallyExistingKeyPath: ['b', 'z'],
@@ -40,17 +41,25 @@ export default function(test: Function, Wrap: Function, keyedTests: Array<Object
     };
 
     CollectionTestDefinitions(objectMapTestConfig)
-        .forEach(({desc, method, args}: Object) => {
-            test(`"Map.${method}" should ${desc}. Args: ${JSON.stringify(args)}`, (tt: *) => {
+        .forEach((testConfig: Object) => {
+            var {
+                desc,
+                method,
+                args,
+                callbackTests = 0
+            } = testConfig;
+
+            test(`"Map.${method}" should ${desc}. Args: ${JSON.stringify(args())}`, (tt: *) => {
+                tt.plan(1 + callbackTests);
                 var map: Map<string,*> = fromJS(sampleObject);
                 // $FlowFixMe: Flow doesnt know how to deal with calling computed properties
-                var immutableResult = map[method](...args);
+                var immutableResult = map[method](...args());
                 var unmutableMethod = Wrap(map)[method];
                 if(!unmutableMethod) {
                     throw new Error(`${Wrap(map).wrapperType()}.${method}" does not exist`);
                 }
-                var unmutableResult = unmutableMethod(...args).value;
-                tt.true(is(unmutableResult, immutableResult));
+                var unmutableResult = unmutableMethod(...args(tt)).value;
+                tt.deepEqual(immutableResult, unmutableResult);
             });
         });
 
@@ -70,34 +79,38 @@ export default function(test: Function, Wrap: Function, keyedTests: Array<Object
                 // "wrapped" if the thing being returned is to be in an unmutable-lite wrapper
                 // "plain" if the thing being returned is just the value (for 'status' methods like .has())
                 deep = false, // true if we're testing a deep method,
-                shouldReturnSelf = false
+                shouldReturnSelf = false,
+                callbackTests = 0
             } = testConfig;
 
-            test(`"Object.${method}" should ${desc}. Args: ${JSON.stringify(args)}`, (tt: *) => {
+            // test(`"Object.${method}" should ${desc}. Args: ${JSON.stringify(args())}`, (tt: *) => {
 
-                var collection = deep ? fromJS(item) : Map(item);
+            //     let testForImmutability = !shouldReturnSelf && returnType === "self";
+            //     tt.plan(1 + callbackTests + (testForImmutability ? 1 : 0));
 
-                // $FlowFixMe: Flow doesnt know how to deal with calling computed properties
-                var mapResult = collection[method](...args);
+            //     var collection = deep ? fromJS(item) : Map(item);
 
-                if(returnType === "self") {
-                    mapResult = deep ? mapResult.toJS() : mapResult.toObject();
-                }
+            //     // $FlowFixMe: Flow doesnt know how to deal with calling computed properties
+            //     var mapResult = collection[method](...args());
 
-                var unmutableMethod = Wrap(item)[method];
-                if(!unmutableMethod) {
-                    throw new Error(`${Wrap(item).wrapperType()}.${method}" does not exist`);
-                }
-                var unmutableLiteResult = unmutableMethod(...args);
+            //     if(returnType === "self") {
+            //         mapResult = deep ? mapResult.toJS() : mapResult.toObject();
+            //     }
 
-                if(returnType !== "plain") {
-                    unmutableLiteResult = unmutableLiteResult.value;
-                }
+            //     var unmutableMethod = Wrap(item)[method];
+            //     if(!unmutableMethod) {
+            //         throw new Error(`${Wrap(item).wrapperType()}.${method}" does not exist`);
+            //     }
+            //     var unmutableLiteResult = unmutableMethod(...args(tt));
 
-                tt.deepEqual(mapResult, unmutableLiteResult, "Result shoud be correct");
-                if(!shouldReturnSelf && typeof mapResult !== "undefined" && returnType === "self") {
-                    tt.not(item, unmutableLiteResult, "Method should be immutable");
-                }
-            });
+            //     if(returnType !== "plain") {
+            //         unmutableLiteResult = unmutableLiteResult.value;
+            //     }
+
+            //     tt.deepEqual(mapResult, unmutableLiteResult, "Result shoud be correct");
+            //     if(testForImmutability) {
+            //         tt.not(item, unmutableLiteResult, "Method should be immutable");
+            //     }
+            // });
         });
 }

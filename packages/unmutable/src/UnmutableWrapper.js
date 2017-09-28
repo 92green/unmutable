@@ -25,6 +25,22 @@ export default class UnmutableWrapper {
                 }
 
                 let method = obj[name];
+
+                // special case for update() as it can requires different kinds of wrapping
+                // depending on the arguments passed in
+                if(name === "update") {
+                    _this.update = (...args: *): UnmutableWrapper => {
+                        console.log("doin an update", args)
+                        const result = method.bind(obj)(...args);
+                        if(typeof args[1] === "undefined") {
+                            console.log("returnin a ", result);
+                            return 123; //methodConstructors.updateSelf(result);
+                        }
+                        return constructor(result);
+                    };
+                    return;
+                }
+
                 _this[name] = (...args: *): UnmutableWrapper => {
                     const result = method.bind(obj)(...args);
                     return constructor(result);
