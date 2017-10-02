@@ -5,9 +5,11 @@ import Wrap from './Wrap';
 export default class UnmutableWrapper {
 
     __item: *;
+    __isUnmutable: boolean;
 
     constructor(item: *) {
         this.__item = item;
+        this.__isUnmutable = true;
     }
 
     _addMethods(obj: *, methodConstructors: ?Object = null) {

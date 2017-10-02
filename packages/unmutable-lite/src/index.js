@@ -1,6 +1,6 @@
 // @flow
 export {default as Wrap} from './Wrap';
-export {CompositeMethods} from 'unmutable-core';
+export {CompositeMethods, IsUnmutable} from 'unmutable-core';
 
 export type {default as UnmutableArrayWrapper} from './UnmutableArrayWrapper';
 export type {default as UnmutableListWrapper} from './UnmutableListWrapper';

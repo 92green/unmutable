@@ -4,8 +4,10 @@ import {Wrap} from './index';
 import IndexedTests from 'unmutable-core/lib/tests/IndexedTests-testUtil';
 import KeyedTests from 'unmutable-core/lib/tests/KeyedTests-testUtil';
 import WrapTests from 'unmutable-core/lib/tests/WrapTests-testUtil';
+import IsUnmutable from 'unmutable-core/lib/tests/IsUnmutable-testUtil';
 
 WrapTests(test, Wrap);
+IsUnmutable(test, Wrap);
 
 var keyedTests: Array<string> = [
     "clear",
