@@ -1,7 +1,7 @@
 // @flow
 type Updater = (value: *) => *;
 
-const update = (_this: UnmutableWrapperType) => (key: *, ...args: *): Object => {
+const update = (_this: Object) => (key: *, ...args: *): Object => {
     let notSetValue: * = args.length > 1 ? args[0] : undefined;
     let updater: Updater = args[args.length - 1];
 
@@ -14,7 +14,7 @@ const update = (_this: UnmutableWrapperType) => (key: *, ...args: *): Object => 
         );
 };
 
-const hasIn = (_this: UnmutableWrapperType) => (keyPath: string[]): * => {
+const hasIn = (_this: Object) => (keyPath: string[]): * => {
     var item = _this;
     for(let key of keyPath) {
         if(!item.isCollection() || !item.has(key)) {
@@ -25,7 +25,7 @@ const hasIn = (_this: UnmutableWrapperType) => (keyPath: string[]): * => {
     return true;
 };
 
-const getIn = (_this: UnmutableWrapperType, Wrap: Function) => (keyPath: string[], notFoundValue: * = undefined): * => {
+const getIn = (_this: Object, Wrap: Function) => (keyPath: string[], notFoundValue: * = undefined): * => {
     var item = _this;
     for(let key of keyPath) {
         if(!item.isCollection() || !item.has(key)) {
@@ -36,7 +36,7 @@ const getIn = (_this: UnmutableWrapperType, Wrap: Function) => (keyPath: string[
     return item;
 };
 
-const setIn = (_this: UnmutableWrapperType, Wrap: Function) => (keyPath: string[], value: *, notFoundValueCreator: Function = () => ({})): UnmutableObjectWrapper => {
+const setIn = (_this: Object, Wrap: Function) => (keyPath: string[], value: *, notFoundValueCreator: Function = () => ({})): UnmutableObjectWrapper => {
     for(var i = keyPath.length - 1; i >= 0; i--) {
         const partialKeyPath = keyPath.slice(0, i);
         value = getIn(_this, Wrap)(partialKeyPath, notFoundValueCreator(partialKeyPath)).set(keyPath[i], value).value;
@@ -44,7 +44,7 @@ const setIn = (_this: UnmutableWrapperType, Wrap: Function) => (keyPath: string[
     return Wrap(value);
 };
 
-const updateIn = (_this: UnmutableWrapperType, Wrap: Function) => (keyPath: string[], notFoundOrUpdater: *, updater: ?Updater, notFoundValueCreator: Function = () => ({})): UnmutableObjectWrapper => {
+const updateIn = (_this: Object, Wrap: Function) => (keyPath: string[], notFoundOrUpdater: *, updater: ?Updater, notFoundValueCreator: Function = () => ({})): UnmutableObjectWrapper => {
     var notFoundValue: * = undefined;
     if(updater) {
         notFoundValue = notFoundOrUpdater;
@@ -61,7 +61,7 @@ const updateIn = (_this: UnmutableWrapperType, Wrap: Function) => (keyPath: stri
     return setIn(_this, Wrap)(keyPath, updater(originalValue.value), notFoundValueCreator);
 };
 
-const deleteIn = (_this: UnmutableWrapperType, Wrap: Function) => (keyPath: string[]): UnmutableObjectWrapper => {
+const deleteIn = (_this: Object, Wrap: Function) => (keyPath: string[]): UnmutableObjectWrapper => {
     if(keyPath.length === 0) {
         return Wrap(undefined);
     }

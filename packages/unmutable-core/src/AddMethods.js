@@ -1,6 +1,8 @@
 // @flow
 import ListMethodNames from './ListMethodNames';
+import CompositeMethods from './CompositeMethods';
 import Unwrap from './Unwrap';
+const {deleteIn, getIn, hasIn, setIn, updateIn} = CompositeMethods;
 
 const iterate = (method: Function, Wrap: Function, self: Object): Function => (iterate: Function): Function => {
     return method(
@@ -27,7 +29,10 @@ const methods: Object = {
         returnType: "self"
     },
     deleteIn: {
-        returnType: "self"
+        fn: (method: Function, Wrap: Function, self: Object): Function => (keyPath: Array<*>): Function => {
+            return deleteIn(self, Wrap)(keyPath);
+        },
+        returnType: (...args) => args[0].length === 0 ? "wrapped" : "self"
     },
     every: {
         fn: iterate,
@@ -51,12 +56,18 @@ const methods: Object = {
         returnType: "wrapped"
     },
     getIn: {
+        fn: (method: Function, Wrap: Function, self: Object): Function => (keyPath: Array<*>, notSetValue: * = undefined): Function => {
+            return getIn(self, Wrap)(keyPath, notSetValue);
+        },
         returnType: "wrapped"
     },
     has: {
         returnType: "plain"
     },
     hasIn: {
+        fn: (method: Function, Wrap: Function, self: Object): Function => (keyPath: Array<*>): Function => {
+            return hasIn(self, Wrap)(keyPath);
+        },
         returnType: "plain"
     },
     includes: {
@@ -131,6 +142,17 @@ const methods: Object = {
         returnType: "self"
     },
     setIn: {
+        fn: (method: Function, Wrap: Function, self: Object): Function => (...args: *): Function => {
+            let arities = [
+                (keyPath: Array<string>, value: *): * => {
+                    return setIn(self, Wrap)(keyPath, value);
+                },
+                (keyPath: Array<string>, notSetValue: *, value: *): * => {
+                    return setIn(self, Wrap)(keyPath, notSetValue, value);
+                }
+            ];
+            return arities[args.length - 2](...args);
+        },
         returnType: "self"
     },
     shift: {
@@ -201,6 +223,34 @@ const methods: Object = {
         returnType: (...args) => args.length === 1 ? "wrapped" : "self"
     },
     updateIn: {
+        fn: (method: Function, Wrap: Function, self: Object): Function => (...args: *): Function => {
+            let arities = [
+                (keyPath: Array<string>, updater: Function): * => {
+
+
+        // _this.deleteIn = deleteIn(_this, Wrap);
+        // _this.hasIn = hasIn(_this, Wrap);
+        // _this.getIn = getIn(_this, Wrap);
+        // _this.setIn = setIn(_this, Wrap);
+        // _this.updateIn = updateIn(_this, Wrap);
+
+
+                    return method(
+                        keyPath,
+                        (value) => Unwrap(updater(Wrap(value)))
+                    );
+                },
+                (keyPath: Array<string>, notSetValue: *, updater: Function): * => {
+                    return method(
+                        keyPath,
+                        notSetValue,
+                        (value) => Unwrap(updater(Wrap(value)))
+                    );
+                }
+            ];
+            return arities[args.length - 2](...args);
+        },
+        returnType: (...args) => args[0].length === 0 ? "wrapped" : "self"
     }
 };
 

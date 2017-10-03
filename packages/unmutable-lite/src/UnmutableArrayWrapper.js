@@ -52,17 +52,16 @@ export default class UnmutableArrayWrapper extends UnmutableWrapper {
         _this.takeLast = (amount: number): Array<*> => item.slice(-amount);
         _this.unshift = (value: *): Array<*> => [value, ...item];
 
+        // define composite methods
         _this.update = update(_this, Wrap);
+        _this.deleteIn = () => {};
+        _this.hasIn = () => {};
+        _this.getIn = () => {};
+        _this.setIn = () => {};
+        _this.updateIn = () => {};
 
         // prepare methods
         AddMethods(this, this, Wrap);
-
-        // define composite methods
-        _this.deleteIn = deleteIn(_this, Wrap);
-        _this.hasIn = hasIn(_this, Wrap);
-        _this.getIn = getIn(_this, Wrap);
-        _this.setIn = setIn(_this, Wrap);
-        _this.updateIn = updateIn(_this, Wrap);
     }
 
     get size(): number {

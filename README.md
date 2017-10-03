@@ -87,6 +87,12 @@ console.log(Wrap("string")value); // logs out "string"
 console.log(Wrap("string").isCollection()); // false
 ```
 
+## Helper functions
+
+Unmutable exports the following helper functions:
+- `IsUnmutable` - Pass it anything and it'll return a boolean, true if the passed item is an unmutable wrapper of some kind.
+- `Unwrap` - Unmutable wrappers passed into this will be unwrapped, everything else will just pass through unchanged.
+
 ## Methods
 
 All unmutable wrappers will have the following member variables and methods:
@@ -121,6 +127,13 @@ Wrap([
         return value.get("name");
     });
 
+```
+
+These methods don't care if the returned value is wrapped or not.
+```
+Wrap(["1","2","3"]).map(ii => ii); // returns Wrap(["1","2","3"])
+
+Wrap(["1","2","3"]).map(ii => ii.value); // also returns Wrap(["1","2","3"])
 ```
 
 | `unmutable` Object / Map | `unmutable` Array / List | `unmutable-lite` Object / Map | `unmutable-lite` Array / List | Notes |

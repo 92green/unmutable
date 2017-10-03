@@ -1,7 +1,7 @@
 // @flow
 import UnmutableWrapper from './UnmutableWrapper';
 import Wrap from './Wrap';
-import {AddMethods, Unwrap} from 'unmutable-core';
+import {AddMethods} from 'unmutable-core';
 
 export default class UnmutableMapWrapper extends UnmutableWrapper {
     constructor(item: *) {
