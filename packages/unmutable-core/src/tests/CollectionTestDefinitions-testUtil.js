@@ -333,6 +333,7 @@ export default function(config: Object): Array<Object> {
                         tt.true(IsUnmutable(wrappedValue), "wrappedValue should be in an unmutable wrapper");
                         tt.deepEqual(wrappedValue.value, itemAtKey, "wrappedValue should contain correct value");
                     }
+                    // $FlowFixMe: Flow doesnt know that template strings cast to string automatically
                     return `${Unwrap(wrappedValue)}!`;
                 }
             ],

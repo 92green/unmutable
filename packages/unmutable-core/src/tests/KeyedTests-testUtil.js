@@ -55,7 +55,7 @@ export default function(test: Function, Wrap: Function, keyedTests: Array<Object
 
             test(`"Map.${method}" should ${desc}. Args: ${JSON.stringify(args())}`, (tt: *) => {
                 tt.plan(1 + callbackTests);
-                // $FlowFixMe: Flow doesnt know how to deal with calling computed properties
+
                 var immutableResult = item[method](...args());
                 var unmutableMethod = Wrap(item)[method];
                 if(!unmutableMethod) {
