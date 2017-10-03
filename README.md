@@ -99,115 +99,139 @@ All unmutable wrappers will have the following member variables and methods:
 
 Objects, Arrays, Lists and Maps will also have the following methods, depending on whether `unmutable` or `unmutable-lite` is being used. New methods will be added over time.
 
-| `unmutable` Object / Map | `unmutable` Array / List | `unmutable-lite` Object / Map | `unmutable-lite` Array / List |
-| --- | --- | --- | --- |
-| asImmutable | asImmutable | asImmutable | asImmutable |
-| asMutable | asMutable | asMutable | asMutable |
-| **butLast** ✔︎ | **butLast** ✔︎ | - | **butLast** ✔︎ |
-| **clear** ✔︎ | **clear** ✔︎ | **clear** ✔︎ | **clear** ✔︎ |
-| **concat** ✔︎ | **concat** ✔︎ | **concat** ✔︎ | **concat** ✔︎ |
-| **count** ✔︎ | **count** ✔︎ | **count** ✔︎ | **count** ✔︎ |
-| countBy | countBy | countBy | countBy |
-| **delete** ✔︎ | **delete** ✔︎ | **delete** ✔︎ | **delete** ✔︎ |
-| **deleteIn** ✔︎ | **deleteIn** ✔︎ | **deleteIn** ✔︎ | **deleteIn** ✔︎ |
-| entries | entries | entries | entries |
-| entrySeq | entrySeq | entrySeq | entrySeq |
-| equals | equals | equals | equals |
-| **every** ✔︎ | **every** ✔︎ | every | **every** ✔︎ |
-| **filter** ✔︎ | **filter** ✔︎ | filter | filter |
-| **filterNot** ✔︎ | **filterNot** ✔︎ | filterNot | filterNot |
-| find | find | find | find |
-| findEntry | findEntry | findEntry | findEntry |
-| - | findIndex | - | findIndex |
-| findKey | findKey | findKey | findKey |
-| findLast | findLast | findLast | findLast |
-| findLastEntry | findLastEntry | findLastEntry | findLastEntry |
-| findLastIndex | findLastIndex | findLastIndex | findLastIndex |
-| findLastKey | findLastKey | findLastKey | findLastKey |
-| **first** ✔︎ | **first** ✔︎ | - | **first** ✔︎ |
-| flatMap | flatMap | flatMap | flatMap |
-| flatten | flatten | flatten | flatten |
-| flip | - | flip | - |
-| forEach | forEach | forEach | forEach |
-|  - | fromEntrySeq | - | fromEntrySeq |
-| **get** ✔︎ | **get** ✔︎ | **get** ✔︎ | **get** ✔︎ |
-| **getIn** ✔︎ | **getIn** ✔︎ | **getIn** ✔︎ | **getIn** ✔︎ |
-| groupBy | groupBy | groupBy | groupBy |
-| **has** ✔︎ | **has** ✔︎ | **has** ✔︎ | **has** ✔︎ |
-| hashCode | hashCode | hashCode | hashCode |
-| **hasIn** ✔︎ | **hasIn** ✔︎ | **hasIn** ✔︎ | **hasIn** ✔︎ |
-| **includes** ✔︎ | **includes** ✔︎ | **includes** ✔︎ | **includes** ✔︎ |
-| - | indexOf | - | indexOf |
-| - | **insert** ✔︎ | - | insert |
-| - | **interleave** ✔︎ | - | interleave |
-| - | **interpose** ✔︎ | - | interpose |
-| **isEmpty** ✔︎ | **isEmpty** ✔︎ | **isEmpty** ✔︎ | **isEmpty** ✔︎ |
-| isSubset | isSubset | isSubset | isSubset |
-| isSuperset | isSuperset | isSuperset | isSuperset |
-| join | join | join | join |
-| keyOf | keyOf | keyOf | keyOf |
-| keys | keys | keys | keys |
-| keySeq | keySeq | keySeq | keySeq |
-| **last** ✔︎ | **last** ✔︎ | - | **last** ✔︎ |
-| - | lastIndexOf | - | lastIndexOf |
-| lastKeyOf | lastKeyOf | lastKeyOf | lastKeyOf |
-| **map** ✔︎ | **map** ✔︎ | map | map |
-| **mapEntries** ✔︎ | - | mapEntries | - |
-| max | max | max | max |
-| maxBy | maxBy | maxBy | maxBy |
-| **merge** ✔︎ | **merge** ✔︎ | merge | merge |
-| mergeDeep | mergeDeep | mergeDeep | mergeDeep |
-| mergeDeepIn | mergeDeepIn | mergeDeepIn | mergeDeepIn |
-| mergeDeepWith | mergeDeepWith | mergeDeepWith | mergeDeepWith |
-| mergeIn | mergeIn | mergeIn | mergeIn |
-| **mergeWith** ✔︎ | **mergeWith** ✔︎ | mergeWith | mergeWith |
-| min | min | min | min |
-| minBy | minBy | minBy | minBy |
-| - | **pop** ✔︎ | - | **pop** ✔︎ |
-| - | **push** ✔︎ | - | **push** ✔︎ |
-| reduce | reduce | reduce | reduce |
-| reduceRight | reduceRight | reduceRight | reduceRight |
-| **rest** ✔︎ | **rest** ✔︎ | - | **rest** ✔︎ |
-| **reverse** ✔︎ | **reverse** ✔︎ | - | **reverse** ✔︎ |
-| **set** ✔︎ | **set** ✔︎ | **set** ✔︎ | **set** ✔︎ |
-| **setIn** ✔︎ | **setIn** ✔︎ | **setIn** ✔︎ | **setIn** ✔︎ |
-| - | setSize | - | setSize |
-| - | **shift** ✔︎ | - | **shift** ✔︎ |
-| **skip** ✔︎ | **skip** ✔︎ | - | **skip** ✔︎ |
-| **skipLast** ✔︎ | **skipLast** ✔︎ | - | **skipLast** ✔︎ |
-| **skipUntil** ✔︎ | **skipUntil** ✔︎ | - | skipUntil |
-| **skipWhile** ✔︎ | **skipWhile** ✔︎ | - | skipWhile |
-| **slice** ✔︎ | **slice** ✔︎ | **slice** ✔︎ | **slice** ✔︎ |
-| **some** ✔︎ | **some** ✔︎ | some | **some** ✔︎ |
-| **sort** ✔︎ | **sort** ✔︎ | sort | sort |
-| **sortBy** ✔︎ | **sortBy** ✔︎ | sortBy | sortBy |
-| - | splice | - | splice |
-| **take** ✔︎ | **take** ✔︎ | - | **take** ✔︎ |
-| **takeLast** ✔︎ | **takeLast** ✔︎ | - | **takeLast** ✔︎ |
-| **takeUntil** ✔︎ | **takeUntil** ✔︎ | - | takeUntil |
-| **takeWhile** ✔︎ | **takeWhile** ✔︎ | - | takeWhile |
-| toArray | toArray | toArray | toArray |
-| toIndexedSeq | toIndexedSeq | toIndexedSeq | toIndexedSeq |
-| toJS | toJS | toJS | toJS |
-| toJSON | toJSON | toJSON | toJSON |
-| toKeyedSeq | toKeyedSeq | toKeyedSeq | toKeyedSeq |
-| toList | toList | toList | toList |
-| toMap | toMap | toMap | toMap |
-| toObject | toObject | toObject | toObject |
-| toOrderedMap | toOrderedMap | toOrderedMap | toOrderedMap |
-| toOrderedSet | toOrderedSet | toOrderedSet | toOrderedSet |
-| toSeq | toSeq | toSeq | toSeq |
-| toSet | toSet | toSet | toSet |
-| toSetSeq | toSetSeq | toSetSeq | toSetSeq |
-| toStack | toStack | toStack | toStack |
-| - | **unshift** ✔︎ | - | **unshift** ✔︎ |
-| **update** ✔︎ | **update** ✔︎ | **update** ✔︎ | **update** ✔︎ |
-| **updateIn** ✔︎ | **updateIn** ✔︎ | **updateIn** ✔︎ | **updateIn** ✔︎ |
-| values | values | values | values |
-| valueSeq | valueSeq | valueSeq | valueSeq |
-| withMutations | withMutations | withMutations | withMutations |
-| - | zip | - | zip |
-| - | zipWith | - | zipWith |
+Most methods return unmutable wrappers, except for those that ask questions about the contents of a collections (e.g. `has()`, `includes()` etc).
+
+```
+Wrap(["1","2","3"]).get(0); // returns an unmutable wrapper containing "1"
+
+Wrap(["1","2","3"]).includes("1"); // returns true
+```
+
+Methods that have function parameters like `map()` and `reduce()` are passed their values in unmutable wrappers. If the original iterable is also received, this is also wrapped. Keys are not wrapped.
+
+```
+Wrap([
+    {name: "tedd"},
+    {name: "todd"}
+])
+    .map((value, key, iter) => {
+        // value is an unmutable wrapper containing {name: "tedd"}, then {name: "todd"}
+        // key is the number 0, then 1
+        // iter is the original unmutable wrapper
+        return value.get("name");
+    });
+
+```
+
+| `unmutable` Object / Map | `unmutable` Array / List | `unmutable-lite` Object / Map | `unmutable-lite` Array / List | Notes |
+| --- | --- | --- | --- | --- |
+| asImmutable | asImmutable | asImmutable | asImmutable ||
+| asMutable | asMutable | asMutable | asMutable ||
+| **butLast** ✔︎ | **butLast** ✔︎ | - | **butLast** ✔︎ ||
+| **clear** ✔︎ | **clear** ✔︎ | **clear** ✔︎ | **clear** ✔︎ ||
+| **concat** ✔︎ | **concat** ✔︎ | **concat** ✔︎ | **concat** ✔︎ ||
+| **count** ✔︎ | **count** ✔︎ | **count** ✔︎ | **count** ✔︎ | Returns plain number |
+| countBy | countBy | countBy | countBy ||
+| **delete** ✔︎ | **delete** ✔︎ | **delete** ✔︎ | **delete** ✔︎ ||
+| **deleteIn** ✔︎ | **deleteIn** ✔︎ | **deleteIn** ✔︎ | **deleteIn** ✔︎ ||
+| entries | entries | entries | entries ||
+| entrySeq | entrySeq | entrySeq | entrySeq ||
+| equals | equals | equals | equals ||
+| **every** ✔︎ | **every** ✔︎ | every | **every** ✔︎ | Returns plain boolean |
+| **filter** ✔︎ | **filter** ✔︎ | filter | filter ||
+| **filterNot** ✔︎ | **filterNot** ✔︎ | filterNot | filterNot ||
+| find | find | find | find ||
+| findEntry | findEntry | findEntry | findEntry ||
+| - | findIndex | - | findIndex ||
+| findKey | findKey | findKey | findKey ||
+| findLast | findLast | findLast | findLast ||
+| findLastEntry | findLastEntry | findLastEntry | findLastEntry ||
+| findLastIndex | findLastIndex | findLastIndex | findLastIndex ||
+| findLastKey | findLastKey | findLastKey | findLastKey ||
+| **first** ✔︎ | **first** ✔︎ | - | **first** ✔︎ ||
+| flatMap | flatMap | flatMap | flatMap ||
+| flatten | flatten | flatten | flatten ||
+| flip | - | flip | - ||
+| forEach | forEach | forEach | forEach ||
+|  - | fromEntrySeq | - | fromEntrySeq ||
+| **get** ✔︎ | **get** ✔︎ | **get** ✔︎ | **get** ✔︎ ||
+| **getIn** ✔︎ | **getIn** ✔︎ | **getIn** ✔︎ | **getIn** ✔︎ ||
+| groupBy | groupBy | groupBy | groupBy ||
+| **has** ✔︎ | **has** ✔︎ | **has** ✔︎ | **has** ✔︎ | Returns plain boolean |
+| hashCode | hashCode | hashCode | hashCode ||
+| **hasIn** ✔︎ | **hasIn** ✔︎ | **hasIn** ✔︎ | **hasIn** ✔︎ | Returns plain boolean |
+| **includes** ✔︎ | **includes** ✔︎ | **includes** ✔︎ | **includes** ✔︎ | Returns plain boolean |
+| - | indexOf | - | indexOf ||
+| - | **insert** ✔︎ | - | insert ||
+| - | **interleave** ✔︎ | - | interleave ||
+| - | **interpose** ✔︎ | - | interpose ||
+| **isEmpty** ✔︎ | **isEmpty** ✔︎ | **isEmpty** ✔︎ | **isEmpty** ✔︎ ||
+| isSubset | isSubset | isSubset | isSubset ||
+| isSuperset | isSuperset | isSuperset | isSuperset ||
+| join | join | join | join ||
+| keyOf | keyOf | keyOf | keyOf ||
+| keys | keys | keys | keys ||
+| keySeq | keySeq | keySeq | keySeq ||
+| **last** ✔︎ | **last** ✔︎ | - | **last** ✔︎ ||
+| - | lastIndexOf | - | lastIndexOf ||
+| lastKeyOf | lastKeyOf | lastKeyOf | lastKeyOf ||
+| **map** ✔︎ | **map** ✔︎ | **map** ✔︎ | **map** ✔︎ ||
+| **mapEntries** ✔︎ | - | mapEntries | - ||
+| max | max | max | max ||
+| maxBy | maxBy | maxBy | maxBy ||
+| **merge** ✔︎ | **merge** ✔︎ | merge | merge ||
+| mergeDeep | mergeDeep | mergeDeep | mergeDeep ||
+| mergeDeepIn | mergeDeepIn | mergeDeepIn | mergeDeepIn ||
+| mergeDeepWith | mergeDeepWith | mergeDeepWith | mergeDeepWith ||
+| mergeIn | mergeIn | mergeIn | mergeIn ||
+| **mergeWith** ✔︎ | **mergeWith** ✔︎ | mergeWith | mergeWith ||
+| min | min | min | min ||
+| minBy | minBy | minBy | minBy ||
+| - | **pop** ✔︎ | - | **pop** ✔︎ ||
+| - | **push** ✔︎ | - | **push** ✔︎ ||
+| **reduce** ✔︎ | **reduce** ✔︎ | **reduce** ✔︎ | **reduce** ✔︎ ||
+| **reduceRight** ✔︎ | **reduceRight** ✔︎ | **reduceRight** ✔︎ | **reduceRight** ✔︎ ||
+| **rest** ✔︎ | **rest** ✔︎ | - | **rest** ✔︎ ||
+| **reverse** ✔︎ | **reverse** ✔︎ | - | **reverse** ✔︎ ||
+| **set** ✔︎ | **set** ✔︎ | **set** ✔︎ | **set** ✔︎ ||
+| **setIn** ✔︎ | **setIn** ✔︎ | **setIn** ✔︎ | **setIn** ✔︎ ||
+| - | setSize | - | setSize ||
+| - | **shift** ✔︎ | - | **shift** ✔︎ ||
+| **skip** ✔︎ | **skip** ✔︎ | - | **skip** ✔︎ ||
+| **skipLast** ✔︎ | **skipLast** ✔︎ | - | **skipLast** ✔︎ ||
+| **skipUntil** ✔︎ | **skipUntil** ✔︎ | - | skipUntil ||
+| **skipWhile** ✔︎ | **skipWhile** ✔︎ | - | skipWhile ||
+| **slice** ✔︎ | **slice** ✔︎ | **slice** ✔︎ | **slice** ✔︎ ||
+| **some** ✔︎ | **some** ✔︎ | some | **some** ✔︎ | Returns plain boolean |
+| **sort** ✔︎ | **sort** ✔︎ | sort | sort ||
+| **sortBy** ✔︎ | **sortBy** ✔︎ | sortBy | sortBy ||
+| - | splice | - | splice ||
+| **take** ✔︎ | **take** ✔︎ | - | **take** ✔︎ ||
+| **takeLast** ✔︎ | **takeLast** ✔︎ | - | **takeLast** ✔︎ ||
+| **takeUntil** ✔︎ | **takeUntil** ✔︎ | - | takeUntil ||
+| **takeWhile** ✔︎ | **takeWhile** ✔︎ | - | takeWhile ||
+| toArray | toArray | toArray | toArray ||
+| toIndexedSeq | toIndexedSeq | toIndexedSeq | toIndexedSeq ||
+| toJS | toJS | toJS | toJS ||
+| toJSON | toJSON | toJSON | toJSON ||
+| toKeyedSeq | toKeyedSeq | toKeyedSeq | toKeyedSeq ||
+| toList | toList | toList | toList ||
+| toMap | toMap | toMap | toMap ||
+| toObject | toObject | toObject | toObject ||
+| toOrderedMap | toOrderedMap | toOrderedMap | toOrderedMap ||
+| toOrderedSet | toOrderedSet | toOrderedSet | toOrderedSet ||
+| toSeq | toSeq | toSeq | toSeq ||
+| toSet | toSet | toSet | toSet ||
+| toSetSeq | toSetSeq | toSetSeq | toSetSeq ||
+| toStack | toStack | toStack | toStack ||
+| - | **unshift** ✔︎ | - | **unshift** ✔︎ ||
+| **update** ✔︎ | **update** ✔︎ | **update** ✔︎ | **update** ✔︎ ||
+| **updateIn** ✔︎ | **updateIn** ✔︎ | **updateIn** ✔︎ | **updateIn** ✔︎ ||
+| values | values | values | values ||
+| valueSeq | valueSeq | valueSeq | valueSeq ||
+| withMutations | withMutations | withMutations | withMutations ||
+| - | zip | - | zip ||
+| - | zipWith | - | zipWith ||
 
 
 

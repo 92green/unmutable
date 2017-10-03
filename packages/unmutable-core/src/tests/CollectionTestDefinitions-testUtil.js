@@ -1,4 +1,7 @@
 // @flow
+import IsUnmutable from '../IsUnmutable';
+import Unwrap from '../Unwrap';
+
 export default function(config: Object): Array<Object> {
     const {
         only,
@@ -88,25 +91,53 @@ export default function(config: Object): Array<Object> {
         {
             desc: "return false if a key returns false",
             method: "every",
-            args: (tt) => [ii => ii === nonExistingValue],
+            args: (tt) => [
+                (wrappedValue, iterKey, wrappedIter) => {
+                    return Unwrap(wrappedValue) === nonExistingValue;
+                }
+            ],
             returnType: "plain"
         },
         {
             desc: "return true only if all keys return true",
             method: "every",
-            args: (tt) => [ii => ii !== nonExistingValue],
-            returnType: "plain"
+            args: (tt) => [
+                (wrappedValue, iterKey, wrappedIter) => {
+                    if(tt && iterKey === key) {
+                        tt.true(IsUnmutable(wrappedIter), "wrappedIter should be in an unmutable wrapper");
+                        tt.deepEqual(wrappedIter.value, item, "wrappedIter should contain correct value");
+                        tt.true(IsUnmutable(wrappedValue), "wrappedValue should be in an unmutable wrapper");
+                        tt.deepEqual(wrappedValue.value, itemAtKey, "wrappedValue should contain correct value");
+                    }
+                    return Unwrap(wrappedValue) !== nonExistingValue;
+                }
+            ],
+            returnType: "plain",
+            callbackTests: 4
         },
         {
             desc: "filter",
             method: "filter",
-            args: (tt) => [ii => ii === existingValue],
-            returnType: "self"
+            args: (tt) => [
+                (wrappedValue, iterKey, wrappedIter) => {
+                    if(tt && iterKey === key) {
+                        tt.true(IsUnmutable(wrappedIter), "wrappedIter should be in an unmutable wrapper");
+                        tt.deepEqual(wrappedIter.value, item, "wrappedIter should contain correct value");
+                        tt.true(IsUnmutable(wrappedValue), "wrappedValue should be in an unmutable wrapper");
+                        tt.deepEqual(wrappedValue.value, itemAtKey, "wrappedValue should contain correct value");
+                    }
+                    return Unwrap(wrappedValue) === existingValue;
+                }
+            ],
+            returnType: "self",
+            callbackTests: 4
         },
         {
             desc: "filterNot",
             method: "filterNot",
-            args: (tt) => [ii => ii === existingValue],
+            args: (tt) => [
+                wrappedValue => Unwrap(wrappedValue) === existingValue
+            ],
             returnType: "self"
         },
         {
@@ -294,8 +325,19 @@ export default function(config: Object): Array<Object> {
         {
             desc: "map",
             method: "map",
-            args: (tt) => [ii => `${ii}!`],
-            returnType: "self"
+            args: (tt) => [
+                (wrappedValue, iterKey, wrappedIter) => {
+                    if(tt && iterKey === key) {
+                        tt.true(IsUnmutable(wrappedIter), "wrappedIter should be in an unmutable wrapper");
+                        tt.deepEqual(wrappedIter.value, item, "wrappedIter should contain correct value");
+                        tt.true(IsUnmutable(wrappedValue), "wrappedValue should be in an unmutable wrapper");
+                        tt.deepEqual(wrappedValue.value, itemAtKey, "wrappedValue should contain correct value");
+                    }
+                    return `${Unwrap(wrappedValue)}!`;
+                }
+            ],
+            returnType: "self",
+            callbackTests: 4
         },
         {
             desc: "mapEntries",
@@ -352,6 +394,42 @@ export default function(config: Object): Array<Object> {
             method: "pop",
             args: (tt) => [],
             returnType: "self"
+        },
+        {
+            desc: "reduce",
+            method: "reduce",
+            args: (tt) => [
+                (reduction, wrappedValue, iterKey, wrappedIter) => {
+                    if(tt && iterKey === key) {
+                        tt.true(IsUnmutable(wrappedIter), "wrappedIter should be in an unmutable wrapper");
+                        tt.deepEqual(wrappedIter.value, item, "wrappedIter should contain correct value");
+                        tt.true(IsUnmutable(wrappedValue), "wrappedValue should be in an unmutable wrapper");
+                        tt.deepEqual(wrappedValue.value, itemAtKey, "wrappedValue should contain correct value");
+                    }
+                    return [...reduction, Unwrap(wrappedValue)];
+                },
+                []
+            ],
+            returnType: "wrapped",
+            callbackTests: 4
+        },
+        {
+            desc: "reduceRight",
+            method: "reduceRight",
+            args: (tt) => [
+                (reduction, wrappedValue, iterKey, wrappedIter) => {
+                    if(tt && iterKey === key) {
+                        tt.true(IsUnmutable(wrappedIter), "wrappedIter should be in an unmutable wrapper");
+                        tt.deepEqual(wrappedIter.value, item, "wrappedIter should contain correct value");
+                        tt.true(IsUnmutable(wrappedValue), "wrappedValue should be in an unmutable wrapper");
+                        tt.deepEqual(wrappedValue.value, itemAtKey, "wrappedValue should contain correct value");
+                    }
+                    return [...reduction, Unwrap(wrappedValue)];
+                },
+                []
+            ],
+            returnType: "wrapped",
+            callbackTests: 4
         },
         {
             desc: "reverse",
@@ -478,16 +556,21 @@ export default function(config: Object): Array<Object> {
             returnType: "self"
         },
         {
-            desc: "return true if a key returns true",
-            method: "some",
-            args: (tt) => [ii => ii === existingValue],
-            returnType: "plain"
-        },
-        {
             desc: "return false only if no keys return true",
             method: "some",
-            args: (tt) => [ii => ii === nonExistingValue],
-            returnType: "plain"
+            args: (tt) => [
+                (wrappedValue, iterKey, wrappedIter) => {
+                    if(tt && iterKey === key) {
+                        tt.true(IsUnmutable(wrappedIter), "wrappedIter should be in an unmutable wrapper");
+                        tt.deepEqual(wrappedIter.value, item, "wrappedIter should contain correct value");
+                        tt.true(IsUnmutable(wrappedValue), "wrappedValue should be in an unmutable wrapper");
+                        tt.deepEqual(wrappedValue.value, itemAtKey, "wrappedValue should contain correct value");
+                    }
+                    return Unwrap(wrappedValue) === nonExistingValue;
+                }
+            ],
+            returnType: "plain",
+            callbackTests: 4
         },
         {
             desc: "sort",
@@ -548,38 +631,42 @@ export default function(config: Object): Array<Object> {
             method: "update",
             args: (tt) => [
                 key,
-                (value) => {
-                    tt && tt.deepEqual(value, itemAtKey);
-                    return value + 100;
+                (wrappedValue) => {
+                    tt && tt.true(IsUnmutable(wrappedValue), "wrappedValue should be in an unmutable wrapper");
+                    tt && tt.deepEqual(wrappedValue.value, itemAtKey, "wrappedValue should contain correct value");
+                    return 100;
                 }
             ],
             returnType: "self",
-            callbackTests: 1
+            callbackTests: 2
         },
         {
             desc: "update with no key",
             method: "update",
             args: (tt) => [
-                (value) => {
-                    tt && tt.deepEqual(value, item);
-                    return value;
+                (wrappedValue) => {
+                    tt && tt.true(IsUnmutable(wrappedValue), "wrappedValue should be in an unmutable wrapper");
+                    tt && tt.deepEqual(wrappedValue.value, item, "wrappedValue should contain original item");
+                    return wrappedValue;
                 }
             ],
-            returnType: "wrapped",
-            callbackTests: 1
+            returnType: "self",
+            callbackTests: 2,
+            shouldBeImmutable: false
         },
         {
             desc: "update non-existing key",
             method: "update",
             args: (tt) => [
                 nonExistingKey,
-                (value) => {
-                    tt && tt.is(value, undefined);
+                (wrappedValue) => {
+                    tt && tt.true(IsUnmutable(wrappedValue), "wrappedValue should be in an unmutable wrapper");
+                    tt && tt.is(wrappedValue.value, undefined, "wrappedValue should contain undefined");
                     return 100;
                 }
             ],
             returnType: "self",
-            callbackTests: 1
+            callbackTests: 2
         },
         {
             desc: "update non-existing key with notSetValue",
@@ -587,13 +674,14 @@ export default function(config: Object): Array<Object> {
             args: (tt) => [
                 nonExistingKey,
                 sampleValue,
-                (value) => {
-                    tt && tt.is(value, sampleValue);
-                    return value + 100;
+                (wrappedValue) => {
+                    tt && tt.true(IsUnmutable(wrappedValue), "wrappedValue should be in an unmutable wrapper");
+                    tt && tt.is(wrappedValue.value, sampleValue, "wrappedValue should contain notsetvalue");
+                    return 100;
                 }
             ],
             returnType: "self",
-            callbackTests: 1
+            callbackTests: 2
         },
         {
             desc: "updateIn keyPath",

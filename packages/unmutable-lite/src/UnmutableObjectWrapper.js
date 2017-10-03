@@ -1,7 +1,7 @@
 // @flow
 import UnmutableWrapper from './UnmutableWrapper';
 import Wrap from './Wrap';
-import {CreateMethodConstructors, CompositeMethods} from 'unmutable-core';
+import {AddMethods, CompositeMethods} from 'unmutable-core';
 const {deleteIn, getIn, hasIn, setIn, update, updateIn} = CompositeMethods;
 
 export default class UnmutableObjectWrapper extends UnmutableWrapper {
@@ -29,20 +29,30 @@ export default class UnmutableObjectWrapper extends UnmutableWrapper {
             return false;
         };
         _this.isEmpty = (): boolean => item.size === 0;
+        _this.map = (mapper: Function): Object => {
+            return Object.keys(item).reduce((reduction: Object, key: string): Object => {
+                reduction[key] = mapper(item[key], key, item);
+                return reduction;
+            }, {});
+        };
+        _this.reduce = (mapper: Function, initialReduction: *): * => {
+            return Object.keys(item).reduce((reduction, key) => mapper(reduction, item[key], key, item), initialReduction);
+        };
+        _this.reduceRight = (mapper: Function, initialReduction: *): * => {
+            return Object.keys(item).reverse().reduce((reduction, key) => mapper(reduction, item[key], key, item), initialReduction);
+        };
         _this.set = (key: *, value: *): Object => ({...item, [key]: value});
 
-        // wrap shallow methods in constructors
-        this._addMethods(
-            this,
-            CreateMethodConstructors(Wrap, ii => new UnmutableObjectWrapper(ii))
-        );
+        _this.update = update(_this, Wrap);
+
+        // prepare methods
+        AddMethods(this, this, Wrap);
 
         // define composite methods
         _this.deleteIn = deleteIn(_this, Wrap);
         _this.hasIn = hasIn(_this, Wrap);
         _this.getIn = getIn(_this, Wrap);
         _this.setIn = setIn(_this, Wrap);
-        _this.update = update(_this, Wrap);
         _this.updateIn = updateIn(_this, Wrap);
     }
 

@@ -2,7 +2,7 @@
 import {Map} from 'immutable';
 import UnmutableWrapper from './UnmutableWrapper';
 import Wrap from './Wrap';
-import {CreateMethodConstructors, CompositeMethods} from 'unmutable-core';
+import {AddMethods, CompositeMethods} from 'unmutable-core';
 const {deleteIn, getIn, hasIn, setIn, updateIn} = CompositeMethods;
 
 export default class UnmutableObjectWrapper extends UnmutableWrapper {
@@ -10,11 +10,8 @@ export default class UnmutableObjectWrapper extends UnmutableWrapper {
         let map: Map<string,*> = Map(item);
         super(map);
 
-        // wrap shallow methods in constructors
-        this._addMethods(
-            map,
-            CreateMethodConstructors(Wrap, ii => new UnmutableObjectWrapper(ii))
-        );
+        // prepare methods
+        AddMethods(this, map, Wrap, ii => ii.toObject());
 
         // define deep methods
         let _this = (this: any);

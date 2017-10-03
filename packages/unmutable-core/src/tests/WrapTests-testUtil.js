@@ -136,4 +136,10 @@ export default function(test: Function, Wrap: Function) {
             tt.is(Wrap(value).isIndexed(), shouldBeIndexed, `${name} ${shouldBeIndexed ? "should" : "should not"} be indexed`);
         });
     });
+
+    test('it should not be possible to double wrap', (tt: *) => {
+        tt.is(Wrap(123).value, 123);
+        tt.is(Wrap(Wrap(123)).value, 123);
+        tt.is(Wrap(Wrap(Wrap(123))).value, 123);
+    });
 }

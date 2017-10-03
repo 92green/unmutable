@@ -2,7 +2,7 @@
 import {List} from 'immutable';
 import UnmutableWrapper from './UnmutableWrapper';
 import Wrap from './Wrap';
-import {CreateMethodConstructors, CompositeMethods} from 'unmutable-core';
+import {AddMethods, CompositeMethods} from 'unmutable-core';
 const {deleteIn, getIn, hasIn, setIn, updateIn} = CompositeMethods;
 
 export default class UnmutableArrayWrapper extends UnmutableWrapper {
@@ -11,11 +11,8 @@ export default class UnmutableArrayWrapper extends UnmutableWrapper {
         let list: List<*> = List(item);
         super(list);
 
-        // wrap shallow methods in constructors
-        this._addMethods(
-            list,
-            CreateMethodConstructors(Wrap, ii => new UnmutableArrayWrapper(ii))
-        );
+        // prepare methods
+        AddMethods(this, list, Wrap, ii => ii.toArray());
 
         // define deep methods
         let _this = (this: any);
