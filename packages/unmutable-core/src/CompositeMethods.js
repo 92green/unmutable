@@ -17,7 +17,7 @@ const update = (_this: Object) => (key: *, ...args: *): Object => {
 const hasIn = (_this: Object) => (keyPath: string[]): * => {
     var item = _this;
     for(let key of keyPath) {
-        if(!item.isCollection() || !item.has(key)) {
+        if(/*!item.isCollection() || */ !item.has(key)) {
             return false;
         }
         item = item.get(key);
@@ -28,7 +28,7 @@ const hasIn = (_this: Object) => (keyPath: string[]): * => {
 const getIn = (_this: Object, Wrap: Function) => (keyPath: string[], notFoundValue: * = undefined): * => {
     var item = _this;
     for(let key of keyPath) {
-        if(!item.isCollection() || !item.has(key)) {
+        if(/*!item.isCollection() || */ !item.has(key)) {
             return Wrap(notFoundValue);
         }
         item = item.get(key);
@@ -44,20 +44,8 @@ const setIn = (_this: Object, Wrap: Function) => (keyPath: string[], value: *, n
     return Wrap(value);
 };
 
-const updateIn = (_this: Object, Wrap: Function) => (keyPath: string[], notFoundOrUpdater: *, updater: ?Updater, notFoundValueCreator: Function = () => ({})): UnmutableObjectWrapper => {
-    var notFoundValue: * = undefined;
-    if(updater) {
-        notFoundValue = notFoundOrUpdater;
-    } else {
-        updater = notFoundOrUpdater;
-    }
-
-    if(!hasIn(_this)(keyPath)) {
-        return _this;
-    }
-
+const updateIn = (_this: Object, Wrap: Function) => (keyPath: string[], notFoundValue: *, updater: Updater, notFoundValueCreator: Function = () => ({})): UnmutableObjectWrapper => {
     var originalValue: * = getIn(_this, Wrap)(keyPath, notFoundValue);
-
     return setIn(_this, Wrap)(keyPath, updater(originalValue.value), notFoundValueCreator);
 };
 
@@ -65,9 +53,13 @@ const deleteIn = (_this: Object, Wrap: Function) => (keyPath: string[]): Unmutab
     if(keyPath.length === 0) {
         return Wrap(undefined);
     }
+    if(!hasIn(_this, Wrap)(keyPath)) {
+        return _this;
+    }
     return updateIn(_this, Wrap)(
         keyPath.slice(0, -1),
-        ii => Wrap(ii).delete(keyPath[keyPath.length - 1]).value
+        undefined,
+        (ii) => Wrap(ii).delete(keyPath[keyPath.length - 1]).value
     );
 };
 

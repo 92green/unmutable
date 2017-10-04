@@ -8,7 +8,12 @@ export default class UnmutableObjectWrapper extends UnmutableWrapper {
     constructor(item: Object) {
         let map: Map<string,*> = Map(item);
         super(map);
-        AddMethods(this, map, Wrap, ii => ii.toObject());
+        AddMethods({
+            self: this,
+            methodsFrom: map,
+            wrap: Wrap,
+            fromWrapperData: ii => ii.toObject()
+        });
     }
 
     get value(): * {

@@ -7,10 +7,6 @@ import WrapTests from 'unmutable-core/lib/tests/WrapTests-testUtil';
 import UnwrapTests from 'unmutable-core/lib/tests/UnwrapTests-testUtil';
 import IsUnmutableTests from 'unmutable-core/lib/tests/IsUnmutableTests-testUtil';
 
-WrapTests(test, Wrap);
-UnwrapTests(test, Wrap);
-IsUnmutableTests(test, Wrap);
-
 var keyedTests: Array<string> = [
     "clear",
     "concat",
@@ -31,8 +27,6 @@ var keyedTests: Array<string> = [
     "update",
     "updateIn"
 ];
-
-KeyedTests(test, Wrap, keyedTests);
 
 var indexedTests: Array<string> = [
     "butLast",
@@ -70,4 +64,8 @@ var indexedTests: Array<string> = [
     "updateIn"
 ];
 
-IndexedTests(test, Wrap, indexedTests);
+WrapTests(test, Wrap, "unmutableLite");
+UnwrapTests(test, Wrap, "unmutableLite");
+IsUnmutableTests(test, Wrap, "unmutableLite");
+KeyedTests(test, Wrap, keyedTests, "unmutableLite");
+IndexedTests(test, Wrap, indexedTests, "unmutableLite");

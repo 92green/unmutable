@@ -9,7 +9,12 @@ export default class UnmutableArrayWrapper extends UnmutableWrapper {
     constructor(item: Object) {
         let list: List<*> = List(item);
         super(list);
-        AddMethods(this, list, Wrap, ii => ii.toArray());
+        AddMethods({
+            self: this,
+            methodsFrom: list,
+            wrap: Wrap,
+            fromWrapperData: ii => ii.toArray()
+        });
     }
 
     get value(): * {

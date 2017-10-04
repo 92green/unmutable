@@ -2,23 +2,38 @@
 import {fromJS, Map} from 'immutable';
 import CollectionTestDefinitions from './CollectionTestDefinitions-testUtil';
 
-var sampleObject: Object = {
-    a: 123,
-    b: {
-        x: 456,
-        y: 321
-    },
-    c: 789
-};
+export default function(test: Function, Wrap: Function, keyedTests: Array<Object>, libraryName: string) {
 
-var sampleObject2: Object = {
-    c: 1000,
-    b: {
-        y: 123123
-    }
-};
+    var sampleObject: Object = {
+        a: 123,
+        b: {
+            x: 456,
+            y: 321
+        },
+        c: 789
+    };
 
-export default function(test: Function, Wrap: Function, keyedTests: Array<Object>) {
+    var sampleObject2: Object = {
+        c: 1000,
+        b: {
+            y: 123123
+        }
+    };
+
+    var testDefinitions: Object = {
+        existingValue: 123,
+        itemAtKey: sampleObject.a,
+        itemAtKeyPath: sampleObject.b.x,
+        key: 'a',
+        keyPath: ['b', 'x'],
+        libraryName,
+        nonExistingKey: 'z',
+        nonExistingKeyPath: ['z', 'zz'],
+        nonExistingValue: 555,
+        only: keyedTests,
+        partiallyExistingKeyPath: ['b', 'z'],
+        sampleValue: 789
+    };
 
     //
     // Map tests
@@ -30,19 +45,9 @@ export default function(test: Function, Wrap: Function, keyedTests: Array<Object
     });
 
     CollectionTestDefinitions({
-        existingValue: 123,
+        ...testDefinitions,
         item: fromJS(sampleObject),
-        itemAlternative: fromJS(sampleObject2),
-        itemAtKey: sampleObject.a,
-        itemAtKeyPath: sampleObject.b.x,
-        key: 'a',
-        keyPath: ['b', 'x'],
-        nonExistingKey: 'z',
-        nonExistingKeyPath: ['z', 'zz'],
-        nonExistingValue: 555,
-        only: keyedTests,
-        partiallyExistingKeyPath: ['b', 'z'],
-        sampleValue: 789
+        itemAlternative: fromJS(sampleObject2)
     })
         .forEach((testConfig: Object) => {
             var {
@@ -81,19 +86,9 @@ export default function(test: Function, Wrap: Function, keyedTests: Array<Object
     });
 
     CollectionTestDefinitions({
-        existingValue: 123,
+        ...testDefinitions,
         item: sampleObject,
-        itemAlternative: sampleObject2,
-        itemAtKey: sampleObject.a,
-        itemAtKeyPath: sampleObject.b.x,
-        key: 'a',
-        keyPath: ['b', 'x'],
-        nonExistingKey: 'z',
-        nonExistingKeyPath: ['z', 'zz'],
-        nonExistingValue: 555,
-        only: keyedTests,
-        partiallyExistingKeyPath: ['b', 'z'],
-        sampleValue: 789
+        itemAlternative: sampleObject2
     })
         .forEach((testConfig: Object) => {
             var {

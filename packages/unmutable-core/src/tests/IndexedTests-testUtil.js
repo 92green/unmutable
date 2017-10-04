@@ -1,8 +1,8 @@
 // @flow
-import {fromJS, List, is} from 'immutable';
+import {fromJS, List} from 'immutable';
 import CollectionTestDefinitions from './CollectionTestDefinitions-testUtil';
 
-export default function(test: Function, Wrap: Function, indexedTests: Array<Object>) {
+export default function(test: Function, Wrap: Function, indexedTests: Array<Object>, libraryName: string) {
 
     var sampleArray: Array<*> = [
         70,
@@ -29,9 +29,11 @@ export default function(test: Function, Wrap: Function, indexedTests: Array<Obje
         item: fromJS(sampleArray),
         itemAlternative: fromJS(sampleArray2),
         itemAtKey: sampleArray[1],
+        // $FlowFixMe: Flow doesnt know that this is safe
         itemAtKeyPath: sampleArray[2][1],
         key: 1,
         keyPath: [2,1],
+        libraryName,
         negativeKey: -3,
         nonExistingKey: 3,
         nonExistingKeyPath: [5,2],
@@ -82,9 +84,11 @@ export default function(test: Function, Wrap: Function, indexedTests: Array<Obje
         item: sampleArray,
         itemAlternative: sampleArray2,
         itemAtKey: sampleArray[1],
+        // $FlowFixMe: Flow doesnt know that this is safe
         itemAtKeyPath: sampleArray[2][1],
         key: 1,
         keyPath: [2,1],
+        libraryName,
         negativeKey: -3,
         nonExistingKey: 3,
         nonExistingKeyPath: [5,2],

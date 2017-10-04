@@ -12,6 +12,7 @@ export default function(config: Object): Array<Object> {
         itemAlternative,
         itemAtKey,
         itemAtKeyPath,
+        libraryName,
         key,
         keyPath,
         nonExistingKey,
@@ -476,7 +477,13 @@ export default function(config: Object): Array<Object> {
             method: "setIn",
             args: () => [nonExistingKeyPath, sampleValue],
             returnType: "self",
-            deep: true
+            deep: true,
+            disable: {
+                unmutableLite: true
+                // unmutable-lite cannot mimic immutbales behaviour of creating Maps
+                // during setIn() where items in a key path do not exist
+                // because it has no knowledge of List or Map constructors
+            }
         },
         {
             desc: "setIn empty keyPath",
@@ -684,94 +691,111 @@ export default function(config: Object): Array<Object> {
             ],
             returnType: "self",
             callbackTests: 2
+        },
+        {
+            desc: "updateIn keyPath",
+            method: "updateIn",
+            args: (tt) => [
+                keyPath,
+                (wrappedValue: *): * => {
+                    tt && tt.true(IsUnmutable(wrappedValue), "wrappedValue should be in an unmutable wrapper");
+                    tt && tt.is(wrappedValue.value, itemAtKeyPath, "wrappedValue should contain item at key path");
+                    return Unwrap(wrappedValue) + 100;
+                }
+            ],
+            returnType: "self",
+            callbackTests: 2,
+            deep: true
+        },
+        {
+            desc: "updateIn non-existing keyPath",
+            method: "updateIn",
+            args: (tt) => [
+                nonExistingKeyPath,
+                (wrappedValue: *): * => {
+                    tt && tt.true(IsUnmutable(wrappedValue), "wrappedValue should be in an unmutable wrapper");
+                    tt && tt.is(wrappedValue.value, undefined, "wrappedValue should contain notsetvalue");
+                    return "?";
+                }
+            ],
+            returnType: "self",
+            deep: true,
+            callbackTests: 2,
+            disable: {
+                unmutableLite: true
+                // unmutable-lite cannot mimic immutbales behaviour of creating Maps
+                // during updateIn() where items in a key path do not exist
+                // because it has no knowledge of List or Map constructors
+            }
+        },
+        {
+            desc: "updateIn non-existing keyPath with notSetValue",
+            method: "updateIn",
+            args: (tt) => [
+                nonExistingKeyPath,
+                sampleValue,
+                (wrappedValue: *): * => {
+                    tt && tt.true(IsUnmutable(wrappedValue), "wrappedValue should be in an unmutable wrapper");
+                    tt && tt.is(wrappedValue.value, sampleValue, "wrappedValue should contain notsetvalue");
+                    return "?";
+                }
+            ],
+            returnType: "self",
+            deep: true,
+            callbackTests: 2,
+            disable: {
+                unmutableLite: true
+                // unmutable-lite cannot mimic immutbales behaviour of creating Maps
+                // during updateIn() where items in a key path do not exist
+                // because it has no knowledge of List or Map constructors
+            }
+        },
+        {
+            desc: "updateIn partially existing keyPath",
+            method: "updateIn",
+            args: (tt) => [
+                partiallyExistingKeyPath,
+                sampleValue,
+                (wrappedValue: *): * => {
+                    tt && tt.true(IsUnmutable(wrappedValue), "wrappedValue should be in an unmutable wrapper");
+                    tt && tt.is(wrappedValue.value, sampleValue, "wrappedValue should contain notsetvalue");
+                    return "?";
+                }
+            ],
+            returnType: "self",
+            deep: true,
+            callbackTests: 2,
+            disable: {
+                unmutableLite: true
+                // unmutable-lite cannot mimic immutbales behaviour of creating Maps
+                // during updateIn() where items in a key path do not exist
+                // because it has no knowledge of List or Map constructors
+            }
+        },
+        {
+            desc: "updateIn empty keyPath",
+            method: "updateIn",
+            args: (tt) => [
+                emptyKeyPath,
+                (wrappedValue: *): * => {
+                    tt && tt.true(IsUnmutable(wrappedValue), "wrappedValue should be in an unmutable wrapper");
+                    tt && tt.deepEqual(wrappedValue.value, item, "wrappedValue should contain original item");
+                    return "?";
+                }
+            ],
+            returnType: "wrapped",
+            deep: true,
+            shouldReturnSelf: true,
+            callbackTests: 2
         }
-        // {
-        //     desc: "updateIn keyPath",
-        //     method: "updateIn",
-        //     args: (tt) => [
-        //         keyPath,
-        //         (wrappedValue: *): * => {
-        //             tt && tt.true(IsUnmutable(wrappedValue), "wrappedValue should be in an unmutable wrapper");
-        //             tt && tt.is(wrappedValue.value, itemAtKeyPath, "wrappedValue should contain item at key path");
-        //             return Unwrap(wrappedValue) + 100;
-        //         }
-        //     ],
-        //     returnType: "wrapped",
-        //     callbackTests: 2,
-        //     deep: true
-        // }
-        // {
-        //     desc: "updateIn non-existing keyPath",
-        //     method: "updateIn",
-        //     args: (tt) => [
-        //         nonExistingKeyPath,
-        //         (wrappedValue) => {
-        //             tt && tt.true(IsUnmutable(wrappedValue), "wrappedValue should be in an unmutable wrapper");
-        //             tt && tt.is(wrappedValue.value, sampleValue, "wrappedValue should contain notsetvalue");
-        //             return ii => ii;
-        //         }
-        //     ],
-        //     returnType: "self",
-        //     deep: true,
-        //     shouldReturnSelf: true,
-        //     callbackTests: 2
-        // },
-        // {
-        //     desc: "updateIn non-existing keyPath with notSetValue",
-        //     method: "updateIn",
-        //     args: (tt) => [
-        //         nonExistingKeyPath,
-        //         sampleValue,
-        //         (wrappedValue) => {
-        //             tt && tt.true(IsUnmutable(wrappedValue), "wrappedValue should be in an unmutable wrapper");
-        //             tt && tt.is(wrappedValue.value, sampleValue, "wrappedValue should contain notsetvalue");
-        //             return ii => ii;
-        //         }
-        //     ],
-        //     returnType: "self",
-        //     deep: true,
-        //     shouldReturnSelf: true,
-        //     callbackTests: 2
-        // },
-        // {
-        //     desc: "updateIn partially existing keyPath",
-        //     method: "updateIn",
-        //     args: (tt) => [
-        //         partiallyExistingKeyPath,
-        //         sampleValue,
-        //         (wrappedValue) => {
-        //             tt && tt.true(IsUnmutable(wrappedValue), "wrappedValue should be in an unmutable wrapper");
-        //             tt && tt.is(wrappedValue.value, sampleValue, "wrappedValue should contain notsetvalue");
-        //             return ii => ii;
-        //         }
-        //     ],
-        //     returnType: "self",
-        //     deep: true,
-        //     shouldReturnSelf: true,
-        //     callbackTests: 2
-        // },
-        // {
-        //     desc: "updateIn empty keyPath",
-        //     method: "updateIn",
-        //     args: (tt) => [
-        //         emptyKeyPath,
-        //         (wrappedValue) => {
-        //             tt && tt.true(IsUnmutable(wrappedValue), "wrappedValue should be in an unmutable wrapper");
-        //             tt && tt.is(wrappedValue.value, sampleValue, "wrappedValue should contain notsetvalue");
-        //             return ii => ii;
-        //         }
-        //     ],
-        //     returnType: "self",
-        //     deep: true,
-        //     shouldReturnSelf: true,
-        //     callbackTests: 2
-        // }
 
         // flatMap
         // groupBy
     ];
 
-    tests = tests.filter((ii: Object) => !ii.hasOwnProperty('doWhen') || ii.doWhen);
+    tests = tests
+        .filter((ii: Object) => !ii.hasOwnProperty('doWhen') || ii.doWhen)
+        .filter((ii: Object) => !ii.hasOwnProperty('disable') || !ii.disable[libraryName]);
 
     if(only) {
         tests = only.reduce((filteredTests: Array<Object>, methodName: string): Array<Object> => {

@@ -6,7 +6,11 @@ import Wrap from './Wrap';
 export default class UnmutableListWrapper extends UnmutableWrapper {
     constructor(item: *) {
         super(item);
-        AddMethods(this, item, Wrap);
+        AddMethods({
+            self: this,
+            methodsFrom: item,
+            wrap: Wrap
+        });
     }
 
     get size(): number {

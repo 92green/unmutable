@@ -4,10 +4,20 @@ import CompositeMethods from './CompositeMethods';
 import Unwrap from './Unwrap';
 const {deleteIn, getIn, hasIn, setIn, updateIn} = CompositeMethods;
 
-const iterate = (method: Function, Wrap: Function, self: Object): Function => (iterate: Function): Function => {
+type FnParams = {
+    method: Function,
+    additionalMethods: Array<string>,
+    methodsFrom: Object,
+    wrap: Function,
+    self: Object,
+    fromWrapperData: Function,
+    toWrapperData: Function
+};
+
+const iterate = ({method, wrap, self}: FnParams): Function => (iterate: Function): * => {
     return method(
         (value, key) => Unwrap(
-            iterate(Wrap(value), key, self)
+            iterate(wrap(value), key, self)
         )
     );
 };
@@ -29,10 +39,10 @@ const methods: Object = {
         returnType: "self"
     },
     deleteIn: {
-        fn: (method: Function, Wrap: Function, self: Object): Function => (keyPath: Array<*>): Function => {
-            return deleteIn(self, Wrap)(keyPath);
+        fn: ({wrap, self}: FnParams): Function => (keyPath: Array<*>): * => {
+            return deleteIn(self, wrap)(keyPath);
         },
-        returnType: (...args) => args[0].length === 0 ? "wrapped" : "self"
+        returnType: (...args) => args[0].length === 0 ? "wrapped" : "plain"
     },
     every: {
         fn: iterate,
@@ -56,8 +66,8 @@ const methods: Object = {
         returnType: "wrapped"
     },
     getIn: {
-        fn: (method: Function, Wrap: Function, self: Object): Function => (keyPath: Array<*>, notSetValue: * = undefined): Function => {
-            return getIn(self, Wrap)(keyPath, notSetValue);
+        fn: ({wrap, self}: FnParams): Function => (keyPath: Array<*>, notSetValue: * = undefined): * => {
+            return getIn(self, wrap)(keyPath, notSetValue);
         },
         returnType: "wrapped"
     },
@@ -65,8 +75,8 @@ const methods: Object = {
         returnType: "plain"
     },
     hasIn: {
-        fn: (method: Function, Wrap: Function, self: Object): Function => (keyPath: Array<*>): Function => {
-            return hasIn(self, Wrap)(keyPath);
+        fn: ({wrap, self}: FnParams): Function => (keyPath: Array<*>): * => {
+            return hasIn(self, wrap)(keyPath);
         },
         returnType: "plain"
     },
@@ -111,10 +121,10 @@ const methods: Object = {
         returnType: "self"
     },
     reduce: {
-        fn: (method: Function, Wrap: Function, self: Object): Function => (iterate: Function, initialReduction: *): Function => {
+        fn: ({method, wrap, self}: FnParams): Function => (iterate: Function, initialReduction: *): * => {
             return method(
                 (reduction, value, key) => Unwrap(
-                    iterate(reduction, Wrap(value), key, self)
+                    iterate(reduction, wrap(value), key, self)
                 ),
                 initialReduction
             );
@@ -122,10 +132,10 @@ const methods: Object = {
         returnType: "wrapped"
     },
     reduceRight: {
-        fn: (method: Function, Wrap: Function, self: Object): Function => (iterate: Function, initialReduction: *): Function => {
+        fn: ({method, wrap, self}: FnParams): Function => (iterate: Function, initialReduction: *): * => {
             return method(
                 (reduction, value, key) => Unwrap(
-                    iterate(reduction, Wrap(value), key, self)
+                    iterate(reduction, wrap(value), key, self)
                 ),
                 initialReduction
             );
@@ -142,18 +152,10 @@ const methods: Object = {
         returnType: "self"
     },
     setIn: {
-        fn: (method: Function, Wrap: Function, self: Object): Function => (...args: *): Function => {
-            let arities = [
-                (keyPath: Array<string>, value: *): * => {
-                    return setIn(self, Wrap)(keyPath, value);
-                },
-                (keyPath: Array<string>, notSetValue: *, value: *): * => {
-                    return setIn(self, Wrap)(keyPath, notSetValue, value);
-                }
-            ];
-            return arities[args.length - 2](...args);
+        fn: ({wrap, self, toWrapperData}: FnParams): Function => (keyPath: Array<string>, value: *): * => {
+            return setIn(self, wrap)(keyPath, value, () => toWrapperData({}));
         },
-        returnType: "self"
+        returnType: "plain"
     },
     shift: {
         returnType: "self"
@@ -199,22 +201,22 @@ const methods: Object = {
         returnType: "self"
     },
     update: {
-        fn: (method: Function, Wrap: Function, self: Object): Function => (...args: *): Function => {
+        fn: ({method, wrap, self}: FnParams): Function => (...args: *): * => {
             let arities = [
                 (updater: Function): * => {
-                    return Wrap(updater(self));
+                    return wrap(updater(self));
                 },
                 (key: string, updater: Function): * => {
                     return method(
                         key,
-                        (value) => Unwrap(updater(Wrap(value)))
+                        (value) => Unwrap(updater(wrap(value)))
                     );
                 },
                 (key: string, notSetValue: *, updater: Function): * => {
                     return method(
                         key,
                         notSetValue,
-                        (value) => Unwrap(updater(Wrap(value)))
+                        (value) => Unwrap(updater(wrap(value)))
                     );
                 }
             ];
@@ -223,39 +225,33 @@ const methods: Object = {
         returnType: (...args) => args.length === 1 ? "wrapped" : "self"
     },
     updateIn: {
-        fn: (method: Function, Wrap: Function, self: Object): Function => (...args: *): Function => {
+        fn: ({self, wrap, toWrapperData}: FnParams): Function => (...args: *): * => {
             let arities = [
                 (keyPath: Array<string>, updater: Function): * => {
-
-
-        // _this.deleteIn = deleteIn(_this, Wrap);
-        // _this.hasIn = hasIn(_this, Wrap);
-        // _this.getIn = getIn(_this, Wrap);
-        // _this.setIn = setIn(_this, Wrap);
-        // _this.updateIn = updateIn(_this, Wrap);
-
-
-                    return method(
-                        keyPath,
-                        (value) => Unwrap(updater(Wrap(value)))
-                    );
+                    return updateIn(self, wrap)(keyPath, undefined, (value) => Unwrap(updater(wrap(value))), () => toWrapperData({}));
                 },
                 (keyPath: Array<string>, notSetValue: *, updater: Function): * => {
-                    return method(
-                        keyPath,
-                        notSetValue,
-                        (value) => Unwrap(updater(Wrap(value)))
-                    );
+                    return updateIn(self, wrap)(keyPath, notSetValue, (value) => Unwrap(updater(wrap(value))), () => toWrapperData({}));
                 }
             ];
             return arities[args.length - 2](...args);
         },
-        returnType: (...args) => args[0].length === 0 ? "wrapped" : "self"
+        returnType: (...args) => args[0].length === 0 ? "wrapped" : "plain"
     }
 };
 
-export default function AddMethods(self: Object, methodsFrom: Object, Wrap: Function, selfTransform: Function = (ii) => ii) {
+export default function AddMethods(args: FnParams) {
+    const {
+        self,
+        methodsFrom,
+        additionalMethods = [],
+        wrap,
+        fromWrapperData = (ii) => ii,
+        toWrapperData = (ii) => ii
+    } = args;
+
     ListMethodNames(methodsFrom)
+        .concat(additionalMethods)
         .forEach((name: string) => {
             if(!methods[name]) {
                 return;
@@ -263,9 +259,19 @@ export default function AddMethods(self: Object, methodsFrom: Object, Wrap: Func
 
             let {returnType} = methods[name];
 
-            let method = methodsFrom[name].bind(methodsFrom);
+            let method;
+            if(typeof methodsFrom[name] == "function") {
+                method = methodsFrom[name].bind(methodsFrom);
+            }
+
             if(methods[name].fn) {
-                method = methods[name].fn(method, Wrap, self);
+                method = methods[name].fn({
+                    method,
+                    wrap,
+                    self,
+                    fromWrapperData,
+                    toWrapperData
+                });
             }
 
             self[name] = (...args: *): UnmutableWrapper => {
@@ -278,9 +284,9 @@ export default function AddMethods(self: Object, methodsFrom: Object, Wrap: Func
                     return result;
                 }
                 if(returnType === "self") {
-                    result = selfTransform(result);
+                    result = fromWrapperData(result);
                 }
-                return Wrap(result);
+                return wrap(result);
             };
         });
 }

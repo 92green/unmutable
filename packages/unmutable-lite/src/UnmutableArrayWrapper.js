@@ -2,7 +2,7 @@
 import UnmutableWrapper from './UnmutableWrapper';
 import Wrap from './Wrap';
 import {AddMethods, CompositeMethods} from 'unmutable-core';
-const {deleteIn, getIn, hasIn, setIn, update, updateIn} = CompositeMethods;
+const {update} = CompositeMethods;
 
 export default class UnmutableArrayWrapper extends UnmutableWrapper {
 
@@ -51,17 +51,21 @@ export default class UnmutableArrayWrapper extends UnmutableWrapper {
         _this.take = (amount: number): Array<*> => item.slice(0, amount);
         _this.takeLast = (amount: number): Array<*> => item.slice(-amount);
         _this.unshift = (value: *): Array<*> => [value, ...item];
-
-        // define composite methods
         _this.update = update(_this, Wrap);
-        _this.deleteIn = () => {};
-        _this.hasIn = () => {};
-        _this.getIn = () => {};
-        _this.setIn = () => {};
-        _this.updateIn = () => {};
 
         // prepare methods
-        AddMethods(this, this, Wrap);
+        AddMethods({
+            self: this,
+            methodsFrom: this,
+            wrap: Wrap,
+            additionalMethods: [
+                "deleteIn",
+                "hasIn",
+                "getIn",
+                "setIn",
+                "updateIn"
+            ]
+        });
     }
 
     get size(): number {

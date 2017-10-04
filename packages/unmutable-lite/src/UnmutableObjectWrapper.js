@@ -2,7 +2,7 @@
 import UnmutableWrapper from './UnmutableWrapper';
 import Wrap from './Wrap';
 import {AddMethods, CompositeMethods} from 'unmutable-core';
-const {deleteIn, getIn, hasIn, setIn, update, updateIn} = CompositeMethods;
+const {update} = CompositeMethods;
 
 export default class UnmutableObjectWrapper extends UnmutableWrapper {
     constructor(item: Object) {
@@ -42,17 +42,21 @@ export default class UnmutableObjectWrapper extends UnmutableWrapper {
             return Object.keys(item).reverse().reduce((reduction, key) => mapper(reduction, item[key], key, item), initialReduction);
         };
         _this.set = (key: *, value: *): Object => ({...item, [key]: value});
-
-        // define composite methods
         _this.update = update(_this, Wrap);
-        _this.deleteIn = () => {};
-        _this.hasIn = () => {};
-        _this.getIn = () => {};
-        _this.setIn = () => {};
-        _this.updateIn = () => {};
 
         // prepare methods
-        AddMethods(this, this, Wrap);
+        AddMethods({
+            self: this,
+            methodsFrom: this,
+            wrap: Wrap,
+            additionalMethods: [
+                "deleteIn",
+                "hasIn",
+                "getIn",
+                "setIn",
+                "updateIn"
+            ]
+        });
 
     }
 

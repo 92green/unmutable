@@ -1,4 +1,5 @@
 // @flow
+import {Map} from 'immutable';
 import UnmutableWrapper from './UnmutableWrapper';
 import {AddMethods} from 'unmutable-core';
 import Wrap from './Wrap';
@@ -6,7 +7,12 @@ import Wrap from './Wrap';
 export default class UnmutableListWrapper extends UnmutableWrapper {
     constructor(item: *) {
         super(item);
-        AddMethods(this, item, Wrap);
+        AddMethods({
+            self: this,
+            methodsFrom: item,
+            wrap: Wrap,
+            toWrapperData: Map
+        });
     }
 
     get size(): number {

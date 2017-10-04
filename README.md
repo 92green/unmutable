@@ -44,7 +44,7 @@ npm install immutable && npm install unmutable
 
 ### unmutable-lite
 
-Unmutable-lite is a standalone library that allows you to use a subset of Immutable.js' methods on objects and arrays, and on Immutable.js collections. Use this if you like using Immutable.js' simpler methods but don't want the Immutable.js dependency.
+Unmutable-lite is a standalone library that allows you to use a subset of Immutable.js' methods on objects and arrays, and on Immutable.js collections. Use this if you like Immutable.js' API sbut don't want the Immutable.js dependency.
 
 Refer to the [Methods](#Methods) section to see which methods you can use on Unmutable-lite collections.
 
@@ -130,6 +130,7 @@ Wrap([
 ```
 
 These methods don't care if the returned value is wrapped or not.
+
 ```
 Wrap(["1","2","3"]).map(ii => ii); // returns Wrap(["1","2","3"])
 
