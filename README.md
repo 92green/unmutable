@@ -129,7 +129,7 @@ Wrap([
 
 ```
 
-These methods don't care if the returned value is wrapped or not.
+It makes no difference if the value returned from a function parameter is wrapped or not, unmutable works with either.
 
 ```
 Wrap(["1","2","3"]).map(ii => ii); // returns Wrap(["1","2","3"])
