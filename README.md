@@ -44,7 +44,7 @@ npm install immutable && npm install unmutable
 
 ### unmutable-lite
 
-Unmutable-lite is a standalone library that allows you to use a subset of Immutable.js' methods on objects and arrays, and on Immutable.js collections. Use this if you like Immutable.js' API sbut don't want the Immutable.js dependency.
+Unmutable-lite is a standalone library that allows you to use a subset of Immutable.js' methods on objects and arrays, and on Immutable.js collections. Use this if you like Immutable.js' API but don't want the Immutable.js dependency.
 
 Refer to the [Methods](#Methods) section to see which methods you can use on Unmutable-lite collections.
 
