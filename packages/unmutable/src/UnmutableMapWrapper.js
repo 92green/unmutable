@@ -1,10 +1,18 @@
 // @flow
+import {Map} from 'immutable';
 import UnmutableWrapper from './UnmutableWrapper';
+import Wrap from './Wrap';
+import {AddMethods} from 'unmutable-core';
 
 export default class UnmutableMapWrapper extends UnmutableWrapper {
     constructor(item: *) {
         super(item);
-        this._addMethods(item);
+        AddMethods({
+            self: this,
+            methodsFrom: item,
+            wrap: Wrap,
+            toWrapperData: Map
+        });
     }
 
     get size(): number {

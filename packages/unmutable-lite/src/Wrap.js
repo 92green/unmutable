@@ -1,6 +1,6 @@
 // @flow
 import {isMap, isList} from './ImmutablePredicates';
-import {IsKeyed} from 'unmutable-core';
+import {IsKeyed, IsUnmutable} from 'unmutable-core';
 
 import UnmutableWrapper from './UnmutableWrapper';
 import UnmutableMapWrapper from './UnmutableMapWrapper';
@@ -9,6 +9,9 @@ import UnmutableObjectWrapper from './UnmutableObjectWrapper';
 import UnmutableArrayWrapper from './UnmutableArrayWrapper';
 
 export default function Wrap(item: *, options: Options = {}): UnmutableWrapperType {
+    if(IsUnmutable(item)) {
+        return item;
+    }
     if(isMap(item)) {
         return new UnmutableMapWrapper(item, options);
     }

@@ -1,35 +1,12 @@
 // @flow
-import {ListMethodNames} from 'unmutable-core';
-import Wrap from './Wrap';
-
 export default class UnmutableWrapper {
 
     __item: *;
+    __isUnmutable: boolean;
 
     constructor(item: *) {
         this.__item = item;
-    }
-
-    _addMethods(obj: *, methodConstructors: ?Object = null) {
-        var _this = (this: any);
-
-        // copy methods if applicable
-        ListMethodNames(obj)
-            .forEach((name: string) => {
-                const constructor = methodConstructors
-                    ? methodConstructors[name]
-                    : Wrap;
-
-                if(!constructor) {
-                    return;
-                }
-
-                let method = obj[name];
-                _this[name] = (...args: *): UnmutableWrapper => {
-                    const result = method.bind(obj)(...args);
-                    return constructor(result);
-                };
-            });
+        this.__isUnmutable = true;
     }
 
     get value(): * {

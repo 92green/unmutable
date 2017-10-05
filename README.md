@@ -2,7 +2,9 @@
 
 *Immutable.js functions for collections that may or may not be Immutable.*
 
-Immutable.js has a fantastic API, but sometimes you don't want to turn everything into Immutable collections. You may need to cope with data that might sometimes contain immutable collections and sometimes not. This project aims to bring that API over for use with plain objects and arrays as well as Immutable.js `Map` and `List` collections.
+Immutable.js has a fantastic API, but sometimes you don't want to turn everything into Immutable collections. Immutable is heavy on memory and slow with large nested data structures, and you may need to cope with data that might sometimes contain immutable collections and sometimes not.
+
+This project aims to bring that API over for use with plain objects and arrays, as well as Immutable.js `Map` and `List` collections. Unmutable also never mutates data, and unlike Immutable.js it constructs nested data objects **lazily**, so its memory footprint is much smaller than Immutable.js when using nested data sets.
 
 ### Quick example
 
@@ -17,7 +19,7 @@ var wrappedObject = Wrap({
     }
 })
 
-console.log(wrappedObject.getIn(['a', 'b'])value); // logs out "hi"
+console.log(wrappedObject.getIn(['a', 'b']).value); // logs out "hi"
 
 ```
 
@@ -44,7 +46,7 @@ npm install immutable && npm install unmutable
 
 ### unmutable-lite
 
-Unmutable-lite is a standalone library that allows you to use a subset of Immutable.js' methods on objects and arrays, and on Immutable.js collections. Use this if you like using Immutable.js' simpler methods but don't want the Immutable.js dependency.
+Unmutable-lite is a standalone library that allows you to use a subset of Immutable.js' methods on objects and arrays, and on Immutable.js collections. Use this if you like Immutable.js' API but don't want the Immutable.js dependency.
 
 Refer to the [Methods](#Methods) section to see which methods you can use on Unmutable-lite collections.
 
@@ -87,6 +89,12 @@ console.log(Wrap("string")value); // logs out "string"
 console.log(Wrap("string").isCollection()); // false
 ```
 
+## Helper functions
+
+Unmutable exports the following helper functions:
+- `IsUnmutable` - Pass it anything and it'll return a boolean, true if the passed item is an unmutable wrapper of some kind.
+- `Unwrap` - Unmutable wrappers passed into this will be unwrapped, everything else will just pass through unchanged.
+
 ## Methods
 
 All unmutable wrappers will have the following member variables and methods:
@@ -97,117 +105,153 @@ All unmutable wrappers will have the following member variables and methods:
 - `.isKeyed(): boolean` - Returns true if the wrapped data is an `Object` or `Map`, or false otherwise.
 - `.wrapperType(): string` - Returns the name of the unmutable wrapper type.
 
+Objects, Arrays, Lists and Maps will also have additional collection methods that mimic what Immutable.js' collections.
+
+Most methods return unmutable wrappers, except for those that ask questions about the contents of a collections (e.g. `has()`, `includes()` etc).
+
+```
+Wrap(["1","2","3"]).get(0); // returns an unmutable wrapper containing "1"
+
+Wrap(["1","2","3"]).includes("1"); // returns true
+```
+
+Methods that have function parameters like `map()` and `reduce()` are passed their values in unmutable wrappers. If the original iterable is also received, this is also wrapped. Keys are not wrapped.
+
+```
+Wrap([
+    {name: "tedd"},
+    {name: "todd"}
+])
+    .map((value, key, iter) => {
+        // value is an unmutable wrapper containing {name: "tedd"}, then {name: "todd"}
+        // key is the number 0, then 1
+        // iter is the original unmutable wrapper
+        return value.get("name");
+    });
+
+```
+
+It makes no difference if the value returned from a function parameter is wrapped or not, unmutable works with either.
+
+```
+Wrap(["1","2","3"]).map(ii => ii); // returns Wrap(["1","2","3"])
+
+Wrap(["1","2","3"]).map(ii => ii.value); // also returns Wrap(["1","2","3"])
+```
+
+### Method feature set
+
 Objects, Arrays, Lists and Maps will also have the following methods, depending on whether `unmutable` or `unmutable-lite` is being used. New methods will be added over time.
 
-| `unmutable` Object / Map | `unmutable` Array / List | `unmutable-lite` Object / Map | `unmutable-lite` Array / List |
-| --- | --- | --- | --- |
-| asImmutable | asImmutable | asImmutable | asImmutable |
-| asMutable | asMutable | asMutable | asMutable |
-| **butLast** ✔︎ | **butLast** ✔︎ | - | **butLast** ✔︎ |
-| **clear** ✔︎ | **clear** ✔︎ | **clear** ✔︎ | **clear** ✔︎ |
-| **concat** ✔︎ | **concat** ✔︎ | **concat** ✔︎ | **concat** ✔︎ |
-| **count** ✔︎ | **count** ✔︎ | **count** ✔︎ | **count** ✔︎ |
-| countBy | countBy | countBy | countBy |
-| **delete** ✔︎ | **delete** ✔︎ | **delete** ✔︎ | **delete** ✔︎ |
-| **deleteIn** ✔︎ | **deleteIn** ✔︎ | **deleteIn** ✔︎ | **deleteIn** ✔︎ |
-| entries | entries | entries | entries |
-| entrySeq | entrySeq | entrySeq | entrySeq |
-| equals | equals | equals | equals |
-| **every** ✔︎ | **every** ✔︎ | every | **every** ✔︎ |
-| **filter** ✔︎ | **filter** ✔︎ | filter | filter |
-| **filterNot** ✔︎ | **filterNot** ✔︎ | filterNot | filterNot |
-| find | find | find | find |
-| findEntry | findEntry | findEntry | findEntry |
-| - | findIndex | - | findIndex |
-| findKey | findKey | findKey | findKey |
-| findLast | findLast | findLast | findLast |
-| findLastEntry | findLastEntry | findLastEntry | findLastEntry |
-| findLastIndex | findLastIndex | findLastIndex | findLastIndex |
-| findLastKey | findLastKey | findLastKey | findLastKey |
-| **first** ✔︎ | **first** ✔︎ | - | **first** ✔︎ |
-| flatMap | flatMap | flatMap | flatMap |
-| flatten | flatten | flatten | flatten |
-| flip | - | flip | - |
-| forEach | forEach | forEach | forEach |
-|  - | fromEntrySeq | - | fromEntrySeq |
-| **get** ✔︎ | **get** ✔︎ | **get** ✔︎ | **get** ✔︎ |
-| **getIn** ✔︎ | **getIn** ✔︎ | **getIn** ✔︎ | **getIn** ✔︎ |
-| groupBy | groupBy | groupBy | groupBy |
-| **has** ✔︎ | **has** ✔︎ | **has** ✔︎ | **has** ✔︎ |
-| hashCode | hashCode | hashCode | hashCode |
-| **hasIn** ✔︎ | **hasIn** ✔︎ | **hasIn** ✔︎ | **hasIn** ✔︎ |
-| **includes** ✔︎ | **includes** ✔︎ | **includes** ✔︎ | **includes** ✔︎ |
-| - | indexOf | - | indexOf |
-| - | **insert** ✔︎ | - | insert |
-| - | **interleave** ✔︎ | - | interleave |
-| - | **interpose** ✔︎ | - | interpose |
-| **isEmpty** ✔︎ | **isEmpty** ✔︎ | **isEmpty** ✔︎ | **isEmpty** ✔︎ |
-| isSubset | isSubset | isSubset | isSubset |
-| isSuperset | isSuperset | isSuperset | isSuperset |
-| join | join | join | join |
-| keyOf | keyOf | keyOf | keyOf |
-| keys | keys | keys | keys |
-| keySeq | keySeq | keySeq | keySeq |
-| **last** ✔︎ | **last** ✔︎ | - | **last** ✔︎ |
-| - | lastIndexOf | - | lastIndexOf |
-| lastKeyOf | lastKeyOf | lastKeyOf | lastKeyOf |
-| **map** ✔︎ | **map** ✔︎ | map | map |
-| **mapEntries** ✔︎ | - | mapEntries | - |
-| max | max | max | max |
-| maxBy | maxBy | maxBy | maxBy |
-| **merge** ✔︎ | **merge** ✔︎ | merge | merge |
-| mergeDeep | mergeDeep | mergeDeep | mergeDeep |
-| mergeDeepIn | mergeDeepIn | mergeDeepIn | mergeDeepIn |
-| mergeDeepWith | mergeDeepWith | mergeDeepWith | mergeDeepWith |
-| mergeIn | mergeIn | mergeIn | mergeIn |
-| **mergeWith** ✔︎ | **mergeWith** ✔︎ | mergeWith | mergeWith |
-| min | min | min | min |
-| minBy | minBy | minBy | minBy |
-| - | **pop** ✔︎ | - | **pop** ✔︎ |
-| - | **push** ✔︎ | - | **push** ✔︎ |
-| reduce | reduce | reduce | reduce |
-| reduceRight | reduceRight | reduceRight | reduceRight |
-| **rest** ✔︎ | **rest** ✔︎ | - | **rest** ✔︎ |
-| **reverse** ✔︎ | **reverse** ✔︎ | - | **reverse** ✔︎ |
-| **set** ✔︎ | **set** ✔︎ | **set** ✔︎ | **set** ✔︎ |
-| **setIn** ✔︎ | **setIn** ✔︎ | **setIn** ✔︎ | **setIn** ✔︎ |
-| - | setSize | - | setSize |
-| - | **shift** ✔︎ | - | **shift** ✔︎ |
-| **skip** ✔︎ | **skip** ✔︎ | - | **skip** ✔︎ |
-| **skipLast** ✔︎ | **skipLast** ✔︎ | - | **skipLast** ✔︎ |
-| **skipUntil** ✔︎ | **skipUntil** ✔︎ | - | skipUntil |
-| **skipWhile** ✔︎ | **skipWhile** ✔︎ | - | skipWhile |
-| **slice** ✔︎ | **slice** ✔︎ | **slice** ✔︎ | **slice** ✔︎ |
-| **some** ✔︎ | **some** ✔︎ | some | **some** ✔︎ |
-| **sort** ✔︎ | **sort** ✔︎ | sort | sort |
-| **sortBy** ✔︎ | **sortBy** ✔︎ | sortBy | sortBy |
-| - | splice | - | splice |
-| **take** ✔︎ | **take** ✔︎ | - | **take** ✔︎ |
-| **takeLast** ✔︎ | **takeLast** ✔︎ | - | **takeLast** ✔︎ |
-| **takeUntil** ✔︎ | **takeUntil** ✔︎ | - | takeUntil |
-| **takeWhile** ✔︎ | **takeWhile** ✔︎ | - | takeWhile |
-| toArray | toArray | toArray | toArray |
-| toIndexedSeq | toIndexedSeq | toIndexedSeq | toIndexedSeq |
-| toJS | toJS | toJS | toJS |
-| toJSON | toJSON | toJSON | toJSON |
-| toKeyedSeq | toKeyedSeq | toKeyedSeq | toKeyedSeq |
-| toList | toList | toList | toList |
-| toMap | toMap | toMap | toMap |
-| toObject | toObject | toObject | toObject |
-| toOrderedMap | toOrderedMap | toOrderedMap | toOrderedMap |
-| toOrderedSet | toOrderedSet | toOrderedSet | toOrderedSet |
-| toSeq | toSeq | toSeq | toSeq |
-| toSet | toSet | toSet | toSet |
-| toSetSeq | toSetSeq | toSetSeq | toSetSeq |
-| toStack | toStack | toStack | toStack |
-| - | **unshift** ✔︎ | - | **unshift** ✔︎ |
-| **update** ✔︎ | **update** ✔︎ | **update** ✔︎ | **update** ✔︎ |
-| **updateIn** ✔︎ | **updateIn** ✔︎ | **updateIn** ✔︎ | **updateIn** ✔︎ |
-| values | values | values | values |
-| valueSeq | valueSeq | valueSeq | valueSeq |
-| withMutations | withMutations | withMutations | withMutations |
-| - | zip | - | zip |
-| - | zipWith | - | zipWith |
+| `unmutable` Object / Map | `unmutable` Array / List | `unmutable-lite` Object / Map | `unmutable-lite` Array / List | Notes |
+| --- | --- | --- | --- | --- |
+| asImmutable | asImmutable | asImmutable | asImmutable ||
+| asMutable | asMutable | asMutable | asMutable ||
+| **butLast** ✔︎ | **butLast** ✔︎ | - | **butLast** ✔︎ ||
+| **clear** ✔︎ | **clear** ✔︎ | **clear** ✔︎ | **clear** ✔︎ ||
+| **concat** ✔︎ | **concat** ✔︎ | **concat** ✔︎ | **concat** ✔︎ ||
+| **count** ✔︎ | **count** ✔︎ | **count** ✔︎ | **count** ✔︎ | Returns plain number |
+| countBy | countBy | countBy | countBy ||
+| **delete** ✔︎ | **delete** ✔︎ | **delete** ✔︎ | **delete** ✔︎ ||
+| **deleteIn** ✔︎ | **deleteIn** ✔︎ | **deleteIn** ✔︎ | **deleteIn** ✔︎ ||
+| entries | entries | entries | entries ||
+| entrySeq | entrySeq | entrySeq | entrySeq ||
+| equals | equals | equals | equals ||
+| **every** ✔︎ | **every** ✔︎ | every | **every** ✔︎ | Returns plain boolean |
+| **filter** ✔︎ | **filter** ✔︎ | filter | filter ||
+| **filterNot** ✔︎ | **filterNot** ✔︎ | filterNot | filterNot ||
+| find | find | find | find ||
+| findEntry | findEntry | findEntry | findEntry ||
+| - | findIndex | - | findIndex ||
+| findKey | findKey | findKey | findKey ||
+| findLast | findLast | findLast | findLast ||
+| findLastEntry | findLastEntry | findLastEntry | findLastEntry ||
+| findLastIndex | findLastIndex | findLastIndex | findLastIndex ||
+| findLastKey | findLastKey | findLastKey | findLastKey ||
+| **first** ✔︎ | **first** ✔︎ | - | **first** ✔︎ ||
+| flatMap | flatMap | flatMap | flatMap ||
+| flatten | flatten | flatten | flatten ||
+| flip | - | flip | - ||
+| forEach | forEach | forEach | forEach ||
+|  - | fromEntrySeq | - | fromEntrySeq ||
+| **get** ✔︎ | **get** ✔︎ | **get** ✔︎ | **get** ✔︎ ||
+| **getIn** ✔︎ | **getIn** ✔︎ | **getIn** ✔︎ | **getIn** ✔︎ ||
+| groupBy | groupBy | groupBy | groupBy ||
+| **has** ✔︎ | **has** ✔︎ | **has** ✔︎ | **has** ✔︎ | Returns plain boolean |
+| hashCode | hashCode | hashCode | hashCode ||
+| **hasIn** ✔︎ | **hasIn** ✔︎ | **hasIn** ✔︎ | **hasIn** ✔︎ | Returns plain boolean |
+| **includes** ✔︎ | **includes** ✔︎ | **includes** ✔︎ | **includes** ✔︎ | Returns plain boolean |
+| - | indexOf | - | indexOf ||
+| - | **insert** ✔︎ | - | insert ||
+| - | **interleave** ✔︎ | - | interleave ||
+| - | **interpose** ✔︎ | - | interpose ||
+| **isEmpty** ✔︎ | **isEmpty** ✔︎ | **isEmpty** ✔︎ | **isEmpty** ✔︎ ||
+| isSubset | isSubset | isSubset | isSubset ||
+| isSuperset | isSuperset | isSuperset | isSuperset ||
+| join | join | join | join ||
+| keyOf | keyOf | keyOf | keyOf ||
+| keys | keys | keys | keys ||
+| keySeq | keySeq | keySeq | keySeq ||
+| **last** ✔︎ | **last** ✔︎ | - | **last** ✔︎ ||
+| - | lastIndexOf | - | lastIndexOf ||
+| lastKeyOf | lastKeyOf | lastKeyOf | lastKeyOf ||
+| **map** ✔︎ | **map** ✔︎ | **map** ✔︎ | **map** ✔︎ ||
+| **mapEntries** ✔︎ | - | mapEntries | - ||
+| max | max | max | max ||
+| maxBy | maxBy | maxBy | maxBy ||
+| **merge** ✔︎ | **merge** ✔︎ | merge | merge ||
+| mergeDeep | mergeDeep | mergeDeep | mergeDeep ||
+| mergeDeepIn | mergeDeepIn | mergeDeepIn | mergeDeepIn ||
+| mergeDeepWith | mergeDeepWith | mergeDeepWith | mergeDeepWith ||
+| mergeIn | mergeIn | mergeIn | mergeIn ||
+| **mergeWith** ✔︎ | **mergeWith** ✔︎ | mergeWith | mergeWith ||
+| min | min | min | min ||
+| minBy | minBy | minBy | minBy ||
+| - | **pop** ✔︎ | - | **pop** ✔︎ ||
+| - | **push** ✔︎ | - | **push** ✔︎ ||
+| **reduce** ✔︎ | **reduce** ✔︎ | **reduce** ✔︎ | **reduce** ✔︎ ||
+| **reduceRight** ✔︎ | **reduceRight** ✔︎ | **reduceRight** ✔︎ | **reduceRight** ✔︎ ||
+| **rest** ✔︎ | **rest** ✔︎ | - | **rest** ✔︎ ||
+| **reverse** ✔︎ | **reverse** ✔︎ | - | **reverse** ✔︎ ||
+| **set** ✔︎ | **set** ✔︎ | **set** ✔︎ | **set** ✔︎ ||
+| **setIn** ✔︎ | **setIn** ✔︎ | **setIn** ✔︎ | **setIn** ✔︎ ||
+| - | setSize | - | setSize ||
+| - | **shift** ✔︎ | - | **shift** ✔︎ ||
+| **skip** ✔︎ | **skip** ✔︎ | - | **skip** ✔︎ ||
+| **skipLast** ✔︎ | **skipLast** ✔︎ | - | **skipLast** ✔︎ ||
+| **skipUntil** ✔︎ | **skipUntil** ✔︎ | - | skipUntil ||
+| **skipWhile** ✔︎ | **skipWhile** ✔︎ | - | skipWhile ||
+| **slice** ✔︎ | **slice** ✔︎ | **slice** ✔︎ | **slice** ✔︎ ||
+| **some** ✔︎ | **some** ✔︎ | some | **some** ✔︎ | Returns plain boolean |
+| **sort** ✔︎ | **sort** ✔︎ | sort | sort ||
+| **sortBy** ✔︎ | **sortBy** ✔︎ | sortBy | sortBy ||
+| - | splice | - | splice ||
+| **take** ✔︎ | **take** ✔︎ | - | **take** ✔︎ ||
+| **takeLast** ✔︎ | **takeLast** ✔︎ | - | **takeLast** ✔︎ ||
+| **takeUntil** ✔︎ | **takeUntil** ✔︎ | - | takeUntil ||
+| **takeWhile** ✔︎ | **takeWhile** ✔︎ | - | takeWhile ||
+| toArray | toArray | toArray | toArray ||
+| toIndexedSeq | toIndexedSeq | toIndexedSeq | toIndexedSeq ||
+| toJS | toJS | toJS | toJS ||
+| toJSON | toJSON | toJSON | toJSON ||
+| toKeyedSeq | toKeyedSeq | toKeyedSeq | toKeyedSeq ||
+| toList | toList | toList | toList ||
+| toMap | toMap | toMap | toMap ||
+| toObject | toObject | toObject | toObject ||
+| toOrderedMap | toOrderedMap | toOrderedMap | toOrderedMap ||
+| toOrderedSet | toOrderedSet | toOrderedSet | toOrderedSet ||
+| toSeq | toSeq | toSeq | toSeq ||
+| toSet | toSet | toSet | toSet ||
+| toSetSeq | toSetSeq | toSetSeq | toSetSeq ||
+| toStack | toStack | toStack | toStack ||
+| - | **unshift** ✔︎ | - | **unshift** ✔︎ ||
+| **update** ✔︎ | **update** ✔︎ | **update** ✔︎ | **update** ✔︎ ||
+| **updateIn** ✔︎ | **updateIn** ✔︎ | **updateIn** ✔︎ | **updateIn** ✔︎ ||
+| values | values | values | values ||
+| valueSeq | valueSeq | valueSeq | valueSeq ||
+| withMutations | withMutations | withMutations | withMutations ||
+| - | zip | - | zip ||
+| - | zipWith | - | zipWith ||
 
 
 

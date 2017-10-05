@@ -4,8 +4,8 @@ import {Wrap} from './index';
 import IndexedTests from 'unmutable-core/lib/tests/IndexedTests-testUtil';
 import KeyedTests from 'unmutable-core/lib/tests/KeyedTests-testUtil';
 import WrapTests from 'unmutable-core/lib/tests/WrapTests-testUtil';
-
-WrapTests(test, Wrap);
+import UnwrapTests from 'unmutable-core/lib/tests/UnwrapTests-testUtil';
+import IsUnmutableTests from 'unmutable-core/lib/tests/IsUnmutableTests-testUtil';
 
 var keyedTests: Array<string> = [
     "clear",
@@ -19,13 +19,14 @@ var keyedTests: Array<string> = [
     "hasIn",
     "includes",
     "isEmpty",
+    "map",
+    "reduce",
+    "reduceRight",
     "set",
     "setIn",
     "update",
     "updateIn"
 ];
-
-KeyedTests(test, Wrap, keyedTests);
 
 var indexedTests: Array<string> = [
     "butLast",
@@ -42,9 +43,12 @@ var indexedTests: Array<string> = [
     "hasIn",
     "includes",
     "isEmpty",
+    "map",
     "last",
     "push",
     "pop",
+    "reduce",
+    "reduceRight",
     "rest",
     "reverse",
     "set",
@@ -60,4 +64,8 @@ var indexedTests: Array<string> = [
     "updateIn"
 ];
 
-IndexedTests(test, Wrap, indexedTests);
+WrapTests(test, Wrap, "unmutableLite");
+UnwrapTests(test, Wrap, "unmutableLite");
+IsUnmutableTests(test, Wrap, "unmutableLite");
+KeyedTests(test, Wrap, keyedTests, "unmutableLite");
+IndexedTests(test, Wrap, indexedTests, "unmutableLite");

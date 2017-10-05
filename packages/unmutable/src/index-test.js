@@ -4,8 +4,8 @@ import {Wrap} from './index';
 import IndexedTests from 'unmutable-core/lib/tests/IndexedTests-testUtil';
 import KeyedTests from 'unmutable-core/lib/tests/KeyedTests-testUtil';
 import WrapTests from 'unmutable-core/lib/tests/WrapTests-testUtil';
-
-WrapTests(test, Wrap);
+import UnwrapTests from 'unmutable-core/lib/tests/UnwrapTests-testUtil';
+import IsUnmutableTests from 'unmutable-core/lib/tests/IsUnmutableTests-testUtil';
 
 var keyedTests: Array<string> = [
     //asImmutable
@@ -64,8 +64,8 @@ var keyedTests: Array<string> = [
     "mergeWith",
     //min
     //minBy
-    //reduce
-    //reduceRight
+    "reduce",
+    "reduceRight",
     "rest",
     "reverse",
     "set",
@@ -102,8 +102,6 @@ var keyedTests: Array<string> = [
     //valueSeq
     //withMutations
 ];
-
-KeyedTests(test, Wrap, keyedTests);
 
 var indexedTests: Array<string> = [
     //asImmutable
@@ -213,4 +211,8 @@ var indexedTests: Array<string> = [
     //zipWith
 ];
 
-IndexedTests(test, Wrap, indexedTests);
+WrapTests(test, Wrap, "unmutable");
+UnwrapTests(test, Wrap, "unmutable");
+IsUnmutableTests(test, Wrap, "unmutable");
+KeyedTests(test, Wrap, keyedTests, "unmutable");
+IndexedTests(test, Wrap, indexedTests, "unmutable");

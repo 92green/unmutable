@@ -65,9 +65,10 @@
     "exclude": [
       "packages/**/src/**/*-test.js",
       "packages/**/src/**/*-testUtil.js",
+      "packages/unmutable-core/src/AddMethods.js",
       "packages/unmutable-core/src/CompositeMethods.js",
-      "packages/unmutable-core/src/MethodReturnTypes.js",
-      "packages/unmutable-core/src/CreateMethodConstructors.js",
+      "packages/unmutable-core/src/IsUnmutable.js",
+      "packages/unmutable-core/src/Unwrap.js",
       "dist"
     ],
     "reporter": [

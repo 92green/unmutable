@@ -1,8 +1,8 @@
 // @flow
 import UnmutableWrapper from './UnmutableWrapper';
 import Wrap from './Wrap';
-import {CreateMethodConstructors, CompositeMethods} from 'unmutable-core';
-const {deleteIn, getIn, hasIn, setIn, update, updateIn} = CompositeMethods;
+import {AddMethods, CompositeMethods} from 'unmutable-core';
+const {update} = CompositeMethods;
 
 export default class UnmutableArrayWrapper extends UnmutableWrapper {
 
@@ -32,8 +32,11 @@ export default class UnmutableArrayWrapper extends UnmutableWrapper {
         _this.includes = (value: *): boolean => item.indexOf(value) !== -1;
         _this.isEmpty = (): boolean => item.size === 0;
         _this.last = (): * => item[item.length - 1];
+        _this.map = (mapper: Function): Array<*> => item.map(mapper);
         _this.push = (value: *): Array<*> => [...item, value];
         _this.pop = (): Array<*> => item.slice(0, -1);
+        _this.reduce = (mapper: Function, initialReduction: *): * => item.reduce(mapper, initialReduction);
+        _this.reduceRight = (mapper: Function, initialReduction: *): * => [...item].reverse().reduce(mapper, initialReduction);
         _this.rest = (): Array<*> => item.slice(1);
         _this.reverse = (): Array<*> => [...item].reverse();
         _this.set = (key: *, value: *): Array<*> => {
@@ -48,20 +51,21 @@ export default class UnmutableArrayWrapper extends UnmutableWrapper {
         _this.take = (amount: number): Array<*> => item.slice(0, amount);
         _this.takeLast = (amount: number): Array<*> => item.slice(-amount);
         _this.unshift = (value: *): Array<*> => [value, ...item];
-
-        // wrap shallow methods in constructors
-        this._addMethods(
-            this,
-            CreateMethodConstructors(Wrap, ii => new UnmutableArrayWrapper(ii))
-        );
-
-        // define composite methods
-        _this.deleteIn = deleteIn(_this, Wrap);
-        _this.hasIn = hasIn(_this, Wrap);
-        _this.getIn = getIn(_this, Wrap);
-        _this.setIn = setIn(_this, Wrap);
         _this.update = update(_this, Wrap);
-        _this.updateIn = updateIn(_this, Wrap);
+
+        // prepare methods
+        AddMethods({
+            self: this,
+            methodsFrom: this,
+            wrap: Wrap,
+            additionalMethods: [
+                "deleteIn",
+                "hasIn",
+                "getIn",
+                "setIn",
+                "updateIn"
+            ]
+        });
     }
 
     get size(): number {

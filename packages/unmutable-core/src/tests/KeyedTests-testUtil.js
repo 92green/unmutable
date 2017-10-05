@@ -1,84 +1,121 @@
 // @flow
-import {fromJS, Map, is} from 'immutable';
+import {fromJS, Map} from 'immutable';
 import CollectionTestDefinitions from './CollectionTestDefinitions-testUtil';
 
-var sampleObject: Object = {
-    a: 123,
-    b: {
-        x: 456,
-        y: 321
-    },
-    c: 789
-};
+export default function(test: Function, Wrap: Function, keyedTests: Array<Object>, libraryName: string) {
 
-var sampleObject2: Object = {
-    c: 1000,
-    b: {
-        y: 123123
-    }
-};
+    var sampleObject: Object = {
+        a: 123,
+        b: {
+            x: 456,
+            y: 321
+        },
+        c: 789
+    };
 
-export default function(test: Function, Wrap: Function, keyedTests: Array<Object>) {
+    var sampleObject2: Object = {
+        c: 1000,
+        b: {
+            y: 123123
+        }
+    };
+
+    var testDefinitions: Object = {
+        existingValue: 123,
+        itemAtKey: sampleObject.a,
+        itemAtKeyPath: sampleObject.b.x,
+        key: 'a',
+        keyPath: ['b', 'x'],
+        libraryName,
+        nonExistingKey: 'z',
+        nonExistingKeyPath: ['z', 'zz'],
+        nonExistingValue: 555,
+        only: keyedTests,
+        partiallyExistingKeyPath: ['b', 'z'],
+        sampleValue: 789
+    };
+
+    //
+    // Map tests
+    //
 
     test('Wrapped Maps have a size', (tt: *) => {
         var map: Map<string,*> = fromJS(sampleObject);
         tt.is(Wrap(map).size, map.size, 'size returns correct size');
     });
 
-    var objectMapTestConfig: Object = {
-        only: keyedTests,
-        item: sampleObject,
-        itemAlternative: sampleObject2,
-        sampleValue: 789,
-        existingValue: 123,
-        nonExistingValue: 555,
-        key: 'a',
-        keyPath: ['b', 'x'],
-        nonExistingKey: 'z',
-        partiallyExistingKeyPath: ['b', 'z'],
-        nonExistingKeyPath: ['z', 'zz']
-    };
+    CollectionTestDefinitions({
+        ...testDefinitions,
+        item: fromJS(sampleObject),
+        itemAlternative: fromJS(sampleObject2)
+    })
+        .forEach((testConfig: Object) => {
+            var {
+                args,
+                callbackTests = 0,
+                desc,
+                item,
+                method,
+                returnType
+            } = testConfig;
 
-    CollectionTestDefinitions(objectMapTestConfig)
-        .forEach(({desc, method, args}: Object) => {
-            test(`"Map.${method}" should ${desc}. Args: ${JSON.stringify(args)}`, (tt: *) => {
-                var map: Map<string,*> = fromJS(sampleObject);
-                // $FlowFixMe: Flow doesnt know how to deal with calling computed properties
-                var immutableResult = map[method](...args);
-                var unmutableMethod = Wrap(map)[method];
+            test(`"Map.${method}" should ${desc}. Args: ${JSON.stringify(args())}`, (tt: *) => {
+                tt.plan(1 + callbackTests);
+
+                var immutableResult = item[method](...args());
+                var unmutableMethod = Wrap(item)[method];
                 if(!unmutableMethod) {
-                    throw new Error(`${Wrap(map).wrapperType()}.${method}" does not exist`);
+                    throw new Error(`${Wrap(item).wrapperType()}.${method}" does not exist`);
                 }
-                var unmutableResult = unmutableMethod(...args).value;
-                tt.true(is(unmutableResult, immutableResult));
+
+                var unmutableResult = unmutableMethod(...args(tt));
+                if(returnType !== "plain") {
+                    unmutableResult = unmutableResult.value;
+                }
+
+                tt.deepEqual(immutableResult, unmutableResult);
             });
         });
+
+    //
+    // Object tests
+    //
 
     test('Objects have a size', (tt: *) => {
         tt.is(Wrap(sampleObject).size, Map(sampleObject).size, 'size returns correct size');
     });
 
-    CollectionTestDefinitions(objectMapTestConfig)
+    CollectionTestDefinitions({
+        ...testDefinitions,
+        item: sampleObject,
+        itemAlternative: sampleObject2
+    })
         .forEach((testConfig: Object) => {
             var {
-                item,
-                desc,
-                method,
                 args,
+                callbackTests = 0,
+                deep = false,
+                desc,
+                item,
+                method,
                 returnType,
-                // "self" if the thing being returned is a modified version of the original thing
-                // "wrapped" if the thing being returned is to be in an unmutable-lite wrapper
-                // "plain" if the thing being returned is just the value (for 'status' methods like .has())
-                deep = false, // true if we're testing a deep method,
+                shouldBeImmutable = true,
                 shouldReturnSelf = false
             } = testConfig;
 
-            test(`"Object.${method}" should ${desc}. Args: ${JSON.stringify(args)}`, (tt: *) => {
+            // returnType: "self" if the thing being returned is a modified version of the original thing
+            // returnType: "wrapped" if the thing being returned is to be in an unmutable-lite wrapper
+            // returnType: "plain" if the thing being returned is just the value (for 'status' methods like .has())
+
+            test(`"Object.${method}" should ${desc}. Args: ${JSON.stringify(args())}`, (tt: *) => {
+
+                let testForImmutability = !shouldReturnSelf && returnType === "self" && shouldBeImmutable;
+                tt.plan(1 + callbackTests + (testForImmutability ? 1 : 0));
 
                 var collection = deep ? fromJS(item) : Map(item);
 
                 // $FlowFixMe: Flow doesnt know how to deal with calling computed properties
-                var mapResult = collection[method](...args);
+                var mapResult = collection[method](...args());
 
                 if(returnType === "self") {
                     mapResult = deep ? mapResult.toJS() : mapResult.toObject();
@@ -88,15 +125,15 @@ export default function(test: Function, Wrap: Function, keyedTests: Array<Object
                 if(!unmutableMethod) {
                     throw new Error(`${Wrap(item).wrapperType()}.${method}" does not exist`);
                 }
-                var unmutableLiteResult = unmutableMethod(...args);
+                var unmutableResult = unmutableMethod(...args(tt));
 
                 if(returnType !== "plain") {
-                    unmutableLiteResult = unmutableLiteResult.value;
+                    unmutableResult = unmutableResult.value;
                 }
 
-                tt.deepEqual(mapResult, unmutableLiteResult, "Result shoud be correct");
-                if(!shouldReturnSelf && typeof mapResult !== "undefined" && returnType === "self") {
-                    tt.not(item, unmutableLiteResult, "Method should be immutable");
+                tt.deepEqual(mapResult, unmutableResult, "Result shoud be correct");
+                if(testForImmutability && shouldBeImmutable) {
+                    tt.not(item, unmutableResult, "Method should be immutable");
                 }
             });
         });
