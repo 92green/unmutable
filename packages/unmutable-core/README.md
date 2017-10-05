@@ -2,15 +2,15 @@
 
 *Immutable.js functions for collections that may or may not be Immutable.*
 
-Immutable.js has a fantastic API, but sometimes you don't want to turn everything into Immutable collections. Immutable is heavy on memory and slow with large nested data structures, and you may need to cope with data that might sometimes contain immutable collections and sometimes not.
+Immutable.js has a fantastic API, but sometimes you don't want to turn everything into Immutable collections. With large nested data structures, Immutable can be quite heavy on memory and slow, and you may need to cope with data that might sometimes contain immutable collections and sometimes not.
 
-This project aims to bring that API over for use with plain objects and arrays, as well as Immutable.js `Map` and `List` collections. Unmutable also never mutates data, and unlike Immutable.js it constructs nested data objects **lazily**, so its memory footprint is much smaller than Immutable.js when using nested data sets.
+This project aims to bring that API over for use with plain objects and arrays, as well as Immutable.js `Map` and `List` collections. Like Immutable.jsm, unmutable never mutates data. Unlike Immutable.js, unmutable constructs nested data objects lazily, so when using nested data sets its memory footprint is much smaller than Immutable.js.
 
 ### Quick example
 
 `Wrap` will wrap your data in an `UnmutableWrapper`. You can then use Immutable.js style methods on it, then access `.value` when you want to get the contents of your wrapper back out again.
 
-```
+```js
 import {Wrap} from 'unmutable';
 
 var wrappedObject = Wrap({
@@ -34,13 +34,13 @@ Unmutable requires `immutable@v3.8.1` as a peer depencency, and will allow you t
 Refer to the [Methods](#Methods) section to see which methods you can use on Unmutable collections.
 
 
-```
+```bash
 yarn add immutable && yarn add unmutable
 ```
 
 or 
 
-```
+```bash
 npm install immutable && npm install unmutable
 ```
 
@@ -50,13 +50,13 @@ Unmutable-lite is a standalone library that allows you to use a subset of Immuta
 
 Refer to the [Methods](#Methods) section to see which methods you can use on Unmutable-lite collections.
 
-```
+```bash
 yarn add unmutable-lite
 ```
 
 or 
 
-```
+```bash
 npm install unmutable-lite
 ```
 
@@ -64,7 +64,7 @@ npm install unmutable-lite
 
 Data types are preserved through the wrapping process. Pass in an object and you'll get back an object. Pass in a `Map`? You'll get a `Map` back. Same goes for Arrays vs `Lists`.
 
-```
+```js
 import {Wrap} from 'unmutable';
 import {Map} from 'immutable';
 
@@ -82,7 +82,7 @@ var newMap = Wrap(map).set('abc', 456)value;
 
 Please note that while you *can* wrap Immutable collections other than `Map` and `List`, right now they won't be recognised as collections so you won't be able to access their methods on the Unmutable wrapper. As this library grows, the plan is to bring in more Immutable types.
 
-```
+```js
 import {Wrap} from 'unmutable';
 
 console.log(Wrap("string")value); // logs out "string"
@@ -109,7 +109,7 @@ Objects, Arrays, Lists and Maps will also have additional collection methods tha
 
 Most methods return unmutable wrappers, except for those that ask questions about the contents of a collections (e.g. `has()`, `includes()` etc).
 
-```
+```js
 Wrap(["1","2","3"]).get(0); // returns an unmutable wrapper containing "1"
 
 Wrap(["1","2","3"]).includes("1"); // returns true
@@ -117,7 +117,7 @@ Wrap(["1","2","3"]).includes("1"); // returns true
 
 Methods that have function parameters like `map()` and `reduce()` are passed their values in unmutable wrappers. If the original iterable is also received, this is also wrapped. Keys are not wrapped.
 
-```
+```js
 Wrap([
     {name: "tedd"},
     {name: "todd"}
@@ -133,7 +133,7 @@ Wrap([
 
 It makes no difference if the value returned from a function parameter is wrapped or not, unmutable works with either.
 
-```
+```js
 Wrap(["1","2","3"]).map(ii => ii); // returns Wrap(["1","2","3"])
 
 Wrap(["1","2","3"]).map(ii => ii.value); // also returns Wrap(["1","2","3"])
