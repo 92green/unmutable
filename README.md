@@ -2,7 +2,9 @@
 
 *Immutable.js functions for collections that may or may not be Immutable.*
 
-Immutable.js has a fantastic API, but sometimes you don't want to turn everything into Immutable collections. You may need to cope with data that might sometimes contain immutable collections and sometimes not. This project aims to bring that API over for use with plain objects and arrays as well as Immutable.js `Map` and `List` collections.
+Immutable.js has a fantastic API, but sometimes you don't want to turn everything into Immutable collections. Immutable is heavy on memory and slow with large nested data structures, and you may need to cope with data that might sometimes contain immutable collections and sometimes not.
+
+This project aims to bring that API over for use with plain objects and arrays, as well as Immutable.js `Map` and `List` collections. Unmutable also never mutates data, and unlike Immutable.js it constructs nested data objects **lazily**, so its memory footprint is much smaller than Immutable.js when using nested data sets.
 
 ### Quick example
 
@@ -17,7 +19,7 @@ var wrappedObject = Wrap({
     }
 })
 
-console.log(wrappedObject.getIn(['a', 'b'])value); // logs out "hi"
+console.log(wrappedObject.getIn(['a', 'b']).value); // logs out "hi"
 
 ```
 
@@ -103,7 +105,7 @@ All unmutable wrappers will have the following member variables and methods:
 - `.isKeyed(): boolean` - Returns true if the wrapped data is an `Object` or `Map`, or false otherwise.
 - `.wrapperType(): string` - Returns the name of the unmutable wrapper type.
 
-Objects, Arrays, Lists and Maps will also have the following methods, depending on whether `unmutable` or `unmutable-lite` is being used. New methods will be added over time.
+Objects, Arrays, Lists and Maps will also have additional collection methods that mimic what Immutable.js' collections.
 
 Most methods return unmutable wrappers, except for those that ask questions about the contents of a collections (e.g. `has()`, `includes()` etc).
 
@@ -136,6 +138,10 @@ Wrap(["1","2","3"]).map(ii => ii); // returns Wrap(["1","2","3"])
 
 Wrap(["1","2","3"]).map(ii => ii.value); // also returns Wrap(["1","2","3"])
 ```
+
+### Method feature set
+
+Objects, Arrays, Lists and Maps will also have the following methods, depending on whether `unmutable` or `unmutable-lite` is being used. New methods will be added over time.
 
 | `unmutable` Object / Map | `unmutable` Array / List | `unmutable-lite` Object / Map | `unmutable-lite` Array / List | Notes |
 | --- | --- | --- | --- | --- |
