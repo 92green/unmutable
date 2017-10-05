@@ -17,7 +17,7 @@ const update = (_this: Object) => (key: *, ...args: *): Object => {
 const hasIn = (_this: Object) => (keyPath: string[]): boolean => {
     var item = _this;
     for(let key of keyPath) {
-        if(/*!item.isCollection() || */ !item.has(key)) {
+        if(!item.has || !item.has(key)) {
             return false;
         }
         item = item.get(key);
@@ -28,7 +28,7 @@ const hasIn = (_this: Object) => (keyPath: string[]): boolean => {
 const getIn = (_this: Object, Wrap: Function) => (keyPath: string[], notFoundValue: * = undefined): Object => {
     var item = _this;
     for(let key of keyPath) {
-        if(/*!item.isCollection() || */ !item.has(key)) {
+        if(!item.has || !item.has(key)) {
             return Wrap(notFoundValue);
         }
         item = item.get(key);
