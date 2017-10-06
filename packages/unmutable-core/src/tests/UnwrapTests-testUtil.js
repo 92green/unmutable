@@ -25,4 +25,18 @@ export default function(test: Function, Wrap: Function) {
         tt.is(Unwrap(Wrap(1)), 1, "number should be unwrapped");
         tt.is(Unwrap(Wrap("A")), "A", "string should be unwrapped");
     });
+
+    test('.set() should unwrap value', (tt: *) => {
+        tt.deepEqual(
+            Wrap({a: 1}).set('b', Wrap(2)).value,
+            {a: 1, b: 2}
+        );
+    });
+
+    test('.setIn() should unwrap value', (tt: *) => {
+        tt.deepEqual(
+            Wrap({a: 1}).setIn(['b'], Wrap(2)).value,
+            {a: 1, b: 2}
+        );
+    });
 }

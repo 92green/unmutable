@@ -123,9 +123,7 @@ const methods: Object = {
     reduce: {
         fn: ({method, wrap, self}: FnParams): Function => (iterate: Function, initialReduction: *): * => {
             return method(
-                (reduction, value, key) => Unwrap(
-                    iterate(reduction, wrap(value), key, self)
-                ),
+                (reduction, value, key) => iterate(reduction, wrap(value), key, self),
                 initialReduction
             );
         },
@@ -134,9 +132,7 @@ const methods: Object = {
     reduceRight: {
         fn: ({method, wrap, self}: FnParams): Function => (iterate: Function, initialReduction: *): * => {
             return method(
-                (reduction, value, key) => Unwrap(
-                    iterate(reduction, wrap(value), key, self)
-                ),
+                (reduction, value, key) => iterate(reduction, wrap(value), key, self),
                 initialReduction
             );
         },
@@ -149,11 +145,14 @@ const methods: Object = {
         returnType: "self"
     },
     set: {
+        fn: ({method}: FnParams): Function => (key: string, value: *): * => {
+            return method(key, Unwrap(value));
+        },
         returnType: "self"
     },
     setIn: {
         fn: ({wrap, self, toWrapperData}: FnParams): Function => (keyPath: Array<string>, value: *): * => {
-            return setIn(self, wrap)(keyPath, value, () => toWrapperData({}));
+            return setIn(self, wrap)(keyPath, Unwrap(value), () => toWrapperData({}));
         },
         returnType: "plain"
     },
