@@ -1,6 +1,7 @@
 // @flow
 import ListMethodNames from './ListMethodNames';
 import CompositeMethods from './CompositeMethods';
+import KeyArray from './KeyArray';
 import Unwrap from './Unwrap';
 const {deleteIn, getIn, hasIn, setIn, updateIn} = CompositeMethods;
 
@@ -94,6 +95,12 @@ const methods: Object = {
     },
     isEmpty: {
         returnType: "plain"
+    },
+    keyArray: {
+        fn: ({self}: FnParams): Function => (): * => {
+            return KeyArray(self);
+        },
+        returnType: "wrapped"
     },
     last: {
         returnType: "wrapped"

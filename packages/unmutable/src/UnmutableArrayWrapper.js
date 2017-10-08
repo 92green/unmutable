@@ -13,7 +13,10 @@ export default class UnmutableArrayWrapper extends UnmutableWrapper {
             self: this,
             methodsFrom: list,
             wrap: Wrap,
-            fromWrapperData: ii => ii.toArray()
+            fromWrapperData: ii => ii.toArray(),
+            additionalMethods: [
+                "keyArray"
+            ]
         });
     }
 

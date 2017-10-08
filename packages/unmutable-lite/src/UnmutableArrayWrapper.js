@@ -59,6 +59,7 @@ export default class UnmutableArrayWrapper extends UnmutableWrapper {
             methodsFrom: this,
             wrap: Wrap,
             additionalMethods: [
+                "keyArray",
                 "deleteIn",
                 "hasIn",
                 "getIn",

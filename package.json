@@ -68,6 +68,7 @@
       "packages/unmutable-core/src/AddMethods.js",
       "packages/unmutable-core/src/CompositeMethods.js",
       "packages/unmutable-core/src/IsUnmutable.js",
+      "packages/unmutable-core/src/KeyArray.js",
       "packages/unmutable-core/src/Unwrap.js",
       "dist"
     ],

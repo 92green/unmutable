@@ -24,6 +24,11 @@ export default function(test: Function, Wrap: Function, indexedTests: Array<Obje
         tt.is(Wrap(list).size, list.size, 'size returns correct size');
     });
 
+    test('Wrapped Lists have a keyArray method', (tt: *) => {
+        var list: List<*> = fromJS(sampleArray);
+        tt.deepEqual(Wrap(list).keyArray().value, [0,1,2], 'keyArray returns correct array of keys');
+    });
+
     CollectionTestDefinitions({
         existingValue: 2,
         item: fromJS(sampleArray),
@@ -77,6 +82,10 @@ export default function(test: Function, Wrap: Function, indexedTests: Array<Obje
 
     test('Arrays have a size', (tt: *) => {
         tt.is(Wrap(sampleArray).size, List(sampleArray).size, 'size returns correct size');
+    });
+
+    test('Wrapped Array have a keyArray method', (tt: *) => {
+        tt.deepEqual(Wrap(sampleArray).keyArray().value, [0,1,2], 'keyArray returns correct array of keys');
     });
 
     CollectionTestDefinitions({

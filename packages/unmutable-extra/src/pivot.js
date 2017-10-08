@@ -3,7 +3,8 @@
 export default function pivot(): Function {
     return (input: UnmutableWrapperType): UnmutableWrapperType => {
         let outerContainer = input.clear();
-        let innerContainer = input.first().clear();
+        let firstKey: number|string = input.keyArray().first().value;
+        let innerContainer = input.get(firstKey).clear();
         return input
             .reduce((pivoted: UnmutableWrapperType, outerItem: UnmutableWrapperType, outerKey: *): UnmutableWrapperType => {
                 return outerItem.reduce((pp: UnmutableWrapperType, value: UnmutableWrapperType, innerKey: *): UnmutableWrapperType => {
