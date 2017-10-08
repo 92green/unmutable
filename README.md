@@ -178,7 +178,7 @@ Objects, Arrays, Lists and Maps will also have the following methods, depending 
 | **getIn** ✔︎ | **getIn** ✔︎ | **getIn** ✔︎ | **getIn** ✔︎ ||
 | groupBy | groupBy | groupBy | groupBy ||
 | **has** ✔︎ | **has** ✔︎ | **has** ✔︎ | **has** ✔︎ | Returns plain boolean |
-| hashCode | hashCode | hashCode | hashCode ||
+| hashCode | hashCode | - | - ||
 | **hasIn** ✔︎ | **hasIn** ✔︎ | **hasIn** ✔︎ | **hasIn** ✔︎ | Returns plain boolean |
 | **includes** ✔︎ | **includes** ✔︎ | **includes** ✔︎ | **includes** ✔︎ | Returns plain boolean |
 | - | indexOf | - | indexOf ||
