@@ -9,7 +9,10 @@ export default class UnmutableListWrapper extends UnmutableWrapper {
         AddMethods({
             self: this,
             methodsFrom: item,
-            wrap: Wrap
+            wrap: Wrap,
+            additionalMethods: [
+                "keyArray"
+            ]
         });
     }
 

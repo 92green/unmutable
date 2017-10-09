@@ -1,6 +1,7 @@
 // @flow
 import ListMethodNames from './ListMethodNames';
 import CompositeMethods from './CompositeMethods';
+import KeyArray from './KeyArray';
 import Unwrap from './Unwrap';
 const {deleteIn, getIn, hasIn, setIn, updateIn} = CompositeMethods;
 
@@ -95,6 +96,12 @@ const methods: Object = {
     isEmpty: {
         returnType: "plain"
     },
+    keyArray: {
+        fn: ({self}: FnParams): Function => (): * => {
+            return KeyArray(self);
+        },
+        returnType: "wrapped"
+    },
     last: {
         returnType: "wrapped"
     },
@@ -123,9 +130,7 @@ const methods: Object = {
     reduce: {
         fn: ({method, wrap, self}: FnParams): Function => (iterate: Function, initialReduction: *): * => {
             return method(
-                (reduction, value, key) => Unwrap(
-                    iterate(reduction, wrap(value), key, self)
-                ),
+                (reduction, value, key) => iterate(reduction, wrap(value), key, self),
                 initialReduction
             );
         },
@@ -134,9 +139,7 @@ const methods: Object = {
     reduceRight: {
         fn: ({method, wrap, self}: FnParams): Function => (iterate: Function, initialReduction: *): * => {
             return method(
-                (reduction, value, key) => Unwrap(
-                    iterate(reduction, wrap(value), key, self)
-                ),
+                (reduction, value, key) => iterate(reduction, wrap(value), key, self),
                 initialReduction
             );
         },
@@ -149,11 +152,14 @@ const methods: Object = {
         returnType: "self"
     },
     set: {
+        fn: ({method}: FnParams): Function => (key: string, value: *): * => {
+            return method(key, Unwrap(value));
+        },
         returnType: "self"
     },
     setIn: {
         fn: ({wrap, self, toWrapperData}: FnParams): Function => (keyPath: Array<string>, value: *): * => {
-            return setIn(self, wrap)(keyPath, value, () => toWrapperData({}));
+            return setIn(self, wrap)(keyPath, Unwrap(value), () => toWrapperData({}));
         },
         returnType: "plain"
     },

@@ -9,7 +9,10 @@ export default class UnmutableMapWrapper extends UnmutableWrapper {
         AddMethods({
             self: this,
             methodsFrom: item,
-            wrap: Wrap
+            wrap: Wrap,
+            additionalMethods: [
+                "keyArray"
+            ]
         });
     }
 

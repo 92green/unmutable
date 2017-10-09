@@ -44,6 +44,11 @@ export default function(test: Function, Wrap: Function, keyedTests: Array<Object
         tt.is(Wrap(map).size, map.size, 'size returns correct size');
     });
 
+    test('Wrapped Maps have a keyArray method', (tt: *) => {
+        var map: Map<string,*> = fromJS(sampleObject);
+        tt.deepEqual(Wrap(map).keyArray().value, ['a','b','c'], 'keyArray returns correct array of keys');
+    });
+
     CollectionTestDefinitions({
         ...testDefinitions,
         item: fromJS(sampleObject),
@@ -83,6 +88,10 @@ export default function(test: Function, Wrap: Function, keyedTests: Array<Object
 
     test('Objects have a size', (tt: *) => {
         tt.is(Wrap(sampleObject).size, Map(sampleObject).size, 'size returns correct size');
+    });
+
+    test('Wrapped Objects have a keyArray method', (tt: *) => {
+        tt.deepEqual(Wrap(sampleObject).keyArray().value, ['a','b','c'], 'keyArray returns correct array of keys');
     });
 
     CollectionTestDefinitions({
@@ -131,7 +140,7 @@ export default function(test: Function, Wrap: Function, keyedTests: Array<Object
                     unmutableResult = unmutableResult.value;
                 }
 
-                tt.deepEqual(mapResult, unmutableResult, "Result shoud be correct");
+                tt.deepEqual(mapResult, unmutableResult, "Result should be correct");
                 if(testForImmutability && shouldBeImmutable) {
                     tt.not(item, unmutableResult, "Method should be immutable");
                 }

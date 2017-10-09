@@ -11,7 +11,10 @@ export default class UnmutableMapWrapper extends UnmutableWrapper {
             self: this,
             methodsFrom: item,
             wrap: Wrap,
-            toWrapperData: Map
+            toWrapperData: Map,
+            additionalMethods: [
+                "keyArray"
+            ]
         });
     }
 

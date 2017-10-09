@@ -21,6 +21,8 @@ export default class UnmutableArrayWrapper extends UnmutableWrapper {
             return clone;
         };
         _this.every = (condition: Function): * => item.every(condition);
+        _this.filter = (predicate: Function): * => item.filter(predicate);
+        _this.filterNot = (predicate: Function): * => item.filter((...args) => !predicate(...args));
         _this.first = (): * => item[0];
         _this.get = (key: *, notFoundValue: * = undefined): * => {
             if(!_this.has(key)) {
@@ -59,6 +61,7 @@ export default class UnmutableArrayWrapper extends UnmutableWrapper {
             methodsFrom: this,
             wrap: Wrap,
             additionalMethods: [
+                "keyArray",
                 "deleteIn",
                 "hasIn",
                 "getIn",
