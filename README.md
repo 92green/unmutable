@@ -178,7 +178,7 @@ Objects, Arrays, Lists and Maps will also have the following methods, depending 
 | **getIn** ✔︎ | **getIn** ✔︎ | **getIn** ✔︎ | **getIn** ✔︎ ||
 | groupBy | groupBy | groupBy | groupBy ||
 | **has** ✔︎ | **has** ✔︎ | **has** ✔︎ | **has** ✔︎ | Returns plain boolean |
-| hashCode | hashCode | hashCode | hashCode ||
+| hashCode | hashCode | - | - ||
 | **hasIn** ✔︎ | **hasIn** ✔︎ | **hasIn** ✔︎ | **hasIn** ✔︎ | Returns plain boolean |
 | **includes** ✔︎ | **includes** ✔︎ | **includes** ✔︎ | **includes** ✔︎ | Returns plain boolean |
 | - | indexOf | - | indexOf ||
@@ -231,19 +231,19 @@ Objects, Arrays, Lists and Maps will also have the following methods, depending 
 | **takeUntil** ✔︎ | **takeUntil** ✔︎ | - | takeUntil ||
 | **takeWhile** ✔︎ | **takeWhile** ✔︎ | - | takeWhile ||
 | toArray | toArray | toArray | toArray ||
-| toIndexedSeq | toIndexedSeq | toIndexedSeq | toIndexedSeq ||
+| toIndexedSeq | toIndexedSeq | - | - ||
 | toJS | toJS | toJS | toJS ||
 | toJSON | toJSON | toJSON | toJSON ||
-| toKeyedSeq | toKeyedSeq | toKeyedSeq | toKeyedSeq ||
-| toList | toList | toList | toList ||
-| toMap | toMap | toMap | toMap ||
+| toKeyedSeq | toKeyedSeq | - | - ||
+| toList | toList | - | - ||
+| toMap | toMap | - | - ||
 | toObject | toObject | toObject | toObject ||
-| toOrderedMap | toOrderedMap | toOrderedMap | toOrderedMap ||
-| toOrderedSet | toOrderedSet | toOrderedSet | toOrderedSet ||
-| toSeq | toSeq | toSeq | toSeq ||
-| toSet | toSet | toSet | toSet ||
-| toSetSeq | toSetSeq | toSetSeq | toSetSeq ||
-| toStack | toStack | toStack | toStack ||
+| toOrderedMap | toOrderedMap | - | - ||
+| toOrderedSet | toOrderedSet | - | - ||
+| toSeq | toSeq | - | - ||
+| toSet | toSet | - | - ||
+| toSetSeq | toSetSeq | - | - ||
+| toStack | toStack | - | - ||
 | - | **unshift** ✔︎ | - | **unshift** ✔︎ ||
 | **update** ✔︎ | **update** ✔︎ | **update** ✔︎ | **update** ✔︎ ||
 | **updateIn** ✔︎ | **updateIn** ✔︎ | **updateIn** ✔︎ | **updateIn** ✔︎ ||
