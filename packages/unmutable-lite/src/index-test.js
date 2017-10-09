@@ -13,6 +13,9 @@ var keyedTests: Array<string> = [
     "count",
     "delete",
     "deleteIn",
+    "every",
+    "filter",
+    "filterNot",
     "get",
     "getIn",
     "has",
@@ -24,6 +27,7 @@ var keyedTests: Array<string> = [
     "reduceRight",
     "set",
     "setIn",
+    "some",
     "update",
     "updateIn"
 ];
@@ -36,6 +40,8 @@ var indexedTests: Array<string> = [
     "delete",
     "deleteIn",
     "every",
+    "filter",
+    "filterNot",
     "first",
     "get",
     "getIn",
