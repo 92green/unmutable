@@ -313,12 +313,6 @@ export default function(config: Object): Array<Object> {
             returnType: "self"
         },
         {
-            desc: "isEmpty",
-            method: "isEmpty",
-            args: () => [],
-            returnType: "plain"
-        },
-        {
             desc: "can get last value",
             method: "last",
             args: () => [],

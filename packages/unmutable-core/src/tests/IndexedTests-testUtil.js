@@ -4,16 +4,33 @@ import CollectionTestDefinitions from './CollectionTestDefinitions-testUtil';
 
 export default function(test: Function, Wrap: Function, indexedTests: Array<Object>, libraryName: string) {
 
-    var sampleArray: Array<*> = [
+    var sampleArray: [number, number, [number, number]] = [
         70,
         2,
         [0, 1]
     ];
 
-    var sampleArray2: Array<*> = [
+    var sampleArray2: [number, number] = [
         4,
         5
     ];
+
+    var testDefinitions: Object = {
+        existingValue: 2,
+        itemAtKey: sampleArray[1],
+        itemAtKeyPath: sampleArray[2][1],
+        key: 1,
+        keyPath: [2,1],
+        libraryName,
+        negativeKey: -3,
+        nonExistingKey: 3,
+        nonExistingKeyPath: [5,2],
+        nonExistingNegativeKey: -4,
+        nonExistingValue: 555,
+        only: indexedTests,
+        partiallyExistingKeyPath: [2,5],
+        sampleValue: 789
+    };
 
     //
     // List tests
@@ -29,24 +46,18 @@ export default function(test: Function, Wrap: Function, indexedTests: Array<Obje
         tt.deepEqual(Wrap(list).keyArray().value, [0,1,2], 'keyArray returns correct array of keys');
     });
 
+    test('Wrapped Lists return true if empty', (tt: *) => {
+        tt.true(Wrap(List()).isEmpty());
+    });
+
+    test('Wrapped Lists return false if not empty', (tt: *) => {
+        tt.false(Wrap(fromJS(sampleArray)).isEmpty());
+    });
+
     CollectionTestDefinitions({
-        existingValue: 2,
+        ...testDefinitions,
         item: fromJS(sampleArray),
-        itemAlternative: fromJS(sampleArray2),
-        itemAtKey: sampleArray[1],
-        // $FlowFixMe: Flow doesnt know that this is safe
-        itemAtKeyPath: sampleArray[2][1],
-        key: 1,
-        keyPath: [2,1],
-        libraryName,
-        negativeKey: -3,
-        nonExistingKey: 3,
-        nonExistingKeyPath: [5,2],
-        nonExistingNegativeKey: -4,
-        nonExistingValue: 555,
-        only: indexedTests,
-        partiallyExistingKeyPath: [2,5],
-        sampleValue: 789
+        itemAlternative: fromJS(sampleArray2)
     })
         .forEach((testConfig: Object) => {
             var {
@@ -88,24 +99,18 @@ export default function(test: Function, Wrap: Function, indexedTests: Array<Obje
         tt.deepEqual(Wrap(sampleArray).keyArray().value, [0,1,2], 'keyArray returns correct array of keys');
     });
 
+    test('Wrapped Arrays return true if empty', (tt: *) => {
+        tt.true(Wrap([]).isEmpty());
+    });
+
+    test('Wrapped Arrays return false if not empty', (tt: *) => {
+        tt.false(Wrap(sampleArray).isEmpty());
+    });
+
     CollectionTestDefinitions({
-        existingValue: 2,
+        ...testDefinitions,
         item: sampleArray,
-        itemAlternative: sampleArray2,
-        itemAtKey: sampleArray[1],
-        // $FlowFixMe: Flow doesnt know that this is safe
-        itemAtKeyPath: sampleArray[2][1],
-        key: 1,
-        keyPath: [2,1],
-        libraryName,
-        negativeKey: -3,
-        nonExistingKey: 3,
-        nonExistingKeyPath: [5,2],
-        nonExistingNegativeKey: -4,
-        nonExistingValue: 555,
-        only: indexedTests,
-        partiallyExistingKeyPath: [2,5],
-        sampleValue: 789
+        itemAlternative: sampleArray2
     })
         .forEach((testConfig: Object) => {
             var {

@@ -43,7 +43,7 @@ export default class UnmutableObjectWrapper extends UnmutableWrapper {
             }
             return false;
         };
-        _this.isEmpty = (): boolean => item.size === 0;
+        _this.isEmpty = (): boolean => _this.size === 0;
         _this.map = (mapper: Function): Object => {
             return Object.keys(item).reduce((reduction: Object, key: string): Object => {
                 reduction[key] = mapper(item[key], key, item);
