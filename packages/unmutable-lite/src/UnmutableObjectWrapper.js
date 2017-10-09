@@ -18,6 +18,21 @@ export default class UnmutableObjectWrapper extends UnmutableWrapper {
             delete clone[key];
             return clone;
         };
+        _this.every = (condition: Function): * => {
+            return Object.keys(item).every(ii => condition(item[ii], ii, item));
+        };
+        _this.filter = (predicate: Function): * => {
+            let result = {};
+            for(var key in item) {
+                if(predicate(item[key], key, item)) {
+                    result[key] = item[key];
+                }
+            }
+            return result;
+        };
+        _this.filterNot = (predicate: Function): * => {
+            return _this.filter((...args) => !predicate(...args));
+        };
         _this.get = (key: *, notFoundValue: * = undefined): * => _this.has(key) ? item[key] : notFoundValue;
         _this.has = (key: *): boolean => item.hasOwnProperty(key);
         _this.includes = (value: *): boolean => {
@@ -42,6 +57,9 @@ export default class UnmutableObjectWrapper extends UnmutableWrapper {
             return Object.keys(item).reverse().reduce((reduction, key) => mapper(reduction, item[key], key, item), initialReduction);
         };
         _this.set = (key: *, value: *): Object => ({...item, [key]: value});
+        _this.some = (condition: Function): * => {
+            return Object.keys(item).some(ii => condition(item[ii], ii, item));
+        };
         _this.update = update(_this, Wrap);
 
         // prepare methods
