@@ -53,6 +53,10 @@ export default function(test: Function, Wrap: Function, keyedTests: Array<Object
         tt.true(Wrap(Map()).isEmpty());
     });
 
+    test('Wrapped Maps return false if not empty', (tt: *) => {
+        tt.false(Wrap(fromJS(sampleObject)).isEmpty());
+    });
+
     CollectionTestDefinitions({
         ...testDefinitions,
         item: fromJS(sampleObject),
@@ -100,6 +104,10 @@ export default function(test: Function, Wrap: Function, keyedTests: Array<Object
 
     test('Wrapped Objects return true if empty', (tt: *) => {
         tt.true(Wrap({}).isEmpty());
+    });
+
+    test('Wrapped Objects return false if not empty', (tt: *) => {
+        tt.false(Wrap(sampleObject).isEmpty());
     });
 
     CollectionTestDefinitions({

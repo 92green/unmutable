@@ -4,13 +4,13 @@ import CollectionTestDefinitions from './CollectionTestDefinitions-testUtil';
 
 export default function(test: Function, Wrap: Function, indexedTests: Array<Object>, libraryName: string) {
 
-    var sampleArray: Array<*> = [
+    var sampleArray: [number, number, [number, number]] = [
         70,
         2,
         [0, 1]
     ];
 
-    var sampleArray2: Array<*> = [
+    var sampleArray2: [number, number] = [
         4,
         5
     ];
@@ -18,7 +18,6 @@ export default function(test: Function, Wrap: Function, indexedTests: Array<Obje
     var testDefinitions: Object = {
         existingValue: 2,
         itemAtKey: sampleArray[1],
-        // $FlowFixMe: Flow doesnt know that this is safe
         itemAtKeyPath: sampleArray[2][1],
         key: 1,
         keyPath: [2,1],
@@ -51,6 +50,9 @@ export default function(test: Function, Wrap: Function, indexedTests: Array<Obje
         tt.true(Wrap(List()).isEmpty());
     });
 
+    test('Wrapped Lists return false if not empty', (tt: *) => {
+        tt.false(Wrap(fromJS(sampleArray)).isEmpty());
+    });
 
     CollectionTestDefinitions({
         ...testDefinitions,
@@ -101,6 +103,9 @@ export default function(test: Function, Wrap: Function, indexedTests: Array<Obje
         tt.true(Wrap([]).isEmpty());
     });
 
+    test('Wrapped Arrays return false if not empty', (tt: *) => {
+        tt.false(Wrap(sampleArray).isEmpty());
+    });
 
     CollectionTestDefinitions({
         ...testDefinitions,
