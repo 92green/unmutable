@@ -62,7 +62,7 @@ npm install unmutable-lite
 
 ### unmutable-extra
 
-This package contains optional extra functions for unmutable that don't exist in Immutable.js. See [Unmutable Extra](#Unmutable Extra).
+This package contains optional extra functions for unmutable that don't exist in Immutable.js. See [Unmutable Extra](#Unmutable-Extra).
 
 ## More examples
 
