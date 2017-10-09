@@ -12,3 +12,6 @@ dist
 docs
 lib
 node_modules
+
+# NPM files
+packages/**/README.md
