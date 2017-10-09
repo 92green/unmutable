@@ -15,24 +15,8 @@ export default function(test: Function, Wrap: Function, indexedTests: Array<Obje
         5
     ];
 
-    //
-    // List tests
-    //
-
-    test('Wrapped Lists have a size', (tt: *) => {
-        var list: List<*> = fromJS(sampleArray);
-        tt.is(Wrap(list).size, list.size, 'size returns correct size');
-    });
-
-    test('Wrapped Lists have a keyArray method', (tt: *) => {
-        var list: List<*> = fromJS(sampleArray);
-        tt.deepEqual(Wrap(list).keyArray().value, [0,1,2], 'keyArray returns correct array of keys');
-    });
-
-    CollectionTestDefinitions({
+    var testDefinitions: Object = {
         existingValue: 2,
-        item: fromJS(sampleArray),
-        itemAlternative: fromJS(sampleArray2),
         itemAtKey: sampleArray[1],
         // $FlowFixMe: Flow doesnt know that this is safe
         itemAtKeyPath: sampleArray[2][1],
@@ -47,6 +31,31 @@ export default function(test: Function, Wrap: Function, indexedTests: Array<Obje
         only: indexedTests,
         partiallyExistingKeyPath: [2,5],
         sampleValue: 789
+    };
+
+    //
+    // List tests
+    //
+
+    test('Wrapped Lists have a size', (tt: *) => {
+        var list: List<*> = fromJS(sampleArray);
+        tt.is(Wrap(list).size, list.size, 'size returns correct size');
+    });
+
+    test('Wrapped Lists have a keyArray method', (tt: *) => {
+        var list: List<*> = fromJS(sampleArray);
+        tt.deepEqual(Wrap(list).keyArray().value, [0,1,2], 'keyArray returns correct array of keys');
+    });
+
+    test('Wrapped Lists return true if empty', (tt: *) => {
+        tt.true(Wrap(List()).isEmpty());
+    });
+
+
+    CollectionTestDefinitions({
+        ...testDefinitions,
+        item: fromJS(sampleArray),
+        itemAlternative: fromJS(sampleArray2)
     })
         .forEach((testConfig: Object) => {
             var {
@@ -88,24 +97,15 @@ export default function(test: Function, Wrap: Function, indexedTests: Array<Obje
         tt.deepEqual(Wrap(sampleArray).keyArray().value, [0,1,2], 'keyArray returns correct array of keys');
     });
 
+    test('Wrapped Arrays return true if empty', (tt: *) => {
+        tt.true(Wrap([]).isEmpty());
+    });
+
+
     CollectionTestDefinitions({
-        existingValue: 2,
+        ...testDefinitions,
         item: sampleArray,
-        itemAlternative: sampleArray2,
-        itemAtKey: sampleArray[1],
-        // $FlowFixMe: Flow doesnt know that this is safe
-        itemAtKeyPath: sampleArray[2][1],
-        key: 1,
-        keyPath: [2,1],
-        libraryName,
-        negativeKey: -3,
-        nonExistingKey: 3,
-        nonExistingKeyPath: [5,2],
-        nonExistingNegativeKey: -4,
-        nonExistingValue: 555,
-        only: indexedTests,
-        partiallyExistingKeyPath: [2,5],
-        sampleValue: 789
+        itemAlternative: sampleArray2
     })
         .forEach((testConfig: Object) => {
             var {

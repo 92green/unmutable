@@ -49,6 +49,10 @@ export default function(test: Function, Wrap: Function, keyedTests: Array<Object
         tt.deepEqual(Wrap(map).keyArray().value, ['a','b','c'], 'keyArray returns correct array of keys');
     });
 
+    test('Wrapped Maps return true if empty', (tt: *) => {
+        tt.true(Wrap(Map()).isEmpty());
+    });
+
     CollectionTestDefinitions({
         ...testDefinitions,
         item: fromJS(sampleObject),
@@ -92,6 +96,10 @@ export default function(test: Function, Wrap: Function, keyedTests: Array<Object
 
     test('Wrapped Objects have a keyArray method', (tt: *) => {
         tt.deepEqual(Wrap(sampleObject).keyArray().value, ['a','b','c'], 'keyArray returns correct array of keys');
+    });
+
+    test('Wrapped Objects return true if empty', (tt: *) => {
+        tt.true(Wrap({}).isEmpty());
     });
 
     CollectionTestDefinitions({
