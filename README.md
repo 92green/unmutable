@@ -25,7 +25,7 @@ console.log(wrappedObject.getIn(['a', 'b']).value); // logs out "hi"
 
 ## Installation
 
-There are two packages you can choose from, `unmutable` or `unmutable-lite`.
+There are two main packages you can choose from, `unmutable` or `unmutable-lite`. There is also an optional package of extra functions called `unmutable-extra`.
 
 ### unmutable
 
@@ -59,6 +59,10 @@ or
 ```bash
 npm install unmutable-lite
 ```
+
+### unmutable-extra
+
+This package contains optional extra functions for unmutable that don't exist in Immutable.js. See [Unmutable Extra](#Unmutable Extra).
 
 ## More examples
 
@@ -157,9 +161,9 @@ Objects, Arrays, Lists and Maps will also have the following methods, depending 
 | entries | entries | entries | entries ||
 | entrySeq | entrySeq | entrySeq | entrySeq ||
 | equals | equals | equals | equals ||
-| **every** ✔︎ | **every** ✔︎ | every | **every** ✔︎ | Returns plain boolean |
-| **filter** ✔︎ | **filter** ✔︎ | filter | filter ||
-| **filterNot** ✔︎ | **filterNot** ✔︎ | filterNot | filterNot ||
+| **every** ✔︎ | **every** ✔︎ | **every** ✔︎ | **every** ✔︎ | Returns plain boolean |
+| **filter** ✔︎ | **filter** ✔︎ | **filter** ✔︎ | **filter** ✔︎ ||
+| **filterNot** ✔︎ | **filterNot** ✔︎ | **filterNot** ✔︎ | **filterNot** ✔︎ ||
 | find | find | find | find ||
 | findEntry | findEntry | findEntry | findEntry ||
 | - | findIndex | - | findIndex ||
@@ -191,7 +195,8 @@ Objects, Arrays, Lists and Maps will also have the following methods, depending 
 | join | join | join | join ||
 | keyOf | keyOf | keyOf | keyOf ||
 | keys | keys | keys | keys ||
-| keySeq | keySeq | keySeq | keySeq ||
+| keyList | keyList | keyList | keyList | Returns keys as an array, this doesn't exist in Immutable.js |
+| keySeq | keySeq | - | - ||
 | **last** ✔︎ | **last** ✔︎ | - | **last** ✔︎ ||
 | - | lastIndexOf | - | lastIndexOf ||
 | lastKeyOf | lastKeyOf | lastKeyOf | lastKeyOf ||
@@ -222,7 +227,7 @@ Objects, Arrays, Lists and Maps will also have the following methods, depending 
 | **skipUntil** ✔︎ | **skipUntil** ✔︎ | - | skipUntil ||
 | **skipWhile** ✔︎ | **skipWhile** ✔︎ | - | skipWhile ||
 | **slice** ✔︎ | **slice** ✔︎ | **slice** ✔︎ | **slice** ✔︎ ||
-| **some** ✔︎ | **some** ✔︎ | some | **some** ✔︎ | Returns plain boolean |
+| **some** ✔︎ | **some** ✔︎ | **some** ✔︎  | **some** ✔︎ | Returns plain boolean |
 | **sort** ✔︎ | **sort** ✔︎ | sort | sort ||
 | **sortBy** ✔︎ | **sortBy** ✔︎ | sortBy | sortBy ||
 | - | splice | - | splice ||
@@ -253,5 +258,74 @@ Objects, Arrays, Lists and Maps will also have the following methods, depending 
 | - | zip | - | zip ||
 | - | zipWith | - | zipWith ||
 
+## Unmutable Extra
 
+This package contains optional extra functions for unmutable that don't exist in Immutable.js.
 
+```bash
+yarn add unmutable-extra
+```
+
+or 
+
+```bash
+npm install unmutable-extra
+```
+
+Functions in this package use partially applied functions, which allow for easy chaining by using them inside of an `update()` method:
+
+```js
+return Wrap([1,2,3])
+    .update(pivot()) // using a pivot in a chain
+    .map(doOtherStuff)
+    .value
+```
+
+### API
+
+#### pivot
+`pivot() => (UnmutableWrapper)`
+
+Takes a collection that is 2 layers deep and flips the contents of each layer, in the same way that you might pivot a spreadsheet to turn rows into columns and vice versa. Works with any combination of Objects, Arrays, Maps and Lists.
+
+```js
+import {pivot} from 'unmutable-extra';
+
+return Wrap([
+    [1,2,3],
+    [4,5,6]
+])
+    .update(pivot())
+    .value;
+
+// Returns:
+// [
+//     [1,4],
+//     [2,5],
+//     [3,6]
+// ]
+
+return Wrap({
+    a: {
+        x: 1,
+        y: 2
+    },
+    b: {
+        x: 3
+    }
+})
+    .update(pivot())
+    .value;
+
+// Returns:
+// {
+//     x: {
+//         a: 1,
+//         b: 3
+//     },
+//     y: {
+//         a: 1
+//     }
+// }
+
+```
