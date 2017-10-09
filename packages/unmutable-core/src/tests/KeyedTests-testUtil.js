@@ -140,7 +140,7 @@ export default function(test: Function, Wrap: Function, keyedTests: Array<Object
                     unmutableResult = unmutableResult.value;
                 }
 
-                tt.deepEqual(mapResult, unmutableResult, "Result shoud be correct");
+                tt.deepEqual(mapResult, unmutableResult, "Result should be correct");
                 if(testForImmutability && shouldBeImmutable) {
                     tt.not(item, unmutableResult, "Method should be immutable");
                 }
