@@ -85,6 +85,9 @@ const methods: Object = {
         returnType: "plain"
     },
     insert: {
+        fn: ({method}: FnParams): Function => (index: number, value: *): * => {
+            return method(index, Unwrap(value));
+        },
         returnType: "self"
     },
     interleave: {
@@ -125,6 +128,9 @@ const methods: Object = {
         returnType: "self"
     },
     push: {
+        fn: ({method}: FnParams): Function => (value: *): * => {
+            return method(Unwrap(value));
+        },
         returnType: "self"
     },
     reduce: {
@@ -204,6 +210,9 @@ const methods: Object = {
         returnType: "self"
     },
     unshift: {
+        fn: ({method}: FnParams): Function => (value: *): * => {
+            return method(Unwrap(value));
+        },
         returnType: "self"
     },
     update: {
