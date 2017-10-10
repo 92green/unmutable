@@ -31,6 +31,9 @@ const methods: Object = {
         returnType: "self"
     },
     concat: {
+        fn: ({method}: FnParams): Function => (...collections: Array<*>): * => {
+            return method(...collections.map(ii => Unwrap(ii)));
+        },
         returnType: "self"
     },
     count: {
@@ -91,9 +94,15 @@ const methods: Object = {
         returnType: "self"
     },
     interleave: {
+        fn: ({method}: FnParams): Function => (...collections: Array<*>): * => {
+            return method(...collections.map(ii => Unwrap(ii)));
+        },
         returnType: "self"
     },
     interpose: {
+        fn: ({method}: FnParams): Function => (separator: *): * => {
+            return method(Unwrap(separator));
+        },
         returnType: "self"
     },
     isEmpty: {
@@ -119,9 +128,18 @@ const methods: Object = {
         returnType: "self"
     },
     merge: {
+        fn: ({method}: FnParams): Function => (...collections: Array<*>): * => {
+            return method(...collections.map(ii => Unwrap(ii)));
+        },
         returnType: "self"
     },
     mergeWith: {
+        fn: ({method, wrap}: FnParams): Function => (merger: Function, ...collections: Array<*>): * => {
+            return method(
+                (oldVal, newVal, key) => merger(wrap(oldVal), wrap(newVal), key),
+                ...collections.map(ii => Unwrap(ii))
+            );
+        },
         returnType: "self"
     },
     pop: {
