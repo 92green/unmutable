@@ -377,8 +377,18 @@ export default function(config: Object): Array<Object> {
         {
             desc: "mergeWith",
             method: "mergeWith",
-            args: () => [(oldVal, newVal) => oldVal / newVal, itemAlternative],
-            returnType: "self"
+            args: (tt) => [
+                (wrappedOldVal: *, wrappedNewVal: *, iterKey: *): * => {
+                    if(tt && iterKey === key) {
+                        tt.true(IsUnmutable(wrappedOldVal), "wrappedOldVal should be in an unmutable wrapper");
+                        tt.true(IsUnmutable(wrappedNewVal), "wrappedNewVal should be in an unmutable wrapper");
+                    }
+                    return Unwrap(wrappedOldVal) + Unwrap(wrappedNewVal);
+                },
+                itemAlternative
+            ],
+            returnType: "self",
+            callbackTests: 2
         },
         {
             desc: "push",

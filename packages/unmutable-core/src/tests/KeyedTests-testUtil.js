@@ -14,7 +14,7 @@ export default function(test: Function, Wrap: Function, keyedTests: Array<Object
     };
 
     var sampleObject2: Object = {
-        c: 1000,
+        a: 1000,
         b: {
             y: 123123
         }

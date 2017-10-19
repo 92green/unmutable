@@ -32,6 +32,11 @@ export default class UnmutableArrayWrapper extends UnmutableWrapper {
         };
         _this.has = (key: *): boolean => key < item.length && key >= -item.length;
         _this.includes = (value: *): boolean => item.indexOf(value) !== -1;
+        _this.insert = (index: number, value: *): * => {
+            let clone = [...item];
+            clone.splice(index, 0, value);
+            return clone;
+        };
         _this.isEmpty = (): boolean => _this.size === 0;
         _this.last = (): * => item[item.length - 1];
         _this.map = (mapper: Function): Array<*> => item.map(mapper);

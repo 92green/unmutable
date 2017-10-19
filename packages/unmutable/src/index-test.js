@@ -42,7 +42,6 @@ var keyedTests: Array<string> = [
     //hashCode
     "hasIn",
     "includes",
-    //isEmpty
     //isSubset
     //isSuperset
     //join
@@ -143,7 +142,6 @@ var indexedTests: Array<string> = [
     "insert",
     "interleave",
     "interpose",
-    "isEmpty",
     //isSubset
     //isSuperset
     //join

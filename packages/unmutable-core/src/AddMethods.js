@@ -31,6 +31,9 @@ const methods: Object = {
         returnType: "self"
     },
     concat: {
+        fn: ({method}: FnParams): Function => (...collections: Array<*>): * => {
+            return method(...collections.map(ii => Unwrap(ii)));
+        },
         returnType: "self"
     },
     count: {
@@ -85,12 +88,21 @@ const methods: Object = {
         returnType: "plain"
     },
     insert: {
+        fn: ({method}: FnParams): Function => (index: number, value: *): * => {
+            return method(index, Unwrap(value));
+        },
         returnType: "self"
     },
     interleave: {
+        fn: ({method}: FnParams): Function => (...collections: Array<*>): * => {
+            return method(...collections.map(ii => Unwrap(ii)));
+        },
         returnType: "self"
     },
     interpose: {
+        fn: ({method}: FnParams): Function => (separator: *): * => {
+            return method(Unwrap(separator));
+        },
         returnType: "self"
     },
     isEmpty: {
@@ -116,15 +128,27 @@ const methods: Object = {
         returnType: "self"
     },
     merge: {
+        fn: ({method}: FnParams): Function => (...collections: Array<*>): * => {
+            return method(...collections.map(ii => Unwrap(ii)));
+        },
         returnType: "self"
     },
     mergeWith: {
+        fn: ({method, wrap}: FnParams): Function => (merger: Function, ...collections: Array<*>): * => {
+            return method(
+                (oldVal, newVal, key) => merger(wrap(oldVal), wrap(newVal), key),
+                ...collections.map(ii => Unwrap(ii))
+            );
+        },
         returnType: "self"
     },
     pop: {
         returnType: "self"
     },
     push: {
+        fn: ({method}: FnParams): Function => (value: *): * => {
+            return method(Unwrap(value));
+        },
         returnType: "self"
     },
     reduce: {
@@ -204,6 +228,9 @@ const methods: Object = {
         returnType: "self"
     },
     unshift: {
+        fn: ({method}: FnParams): Function => (value: *): * => {
+            return method(Unwrap(value));
+        },
         returnType: "self"
     },
     update: {
