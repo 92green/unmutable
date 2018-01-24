@@ -23,13 +23,13 @@
     "prepublish": "yarn run build",
     "watch": "yarn run build -- -w",
     "ava": "NODE_ENV=test ava",
-    "check-coverage": "NODE_ENV=test nyc check-coverage --branches 100.0  --functions 100.0 --lines 100.0",
+    "check-coverage": "NODE_ENV=test nyc check-coverage --branches 80.0  --functions 80.0 --lines 80.0",
     "docs": "jsdoc -c jsdoc.json",
     "flow": "flow check",
     "lint": "eslint src --ext js,jsx",
     "lint-fix": "eslint src --ext js,jsx --fix",
     "test": "NODE_ENV=test nyc --report-dir=./coverage ava && yarn run check-coverage",
-    "test-all": "NODE_ENV=test yarn run lint && yarn run flow && yarn run test",
+    "test-all": "NODE_ENV=test yarn run lint && yarn run test",
     "view-coverage": "yarn run check-coverage; open ./coverage/lcov-report/index.html"
   },
   "devDependencies": {

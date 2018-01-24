@@ -1,7 +1,6 @@
 // @flow
-import test from 'ava';
 import clear from '../clear';
-import compare from '../internal/comp';
+import compare from '../internal/compare';
 
 compare({
     name: `clear() works on objects`,

@@ -1,3 +1,4 @@
+// @flow
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
  *
@@ -5,40 +6,40 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export function isImmutable(maybeImmutable) {
-  return isCollection(maybeImmutable) || isRecord(maybeImmutable);
+export function isImmutable(maybeImmutable: *): boolean {
+    return isCollection(maybeImmutable) || isRecord(maybeImmutable);
 }
 
-export function isCollection(maybeCollection) {
-  return !!(maybeCollection && maybeCollection[IS_ITERABLE_SENTINEL]);
+export function isCollection(maybeCollection: *): boolean {
+    return !!(maybeCollection && maybeCollection[IS_ITERABLE_SENTINEL]);
 }
 
-export function isKeyed(maybeKeyed) {
-  return !!(maybeKeyed && maybeKeyed[IS_KEYED_SENTINEL]);
+export function isKeyed(maybeKeyed: *): boolean {
+    return !!(maybeKeyed && maybeKeyed[IS_KEYED_SENTINEL]);
 }
 
-export function isIndexed(maybeIndexed) {
-  return !!(maybeIndexed && maybeIndexed[IS_INDEXED_SENTINEL]);
+export function isIndexed(maybeIndexed: *): boolean {
+    return !!(maybeIndexed && maybeIndexed[IS_INDEXED_SENTINEL]);
 }
 
-export function isAssociative(maybeAssociative) {
-  return isKeyed(maybeAssociative) || isIndexed(maybeAssociative);
+export function isAssociative(maybeAssociative: *): boolean {
+    return isKeyed(maybeAssociative) || isIndexed(maybeAssociative);
 }
 
-export function isOrdered(maybeOrdered) {
-  return !!(maybeOrdered && maybeOrdered[IS_ORDERED_SENTINEL]);
+export function isOrdered(maybeOrdered: *): boolean {
+    return !!(maybeOrdered && maybeOrdered[IS_ORDERED_SENTINEL]);
 }
 
-export function isRecord(maybeRecord) {
-  return !!(maybeRecord && maybeRecord[IS_RECORD_SENTINEL]);
+export function isRecord(maybeRecord: *): boolean {
+    return !!(maybeRecord && maybeRecord[IS_RECORD_SENTINEL]);
 }
 
-export function isValueObject(maybeValue) {
-  return !!(
-    maybeValue &&
-    typeof maybeValue.equals === 'function' &&
-    typeof maybeValue.hashCode === 'function'
-  );
+export function isValueObject(maybeValue: *): boolean {
+    return !!(
+        maybeValue &&
+        typeof maybeValue.equals === 'function' &&
+        typeof maybeValue.hashCode === 'function'
+    );
 }
 
 export const IS_ITERABLE_SENTINEL = '@@__IMMUTABLE_ITERABLE__@@';

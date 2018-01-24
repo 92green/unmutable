@@ -2,7 +2,7 @@
     "presets": [
         ["blueflag", {"browser": true, "library": true}]
     ],
-    "ignore": ["./pa"],
+    "ignore": ["pa/*"],
     "env": {
         "test": {
             "plugins": [

@@ -1,10 +1,14 @@
 // @flow
-import {isImmutable} from 'immutable';
+import {isImmutable} from './predicates';
 
 export default (config: Object): Function => {
-    let getFn = (key: string) => config[key] || config['any'];
+    let getFn = (key: string) => config[key];
 
-    return (...args: *) => (item): * => {
+    return (...args: *) => (item: *): * => {
+        let all = getFn("all");
+        if(all) {
+            return all(...args)(item);
+        }
         if(isImmutable(item)) {
             return item[config.name](...args);
         }
