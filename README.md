@@ -15,22 +15,29 @@ Immutable.js is good because:
 - Exotic data types.
 - Functional-programming-flavoured usage.
 
-Immutable.js is bad for libraries because:
+Immutable.js can be bad **for libraries** because:
 - It's big, and you can't cherry pick. Disappointment.
 - It's not transparent when dealing with Immutable.js and non-Immutable.js objects.
+  - It's difficult to write functions that use Immutable.js that return the same data types as they accept. Functions you write will tend to either always return Immutable.js typed, or plain types.
+- Having its own set of data containers makes sense for Immutable.js, but it brings its own set of consequences.
+  - Wrapping and unwrapping data can be tedious and lead to confusion about whether you expect to see Immutable.js objects or plain Javascript at different points in the code.
+  - Special data containers make it harder to remove or work alongside functions that only work with Immutable.js
+  - Wrapping and unwrapping take time and can sometimes be quite slow.
 
 ## Introduce unmutable!
 
 Unmutable.js is good because:
-- Wonderful API (it matches Immutable.js API).
+- Wonderful API, because it aims to match Immutable.js API for Maps and Lists as closely as possible.
 - Immutable data.
 - You can pick your cherries. Only import the functions you need. Lightweight!
-- It *is* transparent when dealing with Immutable.js and non-Immutable.js objects. Pass in plain objects and arrays and you will receive plain objects and arrays back out. Even data that is a mix of plain collections and Immutable.js collections works.
+- It *is* transparent when dealing with Immutable.js and non-Immutable.js objects.
+  - Pass in plain objects and arrays and you will receive plain objects and arrays back out. Even data that is a mix of plain collections and Immutable.js collections work.
 - Functional-programming-flavoured usage.
-- Point-free style programming! **Very fine!**
+  - Bonus point-free style programming! **Very fine!**
+- Desiogned to work very well alongside Immutable.js.
 
 Unmutable.js is bad because:
-- No exotic data types. Disappointment.
+- No exotic data types. Disappointment. You can still use Immutable.js if you want nice things like Seqs and Records.
 
 ## API
 
@@ -58,6 +65,8 @@ get('hello', 'notFoundValue')(myData); // hi!
 Then if you want to call more functions in a row like this...
 
 ```
+import {fromJS} from 'immutable';
+
 let data = [
     {name: "Bob"},
     {name: "Jenny"},
@@ -75,12 +84,6 @@ let name = fromJS(data)
 import get from 'unmutable/pa/get';
 import last from 'unmutable/pa/last';
 import pipe from 'unmutable/pa/pipe';
-
-let data = [
-    {name: "Bob"},
-    {name: "Jenny"},
-    {name: "Gordon"}
-];
 
 // point-free style - you dont pass your data in until the very end by calling the returned function.
 
@@ -100,6 +103,8 @@ let name = getLastName(data); // Gordon
 Point free style can become quite fun in methods that accept iteratee functions. Consider this Immutable.js thing:
 
 ```
+import {fromJS} from 'immutable';
+
 let data = [
     {nums: null},
     {nums: [1,2,3]},
@@ -144,6 +149,28 @@ let someStuff = pipe(
 
 ```
 
-Notice how the function returned from the first `get()` ends up receiving the value provided by `filter()`, and the function returned from the inner `pipe()` ends up receiving the value provided by `map()`.
+Notice how the function returned from the first `get()` ends up receiving the values provided by `filter()`, and the function returned from the inner `pipe()` ends up receiving the values provided by `map()`.
 
 **Extravagant!**
+
+Sometimes you'll still want the second and third arguments from an interatee, and you can still do this if you like.
+
+```
+map(pipe(
+    get('nums'),
+    map(ii => ii * 10)
+))
+```
+
+Becomes:
+
+```
+map((value, key) => {
+    console.log("the key to life and all things:", key);
+    return pipe(
+        get('nums'),
+        map(ii => ii * 10)
+    )(value);
+})
+```
+
