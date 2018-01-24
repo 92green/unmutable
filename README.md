@@ -1,11 +1,10 @@
 # unmutable
 
-*Immutable.js functions for collections that may or may not be Immutable.*
+*Pure functional data-collection utilities that work with seamlessly both plain Javascript and Immutable.js*
 
 ```
 yarn add unmutable
 ```
-
 
 ## Reason
 
