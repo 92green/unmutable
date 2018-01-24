@@ -20,7 +20,7 @@ Unmutable.js is good because:
 - You can pick your cherries. Only import the functions you need. Lightweight!
 - It *is* transparent when dealing with Immutable.js and non-Immutable.js objects. Pass in plain objects and arrays and you will receive plain objects and arrays back out. Even data that is a mix of plain collections and Immutable.js collections works.
 - Functional-programming-flavoured usage.
-- Point-free style programming! Very fine!
+- Point-free style programming! **Very fine!**
 
 Unmutable.js is bad because:
 - No exotic data types. Disappointment.
@@ -34,6 +34,8 @@ yarn add unmutable
 ## API
 
 We're adding lots of functions in. We'll add them in as we go. If any added functions match names of Immutable.js Map or List methods, they will match Immutable.js' function signatures and do the same things. On top of this, we reserve the right to add extra cool functions that we might find useful.
+
+**Pleasing time!**
 
 ## Usage examples
 
@@ -79,7 +81,7 @@ let data = [
     {name: "Gordon"}
 ];
 
-// point-free style - you dont pass your data in until the very end.
+// point-free style - you dont pass your data in until the very end by calling the returned function.
 
 let getLastName = pipe(
     last(),
@@ -91,6 +93,8 @@ let getLastName = pipe(
 let name = getLastName(data); // Gordon
 
 ```
+
+**Delicacy!**
 
 Point free style can become quite fun in methods that accept iteratee functions. Consider this Immutable.js thing:
 
@@ -139,6 +143,6 @@ let someStuff = pipe(
 
 ```
 
-Notice how the functions returned from the first `get()` ends up receiving the value from `filter()`, and the function returned from the inner `pipe()` ends up receiving the value provided by `map()`.
+Notice how the function returned from the first `get()` ends up receiving the value provided by `filter()`, and the function returned from the inner `pipe()` ends up receiving the value provided by `map()`.
 
-Extravagant!
+**Extravagant!**
