@@ -1,6 +1,5 @@
 // @flow
 import prep from './internal/prep';
-import set from './set';
 
 export default prep({
     name: 'set',
