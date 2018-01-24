@@ -2,6 +2,13 @@
 
 *Immutable.js functions for collections that may or may not be Immutable.*
 
+```
+yarn add unmutable
+```
+
+
+## Reason
+
 Immutable.js is good because:
 - Wonderful API.
 - Immutable data.
@@ -24,12 +31,6 @@ Unmutable.js is good because:
 
 Unmutable.js is bad because:
 - No exotic data types. Disappointment.
-
-## Installation
-
-```
-yarn add unmutable
-```
 
 ## API
 
