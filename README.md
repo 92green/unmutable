@@ -6,8 +6,6 @@
 yarn add unmutable
 ```
 
-## Reason
-
 Immutable.js is good because:
 - Wonderful API.
 - Immutable data.
@@ -16,37 +14,13 @@ Immutable.js is good because:
 
 Immutable.js can be bad **for libraries** because:
 - It's big, and you can't cherry pick. Disappointment.
-- It's not transparent when dealing with Immutable.js and non-Immutable.js objects.
-  - It's difficult to write functions that use Immutable.js that return the same data types as they accept. Functions you write will tend to either always return Immutable.js typed, or plain types.
-- Having its own set of data containers makes sense for Immutable.js, but it brings its own set of consequences.
-  - Wrapping and unwrapping data can be tedious and lead to confusion about whether you expect to see Immutable.js objects or plain Javascript at different points in the code.
-  - Special data containers make it harder to remove or work alongside functions that only work with Immutable.js
-  - Wrapping and unwrapping take time and can sometimes be quite slow.
+- It's not transparent when dealing with Immutable.js and non-Immutable.js objects.*
+- Having its own set of data containers makes sense for Immutable.js, but it brings its own set of consequences.*
+- *See the *Sell! Sell! Sell!* section for deeper reasoning.
 
-## Introduce unmutable!
+So **Unmutable.js** follows Immutable.js lovely API as closely as it can. But instead of chaining methods, you compose functions together. This leads to smaller bundle sizes, as you only import the functions you need. And it can also work with plain Javascript objects and arrays.
 
-Unmutable.js is good because:
-- Wonderful API, because it aims to match Immutable.js API for Maps and Lists as closely as possible.
-- Immutable data.
-- You can pick your cherries. Only import the functions you need. Lightweight!
-- It *is* transparent when dealing with Immutable.js and non-Immutable.js objects.
-  - Pass in plain objects and arrays and you will receive plain objects and arrays back out. Even data that is a mix of plain collections and Immutable.js collections work.
-- Functional-programming-flavoured usage.
-  - Bonus point-free style programming! **Very fine!**
-- Desiogned to work very well alongside Immutable.js.
-
-Unmutable.js is bad because:
-- No exotic data types. Disappointment. You can still use Immutable.js if you want nice things like Seqs and Records.
-
-## API
-
-We're adding lots of functions in. We'll add them in as we go. If any added functions match names of Immutable.js Map or List methods, they will match Immutable.js' function signatures and do the same things. On top of this, we reserve the right to add extra cool functions that we might find useful.
-
-**Pleasing time!**
-
-## Usage examples
-
-Unmutable follows Immutable.js API as closely as it can. But instead of chaining methods, you compose functions together. Each Unmutable.js function returns a function that accepts the value to operate on.
+Each Unmutable.js function returns a function that accepts the value to operate on.
 
 So instead of this:
 
@@ -98,6 +72,46 @@ let name = getLastName(data); // Gordon
 ```
 
 **Delicacy!**
+
+## API
+
+We're adding lots of functions in. We'll add them in as we go. If any added functions match names of Immutable.js Map or List methods, they will match Immutable.js' function signatures and do the same things. On top of this, we reserve the right to add extra cool functions that we might find useful.
+
+**Pleasing time!**
+
+## Sell! Sell! Sell!
+
+Immutable.js is good because:
+- Wonderful API.
+- Immutable data.
+- Exotic data types.
+- Functional-programming-flavoured usage.
+
+Immutable.js can be bad **for libraries** because:
+- It's big, and you can't cherry pick. Disappointment.
+- It's not transparent when dealing with Immutable.js and non-Immutable.js objects.
+  - It's difficult to write functions that use Immutable.js that return the same data types as they accept. Functions you write will tend to either always return Immutable.js typed, or plain types.
+- Having its own set of data containers makes sense for Immutable.js, but it brings its own set of consequences.
+  - Wrapping and unwrapping data can be tedious and lead to confusion about whether you expect to see Immutable.js objects or plain Javascript at different points in the code.
+  - Special data containers make it harder to work alongside functions that only work with Immutable.js, or to remove Immutable from the codebase if the reason arises.
+  - Wrapping and unwrapping take time and can sometimes be quite slow, particularly if you use `fromJS()` to try and avoid the uncertainly of mixing plain javascript and Immutbale.js types.
+
+## Introduce unmutable!
+
+Unmutable.js is good because:
+- Wonderful API, because it aims to match Immutable.js API for Maps and Lists as closely as possible.
+- Immutable data.
+- You can pick your cherries. Only import the functions you need. Lightweight!
+- It *is* transparent when dealing with Immutable.js and non-Immutable.js objects.
+  - Pass in plain objects and arrays and you will receive plain objects and arrays back out. Even data that is a mix of plain collections and Immutable.js collections work.
+- Functional-programming-flavoured usage.
+  - Bonus point-free style programming! **Very fine!**
+- Desiogned to work very well alongside Immutable.js.
+
+Unmutable.js is bad because:
+- No exotic data types. Disappointment. You can still use Immutable.js if you want nice things like Seqs and Records.
+
+## More examples
 
 Point free style can become quite fun in methods that accept iteratee functions. Consider this Immutable.js thing:
 
