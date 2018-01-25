@@ -1,6 +1,6 @@
 // @flow
 import prep from '../internal/prep';
-import pipe from '../util/pipe';
+import pipeWith from '../util/pipeWith';
 import clear from './clear';
 import first from './first';
 import get from './get';
@@ -13,15 +13,17 @@ export default prep({
     all: () => (item: *): * => {
         let outerContainer = clear()(item);
 
-        let firstKey: number|string = pipe(
+        let firstKey: number|string = pipeWith(
+            item,
             keyArray(),
             first()
-        )(item);
+        );
 
-        let innerContainer = pipe(
+        let innerContainer = pipeWith(
+            item,
             get(firstKey),
             clear()
-        )(item);
+        );
 
         return reduce((pivoted: *, outerItem: *, outerKey: *): * => {
             return reduce((pp: *, value: *, innerKey: *): * => {
