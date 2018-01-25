@@ -67,6 +67,16 @@ let getLastName = pipe(
 
 let name = getLastName(data); // Gordon
 
+// don't like passing your data in at the end? Use pipeWith() and pass your data as ther first argument
+
+import pipe from 'unmutable/lib/util/pipeWith';
+
+let name = pipeWith(
+    data,
+    last(),
+    get('name')
+); // Gordon
+
 ```
 
 **Delicacy!**
