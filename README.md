@@ -1,6 +1,6 @@
 # unmutable
 
-*Pure functional data-collection utilities that work with seamlessly both plain Javascript and Immutable.js*
+*Pure functional, point-free data-collection utilities that work with seamlessly both plain Javascript and Immutable.js*
 
 ```
 yarn add unmutable
