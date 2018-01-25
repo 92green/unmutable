@@ -7,5 +7,5 @@ export default (...funcs: Array<Function>): Function => {
     if(funcs.length === 1) {
         return funcs[0];
     }
-    return funcs.reduce((a, b) => (...args) => b(a(...args)));
+    return funcs.reduce((a, b) => (item) => a(b(item)));
 };

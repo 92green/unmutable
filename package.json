@@ -1,7 +1,7 @@
 {
-  "main": "pa/index.js",
+  "main": "lib/index.js",
   "files": [
-    "pa"
+    "lib"
   ],
   "name": "unmutable",
   "version": "0.6.0",
@@ -17,7 +17,7 @@
   },
   "private": false,
   "scripts": {
-    "build": "rm -rf pa && node ./scripts/flow.js && babel src --out-dir pa",
+    "build": "rm -rf lib && node ./scripts/flow.js && babel src --out-dir lib",
     "build-examples": "cd example && yarn install && yarn run build && cd -",
     "deploy-to-gh-pages": "yarn run build && yarn run build-examples && yarn run docs && node scripts/publish.js",
     "prepublish": "yarn run build",

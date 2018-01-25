@@ -38,12 +38,6 @@ test('pipe throws at runtime if argument is not a function', (tt: Object) => {
     tt.throws(() => pipe(square, add, '42')(1, 2));
 });
 
-test('pipe can be seeded with multiple arguments', (tt: Object) => {
-    const add = (x, y) => x + y;
-    const square = x => x * x;
-    tt.is(pipe(add, square)(1, 2), 9);
-});
-
 test('pipe returns the first given argument if given no functions', (tt: Object) => {
     tt.is(pipe()(1, 2), 1);
     tt.is(pipe()(3), 3);
