@@ -22,20 +22,20 @@ So **Unmutable.js** follows Immutable.js lovely API as closely as it can. But in
 
 Each Unmutable.js function returns a function that accepts the value to operate on. So instead of this:
 
-```
+```js
 let myData = fromJS({hello: "hi!"});
 myData.get('hello', 'notFoundValue'); // hi!
 ```
 
 You could call it like this:
 
-```
+```js
 get('hello', 'notFoundValue')(myData); // hi!
 ```
 
 Then if you want to call more functions in a chain like this...
 
-```
+```js
 import {fromJS} from 'immutable';
 
 let data = [
@@ -51,7 +51,7 @@ let name = fromJS(data)
 
 ...you can use Unmutable.js `pipe()` function to squish your functions together, like this:
 
-```
+```js
 import get from 'unmutable/pa/get';
 import last from 'unmutable/pa/last';
 import pipe from 'unmutable/pa/pipe';
@@ -113,7 +113,7 @@ Unmutable.js is bad because:
 
 Point free style can become quite fun in methods that accept iteratee functions. Consider this Immutable.js thing:
 
-```
+```js
 import {fromJS} from 'immutable';
 
 let data = [
@@ -148,7 +148,7 @@ Returns this:
 
 That can be written in Unmutable.js as this:
 
-```
+```js
 let someStuff = pipe(
     filter(get('nums')),
     map(pipe(
@@ -166,7 +166,7 @@ Notice how the function returned from the first `get()` ends up receiving the va
 
 Sometimes you'll still want the second and third arguments from an interatee, and you can still do this if you like.
 
-```
+```js
 map(pipe(
     get('nums'),
     map(ii => ii * 10)
@@ -175,7 +175,7 @@ map(pipe(
 
 Becomes:
 
-```
+```js
 map((value, key) => {
     console.log("the key to life and all things:", key);
     return pipe(
