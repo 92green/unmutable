@@ -1,5 +1,4 @@
 // @flow
-import test from 'ava';
 import {
     isImmutable,
     isCollection,
@@ -11,47 +10,12 @@ import {
     isValueObject
 } from '../predicates';
 
-import {
-    Map,
-    List,
-    Record,
-    Set,
-    Seq,
-    OrderedMap,
-    OrderedSet,
-    Stack
-} from 'immutable';
+import testTypes from '../../internal/testTypes';
 
-const testPredicate = (tt, predicate, expectedResult) => {
-    const ABRecord = Record({ a: 1, b: 2 });
-
-    const types = {
-        undefined: undefined,
-        null: null,
-        string: "string",
-        number: 123,
-        object: {obj: true},
-        array: ["array"],
-        map: Map(),
-        orderedMap: OrderedMap(),
-        list: List(),
-        record: new ABRecord({ b: 3 }),
-        set: Set(),
-        orderedSet: OrderedSet(),
-        seq: Seq(),
-        stack: Stack()
-    };
-
-    const result = Object.keys(types).reduce((obj, key) => ({
-        ...obj,
-        [key]: predicate(types[key])
-    }), {});
-
-    tt.deepEqual(expectedResult, result);
-};
-
-test(`isImmutable() predicate should work`, (tt: *) => {
-    let expectedResult = {
+testTypes({
+    name: "isImmutable() predicate should work",
+    fn: isImmutable,
+    expectedResult: {
         undefined: false,
         null: false,
         string: false,
@@ -66,12 +30,13 @@ test(`isImmutable() predicate should work`, (tt: *) => {
         orderedSet: true,
         seq: true,
         stack: true
-    };
-    testPredicate(tt, isImmutable, expectedResult)
+    }
 });
 
-test(`isCollection() predicate should work`, (tt: *) => {
-    let expectedResult = {
+testTypes({
+    name: "isCollection() predicate should work",
+    fn: isCollection,
+    expectedResult: {
         undefined: false,
         null: false,
         string: false,
@@ -86,12 +51,13 @@ test(`isCollection() predicate should work`, (tt: *) => {
         orderedSet: true,
         seq: true,
         stack: true
-    };
-    testPredicate(tt, isCollection, expectedResult)
+    }
 });
 
-test(`isKeyed() predicate should work`, (tt: *) => {
-    let expectedResult = {
+testTypes({
+    name: "isKeyed() predicate should work",
+    fn: isKeyed,
+    expectedResult: {
         undefined: false,
         null: false,
         string: false,
@@ -106,12 +72,13 @@ test(`isKeyed() predicate should work`, (tt: *) => {
         orderedSet: false,
         seq: false,
         stack: false
-    };
-    testPredicate(tt, isKeyed, expectedResult)
+    }
 });
 
-test(`isIndexed() predicate should work`, (tt: *) => {
-    let expectedResult = {
+testTypes({
+    name: "isIndexed() predicate should work",
+    fn: isIndexed,
+    expectedResult: {
         undefined: false,
         null: false,
         string: false,
@@ -126,13 +93,13 @@ test(`isIndexed() predicate should work`, (tt: *) => {
         orderedSet: false,
         seq: true,
         stack: true
-    };
-    testPredicate(tt, isIndexed, expectedResult)
+    }
 });
 
-
-test(`isAssociative() predicate should work`, (tt: *) => {
-    let expectedResult = {
+testTypes({
+    name: "isAssociative() predicate should work",
+    fn: isAssociative,
+    expectedResult: {
         undefined: false,
         null: false,
         string: false,
@@ -147,12 +114,13 @@ test(`isAssociative() predicate should work`, (tt: *) => {
         orderedSet: false,
         seq: true,
         stack: true
-    };
-    testPredicate(tt, isAssociative, expectedResult)
+    }
 });
 
-test(`isOrdered() predicate should work`, (tt: *) => {
-    let expectedResult = {
+testTypes({
+    name: "isOrdered() predicate should work",
+    fn: isOrdered,
+    expectedResult: {
         undefined: false,
         null: false,
         string: false,
@@ -167,12 +135,13 @@ test(`isOrdered() predicate should work`, (tt: *) => {
         orderedSet: true,
         seq: true,
         stack: true
-    };
-    testPredicate(tt, isOrdered, expectedResult)
+    }
 });
 
-test(`isRecord() predicate should work`, (tt: *) => {
-    let expectedResult = {
+testTypes({
+    name: "isRecord() predicate should work",
+    fn: isRecord,
+    expectedResult: {
         undefined: false,
         null: false,
         string: false,
@@ -187,12 +156,13 @@ test(`isRecord() predicate should work`, (tt: *) => {
         orderedSet: false,
         seq: false,
         stack: false
-    };
-    testPredicate(tt, isRecord, expectedResult)
+    }
 });
 
-test(`isValueObject() predicate should work`, (tt: *) => {
-    let expectedResult = {
+testTypes({
+    name: "isValueObject() predicate should work",
+    fn: isValueObject,
+    expectedResult: {
         undefined: false,
         null: false,
         string: false,
@@ -207,6 +177,5 @@ test(`isValueObject() predicate should work`, (tt: *) => {
         orderedSet: true,
         seq: true,
         stack: true
-    };
-    testPredicate(tt, isValueObject, expectedResult)
+    }
 });
