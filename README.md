@@ -20,9 +20,7 @@ Immutable.js can be bad **for libraries** because:
 
 So **Unmutable.js** follows Immutable.js lovely API as closely as it can. But instead of chaining methods, you compose functions together. This leads to smaller bundle sizes, as you only import the functions you need. And it can also work with plain Javascript objects and arrays.
 
-Each Unmutable.js function returns a function that accepts the value to operate on.
-
-So instead of this:
+Each Unmutable.js function returns a function that accepts the value to operate on. So instead of this:
 
 ```
 let myData = fromJS({hello: "hi!"});
@@ -35,7 +33,7 @@ You could call it like this:
 get('hello', 'notFoundValue')(myData); // hi!
 ```
 
-Then if you want to call more functions in a row like this...
+Then if you want to call more functions in a chain like this...
 
 ```
 import {fromJS} from 'immutable';
