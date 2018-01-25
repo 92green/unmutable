@@ -9,7 +9,6 @@
 coverage
 dist
 docs
-pa
 lib
 node_modules
 *.log
