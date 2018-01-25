@@ -4,7 +4,9 @@ import {isImmutable} from './predicates';
 export default ({name, all, arr, obj}: Object): Function => {
     return (...args: *) => (item: *): * => {
         if(name && isImmutable(item)) { // if "name" is set and item is Immutable.js, call the Immutable.js function
-            return item[name](...args);
+            return typeof name === "string"
+                ? item[name](...args)
+                : name(...args)(item);
         }
         if(all) { // else if "all" is set, call that for any type of thing
             return all(...args)(item);
