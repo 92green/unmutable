@@ -51,10 +51,10 @@ let name = fromJS(data)
 
 ...you can use Unmutable.js `pipe()` function to squish your functions together, like this:
 
-```js
-import get from 'unmutable/pa/get';
-import last from 'unmutable/pa/last';
-import pipe from 'unmutable/pa/pipe';
+```
+import get from 'unmutable/lib/pa/get';
+import last from 'unmutable/lib/pa/last';
+import pipe from 'unmutable/lib/util/pipe';
 
 // point-free style - you dont pass your data in until the very end by calling the returned function.
 

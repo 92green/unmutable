@@ -1,20 +1,17 @@
 // @flow
 import {isImmutable} from './predicates';
 
-export default (config: Object): Function => {
-    let getFn = (key: string) => config[key];
-
+export default ({name, all, arr, obj}: Object): Function => {
     return (...args: *) => (item: *): * => {
-        let all = getFn("all");
-        if(all) {
+        if(name && isImmutable(item)) { // if "name" is set and item is Immutable.js, call the Immutable.js function
+            return item[name](...args);
+        }
+        if(all) { // else if "all" is set, call that for any type of thing
             return all(...args)(item);
         }
-        if(isImmutable(item)) {
-            return item[config.name](...args);
+        if(Array.isArray(item)) { // else if "arr" is set and item is an array, call "arr"
+            return arr(...args)(item);
         }
-        if(Array.isArray(item)) {
-            return getFn("arr")(...args)(item);
-        }
-        return getFn("obj")(...args)(item);
+        return obj(...args)(item); // else call "obj"
     };
 };
