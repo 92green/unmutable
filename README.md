@@ -119,7 +119,7 @@ API docs will come soon, with examples. In the mean time you can assume that any
 #### pa/omit
 `omit(keys: string[]): Evaluator` - For `Map` and object: Returns an evaluator that filters out all keys listed in `keys`.
 
-#### pa/omit
+#### pa/size
 `size(): Evaluator` - Returns the number of keys on the item. Immutable.js has this as a getter on their collections, Unmutable.js offers this as a function.
 
 ## Sell! Sell! Sell!
@@ -134,10 +134,10 @@ Immutable.js can be bad **for libraries** because:
 - It's big, and you can't cherry pick. Disappointment.
   - If you import `List` for example, you import every method that `List` has on it, even if you only use one of them.
 - It's not transparent when dealing with Immutable.js and non-Immutable.js objects.
-  - It's difficult to write functions that use Immutable.js that return the same data types as they accept. Functions you write will tend to either always return Immutable.js typed, or plain types.
+  - It's difficult to write functions that use Immutable.js that return the same data types as they start with. Functions you write will tend to either always return Immutable.js typed, or plain types.
 - Having its own set of data containers makes sense for Immutable.js, but it brings its own set of consequences.
   - Wrapping and unwrapping data can be tedious and lead to confusion about whether you expect to see Immutable.js objects or plain Javascript at different points in the code.
-  - Special data containers make it harder to work alongside functions that only work with Immutable.js, or to remove Immutable from the codebase if the reason arises.
+  - Special data containers make it harder to work alongside functions that only work with Immutable.js, and make it harder to remove Immutable from the codebase if the reason arises.
   - Wrapping and unwrapping take time and can sometimes be quite slow, particularly if you use `fromJS()` to try and avoid the uncertainly of mixing plain javascript and Immutable.js types.
 
 ## Introduce unmutable!
@@ -233,3 +233,8 @@ map((value, key) => {
 
 ## Development
 
+If you are to add functions that already ezist in Immutable.js, make sure they are fully complete before submitting, and work with all data types that the original function works with + the plain Javascript equivalents. Test utils like `compare` and `compareIteratee` will let you easily test the plain Javascript portion of your functions against the behaviour of Immutable.js' functions.
+
+*Caution: Do not use `compare` or `compareIteratee` if the function you are writing does not use the Immutable.js version of the function internally. This may give you passing tests that don't prove that your code works. See `pa/hasIn` for an example.*
+
+If you want to add functions that don't existing in Immutable.js, roll your chair over and talk about it first. Yes I'm assuming you work in the same room as me, you probably do. If you don't, feel free to pop your idea in an issue and we can talk about it. Functions that aren't in Immutable.js should be built out of other Unmutable.js functions as much as possible, keeping the amount of data-container-specific code to a minimum. See `pa/pivot` as an example.
