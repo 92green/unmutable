@@ -1,5 +1,8 @@
 # unmutable
 
+[![unmutable npm](https://img.shields.io/npm/v/stampy.svg?style=flat-square)](https://www.npmjs.com/package/unmutable)
+[![unmutable circle](https://img.shields.io/circleci/project/github/blueflag/unmutable.svg?style=flat-square)]()
+
 *Pure functional, point-free data-collection utilities that work seamlessly with both plain Javascript and Immutable.js*
 
 ```
