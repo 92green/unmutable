@@ -233,8 +233,8 @@ map((value, key) => {
 
 ## Development
 
-If you are to add functions that already exist in Immutable.js, make sure they are fully complete before submitting, and work with all data types that the original function works with + the plain Javascript equivalents. Test utils like `compare` and `compareIteratee` will let you easily test the plain Javascript portion of your functions against the behaviour of Immutable.js' functions.
+If you are to add functions that already exist in Immutable.js, make sure they are fully complete before submitting, and work with all data types that the original function works, plus their corresponding Javascript equivalents (e.g. `List` -> array). Test utils like `compare` and `compareIteratee` will let you easily test the plain Javascript portion of your functions against the behaviour of Immutable.js' functions.
 
-*Caution: Do not use `compare` or `compareIteratee` if the function you are writing does not use the Immutable.js version of the function internally. This may give you passing tests that don't prove that your code works. See `pa/hasIn` for an example.*
+*Caution: Do not use `compare` or `compareIteratee` if the function you are writing does not use the Immutable.js version of the function internally. Doing so may give you passing tests that don't prove that your code works. See `pa/hasIn` for an example.*
 
-If you want to add functions that don't existing in Immutable.js, roll your chair over and talk about it first. Yes I'm assuming you work in the same room as me, you probably do. If you don't, feel free to pop your idea in an issue and we can talk about it. Functions that aren't in Immutable.js should be built out of other Unmutable.js functions as much as possible, keeping the amount of data-container-specific code to a minimum. See `pa/pivot` as an example.
+If you want to add functions that don't exist in Immutable.js, roll your chair over and talk about it first. Yes I'm assuming you work in the same room as me, you probably do. If you don't, feel free to pop your idea in an issue and we can talk about it. Functions that aren't in Immutable.js should be built out of other Unmutable.js functions as much as possible, keeping the amount of data-container-specific code to a minimum. See `pa/pivot` as an example.
