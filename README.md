@@ -233,7 +233,7 @@ map((value, key) => {
 
 ## Development
 
-If you are to add functions that already ezist in Immutable.js, make sure they are fully complete before submitting, and work with all data types that the original function works with + the plain Javascript equivalents. Test utils like `compare` and `compareIteratee` will let you easily test the plain Javascript portion of your functions against the behaviour of Immutable.js' functions.
+If you are to add functions that already exist in Immutable.js, make sure they are fully complete before submitting, and work with all data types that the original function works with + the plain Javascript equivalents. Test utils like `compare` and `compareIteratee` will let you easily test the plain Javascript portion of your functions against the behaviour of Immutable.js' functions.
 
 *Caution: Do not use `compare` or `compareIteratee` if the function you are writing does not use the Immutable.js version of the function internally. This may give you passing tests that don't prove that your code works. See `pa/hasIn` for an example.*
 
