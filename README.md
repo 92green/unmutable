@@ -20,7 +20,7 @@ Immutable.js can be bad **for libraries** because:
 - Having its own set of data containers makes sense for Immutable.js, but it brings its own set of consequences.*
 - *See the *Sell! Sell! Sell!* section for deeper reasoning.
 
-So **Unmutable.js** follows Immutable.js lovely API as closely as it can. But instead of chaining methods, you compose functions together. This leads to smaller bundle sizes, as you only import the functions you need. And it can also work with plain Javascript objects and arrays.
+So **Unmutable.js** follows Immutable.js lovely API as closely as it can. But instead of chaining methods, you compose functions together. This leads to smaller bundle sizes, as you only import the functions you need. And all Unmutable.js functions can work seamlessly with plain javascript or Immutable.js! Wonder!
 
 Each Unmutable.js function returns a function that accepts the value to operate on. So instead of this:
 
@@ -40,8 +40,9 @@ Or if you prefer to pass your data in first, use Unmutable.js' `pipeWith` functi
 
 ```js
 import get from 'unmutable/lib/pa/get';
-import _ from 'unmutable/lib/util/pipeWith';
-_(myData, get('hello', 'notFoundValue')); // hi!
+import pw from 'unmutable/lib/util/pipeWith';
+
+pw(myData, get('hello', 'notFoundValue')); // hi!
 ```
 
 Then if you want to call more functions in a chain like this...
@@ -60,27 +61,12 @@ let name = fromJS(data)
     .get('name'); // Gordon
 ```
 
-...you can use Unmutable.js' `pipeWith` function again:
-
-```js
-import _ from 'unmutable/lib/util/pipeWith';
-
-let name = _(
-    data,
-    last(),
-    get('name')
-); // Gordon
-```
-
-Unmutable.js also provides `pipe()` to squish your functions together and return a function waiting for the value to be passed in, like this:
+...you can use Unmutable.js' `pipe` function, which can be used to squish a set of functions together, like this:
 
 ```js
 import get from 'unmutable/lib/pa/get';
 import last from 'unmutable/lib/pa/last';
 import pipe from 'unmutable/lib/util/pipe';
-
-// point-free style - you dont pass your data in until the very end by calling the returned function.
-// this function works with plain javascript or Immutable.js! Wonder!
 
 let getLastName = pipe(
     last(),
@@ -89,6 +75,21 @@ let getLastName = pipe(
 
 let name = getLastName(data); // Gordon
 
+// you dont pass your data in until the very end by calling the returned function.
+// this is known as point-free programming, and allows for very composable functions.
+
+```
+
+Or if you prefer to pass your data in first, use Unmutable.js' `pipeWith` function:
+
+```js
+import pw from 'unmutable/lib/util/pipeWith';
+
+let name = pw(
+    data,
+    last(),
+    get('name')
+); // Gordon
 ```
 
 **Delicacy!**
@@ -240,6 +241,21 @@ map((value, key) => {
         get('nums'),
         map(ii => ii * 10)
     )(value);
+})
+```
+
+Now that your mapper function makes a pipe and also immediately calls it with a value, you might find it more readable to use `pipeWith` instead:
+
+```js
+import pw from 'unmutable/lib/util/pipeWith;
+
+map((value, key) => {
+    console.log("the key to life and all things:", key);
+    return pw(
+        value,
+        get('nums'),
+        map(ii => ii * 10)
+    );
 })
 ```
 
