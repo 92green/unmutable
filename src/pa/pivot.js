@@ -3,8 +3,6 @@ import prep from '../internal/prep';
 import pipeWith from '../util/pipeWith';
 import clear from './clear';
 import first from './first';
-import get from './get';
-import keyArray from './keyArray';
 import reduce from './reduce';
 import set from './set';
 import update from './update';
