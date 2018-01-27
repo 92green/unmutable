@@ -11,27 +11,31 @@ import update from './update';
 
 export default prep({
     all: () => (item: *): * => {
-        let outerContainer = clear()(item);
 
-        let firstKey: number|string = pipeWith(
+        let outerContainer = pipeWith(
             item,
-            keyArray(),
-            first()
+            clear()
         );
 
         let innerContainer = pipeWith(
             item,
-            get(firstKey),
+            first(),
             clear()
         );
 
-        return reduce((pivoted: *, outerItem: *, outerKey: *): * => {
-            return reduce((pp: *, value: *, innerKey: *): * => {
-                return update(
-                    innerKey,
-                    (ii) => set(outerKey, value)(ii || outerContainer)
-                )(pp);
-            }, pivoted)(outerItem);
-        }, innerContainer)(item);
+        return pipeWith(
+            item,
+            reduce((pivoted: *, outerItem: *, outerKey: *): * => pipeWith(
+                outerItem,
+                reduce((pp: *, value: *, innerKey: *): * => pipeWith(
+                    pp,
+                    update(
+                        innerKey,
+                        outerContainer,
+                        set(outerKey, value)
+                    )
+                ), pivoted)
+            ), innerContainer)
+        );
     }
 });
