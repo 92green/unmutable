@@ -38,6 +38,14 @@ test(`hasIn() should overshoot a value`, (tt: *) => {
     );
 });
 
+test(`hasIn() should find a keyless value`, (tt: *) => {
+    tt.deepEqual(
+        fromJS(data).hasIn([]),
+        hasIn([])(data)
+    );
+});
+
+
 data = [
     123,
     [456,789,101112]
