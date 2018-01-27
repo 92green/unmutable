@@ -40,9 +40,9 @@ Or if you prefer to pass your data in first, use Unmutable.js' `pipeWith` functi
 
 ```js
 import get from 'unmutable/lib/pa/get';
-import pw from 'unmutable/lib/util/pipeWith';
+import pipeWith from 'unmutable/lib/util/pipeWith';
 
-pw(myData, get('hello', 'notFoundValue')); // hi!
+pipeWith(myData, get('hello', 'notFoundValue')); // hi!
 ```
 
 Then if you want to call more functions in a chain like this...
@@ -83,9 +83,9 @@ let name = getLastName(data); // Gordon
 Or if you prefer to pass your data in first, use Unmutable.js' `pipeWith` function:
 
 ```js
-import pw from 'unmutable/lib/util/pipeWith';
+import pipeWith from 'unmutable/lib/util/pipeWith';
 
-let name = pw(
+let name = pipeWith(
     data,
     last(),
     get('name')
@@ -226,37 +226,46 @@ Notice how the function returned from the first `get()` ends up receiving the va
 Sometimes you'll still want the second and third arguments from an interatee, and you can still do this if you like.
 
 ```js
-map(pipe(
-    get('nums'),
-    map(ii => ii * 10)
-))
+let data = {
+    groupA: {names: ["Alice", "Bob", "Chris"]},
+    groupB: {names: ["Doug", "Ed", "Futz"]}
+};
+
+let printGroup = map(pipe(
+    get('names'),
+    join(', ')
+    update(str => `which group?: ${str}`)
+));
+
+let answer = printGroup(data);
+// Answer = ["which group?: Alice, Bob, Chris", "which group?: Doug, Ed, Futz"];
 ```
 
 Becomes:
 
 ```js
-map((value, key) => {
-    console.log("the key to life and all things:", key);
-    return pipe(
-        get('nums'),
-        map(ii => ii * 10)
-    )(value);
-})
+let printGroup = map((value, key) => pipe(
+    get('names'),
+    join(', ')
+    update(str => `${key}: ${str}`)
+)(value));
+
+let answer = printGroup(data);
+// Answer = ["groupA: Alice, Bob, Chris", "groupB: Doug, Ed, Futz"];
 ```
 
-Now that your mapper function makes a pipe and also immediately calls it with a value, you might find it more readable to use `pipeWith` instead:
+Now that your mapper function makes a pipe and immediately calls it with a value, you might find it more readable to pass your value in first using `pipeWith`:
 
 ```js
-import pw from 'unmutable/lib/util/pipeWith;
+let printGroup = map((value, key) => pipeWith(
+    value,
+    get('names'),
+    join(', ')
+    update(str => `${key}: ${str}`)
+));
 
-map((value, key) => {
-    console.log("the key to life and all things:", key);
-    return pw(
-        value,
-        get('nums'),
-        map(ii => ii * 10)
-    );
-})
+let answer = printGroup(data);
+// Answer = ["groupA: Alice, Bob, Chris", "groupB: Doug, Ed, Futz"];
 ```
 
 ## Development
