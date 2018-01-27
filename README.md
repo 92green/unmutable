@@ -223,7 +223,7 @@ Notice how the function returned from the first `get()` ends up receiving the va
 
 **Extravagant!**
 
-Sometimes you'll still want the second and third arguments from an interatee, and you can still do this if you like.
+Sometimes you'll still want the second and third arguments from an iteratee, and you can still do this if you like. In this example we want to get the `key` that `map()` provides, but we can't get access to it if we put `pipe()` straight into `map()`:
 
 ```js
 let data = {
@@ -241,7 +241,7 @@ let answer = printGroup(data);
 // Answer = ["which group?: Alice, Bob, Chris", "which group?: Doug, Ed, Futz"];
 ```
 
-Becomes:
+To fix this, we can put the `pipe()` in another function, which can receive `key`:
 
 ```js
 let printGroup = map((value, key) => pipe(
