@@ -22,6 +22,8 @@ Immutable.js can be bad **for libraries** because:
 
 So **Unmutable.js** follows Immutable.js lovely API as closely as it can. But instead of chaining methods, you compose functions together. This leads to smaller bundle sizes, as you only import the functions you need. And all Unmutable.js functions can work seamlessly with plain javascript or Immutable.js! Wonder!
 
+For now, Unmutable.js is focused only on Maps, Lists, objects and arrays.
+
 Each Unmutable.js function returns a function that accepts the value to operate on. So instead of this:
 
 ```js
@@ -166,7 +168,7 @@ Unmutable.js is good because:
 - Designed to work very well alongside Immutable.js.
 
 Unmutable.js is bad because:
-- No exotic data types. Disappointment. You can still use Immutable.js if you want nice things like Seqs and Records.
+- No exotic data types, just Maps, Lists, arrays and objects for now. Disappointment. You can still use Immutable.js if you want nice things like Seqs and Records.
 
 ## More examples
 

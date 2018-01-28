@@ -53,8 +53,8 @@ data = [
 
 test(`hasIn() should find an array value`, (tt: *) => {
     tt.deepEqual(
-        fromJS(data).hasIn([0,2]),
-        hasIn([0,2])(data)
+        fromJS(data).hasIn([1,2]),
+        hasIn([1,2])(data)
     );
 });
 
@@ -67,8 +67,8 @@ test(`hasIn() should find a negative array value`, (tt: *) => {
 
 test(`hasIn() should miss an array value`, (tt: *) => {
     tt.deepEqual(
-        fromJS(data).hasIn([0,-12]),
-        hasIn([0,-12])(data)
+        fromJS(data).hasIn([1,-12]),
+        hasIn([1,-12])(data)
     );
 });
 
