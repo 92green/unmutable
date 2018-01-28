@@ -2,7 +2,6 @@
 import prep from '../internal/prep';
 import del from './delete';
 import updateIn from './updateIn';
-import overload from '../util/overload';
 
 // we're not using Immutable.js deleteIn because it can't cope with mixed types in the keyPath
 
