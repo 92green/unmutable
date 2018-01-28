@@ -122,8 +122,11 @@ API docs will come soon, with examples. In the mean time you can assume that any
 #### util/isValueObject
  `isValueObject(maybe: *): boolean` - Works like Immutable.js `isValueObject` but also works on plain Javascript arrays and objects.
 
+#### pa/entriesReverse
+`entriesReverse(): Evaluator` - Returns an evaluator that works just like `entries()`, but iterates in the reverse order.
+
 #### pa/entryArray
-`entryArray(): Evaluator` - Returns an evaluator that returns an array of values on the item. Immutable.js has no function that does this, they have `entries()` which returns an iterator, and `entrySeq()` which returns an Immutable.js `Seq`.
+`entryArray(): Evaluator` - Returns an evaluator that returns an array of entries (e.g. `[key, value]` tuples) of the item. Immutable.js has no function that does this, they have `entries()` which returns an iterator, and `entrySeq()` which returns an Immutable.js `Seq`.
 
 #### pa/keyArray
 `keyArray(): Evaluator` - Returns an evaluator that returns an array of keys on the item. Immutable.js has no function that does this, they have `keys()` which returns an iterator, and `keySeq()` which returns an Immutable.js `Seq`.
