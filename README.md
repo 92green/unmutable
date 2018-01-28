@@ -2,23 +2,27 @@
 
 *Pure functional, point-free data-collection utilities that work seamlessly with both plain Javascript and Immutable.js*
 
+[![unmutable npm](https://img.shields.io/npm/v/unmutable.svg?style=flat-square)](https://www.npmjs.com/package/unmutable) [![unmutable circle](https://img.shields.io/circleci/project/github/blueflag/unmutable.svg?style=flat-square)]()
+
 ```
 yarn add unmutable
 ```
 
-Immutable.js is good because:
+[Immutable.js](https://facebook.github.io/immutable-js/docs/) is good because:
 - Wonderful API.
 - Immutable data.
 - Exotic data types.
 - Functional-programming-flavoured usage.
 
 Immutable.js can be bad **for libraries** because:
-- It's big, and you can't cherry pick. Disappointment.
+- It's big, and you can't cherry pick. Disappointment.*
 - It's not transparent when dealing with Immutable.js and non-Immutable.js objects.*
 - Having its own set of data containers makes sense for Immutable.js, but it brings its own set of consequences.*
 - *See the *Sell! Sell! Sell!* section for deeper reasoning.
 
-So **Unmutable.js** follows Immutable.js lovely API as closely as it can. But instead of chaining methods, you compose functions together. This leads to smaller bundle sizes, as you only import the functions you need. And it can also work with plain Javascript objects and arrays.
+So **Unmutable.js** follows Immutable.js lovely API as closely as it can. But instead of chaining methods, you compose functions together. This leads to smaller bundle sizes, as you only import the functions you need. And all Unmutable.js functions can work seamlessly with plain javascript or Immutable.js! Wonder!
+
+For now, Unmutable.js is focused only on Maps, Lists, objects and arrays.
 
 Each Unmutable.js function returns a function that accepts the value to operate on. So instead of this:
 
@@ -30,7 +34,17 @@ myData.get('hello', 'notFoundValue'); // hi!
 You could call it like this:
 
 ```js
+import get from 'unmutable/lib/pa/get';
 get('hello', 'notFoundValue')(myData); // hi!
+```
+
+Or if you prefer to pass your data in first, use Unmutable.js' `pipeWith` function:
+
+```js
+import get from 'unmutable/lib/pa/get';
+import pipeWith from 'unmutable/lib/util/pipeWith';
+
+pipeWith(myData, get('hello', 'notFoundValue')); // hi!
 ```
 
 Then if you want to call more functions in a chain like this...
@@ -49,24 +63,35 @@ let name = fromJS(data)
     .get('name'); // Gordon
 ```
 
-...you can use Unmutable.js `pipe()` function to squish your functions together, like this:
+...you can use Unmutable.js' `pipe` function, which can be used to squish a set of functions together, like this:
 
-```
+```js
 import get from 'unmutable/lib/pa/get';
 import last from 'unmutable/lib/pa/last';
 import pipe from 'unmutable/lib/util/pipe';
-
-// point-free style - you dont pass your data in until the very end by calling the returned function.
 
 let getLastName = pipe(
     last(),
     get('name')
 );
 
-// this function works with plain javascript or Immutable.js! Wonder!
-
 let name = getLastName(data); // Gordon
 
+// you dont pass your data in until the very end by calling the returned function.
+// this is known as point-free programming, and allows for very composable functions.
+
+```
+
+Or if you prefer to pass your data in first, use Unmutable.js' `pipeWith` function:
+
+```js
+import pipeWith from 'unmutable/lib/util/pipeWith';
+
+let name = pipeWith(
+    data,
+    last(),
+    get('name')
+); // Gordon
 ```
 
 **Delicacy!**
@@ -76,6 +101,53 @@ let name = getLastName(data); // Gordon
 We're adding lots of functions in. We'll add them in as we go. If any added functions match names of Immutable.js Map or List methods, they will match Immutable.js' function signatures and do the same things. On top of this, we reserve the right to add extra cool functions that we might find useful.
 
 **Pleasing time!**
+
+API docs will come soon, with examples. In the mean time you can assume that any functions in this library are feature complete compared with [Immutable.js docs](https://facebook.github.io/immutable-js/docs/), and fully tested for `Map`, `List`, object and arrays. There are also a few extra functions:
+
+#### util/pipe
+ `pipe(...functions) => (value) => newValue` - Composes (combines) functions together from left to right. Returns an evaluator that returns the output of the operation.
+
+#### util/pipeWith
+ `pipeWith(item, ...functions) => newValue` - Accepts an item as the first argument, and composes (combines) functions in the remaining arguments together from left to right. Returns the output of the operation.
+ 
+#### util/compose
+ `compose(...functions) => (value) => newValue` - Composes (combines) functions together from right to left. Returns an evaluator that returns the output of the operation.
+ 
+#### util/overload
+ `overload({...overloads}, overloadArgs: * = undefined) => Function` - Simulates function overloading in Javascript.
+
+#### util/isCollection
+ `isCollection(maybe: *) => boolean` - Works like Immutable.js `isCollection` but also works on plain Javascript arrays and objects.
+
+#### util/isValueObject
+ `isValueObject(maybe: *) => boolean` - Works like Immutable.js `isValueObject` but also works on plain Javascript arrays and objects.
+
+#### pa/entriesReverse
+`entriesReverse() => (value) => Iterator` - Returns an evaluator that works just like `entries()`, but iterates in the reverse order.
+
+#### pa/entryArray
+`entryArray() => (value) => Array` - Returns an evaluator that returns an array of entries (e.g. `[key, value]` tuples) of the item. Immutable.js has no function that does this, they have `entries()` which returns an iterator, and `entrySeq()` which returns an Immutable.js `Seq`.
+
+#### pa/keyArray
+`keyArray() => (value) => Array` - Returns an evaluator that returns an array of keys on the item. Immutable.js has no function that does this, they have `keys()` which returns an iterator, and `keySeq()` which returns an Immutable.js `Seq`.
+
+#### pa/noop
+`noop() => (value) => value` - Returns a no-op. Useful for readable code.
+
+#### pa/omit
+`omit(keys: string[]) => (value) => newValue` - For `Map` and object: Returns an evaluator that filters out all keys listed in `keys`.
+
+#### pa/pick
+`pick(keys: string[]) => (value) => newValue` - For `Map` and object: Returns an evaluator that filters out all keys that aren't listed in `keys`.
+
+#### pa/pivot
+`pivot() => (value) => newValue` - Returns an evaluator that pivots the item. The keys at the first level of nesting are moved to the second level, and the keys of the second level are moved to the first.
+
+#### pa/size
+`size() => (value) => number` - Returns the number of keys on the item. Immutable.js has this as a getter on their collections, Unmutable.js offers this as a function.
+
+#### pa/valueArray
+`valueArray() => (value) => Array` - Returns an evaluator that returns an array of values on the item. Immutable.js has no function that does this, they have `values()` which returns an iterator, and `valueSeq()` which returns an Immutable.js `Seq`.
 
 ## Sell! Sell! Sell!
 
@@ -87,12 +159,13 @@ Immutable.js is good because:
 
 Immutable.js can be bad **for libraries** because:
 - It's big, and you can't cherry pick. Disappointment.
+  - If you import `List` for example, you import every method that `List` has on it, even if you only use one of them.
 - It's not transparent when dealing with Immutable.js and non-Immutable.js objects.
-  - It's difficult to write functions that use Immutable.js that return the same data types as they accept. Functions you write will tend to either always return Immutable.js typed, or plain types.
+  - It's difficult to write functions that use Immutable.js that return the same data types as they start with. Functions you write will tend to either always return Immutable.js typed, or plain types.
 - Having its own set of data containers makes sense for Immutable.js, but it brings its own set of consequences.
   - Wrapping and unwrapping data can be tedious and lead to confusion about whether you expect to see Immutable.js objects or plain Javascript at different points in the code.
-  - Special data containers make it harder to work alongside functions that only work with Immutable.js, or to remove Immutable from the codebase if the reason arises.
-  - Wrapping and unwrapping take time and can sometimes be quite slow, particularly if you use `fromJS()` to try and avoid the uncertainly of mixing plain javascript and Immutbale.js types.
+  - Special data containers make it harder to work alongside functions that only work with Immutable.js, and make it harder to remove Immutable from the codebase if the reason arises.
+  - Wrapping and unwrapping take time and can sometimes be quite slow, particularly if you use `fromJS()` to try and avoid the uncertainly of mixing plain javascript and Immutable.js types.
 
 ## Introduce unmutable!
 
@@ -101,13 +174,13 @@ Unmutable.js is good because:
 - Immutable data.
 - You can pick your cherries. Only import the functions you need. Lightweight!
 - It *is* transparent when dealing with Immutable.js and non-Immutable.js objects.
-  - Pass in plain objects and arrays and you will receive plain objects and arrays back out. Even data that is a mix of plain collections and Immutable.js collections work.
+  - Pass in plain objects and arrays and you will receive plain objects and arrays back out. Even data that is a mix of plain collections and Immutable.js collections will be preserved, and deep operations like `getIn()` will traverse Immutable.js and non-Immutable.js objects with no issue.
 - Functional-programming-flavoured usage.
   - Bonus point-free style programming! **Very fine!**
-- Desiogned to work very well alongside Immutable.js.
+- Designed to work very well alongside Immutable.js.
 
 Unmutable.js is bad because:
-- No exotic data types. Disappointment. You can still use Immutable.js if you want nice things like Seqs and Records.
+- No exotic data types, just Maps, Lists, arrays and objects for now. Disappointment. You can still use Immutable.js if you want nice things like Seqs and Records.
 
 ## More examples
 
@@ -164,24 +237,55 @@ Notice how the function returned from the first `get()` ends up receiving the va
 
 **Extravagant!**
 
-Sometimes you'll still want the second and third arguments from an interatee, and you can still do this if you like.
+Sometimes you'll still want the second and third arguments from an iteratee, and you can still do this if you like. In this example we want to get the `key` that `map()` provides, but we can't get access to it if we put `pipe()` straight into `map()`:
 
 ```js
-map(pipe(
-    get('nums'),
-    map(ii => ii * 10)
-))
+let data = {
+    groupA: {names: ["Alice", "Bob", "Chris"]},
+    groupB: {names: ["Doug", "Ed", "Futz"]}
+};
+
+let printGroup = map(pipe(
+    get('names'),
+    join(', ')
+    update(str => `which group?: ${str}`)
+));
+
+let answer = printGroup(data);
+// Answer = ["which group?: Alice, Bob, Chris", "which group?: Doug, Ed, Futz"];
 ```
 
-Becomes:
+To fix this, we can put the `pipe()` in another function, which can receive `key`:
 
 ```js
-map((value, key) => {
-    console.log("the key to life and all things:", key);
-    return pipe(
-        get('nums'),
-        map(ii => ii * 10)
-    )(value);
-})
+let printGroup = map((value, key) => pipe(
+    get('names'),
+    join(', ')
+    update(str => `${key}: ${str}`)
+)(value));
+
+let answer = printGroup(data);
+// Answer = ["groupA: Alice, Bob, Chris", "groupB: Doug, Ed, Futz"];
 ```
 
+Now that your mapper function makes a pipe and immediately calls it with a value, you might find it more readable to pass your value in first using `pipeWith`:
+
+```js
+let printGroup = map((value, key) => pipeWith(
+    value,
+    get('names'),
+    join(', ')
+    update(str => `${key}: ${str}`)
+));
+
+let answer = printGroup(data);
+// Answer = ["groupA: Alice, Bob, Chris", "groupB: Doug, Ed, Futz"];
+```
+
+## Development
+
+If you are to add functions that already exist in Immutable.js, make sure they are fully complete before submitting, and work with all data types that the original function works, plus their corresponding Javascript equivalents (e.g. `List` -> array). Test utils like `compare` and `compareIteratee` will let you easily test the plain Javascript portion of your functions against the behaviour of Immutable.js' functions.
+
+*Caution: Do not use `compare` or `compareIteratee` if the function you are writing does not use the Immutable.js version of the function internally. Doing so may give you passing tests that don't prove that your code works. See `pa/hasIn` for an example.*
+
+If you want to add functions that don't exist in Immutable.js, roll your chair over and talk about it first. Yes I'm assuming you work in the same room as me, you probably do. If you don't, feel free to pop your idea in an issue and we can talk about it. Functions that aren't in Immutable.js should be built out of other Unmutable.js functions as much as possible, keeping the amount of data-container-specific code to a minimum. See `pa/pivot` as an example.

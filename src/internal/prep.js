@@ -1,6 +1,10 @@
 // @flow
 import {isImmutable} from './predicates';
 
+// TODO internal changes
+// + rename "name" to "immutable"
+// + rename "all" to "any" and move to bottom of chain, as a fallback
+
 export default ({name, all, arr, obj}: Object): Function => {
     return (...args: *) => (item: *): * => {
         if(name && isImmutable(item)) { // if "name" is set and item is Immutable.js, call the Immutable.js function

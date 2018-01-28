@@ -24,22 +24,21 @@ test('pipe composes functions from left to right', (tt: Object) => {
 
 test('pipe throws at runtime if argument is not a function', (tt: Object) => {
     const square = x => x * x;
-    const add = (x, y) => x + y;
+    const double = x => x * 2;
 
     // $FlowFixMe - deliberate misuse of types for testing
-    tt.throws(() => pipe(square, add, false)(1, 2));
+    tt.throws(() => pipe(square, double, false)(1));
     // $FlowFixMe - deliberate misuse of types for testing
-    tt.throws(() => pipe(square, add, undefined)(1, 2));
+    tt.throws(() => pipe(square, double, undefined)(1));
     // $FlowFixMe - deliberate misuse of types for testing
-    tt.throws(() => pipe(square, add, true)(1, 2));
+    tt.throws(() => pipe(square, double, true)(1));
     // $FlowFixMe - deliberate misuse of types for testing
-    tt.throws(() => pipe(square, add, NaN)(1, 2));
+    tt.throws(() => pipe(square, double, NaN)(1));
     // $FlowFixMe - deliberate misuse of types for testing
-    tt.throws(() => pipe(square, add, '42')(1, 2));
+    tt.throws(() => pipe(square, double, '42')(1));
 });
 
 test('pipe returns the first given argument if given no functions', (tt: Object) => {
-    tt.is(pipe()(1, 2), 1);
     tt.is(pipe()(3), 3);
     tt.is(pipe()(), undefined);
 });
