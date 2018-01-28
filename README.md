@@ -114,13 +114,13 @@ API docs will come soon, with examples. In the mean time you can assume that any
  `compose(...functions) => (value) => newValue` - Composes (combines) functions together from right to left. Returns an evaluator that returns the output of the operation.
  
 #### util/overload
- `overload({...overloads}, overloadArgs: * = undefined): Function` - Simulates function overloading in Javascript.
+ `overload({...overloads}, overloadArgs: * = undefined) => Function` - Simulates function overloading in Javascript.
 
 #### util/isCollection
- `isCollection(maybe: *): boolean` - Works like Immutable.js `isCollection` but also works on plain Javascript arrays and objects.
+ `isCollection(maybe: *) => boolean` - Works like Immutable.js `isCollection` but also works on plain Javascript arrays and objects.
 
 #### util/isValueObject
- `isValueObject(maybe: *): boolean` - Works like Immutable.js `isValueObject` but also works on plain Javascript arrays and objects.
+ `isValueObject(maybe: *) => boolean` - Works like Immutable.js `isValueObject` but also works on plain Javascript arrays and objects.
 
 #### pa/entriesReverse
 `entriesReverse() => (value) => Iterator` - Returns an evaluator that works just like `entries()`, but iterates in the reverse order.
