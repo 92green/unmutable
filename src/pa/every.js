@@ -1,15 +1,16 @@
 // @flow
 import prep from '../internal/prep';
+import entries from './entries';
 
 export default prep({
     name: 'every',
-    obj: (predicate: Function) => (item: Object): boolean => {
-        for(let key in item) {
-            if(!predicate(item[key], key, item)) {
+    all: (predicate: Function) => (item: Object): boolean => {
+        let iterator = entries()(item);
+        for(let [key, value] of iterator) {
+            if(!predicate(value, key, item)) {
                 return false;
             }
         }
         return true;
-    },
-    arr: (predicate: Function) => (item: Array<*>): boolean => item.every(predicate)
+    }
 });
