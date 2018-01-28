@@ -1,14 +1,14 @@
 // @flow
 import prep from '../internal/prep';
-import keys from './keys';
+import values from './values';
 
 export default prep({
     all: () => (item: Array<*>): Array<*> => {
-        let iterator = keys()(item);
-        let keyArray = [];
+        let iterator = values()(item);
+        let valueArray = [];
         for(let key of iterator) {
-            keyArray.push(key);
+            valueArray.push(key);
         }
-        return keyArray;
+        return valueArray;
     }
 });

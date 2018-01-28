@@ -122,8 +122,14 @@ API docs will come soon, with examples. In the mean time you can assume that any
 #### util/isValueObject
  `isValueObject(maybe: *): boolean` - Works like Immutable.js `isValueObject` but also works on plain Javascript arrays and objects.
 
+#### pa/entryArray
+`entryArray(): Evaluator` - Returns an evaluator that returns an array of values on the item. Immutable.js has no function that does this, they have `entries()` which returns an iterator, and `entrySeq()` which returns an Immutable.js `Seq`.
+
 #### pa/keyArray
 `keyArray(): Evaluator` - Returns an evaluator that returns an array of keys on the item. Immutable.js has no function that does this, they have `keys()` which returns an iterator, and `keySeq()` which returns an Immutable.js `Seq`.
+
+#### pa/omit
+`omit(keys: string[]): Evaluator` - For `Map` and object: Returns an evaluator that filters out all keys listed in `keys`.
 
 #### pa/pick
 `pick(keys: string[]): Evaluator` - For `Map` and object: Returns an evaluator that filters out all keys that aren't listed in `keys`.
@@ -131,11 +137,11 @@ API docs will come soon, with examples. In the mean time you can assume that any
 #### pa/pivot
 `pivot(): Evaluator` - Returns an evaluator that pivots the item. The keys at the first level of nesting are moved to the second level, and the keys of the second level are moved to the first.
 
-#### pa/omit
-`omit(keys: string[]): Evaluator` - For `Map` and object: Returns an evaluator that filters out all keys listed in `keys`.
-
 #### pa/size
 `size(): Evaluator` - Returns the number of keys on the item. Immutable.js has this as a getter on their collections, Unmutable.js offers this as a function.
+
+#### pa/valueArray
+`valueArray(): Evaluator` - Returns an evaluator that returns an array of values on the item. Immutable.js has no function that does this, they have `values()` which returns an iterator, and `valueSeq()` which returns an Immutable.js `Seq`.
 
 ## Sell! Sell! Sell!
 
