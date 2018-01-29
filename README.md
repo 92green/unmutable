@@ -117,7 +117,13 @@ API docs will come soon, with examples. In the mean time you can assume that any
  `overload({...overloads}, overloadArgs: * = undefined) => Function` - Simulates function overloading in Javascript.
 
 #### util/isCollection
- `isCollection(maybe: *) => boolean` - Works like Immutable.js `isCollection` but also works on plain Javascript arrays and objects.
+ `isCollection(maybe: *) => boolean` - Works like Immutable.js `isCollection` but also identifies plain Javascript arrays and objects as being collections.
+
+#### util/isIndexed
+ `isIndexed(maybe: *) => boolean` - Works like Immutable.js `isIndexed` but also identifies plain Javascript arrays as being indexed.
+
+#### util/isPlainObject
+ `isPlainObject(maybe: *) => boolean` - Tests if something is a plain object according to [`is-plain-object`](https://www.npmjs.com/package/is-plain-object).
 
 #### util/isValueObject
  `isValueObject(maybe: *) => boolean` - Works like Immutable.js `isValueObject` but also works on plain Javascript arrays and objects.
