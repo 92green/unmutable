@@ -1,9 +1,9 @@
 // @flow
 import prep from '../internal/prep';
-import noop from './noop';
+import identity from './identity';
 import slice from './slice';
 
 export default prep({
     name: 'skipLast',
-    all: (amount: number) => amount === 0 ? noop() : slice(0, -amount)
+    all: (amount: number) => amount === 0 ? identity() : slice(0, -amount)
 });
