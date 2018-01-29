@@ -122,6 +122,9 @@ API docs will come soon, with examples. In the mean time you can assume that any
 #### util/isIndexed
  `isIndexed(maybe: *) => boolean` - Works like Immutable.js `isIndexed` but also identifies plain Javascript arrays as being indexed.
 
+#### util/isKeyed
+ `isKeyed(maybe: *) => boolean` - Works like Immutable.js `isKeyed` but also works on plain Javascript objects.
+
 #### util/isPlainObject
  `isPlainObject(maybe: *) => boolean` - Tests if something is a plain object according to [`is-plain-object`](https://www.npmjs.com/package/is-plain-object).
 
