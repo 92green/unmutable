@@ -128,11 +128,14 @@ API docs will come soon, with examples. In the mean time you can assume that any
 #### pa/entryArray
 `entryArray() => (value) => Array` - Returns an evaluator that returns an array of entries (e.g. `[key, value]` tuples) of the item. Immutable.js has no function that does this, they have `entries()` which returns an iterator, and `entrySeq()` which returns an Immutable.js `Seq`.
 
+#### pa/identity
+`identity() => (value) => value` - Returns a function that just passes values through with no change. Useful for readable code.
+
 #### pa/keyArray
 `keyArray() => (value) => Array` - Returns an evaluator that returns an array of keys on the item. Immutable.js has no function that does this, they have `keys()` which returns an iterator, and `keySeq()` which returns an Immutable.js `Seq`.
 
-#### pa/noop
-`noop() => (value) => value` - Returns a no-op. Useful for readable code.
+#### pa/log
+`log(message: string = "", type: string = "log") => (value) => value` - Returns an evaluator that passes the value through unchanged, but also calls `console[type](message, value)`. Useful for debugging.
 
 #### pa/omit
 `omit(keys: string[]) => (value) => newValue` - For `Map` and object: Returns an evaluator that filters out all keys listed in `keys`.
@@ -154,7 +157,7 @@ API docs will come soon, with examples. In the mean time you can assume that any
 Immutable.js is good because:
 - Wonderful API.
 - Immutable data.
-- Exotic data types.
+- Exotic data types. 
 - Functional-programming-flavoured usage.
 
 Immutable.js can be bad **for libraries** because:
@@ -181,6 +184,7 @@ Unmutable.js is good because:
 
 Unmutable.js is bad because:
 - No exotic data types, just Maps, Lists, arrays and objects for now. Disappointment. You can still use Immutable.js if you want nice things like Seqs and Records.
+- Performance has not been tested in comparison to Immutable.js yet. It's likely that some aspects of Immutable.js are more efficient. Keep in mind that using Unmutable.js doesn't have the overhead of `fromJS()` and `toJS()`ing all your data. Some benchmarks would be great, stay tuned.
 
 ## More examples
 
@@ -284,8 +288,9 @@ let answer = printGroup(data);
 
 ## Development
 
-If you are to add functions that already exist in Immutable.js, make sure they are fully complete before submitting, and work with all data types that the original function works, plus their corresponding Javascript equivalents (e.g. `List` -> array). Test utils like `compare` and `compareIteratee` will let you easily test the plain Javascript portion of your functions against the behaviour of Immutable.js' functions.
+If you are to add functions that already exist in Immutable.js, make sure they are fully complete before submitting, and work with all data types that the original function works with, plus their corresponding Javascript equivalents (e.g. `List` -> array). Test utils like `compare` and `compareIteratee` will let you easily test the plain Javascript portion of your functions against the behaviour of Immutable.js' functions.
 
 *Caution: Do not use `compare` or `compareIteratee` if the function you are writing does not use the Immutable.js version of the function internally. Doing so may give you passing tests that don't prove that your code works. See `pa/hasIn` for an example.*
 
-If you want to add functions that don't exist in Immutable.js, roll your chair over and talk about it first. Yes I'm assuming you work in the same room as me, you probably do. If you don't, feel free to pop your idea in an issue and we can talk about it. Functions that aren't in Immutable.js should be built out of other Unmutable.js functions as much as possible, keeping the amount of data-container-specific code to a minimum. See `pa/pivot` as an example.
+If you want to add functions that don't exist in Immutable.js, roll your chair over and talk about it first. Yes I'm assuming you work in the same room as me, you probably do. If you don't, feel free to pop your idea in an issue and we can talk about it. Functions that aren't in Immutable.js should be built out of other Unmutable.js functions as much as possible and/or make use of iterators (`entries()`, `entriesReverse()`, `keys()`, `values()`), to keep the amount of data-container-specific code to a minimum. See `pa/pivot` as an example.
+
