@@ -1,6 +1,10 @@
 # Unmutable Docs
 
-Unmutable.js is a work in progress, but it follows [Immutable.js](https://facebook.github.io/immutable-js/docs/) methods closely. 
+Unmutable.js follows [Immutable.js](https://facebook.github.io/immutable-js/docs/)'s `Map` and `List` methods closely. For all Unmutable.js functions that have matching functions in Immutable.js, you can assume that they take the same arguments and do the same things.
+
+Functions that normally work on `List`s will work on `List` and arrays, functions that normally work on `Map`s will work on `Map`s and objects.
+
+It's a work in progress so not all functions have been implemented yet.
 
 ## Functions
 
@@ -9,8 +13,6 @@ All `pa` functions return an evaluator. An evaluator is a function that accepts 
 * The asterisk indicates functions which only work with `List`s and arrays.
 
 ### Implemented
-
-You can assume that any functions in this library are feature complete compared with [Immutable.js docs](https://facebook.github.io/immutable-js/docs/), and fully tested for `Map`, `List`, object and arrays.
 
 ```
 butLast
@@ -187,6 +189,8 @@ uniqueBy
 
 ## Util
 
+Utils include functions that make Unmutable.js useable and useful, as well as plain-Javascript friendly versions of some of Immutable.js top level functions.
+
 #### util/pipe
  `pipe(...functions) => (value) => newValue` - Composes (combines) functions together from left to right. Returns an evaluator that returns the output of the operation.
 
@@ -214,3 +218,8 @@ uniqueBy
 #### util/isValueObject
  `isValueObject(maybe: *) => boolean` - Works like Immutable.js `isValueObject` but also works on plain Javascript arrays and objects.
 
+### To be implemented
+
+```
+is (use epoberezkin/fast-deep-equal)
+```
