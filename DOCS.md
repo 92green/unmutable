@@ -23,6 +23,7 @@ delete
 deleteAll
 deleteIn
 entries
+equals
 every
 filter
 filterNot
@@ -72,7 +73,6 @@ values
 
 ```
 countBy
-equals (use epoberezkin/fast-deep-equal)
 flatMap
 flatten
 flip
@@ -153,7 +153,7 @@ withMutations
 `entryArray() => (value) => Array` - Returns an evaluator that returns an array of entries (e.g. `[key, value]` tuples) of the item. Immutable.js has no function that does this, they have `entries()` which returns an iterator, and `entrySeq()` which returns an Immutable.js `Seq`.
 
 #### pa/identity
-`identity() => (value) => value` - Returns a function that just passes values through with no change. Useful for readable code.
+`identity() => (value) => value` - Returns an evaluator that just passes values through with no change. Useful for readable code.
 
 #### pa/keyArray
 `keyArray() => (value) => Array` - Returns an evaluator that returns an array of keys on the item. Immutable.js has no function that does this, they have `keys()` which returns an iterator, and `keySeq()` which returns an Immutable.js `Seq`.
@@ -171,7 +171,10 @@ withMutations
 `pivot() => (value) => newValue` - Returns an evaluator that pivots the item. The keys at the first level of nesting are moved to the second level, and the keys of the second level are moved to the first.
 
 #### pa/size
-`size() => (value) => number` - Returns the number of keys on the item. Immutable.js has this as a getter on their collections, Unmutable.js offers this as a function.
+`size() => (value) => number` - Returns an evaluator that number of keys on the item. Immutable.js has this as a getter on their collections, Unmutable.js offers this as a function.
+
+#### pa/strictEquals
+`strictEquals(other: *) => (value) => number` - Returns an evaluator that checks if `other` and `value` are strictly equal. This complements `equals()`, which checks for deep value equality.
 
 #### pa/valueArray
 `valueArray() => (value) => Array` - Returns an evaluator that returns an array of values on the item. Immutable.js has no function that does this, they have `values()` which returns an iterator, and `valueSeq()` which returns an Immutable.js `Seq`.
@@ -179,7 +182,6 @@ withMutations
 ### Extra functions to be implemented
 
 ```
-strictEquals
 toIndexed
 toKeyed
 unique
@@ -217,9 +219,3 @@ Utils include functions that make Unmutable.js useable and useful, as well as pl
 
 #### util/isValueObject
  `isValueObject(maybe: *) => boolean` - Works like Immutable.js `isValueObject` but also works on plain Javascript arrays and objects.
-
-### To be implemented
-
-```
-is (use epoberezkin/fast-deep-equal)
-```
