@@ -96,70 +96,11 @@ let name = pipeWith(
 
 **Delicacy!**
 
-## API
+## Docs
 
 We're adding lots of functions in. We'll add them in as we go. If any added functions match names of Immutable.js Map or List methods, they will match Immutable.js' function signatures and do the same things. On top of this, we reserve the right to add extra cool functions that we might find useful.
 
-**Pleasing time!**
-
-API docs will come soon, with examples. In the mean time you can assume that any functions in this library are feature complete compared with [Immutable.js docs](https://facebook.github.io/immutable-js/docs/), and fully tested for `Map`, `List`, object and arrays. There are also a few extra functions:
-
-#### util/pipe
- `pipe(...functions) => (value) => newValue` - Composes (combines) functions together from left to right. Returns an evaluator that returns the output of the operation.
-
-#### util/pipeWith
- `pipeWith(item, ...functions) => newValue` - Accepts an item as the first argument, and composes (combines) functions in the remaining arguments together from left to right. Returns the output of the operation.
- 
-#### util/compose
- `compose(...functions) => (value) => newValue` - Composes (combines) functions together from right to left. Returns an evaluator that returns the output of the operation.
- 
-#### util/overload
- `overload({...overloads}, overloadArgs: * = undefined) => Function` - Simulates function overloading in Javascript.
-
-#### util/isCollection
- `isCollection(maybe: *) => boolean` - Works like Immutable.js `isCollection` but also identifies plain Javascript arrays and objects as being collections.
-
-#### util/isIndexed
- `isIndexed(maybe: *) => boolean` - Works like Immutable.js `isIndexed` but also identifies plain Javascript arrays as being indexed.
-
-#### util/isKeyed
- `isKeyed(maybe: *) => boolean` - Works like Immutable.js `isKeyed` but also works on plain Javascript objects.
-
-#### util/isPlainObject
- `isPlainObject(maybe: *) => boolean` - Tests if something is a plain object according to [`is-plain-object`](https://www.npmjs.com/package/is-plain-object).
-
-#### util/isValueObject
- `isValueObject(maybe: *) => boolean` - Works like Immutable.js `isValueObject` but also works on plain Javascript arrays and objects.
-
-#### pa/entriesReverse
-`entriesReverse() => (value) => Iterator` - Returns an evaluator that works just like `entries()`, but iterates in the reverse order.
-
-#### pa/entryArray
-`entryArray() => (value) => Array` - Returns an evaluator that returns an array of entries (e.g. `[key, value]` tuples) of the item. Immutable.js has no function that does this, they have `entries()` which returns an iterator, and `entrySeq()` which returns an Immutable.js `Seq`.
-
-#### pa/identity
-`identity() => (value) => value` - Returns a function that just passes values through with no change. Useful for readable code.
-
-#### pa/keyArray
-`keyArray() => (value) => Array` - Returns an evaluator that returns an array of keys on the item. Immutable.js has no function that does this, they have `keys()` which returns an iterator, and `keySeq()` which returns an Immutable.js `Seq`.
-
-#### pa/log
-`log(message: string = "", type: string = "log") => (value) => value` - Returns an evaluator that passes the value through unchanged, but also calls `console[type](message, value)`. Useful for debugging.
-
-#### pa/omit
-`omit(keys: string[]) => (value) => newValue` - For `Map` and object: Returns an evaluator that filters out all keys listed in `keys`.
-
-#### pa/pick
-`pick(keys: string[]) => (value) => newValue` - For `Map` and object: Returns an evaluator that filters out all keys that aren't listed in `keys`.
-
-#### pa/pivot
-`pivot() => (value) => newValue` - Returns an evaluator that pivots the item. The keys at the first level of nesting are moved to the second level, and the keys of the second level are moved to the first.
-
-#### pa/size
-`size() => (value) => number` - Returns the number of keys on the item. Immutable.js has this as a getter on their collections, Unmutable.js offers this as a function.
-
-#### pa/valueArray
-`valueArray() => (value) => Array` - Returns an evaluator that returns an array of values on the item. Immutable.js has no function that does this, they have `values()` which returns an iterator, and `valueSeq()` which returns an Immutable.js `Seq`.
+[**See the Unmutable Docs**](DOCS.md)
 
 ## Sell! Sell! Sell!
 
@@ -194,6 +135,8 @@ Unmutable.js is good because:
 Unmutable.js is bad because:
 - No exotic data types, just Maps, Lists, arrays and objects for now. Disappointment. You can still use Immutable.js if you want nice things like Seqs and Records.
 - Performance has not been tested in comparison to Immutable.js yet. It's likely that some aspects of Immutable.js are more efficient. Keep in mind that using Unmutable.js doesn't have the overhead of `fromJS()` and `toJS()`ing all your data. Some benchmarks would be great, stay tuned.
+
+**Pleasing time!**
 
 ## More examples
 
