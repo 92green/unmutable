@@ -246,3 +246,4 @@ If you are to add functions that already exist in Immutable.js, make sure they a
 
 If you want to add functions that don't exist in Immutable.js, roll your chair over and talk about it first. Yes I'm assuming you work in the same room as me, you probably do. If you don't, feel free to pop your idea in an issue and we can talk about it. Functions that aren't in Immutable.js should be built out of other Unmutable.js functions as much as possible and/or make use of iterators (`entries()`, `entriesReverse()`, `keys()`, `values()`), to keep the amount of data-container-specific code to a minimum. See `pa/pivot` as an example.
 
+Remember to update the [docs page](DOCS.md) if necessary as part of your PR.

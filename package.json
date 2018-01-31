@@ -54,6 +54,7 @@
     "sinon": "^2.1.0"
   },
   "dependencies": {
+    "fast-deep-equal": "^1.0.0",
     "is-plain-object": "^2.0.4"
   },
   "peerDependencies": {
