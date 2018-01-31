@@ -173,6 +173,9 @@ withMutations
 #### pa/size
 `size() => (value) => number` - Returns an evaluator that number of keys on the item. Immutable.js has this as a getter on their collections, Unmutable.js offers this as a function.
 
+#### pa/shallowEquals
+`shallowEquals(other: *) => (value) => number` - Returns an evaluator that checks if `other` and `value` are shallowly equal, using strict equality. Note: use `equals()` if you want to check deep equality.
+
 #### pa/strictEquals
 `strictEquals(other: *) => (value) => number` - Returns an evaluator that checks if `other` and `value` are strictly equal. This complements `equals()`, which checks for deep value equality.
 
