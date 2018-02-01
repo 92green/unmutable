@@ -63,6 +63,7 @@ slice
 some
 take
 takeLast
+toJS
 unshift *
 update
 updateIn
@@ -107,7 +108,6 @@ sortBy
 takeWhile
 takeUntil
 toArray
-toJS
 toJSON
 toObject
 zip *
@@ -175,6 +175,9 @@ withMutations
 
 #### pa/shallowEquals
 `shallowEquals(other: *) => (value) => number` - Returns an evaluator that checks if `other` and `value` are shallowly equal, using strict equality. Note: use `equals()` if you want to check deep equality.
+
+#### pa/shallowToJS
+`shallowToJS() => (value) => *` - Returns an evaluator that turns the `value` into plain Javascript if it is an Immutable.js data type. Internally if `value` is a `List` then `.toArray()` is called, and if value is a `Map` then `toObject()` is called.
 
 #### pa/strictEquals
 `strictEquals(other: *) => (value) => number` - Returns an evaluator that checks if `other` and `value` are strictly equal. This complements `equals()`, which checks for deep value equality.
