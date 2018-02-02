@@ -225,3 +225,6 @@ Utils include functions that make Unmutable.js useable and useful, as well as pl
 
 #### util/isValueObject
  `isValueObject(maybe: *) => boolean` - Works like Immutable.js `isValueObject` but also works on plain Javascript arrays and objects.
+
+#### util/recordAsObject
+ `recordAsObject(updater: Function, value: *, returnRecord: boolean);` - Helper function that allows you to update an Immutable.js `Record`. The updater receives an object version of the `Record`. If `returnRecord = true`, the result of the updater will be passed back into the `Record`'s constructor before being returned. If `returnRecord = false`, the data returned from `updater` will be returned directly from `recordAsObject` without change.
