@@ -25,7 +25,7 @@ export default ({name, fn, expectedResult}: TestTypesConfig) => {
         null: null,
         string: "string",
         number: 123,
-        object: {obj: true},
+        object: {object: true},
         array: ["array"],
         map: Map(),
         orderedMap: OrderedMap(),

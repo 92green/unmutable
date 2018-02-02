@@ -2,8 +2,8 @@
 import prep from '../internal/prep';
 
 export default prep({
-    name: 'filter',
-    obj: (predicate: Function) => (item: Object): * => {
+    immutable: 'filter',
+    object: (predicate: Function) => (item: Object): * => {
         return Object
             .keys(item)
             .reduce((obj: Object, key: string): Object => {
@@ -11,5 +11,5 @@ export default prep({
                 return predicate(value, key, item) ? {...obj, [key]: value} : obj;
             }, {});
     },
-    arr: (predicate: Function) => (item: Array<*>): * => item.filter(predicate)
+    array: (predicate: Function) => (item: Array<*>): * => item.filter(predicate)
 });

@@ -1,8 +1,9 @@
 // @flow
 import prep from '../internal/prep';
+import keyArray from './keyArray';
 
 export default prep({
-    name: 'count',
-    obj: () => (item: Object): number => Object.keys(item).length,
-    arr: () => (item: Array<*>): number => item.length
+    immutable: 'count',
+    keyed: () => (item: Object): number => keyArray()(item).length,
+    array: () => (item: Array<*>): number => item.length
 });

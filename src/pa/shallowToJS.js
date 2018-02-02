@@ -12,6 +12,5 @@ export default prep({
             return item.toArray();
         }
         return item.toObject();
-    },
-    returnsSelf: false
+    }
 });

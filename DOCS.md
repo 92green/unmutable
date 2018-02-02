@@ -63,7 +63,9 @@ slice
 some
 take
 takeLast
+toArray
 toJS
+toObject
 unshift *
 update
 updateIn
@@ -107,9 +109,7 @@ sort
 sortBy
 takeWhile
 takeUntil
-toArray
 toJSON
-toObject
 zip *
 zipAll *
 zipWith *

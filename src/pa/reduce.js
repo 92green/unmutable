@@ -2,8 +2,8 @@
 import prep from '../internal/prep';
 
 export default prep({
-    name: 'reduce',
-    obj: (reducer: Function, initialReduction: *) => (item: Object): * => {
+    immutable: 'reduce',
+    object: (reducer: Function, initialReduction: *) => (item: Object): * => {
         return Object
             .keys(item)
             .reduce(
@@ -11,5 +11,5 @@ export default prep({
                 initialReduction
             );
     },
-    arr: (reducer: Function, initialReduction: *) => (item: Array<*>): * => item.reduce(reducer, initialReduction)
+    array: (reducer: Function, initialReduction: *) => (item: Array<*>): * => item.reduce(reducer, initialReduction)
 });

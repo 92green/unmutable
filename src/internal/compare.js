@@ -1,6 +1,17 @@
 // @flow
 import test from 'ava';
-import {fromJS} from 'immutable';
+import {fromJS, Record} from 'immutable';
+import isPlainObject from '../util/isPlainObject';
+import isRecord from '../util/isRecord';
+
+let defaultValues = {
+    a: null,
+    b: null,
+    c: null,
+    d: null
+};
+
+let MyRecord = Record(defaultValues);
 
 type CompareConfig = {
     item: *, // the input item to test, in plain javascript.
@@ -20,4 +31,21 @@ export default ({item, name, fn, toJS}: CompareConfig) => {
             fn(item)
         );
     });
+
+    // if value is an object, make sure that it also works on Records
+    // if(isPlainObject(item)) {
+    //     test(`Record test: ${name}`, (tt: *) => {
+    //         let plainResult = fn(item);
+    //         let recordResult = fn(new MyRecord(item));
+
+    //         if(isRecord(recordResult)) {
+    //             recordResult = recordResult.toObject();
+    //             plainResult = {
+    //                 ...defaultValues,
+    //                 ...plainResult
+    //             };
+    //         }
+    //         tt.deepEqual(plainResult, recordResult);
+    //     });
+    // }
 };

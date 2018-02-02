@@ -2,8 +2,8 @@
 import prep from '../internal/prep';
 
 export default prep({
-    name: "keys",
-    obj: () => (item: Object): Iterator<*> => {
+    immutable: "keys",
+    object: () => (item: Object): Iterator<*> => {
         let counter = 0;
         const keys = Object.keys(item);
         return {
@@ -16,5 +16,5 @@ export default prep({
             })
         };
     },
-    arr: () => (item: Array<*>): Iterator<*> => item.keys()
+    array: () => (item: Array<*>): Iterator<*> => item.keys()
 });

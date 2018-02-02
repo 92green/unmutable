@@ -2,8 +2,8 @@
 import prep from '../internal/prep';
 
 export default prep({
-    name: 'map',
-    obj: (mapper: Function) => (item: Object): * => {
+    immutable: 'map',
+    object: (mapper: Function) => (item: Object): * => {
         return Object
             .keys(item)
             .reduce((obj: Object, key: string): Object => {
@@ -11,5 +11,5 @@ export default prep({
                 return obj;
             }, {});
     },
-    arr: (mapper: Function) => (item: Array<*>): * => item.map(mapper)
+    array: (mapper: Function) => (item: Array<*>): * => item.map(mapper)
 });
