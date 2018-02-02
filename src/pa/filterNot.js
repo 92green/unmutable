@@ -1,8 +1,18 @@
 // @flow
 import prep from '../internal/prep';
+import pipeWith from '../util/pipeWith';
+import entryArray from '../pa/entryArray';
+import reduce from '../pa/reduce';
+
+
 
 export default prep({
     immutable: 'filterNot',
+    record: (predicate: Function) => (item: *): * => pipeWith(
+        item,
+        entryArray(),
+        reduce((record, [key, value]) => predicate(value, key, record) ? record.delete(key) : record, item)
+    ),
     object: (predicate: Function) => (item: Object): * => {
         return Object
             .keys(item)

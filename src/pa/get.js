@@ -4,6 +4,7 @@ import has from './has';
 
 export default prep({
     immutable: 'get',
+    record: 'get',
     object: (key: string, notFoundValue: * = undefined) => (item: Object): * => {
         return has(key)(item)
             ? item[key]

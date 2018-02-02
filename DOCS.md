@@ -19,14 +19,14 @@ butLast
 clear
 concat
 count
-delete
+delete ^
 deleteAll
 deleteIn
-entries
+entries ^
 equals
 every
-filter
-filterNot
+filter ^
+filterNot ^
 find
 findEntry
 findIndex
@@ -36,25 +36,25 @@ findLastEntry
 findLastIndex
 findLastKey
 first
-get
-getIn
+get ^
+getIn ^
 has
 hasIn
-insert *
-isEmpty
+insert * ^
+isEmpty ^
 keyOf
-keys
+keys ^
 last
 lastKeyOf
-map
+map ^
 pop *
 push *
-reduce
+reduce ^
 reduceRight
 rest
 reverse
-set
-setIn
+set ^
+setIn ^
 shift *
 size
 skip
@@ -63,13 +63,13 @@ slice
 some
 take
 takeLast
-toArray
+toArray ^
 toJS
 toObject
 unshift *
 update
 updateIn
-values
+values ^
 ```
 
 ### To be implemented

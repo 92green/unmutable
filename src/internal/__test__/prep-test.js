@@ -11,11 +11,13 @@ test(`prep should handle records`, (tt: *) => {
     let keyed = (a,b) => (item) => `${a}${b}${item.c}-keyed`;
     let all = (a,b) => (item) => `${a}${b}${item.c}-all`;
 
+    let useImmutable = prep({record: "get"});
     let useRecord = prep({immutable, record, keyed, all});
     let useKeyed = prep({immutable, keyed, all});
     let useAll = prep({immutable, all});
     let useNone = prep({immutable});
 
+    tt.is("c", useImmutable("c")(new MyRecord()));
     tt.is("abc-record", useRecord("a","b")(new MyRecord()));
     tt.is("abc-keyed", useKeyed("a","b")(new MyRecord()));
     tt.is("abc-all", useAll("a","b")(new MyRecord()));
@@ -80,6 +82,8 @@ test(`prep should handle Objects`, (tt: *) => {
     tt.is("a-1-all", useAll('a')(myObject));
     tt.is(tt.throws(() => useNone('a')(myObject), Error).message, `Evaluation of noooooo() failed: method doesn't exist`);
 });
+
+
 
 test(`prep should not handle strings as values`, (tt: *) => {
     let useNone = prep({});

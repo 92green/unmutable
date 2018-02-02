@@ -43,6 +43,9 @@ const callImmutable = ({immutable, all}: Object, args: *, item: *): * => {
 
 const callRecord = ({immutable, record, keyed, all}: Object, args: *, item: *): * => {
     if(record) {
+        if(typeof record === 'string') {
+            return item[record](...args);
+        }
         return record(...args)(item);
     }
     if(keyed) {

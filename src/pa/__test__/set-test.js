@@ -1,6 +1,8 @@
 // @flow
 import set from '../set';
 import compare from '../../internal/compare';
+import test from 'ava';
+import {Record} from 'immutable';
 
 compare({
     name: `set() object sets a new value`,
@@ -35,4 +37,9 @@ compare({
     item: [1,2,3],
     fn: set(-2, 123),
     toJS: true
+});
+
+test('get() on record should work', (t: *) => {
+    const TestRecord = Record({foo: 'bar'});
+    t.is(set('foo', '!!!')(new TestRecord()).foo, '!!!');
 });

@@ -3,6 +3,7 @@ import prep from '../internal/prep';
 
 export default prep({
     immutable: "keys",
+    record: () => (item: *) => item.toSeq().keys(),
     object: () => (item: Object): Iterator<*> => {
         let counter = 0;
         const keys = Object.keys(item);
@@ -16,5 +17,5 @@ export default prep({
             })
         };
     },
-    array: () => (item: Array<*>): Iterator<*> => item.keys()
+    array: () => (item: Array<*>): Iterator<*> => item.keys(),
 });

@@ -3,6 +3,7 @@ import prep from '../internal/prep';
 
 export default prep({
     immutable: 'delete',
+    record: 'delete',
     object: (key: string) => (item: Object): Object => {
         let clone = {...item};
         delete clone[key];

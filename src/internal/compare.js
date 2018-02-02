@@ -1,8 +1,6 @@
 // @flow
 import test from 'ava';
 import {fromJS, Record} from 'immutable';
-import isPlainObject from '../util/isPlainObject';
-import isRecord from '../util/isRecord';
 
 let defaultValues = {
     a: null,
@@ -10,8 +8,6 @@ let defaultValues = {
     c: null,
     d: null
 };
-
-let MyRecord = Record(defaultValues);
 
 type CompareConfig = {
     item: *, // the input item to test, in plain javascript.

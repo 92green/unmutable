@@ -1,6 +1,8 @@
 // @flow
 import get from '../get';
 import compare from '../../internal/compare';
+import test from 'ava';
+import {Record} from 'immutable';
 
 compare({
     name: `get() finds a value`,
@@ -48,4 +50,9 @@ compare({
     name: `get() doesnt find an index with a notSetValue`,
     item: [1,2,3],
     fn: get(3, '!')
+});
+
+test('get() on record should work', (t: *) => {
+    const TestRecord = Record({foo: 'bar'});
+    t.is(get('foo')(new TestRecord()), 'bar');
 });
