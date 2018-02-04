@@ -134,7 +134,7 @@ Unmutable.js is good because:
 
 Unmutable.js is bad because:
 - No exotic data types, just Maps, Lists, arrays and objects for now. Disappointment. You can still use Immutable.js if you want nice things like Seqs and Records.
-- Performance has not been tested in comparison to Immutable.js yet. It's likely that Immutable.js is more efficient in many cases, so consider that if you're working with large data sets or intense computation of collections. Keep in mind that using Unmutable.js doesn't have the overhead of `fromJS()` and `toJS()`ing all your data. Some benchmarks would be great, stay tuned.
+- Performance has not been tested in comparison to Immutable.js yet. It's likely that Immutable.js is more efficient in many cases, so consider that if you're working with large data sets or intense computation of collections. Keep in mind that using Unmutable.js doesn't have the overhead of `fromJS()` and `toJS()`ing all your data. Unmutable.js *does* have the extra overhead of having to identify the data type whenever a function is called, which may be noticeable until we do [this](https://github.com/blueflag/unmutable/issues/35).
 
 **Pleasing time!**
 
