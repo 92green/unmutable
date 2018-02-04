@@ -8,14 +8,16 @@ compare({
     name: `set() object sets a new value`,
     item: {a:1, b:2},
     fn: set('c', 123),
-    toJS: true
+    toJS: true,
+    record: true
 });
 
 compare({
     name: `set() object sets an existing value`,
     item: {a:1, b:2},
     fn: set('a', 123),
-    toJS: true
+    toJS: true,
+    record: true
 });
 
 compare({
@@ -37,9 +39,4 @@ compare({
     item: [1,2,3],
     fn: set(-2, 123),
     toJS: true
-});
-
-test('get() on record should work', (t: *) => {
-    const TestRecord = Record({foo: 'bar'});
-    t.is(set('foo', '!!!')(new TestRecord()).foo, '!!!');
 });

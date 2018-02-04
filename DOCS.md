@@ -39,9 +39,9 @@ findLastKey
 first
 get ^
 getIn ^
-has
-hasIn
-insert * ^
+has ^
+hasIn ^
+insert *
 isEmpty ^
 keyOf
 keys ^
@@ -64,7 +64,7 @@ slice
 some
 take
 takeLast
-toArray ^
+toArray
 toJS
 toObject
 unshift *

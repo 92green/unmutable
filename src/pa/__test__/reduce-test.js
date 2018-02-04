@@ -8,7 +8,8 @@ import compareIteratee from '../../internal/compareIteratee';
 compare({
     name: `reduce() on object should work`,
     item: {a:1, b:2, c:3, d:4},
-    fn: reduce((reduction, value) => [...reduction, value], [])
+    fn: reduce((reduction, value) => [...reduction, value], []),
+    record: true
 });
 
 compareIteratee({
@@ -41,12 +42,6 @@ compareIteratee({
 //
 // Records
 //
-
-const TestRecord = Record({foo: 'bar'});
-test('reduce() on record should work', (t: *) => {
-    const data = new TestRecord();
-    t.is(reduce((rr, val) => rr + val, 'foo')(data), 'foobar');
-});
 
 test('reduce() on should pass correct arguments to iteratee', (t: *) => {
     const data = new TestRecord();
