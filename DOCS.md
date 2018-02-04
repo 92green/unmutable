@@ -10,7 +10,8 @@ It's a work in progress so not all functions have been implemented yet.
 
 All `pa` functions return an evaluator. An evaluator is a function that accepts a value and returns a result.
 
-* The asterisk indicates functions which only work with `List`s and arrays.
+- * The asterisk indicates functions which only work with `List`s and arrays.
+- ^ The carat indicates functions that are confirmed to work with `Record`s.
 
 ### Implemented
 
@@ -211,6 +212,9 @@ Utils include functions that make Unmutable.js useable and useful, as well as pl
 #### util/overload
  `overload({...overloads}, overloadArgs: * = undefined) => Function` - Simulates function overloading in Javascript.
 
+#### util/isAssociative
+ `isAssociative(maybe: *) => boolean` - Works like Immutable.js `isAssociative` but also identifies plain Javascript arrays and objects as being associative.
+
 #### util/isCollection
  `isCollection(maybe: *) => boolean` - Works like Immutable.js `isCollection` but also identifies plain Javascript arrays and objects as being collections.
 
@@ -219,6 +223,9 @@ Utils include functions that make Unmutable.js useable and useful, as well as pl
 
 #### util/isKeyed
  `isKeyed(maybe: *) => boolean` - Works like Immutable.js `isKeyed` but also works on plain Javascript objects.
+
+#### util/isOrdered
+ `isOrdered(maybe: *) => boolean` - Works like Immutable.js `isOrdered` but also identifies plain Javascript arrays as being ordered.
 
 #### util/isPlainObject
  `isPlainObject(maybe: *) => boolean` - Tests if something is a plain object according to [`is-plain-object`](https://www.npmjs.com/package/is-plain-object).
