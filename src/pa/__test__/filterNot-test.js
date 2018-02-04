@@ -1,4 +1,6 @@
 // @flow
+import test from 'ava';
+import {Record} from 'immutable';
 import filterNot from '../filterNot';
 import compare from '../../internal/compare';
 import compareIteratee from '../../internal/compareIteratee';
@@ -7,7 +9,8 @@ compare({
     name: `filterNot() on object should work`,
     item: {a:1, b:2, c:3, d:4},
     fn: filterNot(value => value % 2 === 0),
-    toJS: true
+    toJS: true,
+    record: true
 });
 
 compareIteratee({
@@ -37,3 +40,18 @@ compareIteratee({
     argsToJS: ['iter']
 });
 
+
+//
+// Records
+//
+
+const TestRecord = Record({foo: 'bar'});
+test('filterNot() on should pass correct arguments to iteratee', (t: *) => {
+    const data = new TestRecord({foo: 'baz'});
+
+    filterNot((value, key, record) => {
+        t.is(key, 'foo');
+        t.is(value, 'baz');
+        t.is(record, data);
+    })(data);
+});

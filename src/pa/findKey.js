@@ -3,7 +3,7 @@ import prep from '../internal/prep';
 import entries from './entries';
 
 export default prep({
-    name: 'findKey',
+    immutable: 'findKey',
     all: (predicate: Function) => (item: Object): * => {
         let iterator = entries()(item);
         for(let [key, value] of iterator) {

@@ -3,9 +3,9 @@ import prep from '../internal/prep';
 import get from './get';
 
 export default prep({
-    name: 'last',
-    obj: () => (item: Object): * => {
+    immutable: 'last',
+    object: () => (item: Object): * => {
         return item[get(-1)(Object.keys(item))];
     },
-    arr: () => get(-1)
+    array: () => get(-1)
 });

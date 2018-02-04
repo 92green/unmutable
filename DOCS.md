@@ -10,7 +10,8 @@ It's a work in progress so not all functions have been implemented yet.
 
 All `pa` functions return an evaluator. An evaluator is a function that accepts a value and returns a result.
 
-* The asterisk indicates functions which only work with `List`s and arrays.
+- * The asterisk indicates functions which only work with `List`s and arrays.
+- ^ The carat indicates functions that are confirmed to work with `Record`s.
 
 ### Implemented
 
@@ -19,14 +20,14 @@ butLast
 clear
 concat
 count
-delete
+delete ^
 deleteAll
 deleteIn
-entries
+entries ^
 equals
 every
-filter
-filterNot
+filter ^
+filterNot ^
 find
 findEntry
 findIndex
@@ -36,25 +37,25 @@ findLastEntry
 findLastIndex
 findLastKey
 first
-get
-getIn
-has
-hasIn
+get ^
+getIn ^
+has ^
+hasIn ^
 insert *
-isEmpty
+isEmpty ^
 keyOf
-keys
+keys ^
 last
 lastKeyOf
-map
+map ^
 pop *
 push *
-reduce
+reduce ^
 reduceRight
 rest
 reverse
-set
-setIn
+set ^
+setIn ^
 shift *
 size
 skip
@@ -63,11 +64,13 @@ slice
 some
 take
 takeLast
+toArray
 toJS
+toObject
 unshift *
 update
 updateIn
-values
+values ^
 ```
 
 ### To be implemented
@@ -107,9 +110,7 @@ sort
 sortBy
 takeWhile
 takeUntil
-toArray
 toJSON
-toObject
 zip *
 zipAll *
 zipWith *
@@ -211,6 +212,9 @@ Utils include functions that make Unmutable.js useable and useful, as well as pl
 #### util/overload
  `overload({...overloads}, overloadArgs: * = undefined) => Function` - Simulates function overloading in Javascript.
 
+#### util/isAssociative
+ `isAssociative(maybe: *) => boolean` - Works like Immutable.js `isAssociative` but also identifies plain Javascript arrays and objects as being associative.
+
 #### util/isCollection
  `isCollection(maybe: *) => boolean` - Works like Immutable.js `isCollection` but also identifies plain Javascript arrays and objects as being collections.
 
@@ -220,8 +224,14 @@ Utils include functions that make Unmutable.js useable and useful, as well as pl
 #### util/isKeyed
  `isKeyed(maybe: *) => boolean` - Works like Immutable.js `isKeyed` but also works on plain Javascript objects.
 
+#### util/isOrdered
+ `isOrdered(maybe: *) => boolean` - Works like Immutable.js `isOrdered` but also identifies plain Javascript arrays as being ordered.
+
 #### util/isPlainObject
  `isPlainObject(maybe: *) => boolean` - Tests if something is a plain object according to [`is-plain-object`](https://www.npmjs.com/package/is-plain-object).
 
 #### util/isValueObject
  `isValueObject(maybe: *) => boolean` - Works like Immutable.js `isValueObject` but also works on plain Javascript arrays and objects.
+
+#### util/recordAsObject
+ `recordAsObject(updater: Function, value: *, returnRecord: boolean);` - Helper function that allows you to update an Immutable.js `Record`. The updater receives an object version of the `Record`. If `returnRecord = true`, the result of the updater will be passed back into the `Record`'s constructor before being returned. If `returnRecord = false`, the data returned from `updater` will be returned directly from `recordAsObject` without change.

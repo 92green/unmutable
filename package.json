@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "app-module-path": "^2.2.0",
-    "ava": "^0.22.0",
+    "ava": "^0.25.0",
     "babel-cli": "^6.23.0",
     "babel-core": "^6.23.0",
     "babel-plugin-istanbul": "4.1.1",
@@ -49,6 +49,7 @@
     "gh-pages": "^0.11.0",
     "git-url-parse": "^6.0.1",
     "immutable": "4.0.0-rc.9",
+    "immutable3": "npm:immutable@^3.8.1",
     "nyc": "^10.0.0",
     "proxyquire": "^1.7.10",
     "sinon": "^2.1.0"

@@ -1,19 +1,23 @@
 // @flow
 import set from '../set';
 import compare from '../../internal/compare';
+import test from 'ava';
+import {Record} from 'immutable';
 
 compare({
     name: `set() object sets a new value`,
     item: {a:1, b:2},
     fn: set('c', 123),
-    toJS: true
+    toJS: true,
+    record: true
 });
 
 compare({
     name: `set() object sets an existing value`,
     item: {a:1, b:2},
     fn: set('a', 123),
-    toJS: true
+    toJS: true,
+    record: true
 });
 
 compare({

@@ -5,7 +5,7 @@ import overload from '../util/overload';
 import set from './set';
 
 export default prep({
-    name: 'update',
+    immutable: 'update',
     all: overload({
         ["1"]: () => (updater: Function) => (item) => updater(item),
         ["2"]: (fn) => (key: string, updater: Function) => fn(key, updater),

@@ -3,7 +3,7 @@ import prep from '../internal/prep';
 import entriesReverse from './entriesReverse';
 
 export default prep({
-    name: 'findLastEntry',
+    immutable: 'findLastEntry',
     all: (predicate: Function, context: *, notSetValue: * = undefined) => (item: Object): * => {
         let iterator = entriesReverse()(item);
         for(let entry of iterator) {

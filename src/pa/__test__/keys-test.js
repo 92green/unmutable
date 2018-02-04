@@ -2,6 +2,8 @@
 import keys from '../keys';
 import test from 'ava';
 import {fromJS} from 'immutable';
+import {Record} from 'immutable';
+
 
 test(`keys() on object should work`, (tt: *) => {
     let objectIterator = keys()({a:1, b:2, c:3});
@@ -81,4 +83,9 @@ test(`keys() on list should work`, (tt: *) => {
         listKeys,
         immutableKeys
     );
+});
+
+test(`keys() on record should work`, (tt: *) => {
+    const TestRecord = Record({foo: 'bar'});
+    tt.deepEqual([...keys()(new TestRecord({}))], ['foo']);
 });

@@ -16,9 +16,19 @@ testTypes({
         orderedMap: true,
         list: true,
         record: false,
+        recordExtended: false,
         set: true,
         orderedSet: true,
         seq: true,
-        stack: true
+        stack: true,
+        map3: true,
+        orderedMap3: true,
+        list3: true,
+        record3: false,
+        recordExtended3: false,
+        set3: true,
+        orderedSet3: true,
+        seq3: true,
+        stack3: true
     }
 });

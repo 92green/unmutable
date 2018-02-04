@@ -2,17 +2,19 @@
 import prep from '../internal/prep';
 import pipeWith from '../util/pipeWith';
 import del from './delete';
+import keyArray from './keyArray';
 import last from './last';
 import pop from './pop';
 
 export default prep({
-    name: 'butLast',
-    obj: () => (item) => pipeWith(
+    immutable: 'butLast',
+    keyed: () => (item) => pipeWith(
         item,
         del(pipeWith(
-            Object.keys(item),
+            item,
+            keyArray(),
             last()
         ))
     ),
-    arr: pop
+    array: pop
 });

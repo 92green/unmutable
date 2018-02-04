@@ -6,13 +6,13 @@ import first from './first';
 import shift from './shift';
 
 export default prep({
-    name: 'rest',
-    obj: () => (item) => pipeWith(
+    immutable: 'rest',
+    object: () => (item) => pipeWith(
         item,
         del(pipeWith(
             Object.keys(item),
             first()
         ))
     ),
-    arr: shift
+    array: shift
 });

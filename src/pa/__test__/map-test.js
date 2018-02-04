@@ -1,4 +1,6 @@
 // @flow
+import test from 'ava';
+import {Record} from 'immutable';
 import map from '../map';
 import compare from '../../internal/compare';
 import compareIteratee from '../../internal/compareIteratee';
@@ -7,7 +9,8 @@ compare({
     name: `map() on object should work`,
     item: {a:1, b:2, c:3, d:4},
     fn: map(value => value * 2),
-    toJS: true
+    toJS: true,
+    record: true
 });
 
 compareIteratee({
@@ -37,3 +40,18 @@ compareIteratee({
     argsToJS: ['iter']
 });
 
+
+//
+// Records
+//
+
+const TestRecord = Record({foo: 'bar'});
+test('map() on should pass correct arguments to iteratee', (t: *) => {
+    const data = new TestRecord({foo: 'baz'});
+
+    map((value, key, record) => {
+        t.is(key, 'foo');
+        t.is(value, 'baz');
+        t.is(record, data);
+    })(data);
+});

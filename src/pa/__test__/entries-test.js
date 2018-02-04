@@ -2,6 +2,7 @@
 import entries from '../entries';
 import test from 'ava';
 import {fromJS} from 'immutable';
+import {Record} from 'immutable';
 
 test(`entries() on object should work`, (tt: *) => {
     let objectIterator = entries()({a:1, b:2, c:3});
@@ -81,4 +82,9 @@ test(`entries() on list should work`, (tt: *) => {
         listEntries,
         immutableEntries
     );
+});
+
+test(`entries() on record should work`, (tt: *) => {
+    const TestRecord = Record({foo: 'bar'});
+    tt.deepEqual([...entries()(new TestRecord({}))], [['foo','bar']]);
 });

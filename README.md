@@ -20,9 +20,9 @@ Immutable.js can be bad **for libraries** because:
 - Having its own set of data containers makes sense for Immutable.js, but it brings its own set of consequences.*
 - *See the *Sell! Sell! Sell!* section for deeper reasoning.
 
-So **Unmutable.js** follows Immutable.js lovely API as closely as it can. But instead of chaining methods, you compose functions together. This leads to smaller bundle sizes, as you only import the functions you need. And all Unmutable.js functions can work seamlessly with plain javascript or Immutable.js! Wonder!
+So **Unmutable.js** follows Immutable.js lovely API as closely as it can. But instead of chaining methods, you compose functions together. This leads to smaller bundle sizes, as you only import the functions you need. And all Unmutable.js functions can work seamlessly with plain javascript or Immutable.js versions 3 and 4! Wonder!
 
-For now, Unmutable.js is focused only on Maps, Lists, objects and arrays.
+For now, Unmutable.js is focused only on `Map`s, `List`s, objects and arrays. Support for `Record`s is currently being added experimentally.
 
 Each Unmutable.js function returns a function that accepts the value to operate on. So instead of this:
 
@@ -134,7 +134,7 @@ Unmutable.js is good because:
 
 Unmutable.js is bad because:
 - No exotic data types, just Maps, Lists, arrays and objects for now. Disappointment. You can still use Immutable.js if you want nice things like Seqs and Records.
-- Performance has not been tested in comparison to Immutable.js yet. It's likely that some aspects of Immutable.js are more efficient. Keep in mind that using Unmutable.js doesn't have the overhead of `fromJS()` and `toJS()`ing all your data. Some benchmarks would be great, stay tuned.
+- Performance has not been tested in comparison to Immutable.js yet. It's likely that Immutable.js is more efficient in many cases, so consider that if you're working with large data sets or intense computation of collections. Keep in mind that using Unmutable.js doesn't have the overhead of `fromJS()` and `toJS()`ing all your data. Unmutable.js *does* have the extra overhead of having to identify the data type whenever a function is called, which may be noticeable until we do [this](https://github.com/blueflag/unmutable/issues/35).
 
 **Pleasing time!**
 
