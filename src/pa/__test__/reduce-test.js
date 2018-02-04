@@ -43,6 +43,7 @@ compareIteratee({
 // Records
 //
 
+const TestRecord = Record({foo: 'bar'});
 test('reduce() on should pass correct arguments to iteratee', (t: *) => {
     const data = new TestRecord();
 

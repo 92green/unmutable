@@ -45,6 +45,7 @@ compareIteratee({
 // Records
 //
 
+const TestRecord = Record({foo: 'bar'});
 test('filterNot() on should pass correct arguments to iteratee', (t: *) => {
     const data = new TestRecord({foo: 'baz'});
 
