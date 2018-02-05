@@ -58,9 +58,6 @@
     "fast-deep-equal": "^1.0.0",
     "is-plain-object": "^2.0.4"
   },
-  "peerDependencies": {
-    "immutable": "4.0.0-rc.9"
-  },
   "ava": {
     "require": [
       "./pretest",
