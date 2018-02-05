@@ -37,7 +37,6 @@ export const isOrdered = (ii: *): boolean => {
         ? false
         : !!(ii[IS_ORDERED_SENTINEL]);
 };
-
 export const isRecord = (ii: *): boolean => {
     return !ii
         ? false
@@ -45,17 +44,7 @@ export const isRecord = (ii: *): boolean => {
 };
 
 export const isVersion3Record = (ii: *): boolean => {
-    if(typeof ii !== "object" || ii.hasOwnProperty("__hash")) {
-        return false;
-    }
-    ii = ii.__proto__;
-    while(ii) {
-        if(ii.hasOwnProperty("_defaultValues")) {
-            return true;
-        }
-        ii = ii.__proto__;
-    }
-    return false;
+    return !!(ii._defaultValues);
 };
 
 export const isValueObject = (ii: *): boolean => {
