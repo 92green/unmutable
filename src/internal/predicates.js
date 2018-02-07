@@ -6,62 +6,56 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export function isImmutable(maybeImmutable: *): boolean {
+export const isImmutable = (maybeImmutable: *): boolean => {
     return isCollection(maybeImmutable) || isRecord(maybeImmutable);
-}
+};
 
-export function isCollection(ii: *): boolean {
+export const isCollection = (ii: *): boolean => {
     return !ii
         ? false
-        : !!(ii[IS_ITERABLE_SENTINEL] || ii[IS_MAP_SENTINEL]);
-}
+        : !!((ii[IS_ITERABLE_SENTINEL] && !isVersion3Record(ii)));
+};
 
-export function isKeyed(ii: *): boolean {
+export const isKeyed = (ii: *): boolean => {
     return !ii
         ? false
-        : !!(ii[IS_KEYED_SENTINEL] || ii[IS_MAP_SENTINEL]);
-}
+        : !!((ii[IS_KEYED_SENTINEL] && !isVersion3Record(ii)));
+};
 
-export function isIndexed(ii: *): boolean {
+export const isIndexed = (ii: *): boolean => {
     return !ii
         ? false
-        : !!(ii[IS_INDEXED_SENTINEL] || ii[IS_LIST_SENTINEL]);
-}
+        : !!(ii[IS_INDEXED_SENTINEL]);
+};
 
-export function isAssociative(ii: *): boolean {
+export const isAssociative = (ii: *): boolean => {
     return isKeyed(ii) || isIndexed(ii);
-}
+};
 
-export function isOrdered(ii: *): boolean {
+export const isOrdered = (ii: *): boolean => {
     return !ii
         ? false
         : !!(ii[IS_ORDERED_SENTINEL]);
-}
-
-export function isRecord(ii: *): boolean {
+};
+export const isRecord = (ii: *): boolean => {
     return !ii
         ? false
         : !!(ii[IS_RECORD_SENTINEL] || isVersion3Record(ii));
-}
+};
 
-export function isVersion3Record(ii: *): boolean {
-    return !!(typeof ii === "object" && ii.__proto__.hasOwnProperty("_defaultValues"));
-}
+export const isVersion3Record = (ii: *): boolean => {
+    return !!(ii._defaultValues);
+};
 
-export function isValueObject(ii: *): boolean {
+export const isValueObject = (ii: *): boolean => {
     return !ii
         ? false
         : typeof ii.equals === 'function'
             && typeof ii.hashCode === 'function';
-}
+};
 
-// verion 4
 export const IS_ITERABLE_SENTINEL = '@@__IMMUTABLE_ITERABLE__@@';
 export const IS_KEYED_SENTINEL = '@@__IMMUTABLE_KEYED__@@';
 export const IS_INDEXED_SENTINEL = '@@__IMMUTABLE_INDEXED__@@';
 export const IS_ORDERED_SENTINEL = '@@__IMMUTABLE_ORDERED__@@';
 export const IS_RECORD_SENTINEL = '@@__IMMUTABLE_RECORD__@@';
-
-// version 3
-export const IS_MAP_SENTINEL = '@@__IMMUTABLE_MAP__@@';
-export const IS_LIST_SENTINEL = '@@__IMMUTABLE_LIST__@@';

@@ -26,10 +26,20 @@ testTypes({
         orderedMap: true,
         list: true,
         record: true,
+        recordExtended: true,
         set: true,
         orderedSet: true,
         seq: true,
-        stack: true
+        stack: true,
+        map3: true,
+        orderedMap3: true,
+        list3: true,
+        record3: true,
+        recordExtended3: true,
+        set3: true,
+        orderedSet3: true,
+        seq3: true,
+        stack3: true
     }
 });
 
@@ -47,10 +57,20 @@ testTypes({
         orderedMap: true,
         list: true,
         record: false,
+        recordExtended: false,
         set: true,
         orderedSet: true,
         seq: true,
-        stack: true
+        stack: true,
+        map3: true,
+        orderedMap3: true,
+        list3: true,
+        record3: false,
+        recordExtended3: false,
+        set3: true,
+        orderedSet3: true,
+        seq3: true,
+        stack3: true
     }
 });
 
@@ -68,10 +88,20 @@ testTypes({
         orderedMap: true,
         list: false,
         record: false,
+        recordExtended: false,
         set: false,
         orderedSet: false,
         seq: false,
-        stack: false
+        stack: false,
+        map3: true,
+        orderedMap3: true,
+        list3: false,
+        record3: false,
+        recordExtended3: false,
+        set3: false,
+        orderedSet3: false,
+        seq3: false,
+        stack3: false
     }
 });
 
@@ -89,10 +119,20 @@ testTypes({
         orderedMap: false,
         list: true,
         record: false,
+        recordExtended: false,
         set: false,
         orderedSet: false,
         seq: true,
-        stack: true
+        stack: true,
+        map3: false,
+        orderedMap3: false,
+        list3: true,
+        record3: false,
+        recordExtended3: false,
+        set3: false,
+        orderedSet3: false,
+        seq3: true,
+        stack3: true
     }
 });
 
@@ -110,10 +150,20 @@ testTypes({
         orderedMap: true,
         list: true,
         record: false,
+        recordExtended: false,
         set: false,
         orderedSet: false,
         seq: true,
-        stack: true
+        stack: true,
+        map3: true,
+        orderedMap3: true,
+        list3: true,
+        record3: false,
+        recordExtended3: false,
+        set3: false,
+        orderedSet3: false,
+        seq3: true,
+        stack3: true
     }
 });
 
@@ -131,10 +181,20 @@ testTypes({
         orderedMap: true,
         list: true,
         record: false,
+        recordExtended: false,
         set: false,
         orderedSet: true,
         seq: true,
-        stack: true
+        stack: true,
+        map3: false,
+        orderedMap3: true,
+        list3: true,
+        record3: false,
+        recordExtended3: false,
+        set3: false,
+        orderedSet3: true,
+        seq3: true,
+        stack3: true
     }
 });
 
@@ -152,10 +212,20 @@ testTypes({
         orderedMap: false,
         list: false,
         record: true,
+        recordExtended: true,
         set: false,
         orderedSet: false,
         seq: false,
-        stack: false
+        stack: false,
+        map3: false,
+        orderedMap3: false,
+        list3: false,
+        record3: true,
+        recordExtended3: true,
+        set3: false,
+        orderedSet3: false,
+        seq3: false,
+        stack3: false
     }
 });
 
@@ -173,9 +243,19 @@ testTypes({
         orderedMap: true,
         list: true,
         record: true,
+        recordExtended: true,
         set: true,
         orderedSet: true,
         seq: true,
-        stack: true
+        stack: true,
+        map3: true,
+        orderedMap3: true,
+        list3: true,
+        record3: true,
+        recordExtended3: true,
+        set3: true,
+        orderedSet3: true,
+        seq3: true,
+        stack3: true
     }
 });

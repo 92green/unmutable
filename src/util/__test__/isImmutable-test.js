@@ -1,22 +1,22 @@
 // @flow
-import isCollection from '../isCollection';
+import isImmutable from '../isImmutable';
 import testTypes from '../../internal/testTypes';
 
 testTypes({
-    name: "isCollection",
-    fn: isCollection,
+    name: "isImmutable",
+    fn: isImmutable,
     expectedResult: {
         undefined: false,
         null: false,
         string: false,
         number: false,
-        object: true,
-        array: true,
+        object: false,
+        array: false,
         map: true,
         orderedMap: true,
         list: true,
-        record: false,
-        recordExtended: false,
+        record: true,
+        recordExtended: true,
         set: true,
         orderedSet: true,
         seq: true,
@@ -24,8 +24,8 @@ testTypes({
         map3: true,
         orderedMap3: true,
         list3: true,
-        record3: false,
-        recordExtended3: false,
+        record3: true,
+        recordExtended3: true,
         set3: true,
         orderedSet3: true,
         seq3: true,

@@ -6,14 +6,16 @@ compare({
     name: `delete() deletes a value`,
     item: {a:1, b:2},
     fn: del('a'),
-    toJS: true
+    toJS: true,
+    record: true
 });
 
 compare({
     name: `delete() deletes a value that doesnt exist`,
     item: {a:1, b:2},
-    fn: del('c'),
-    toJS: true
+    fn: del('z'),
+    toJS: true,
+    record: true
 });
 
 compare({

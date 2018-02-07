@@ -1,10 +1,10 @@
 // @flow
+import isOrdered from '../isOrdered';
 import testTypes from '../../internal/testTypes';
-import isIndexed from '../isIndexed';
 
 testTypes({
-    name: "isIndexed",
-    fn: isIndexed,
+    name: "isOrdered",
+    fn: isOrdered,
     expectedResult: {
         undefined: false,
         null: false,
@@ -13,21 +13,21 @@ testTypes({
         object: false,
         array: true,
         map: false,
-        orderedMap: false,
+        orderedMap: true,
         list: true,
         record: false,
         recordExtended: false,
         set: false,
-        orderedSet: false,
+        orderedSet: true,
         seq: true,
         stack: true,
         map3: false,
-        orderedMap3: false,
+        orderedMap3: true,
         list3: true,
         record3: false,
         recordExtended3: false,
         set3: false,
-        orderedSet3: false,
+        orderedSet3: true,
         seq3: true,
         stack3: true
     }

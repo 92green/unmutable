@@ -1,19 +1,19 @@
 // @flow
+import isAssociative from '../isAssociative';
 import testTypes from '../../internal/testTypes';
-import isIndexed from '../isIndexed';
 
 testTypes({
-    name: "isIndexed",
-    fn: isIndexed,
+    name: "isAssociative",
+    fn: isAssociative,
     expectedResult: {
         undefined: false,
         null: false,
         string: false,
         number: false,
-        object: false,
+        object: true,
         array: true,
-        map: false,
-        orderedMap: false,
+        map: true,
+        orderedMap: true,
         list: true,
         record: false,
         recordExtended: false,
@@ -21,8 +21,8 @@ testTypes({
         orderedSet: false,
         seq: true,
         stack: true,
-        map3: false,
-        orderedMap3: false,
+        map3: true,
+        orderedMap3: true,
         list3: true,
         record3: false,
         recordExtended3: false,

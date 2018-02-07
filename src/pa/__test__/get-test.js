@@ -7,19 +7,22 @@ import {Record} from 'immutable';
 compare({
     name: `get() finds a value`,
     item: {a:1, b:2},
-    fn: get('a')
+    fn: get('a'),
+    record: true
 });
 
 compare({
     name: `get() doesnt find a value`,
     item: {a:1, b:2},
-    fn: get('c')
+    fn: get('z'),
+    record: true
 });
 
 compare({
     name: `get() doesnt find a value with a notSetValue`,
     item: {a:1, b:2},
-    fn: get('c', '!')
+    fn: get('z', '!'),
+    record: true
 });
 
 compare({

@@ -17,5 +17,5 @@ export default prep({
             })
         };
     },
-    array: () => (item: Array<*>): Iterator<*> => item.keys(),
+    array: () => (item: Array<*>): Iterator<*> => item.keys()
 });

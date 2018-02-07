@@ -9,7 +9,8 @@ compare({
     name: `filter() on object should work`,
     item: {a:1, b:2, c:3, d:4},
     fn: filter(value => value % 2 === 0),
-    toJS: true
+    toJS: true,
+    record: true
 });
 
 compareIteratee({
@@ -45,12 +46,6 @@ compareIteratee({
 //
 
 const TestRecord = Record({foo: 'bar'});
-test('filter() on record should work', (t: *) => {
-    const data = new TestRecord({foo: 'foo'});
-    t.is(filter(() => true)(data).foo, 'foo');
-    t.is(filter(() => false)(data).foo, 'bar');
-});
-
 test('filter() on should pass correct arguments to iteratee', (t: *) => {
     const data = new TestRecord({foo: 'baz'});
 

@@ -5,13 +5,15 @@ import compare from '../../internal/compare';
 compare({
     name: `has() finds a key`,
     item: {a:1, b:2},
-    fn: has('a')
+    fn: has('a'),
+    record: true
 });
 
 compare({
     name: `has() doesnt find a key`,
     item: {a:1, b:2},
-    fn: has('c')
+    fn: has('z'),
+    record: true
 });
 
 compare({
