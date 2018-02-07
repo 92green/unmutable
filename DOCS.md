@@ -48,6 +48,7 @@ keys ^
 last
 lastKeyOf
 map ^
+merge
 pop *
 push *
 reduce ^
@@ -94,7 +95,6 @@ mapKeys
 mapEntries
 max
 maxBy
-merge
 mergeWith
 mergeDeep
 mergeDeepIn
@@ -155,6 +155,9 @@ withMutations
 
 #### pa/identity
 `identity() => (value) => value` - Returns an evaluator that just passes values through with no change. Useful for readable code.
+
+#### pa/isNotEmpty
+`isNotEmpty() => (value) => boolean` - Returns an evaluator that returns true when the `value` is not empty.
 
 #### pa/keyArray
 `keyArray() => (value) => Array` - Returns an evaluator that returns an array of keys on the item. Immutable.js has no function that does this, they have `keys()` which returns an iterator, and `keySeq()` which returns an Immutable.js `Seq`.
@@ -233,5 +236,14 @@ Utils include functions that make Unmutable.js useable and useful, as well as pl
 #### util/isValueObject
  `isValueObject(maybe: *) => boolean` - Works like Immutable.js `isValueObject` but also works on plain Javascript arrays and objects.
 
+#### util/method
+ `method(method: string) => (...methodArgs) => (value) => *` - Helper function that allows you to turn any method into a point-free version. For example, this creates a point free version of `toLowerCase()` that would call `value.toLowerCase()` once evaluated.
+
+ ```
+ import method from 'unmutable/lib/util/method';
+ let toLowerCase = method('toLowerCase');
+ toLowerCase()("HELLO"); // "hello"
+ ```
+
 #### util/recordAsObject
- `recordAsObject(updater: Function, value: *, returnRecord: boolean);` - Helper function that allows you to update an Immutable.js `Record`. The updater receives an object version of the `Record`. If `returnRecord = true`, the result of the updater will be passed back into the `Record`'s constructor before being returned. If `returnRecord = false`, the data returned from `updater` will be returned directly from `recordAsObject` without change.
+ `recordAsObject(updater: Function, value: *, returnRecord: boolean) => *` - Helper function that allows you to update an Immutable.js `Record`. The updater receives an object version of the `Record`. If `returnRecord = true`, the result of the updater will be passed back into the `Record`'s constructor before being returned. If `returnRecord = false`, the data returned from `updater` will be returned directly from `recordAsObject` without change.

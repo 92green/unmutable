@@ -1,6 +1,4 @@
 // @flow
-import test from 'ava';
-import {Record} from 'immutable';
 import isEmpty from '../isEmpty';
 import compare from '../../internal/compare';
 
