@@ -48,6 +48,7 @@ keys ^
 last
 lastKeyOf
 map ^
+merge
 pop *
 push *
 reduce ^
@@ -94,7 +95,6 @@ mapKeys
 mapEntries
 max
 maxBy
-merge
 mergeWith
 mergeDeep
 mergeDeepIn
