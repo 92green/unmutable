@@ -1,5 +1,5 @@
 // @flow
-import testTypes from '../../internal/testTypes';
+import testTypes from '../../internal/__test__/testTypes-testutil';
 import isIndexed from '../isIndexed';
 
 testTypes({

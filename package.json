@@ -17,7 +17,7 @@
   },
   "private": false,
   "scripts": {
-    "build": "rm -rf lib && node ./scripts/flow.js && babel src --out-dir lib --ignore **/__test__/*-test.js",
+    "build": "rm -rf lib && node ./scripts/flow.js && babel src --out-dir lib --ignore **/__test__/*-test.js,**/__test__/*-testutil.js",
     "build-examples": "cd example && yarn install && yarn run build && cd -",
     "deploy-to-gh-pages": "yarn run build && yarn run build-examples && yarn run docs && node scripts/publish.js",
     "prepublish": "yarn run build",
@@ -85,6 +85,7 @@
     ],
     "exclude": [
       "src/**/*-test.js",
+      "src/**/*-testutil.js",
       "dist"
     ],
     "reporter": [

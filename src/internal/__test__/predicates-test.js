@@ -10,7 +10,7 @@ import {
     isValueObject
 } from '../predicates';
 
-import testTypes from '../../internal/testTypes';
+import testTypes from '../../internal/__test__/testTypes-testutil';
 
 testTypes({
     name: "isImmutable() predicate should work",
