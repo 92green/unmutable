@@ -9,3 +9,4 @@ unsafe.enable_getters_and_setters=true
 <PROJECT_ROOT>/.nyc_output/.*
 <PROJECT_ROOT>/scripts/.*
 <PROJECT_ROOT>/dist/.*
+<PROJECT_ROOT>/node_modules/immutable/.*

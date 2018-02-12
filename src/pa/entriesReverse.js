@@ -4,6 +4,7 @@ import get from './get';
 import keyArray from './keyArray';
 
 export default prep({
+    // $FlowFixMe - flow cannot recognise Symbol.iterator (apparently fixed in later version https://github.com/facebook/flow/issues/1163)
     all: () => (item: *): Iterator<*> => {
         const keys = keyArray()(item);
         let counter = keys.length - 1;
@@ -11,13 +12,17 @@ export default prep({
             [Symbol.iterator]: function(): Object {
                 return this;
             },
-            next: () => ({
-                value: [
-                    keys[counter],
-                    get(keys[counter])(item)
-                ],
-                done: !keys.hasOwnProperty(counter--)
-            })
+            next: () => keys.hasOwnProperty(counter)
+                ? ({
+                    value: [
+                        keys[counter],
+                        get(keys[counter--])(item)
+                    ],
+                    done: false
+                })
+                : ({
+                    done: true
+                })
         };
     }
 });
