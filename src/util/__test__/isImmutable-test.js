@@ -1,6 +1,6 @@
 // @flow
 import isImmutable from '../isImmutable';
-import testTypes from '../../internal/testTypes';
+import testTypes from '../../internal/__test__/testTypes-testutil';
 
 testTypes({
     name: "isImmutable",

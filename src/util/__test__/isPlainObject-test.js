@@ -1,6 +1,6 @@
 // @flow
 import isPlainObject from '../isPlainObject';
-import testTypes from '../../internal/testTypes';
+import testTypes from '../../internal/__test__/testTypes-testutil';
 
 testTypes({
     name: "isPlainObject",
