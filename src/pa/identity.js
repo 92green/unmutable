@@ -1,2 +1,2 @@
 // @flow
-export default () => ii => ii;
+export default () => (ii: *): * => ii;

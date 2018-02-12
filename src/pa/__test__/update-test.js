@@ -14,7 +14,7 @@ compare({
 compareIteratee({
     name: `update() without key should pass correct arguments to iteratee`,
     item: {a:1, b:2, c:3, d:4},
-    fn: (checkArgs) => update((value: *): boolean => {
+    fn: (checkArgs) => update((value: *): number => {
         checkArgs({value});
         return 2;
     }),

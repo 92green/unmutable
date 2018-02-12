@@ -17,7 +17,7 @@
   },
   "private": false,
   "scripts": {
-    "build": "rm -rf lib && node ./scripts/flow.js && babel src --out-dir lib",
+    "build": "rm -rf lib && node ./scripts/flow.js && babel src --out-dir lib --ignore **/__test__/*-test.js",
     "build-examples": "cd example && yarn install && yarn run build && cd -",
     "deploy-to-gh-pages": "yarn run build && yarn run build-examples && yarn run docs && node scripts/publish.js",
     "prepublish": "yarn run build",
@@ -29,7 +29,7 @@
     "lint": "eslint src --ext js,jsx",
     "lint-fix": "eslint src --ext js,jsx --fix",
     "test": "NODE_ENV=test nyc --report-dir=./coverage ava && yarn run check-coverage",
-    "test-all": "NODE_ENV=test yarn run lint && yarn run test",
+    "test-all": "NODE_ENV=test yarn run lint && yarn run test && yarn run flow",
     "view-coverage": "yarn run check-coverage; open ./coverage/lcov-report/index.html"
   },
   "devDependencies": {
@@ -73,8 +73,7 @@
       "sourceMaps": "inline"
     },
     "files": [
-      "src/**/*-test.js",
-      "src/**/*-testutil.js"
+      "src/**/*-test.js"
     ]
   },
   "nyc": {

@@ -4,6 +4,17 @@ import pick from './pick';
 
 export default prep({
     immutable: 'slice',
-    object: (begin: ?number, end: ?number) => (item: Object): Object => pick(Object.keys(item).slice(begin, end))(item),
-    array: (begin: ?number, end: ?number) => (item: Array<*>): Array<*> => item.slice(begin, end)
+    object: (begin: number = 0, end: ?number) => (item: Object): Object => {
+        let keys = Object.keys(item);
+        let keysSliced = (end || end === 0)
+            ? keys.slice(begin, end)
+            : keys.slice(begin);
+
+        return pick(keysSliced)(item);
+    },
+    array: (begin: number = 0, end: ?number) => (item: Array<*>): Array<*> => {
+        return (end || end === 0)
+            ? item.slice(begin, end)
+            : item.slice(begin);
+    }
 });
