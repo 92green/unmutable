@@ -1,17 +1,17 @@
 // @flow
-import butLast from '../butLast';
+import pop from '../pop';
 import compare from '../../internal/compare';
 
 compare({
-    name: `butLast() should do its thing`,
+    name: `pop() should do its thing`,
     item: [1,2,3],
-    fn: butLast(),
+    fn: pop(),
     toJS: true
 });
 
 compare({
-    name: `butLast() should do its thing on empty`,
+    name: `pop() should do its thing on empty`,
     item: [],
-    fn: butLast(),
+    fn: pop(),
     toJS: true
 });

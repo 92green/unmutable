@@ -42,6 +42,7 @@ getIn ^
 has ^
 hasIn ^
 insert *
+interpose *
 isEmpty ^
 keyOf
 keys ^
@@ -72,6 +73,9 @@ unshift *
 update
 updateIn
 values ^
+zip *
+zipAll *
+zipWith *
 ```
 
 ### To be implemented
@@ -86,7 +90,6 @@ groupBy
 includes
 indexOf *
 interleave *
-interpose *
 isSubset
 isSuperset
 join
@@ -111,9 +114,6 @@ sortBy
 takeWhile
 takeUntil
 toJSON
-zip *
-zipAll *
-zipWith *
 ```
 
 ### Exceptions
