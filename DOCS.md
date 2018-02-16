@@ -44,6 +44,7 @@ hasIn ^
 insert *
 interpose *
 isEmpty ^
+join
 keyOf
 keys ^
 last
@@ -92,7 +93,6 @@ indexOf *
 interleave *
 isSubset
 isSuperset
-join
 lastIndexOf *
 mapKeys
 mapEntries
