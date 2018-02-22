@@ -34,14 +34,14 @@ myData.get('hello', 'notFoundValue'); // hi!
 You could call it like this:
 
 ```js
-import get from 'unmutable/lib/pa/get';
+import get from 'unmutable/lib/get';
 get('hello', 'notFoundValue')(myData); // hi!
 ```
 
 Or if you prefer to pass your data in first, use Unmutable.js' `pipeWith` function:
 
 ```js
-import get from 'unmutable/lib/pa/get';
+import get from 'unmutable/lib/get';
 import pipeWith from 'unmutable/lib/util/pipeWith';
 
 pipeWith(myData, get('hello', 'notFoundValue')); // hi!
@@ -66,8 +66,8 @@ let name = fromJS(data)
 ...you can use Unmutable.js' `pipe` function, which can be used to squish a set of functions together, like this:
 
 ```js
-import get from 'unmutable/lib/pa/get';
-import last from 'unmutable/lib/pa/last';
+import get from 'unmutable/lib/get';
+import last from 'unmutable/lib/last';
 import pipe from 'unmutable/lib/util/pipe';
 
 let getLastName = pipe(
