@@ -82,7 +82,6 @@ zipWith *
 ### To be implemented
 
 ```
-countBy
 flatMap
 flatten
 flip
@@ -124,6 +123,7 @@ The following functions will not be implemented in Unmutable.js
 [Symbol.iterator]()
 asMutable
 asImmutable
+countBy
 entrySeq
 fromEntrySeq
 hashCode
@@ -146,6 +146,11 @@ withMutations
 
 
 ### Extra functions
+
+#### pa/doIf
+`doIf(predicate: Function, ifTrue: Function, ifFalse: Function = ii => ii) => (value) => newValue` - Returns an evaluator that passes the value to the predicate function. If the predicate returns true, the value is then passed through the `ifTrue` function and the result is returned. If the predicate returns false then the value is simply returned unchanged.
+
+If the third argument `ifFalse` is provided, then the value will be passed through `ifFalse` when the predicate returns false.
 
 #### pa/entriesReverse
 `entriesReverse() => (value) => Iterator` - Returns an evaluator that works just like `entries()`, but iterates in the reverse order.

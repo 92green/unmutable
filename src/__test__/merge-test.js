@@ -8,3 +8,10 @@ compare({
     fn: merge({b:6,c:3}),
     toJS: true
 });
+
+compare({
+    name: `merge() array should merge an array`,
+    item: [1,2,3],
+    fn: merge([4,5,6]),
+    toJS: true
+});
