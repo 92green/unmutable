@@ -37,6 +37,7 @@ findLastEntry
 findLastIndex
 findLastKey
 first
+flatMap
 get ^
 getIn ^
 has ^
@@ -82,7 +83,6 @@ zipWith *
 ### To be implemented
 
 ```
-flatMap
 flatten
 flip
 forEach
