@@ -171,10 +171,10 @@ If the third argument `ifFalse` is provided, then the value will be passed throu
 `log(message: string = "", type: string = "log") => (value) => value` - Returns an evaluator that passes the value through unchanged, but also calls `console[type](message, value)`. Useful for debugging.
 
 #### pa/omit
-`omit(keys: string[]) => (value) => newValue` - For `Map` and object: Returns an evaluator that filters out all keys listed in `keys`.
+`omit(keys: string[]|number[]) => (value) => newValue` - For `Map` and object: Returns an evaluator that filters out all keys listed in `keys`.
 
 #### pa/pick
-`pick(keys: string[]) => (value) => newValue` - For `Map` and object: Returns an evaluator that filters out all keys that aren't listed in `keys`.
+`pick(keys: string[]|number[]) => (value) => newValue` - For `Map` and object: Returns an evaluator that filters out all keys that aren't listed in `keys`.
 
 #### pa/pivot
 `pivot() => (value) => newValue` - Returns an evaluator that pivots the item. The keys at the first level of nesting are moved to the second level, and the keys of the second level are moved to the first.
@@ -190,6 +190,9 @@ If the third argument `ifFalse` is provided, then the value will be passed throu
 
 #### pa/strictEquals
 `strictEquals(other: *) => (value) => number` - Returns an evaluator that checks if `other` and `value` are strictly equal. This complements `equals()`, which checks for deep value equality.
+
+#### pa/swap
+`swap(keyA: string|number, keyB: string|number) => (value) => newValue` - Returns an evaluator that will swap the values at the given keys. Keys that don't exist are assumed to have a value of `undefined`.
 
 #### pa/valueArray
 `valueArray() => (value) => Array` - Returns an evaluator that returns an array of values on the item. Immutable.js has no function that does this, they have `values()` which returns an iterator, and `valueSeq()` which returns an Immutable.js `Seq`.
