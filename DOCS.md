@@ -147,54 +147,60 @@ withMutations
 
 ### Extra functions
 
-#### pa/doIf
+#### clone
+`clone() => (value) => newValue` - Returns an evaluator that returns a clone of `value` if `value` is an array or object, or returns the `value` unchanged if given an Immutable.js `Map` or `List`. Immutable.js data types are inherently immutable so do not need to be explicitly cloned.
+
+#### doIf
 `doIf(predicate: Function, ifTrue: Function, ifFalse: Function = ii => ii) => (value) => newValue` - Returns an evaluator that passes the value to the predicate function. If the predicate returns true, the value is then passed through the `ifTrue` function and the result is returned. If the predicate returns false then the value is simply returned unchanged.
 
 If the third argument `ifFalse` is provided, then the value will be passed through `ifFalse` when the predicate returns false.
 
-#### pa/entriesReverse
+#### entriesReverse
 `entriesReverse() => (value) => Iterator` - Returns an evaluator that works just like `entries()`, but iterates in the reverse order.
 
-#### pa/entryArray
+#### entryArray
 `entryArray() => (value) => Array` - Returns an evaluator that returns an array of entries (e.g. `[key, value]` tuples) of the item. Immutable.js has no function that does this, they have `entries()` which returns an iterator, and `entrySeq()` which returns an Immutable.js `Seq`.
 
-#### pa/identity
+#### identity
 `identity() => (value) => value` - Returns an evaluator that just passes values through with no change. Useful for readable code.
 
-#### pa/isNotEmpty
+#### isNotEmpty
 `isNotEmpty() => (value) => boolean` - Returns an evaluator that returns true when the `value` is not empty.
 
-#### pa/keyArray
+#### keyArray
 `keyArray() => (value) => Array` - Returns an evaluator that returns an array of keys on the item. Immutable.js has no function that does this, they have `keys()` which returns an iterator, and `keySeq()` which returns an Immutable.js `Seq`.
 
-#### pa/log
+#### log
 `log(message: string = "", type: string = "log") => (value) => value` - Returns an evaluator that passes the value through unchanged, but also calls `console[type](message, value)`. Useful for debugging.
 
-#### pa/omit
+#### omit
 `omit(keys: string[]|number[]) => (value) => newValue` - For `Map` and object: Returns an evaluator that filters out all keys listed in `keys`.
 
-#### pa/pick
+#### pick
 `pick(keys: string[]|number[]) => (value) => newValue` - For `Map` and object: Returns an evaluator that filters out all keys that aren't listed in `keys`.
 
-#### pa/pivot
+#### pivot
 `pivot() => (value) => newValue` - Returns an evaluator that pivots the item. The keys at the first level of nesting are moved to the second level, and the keys of the second level are moved to the first.
 
-#### pa/size
-`size() => (value) => number` - Returns an evaluator that number of keys on the item. Immutable.js has this as a getter on their collections, Unmutable.js offers this as a function.
+#### unit
+`unit(newValue) => (value) => number` - Returns an evaluator that attempts to turn `newValue` into the `value`s data type, and returns `newValue`.
 
-#### pa/shallowEquals
+#### size
+`size() => (value) => number` - Returns an evaluator that returns the number of keys on the item. Immutable.js has this as a getter on their collections, Unmutable.js offers this as a function.
+
+#### shallowEquals
 `shallowEquals(other: *) => (value) => number` - Returns an evaluator that checks if `other` and `value` are shallowly equal, using strict equality. Note: use `equals()` if you want to check deep equality.
 
-#### pa/shallowToJS
+#### shallowToJS
 `shallowToJS() => (value) => *` - Returns an evaluator that turns the `value` into plain Javascript if it is an Immutable.js data type. Internally if `value` is a `List` then `.toArray()` is called, and if value is a `Map` then `toObject()` is called.
 
-#### pa/strictEquals
+#### strictEquals
 `strictEquals(other: *) => (value) => number` - Returns an evaluator that checks if `other` and `value` are strictly equal. This complements `equals()`, which checks for deep value equality.
 
-#### pa/swap
+#### swap
 `swap(keyA: string|number, keyB: string|number) => (value) => newValue` - Returns an evaluator that will swap the values at the given keys. Keys that don't exist are assumed to have a value of `undefined`.
 
-#### pa/valueArray
+#### valueArray
 `valueArray() => (value) => Array` - Returns an evaluator that returns an array of values on the item. Immutable.js has no function that does this, they have `values()` which returns an iterator, and `valueSeq()` which returns an Immutable.js `Seq`.
 
 ### Extra functions to be implemented
