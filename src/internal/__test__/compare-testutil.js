@@ -1,7 +1,7 @@
 // @flow
 import test from 'ava';
 import {fromJS, Record} from 'immutable';
-import {isRecord} from './predicates';
+import {isRecord} from '../predicates';
 
 let defaultValues = {
     a: null,

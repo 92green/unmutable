@@ -1,6 +1,6 @@
 // @flow
 import rest from '../rest';
-import compare from '../internal/compare';
+import compare from '../internal/__test__/compare-testutil';
 
 compare({
     name: `rest() should do its object thing`,

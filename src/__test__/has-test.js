@@ -1,6 +1,6 @@
 // @flow
 import has from '../has';
-import compare from '../internal/compare';
+import compare from '../internal/__test__/compare-testutil';
 
 compare({
     name: `has() finds a key`,

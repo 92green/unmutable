@@ -1,6 +1,6 @@
 // @flow
 import last from '../last';
-import compare from '../internal/compare';
+import compare from '../internal/__test__/compare-testutil';
 import test from 'ava';
 
 compare({

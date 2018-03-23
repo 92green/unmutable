@@ -1,6 +1,6 @@
 // @flow
 import skip from '../skip';
-import compare from '../internal/compare';
+import compare from '../internal/__test__/compare-testutil';
 
 compare({
     name: `skip() should skip an object with 0`,

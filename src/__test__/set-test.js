@@ -1,6 +1,6 @@
 // @flow
 import set from '../set';
-import compare from '../internal/compare';
+import compare from '../internal/__test__/compare-testutil';
 import test from 'ava';
 import {Record} from 'immutable';
 

@@ -1,6 +1,6 @@
 // @flow
 import interpose from '../interpose';
-import compare from '../internal/compare';
+import compare from '../internal/__test__/compare-testutil';
 
 compare({
     name: `interpose() should do its thing`,

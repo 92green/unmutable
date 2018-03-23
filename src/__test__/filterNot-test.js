@@ -2,8 +2,8 @@
 import test from 'ava';
 import {Record} from 'immutable';
 import filterNot from '../filterNot';
-import compare from '../internal/compare';
-import compareIteratee from '../internal/compareIteratee';
+import compare from '../internal/__test__/compare-testutil';
+import compareIteratee from '../internal/__test__/compareIteratee-testutil';
 
 compare({
     name: `filterNot() on object should work`,

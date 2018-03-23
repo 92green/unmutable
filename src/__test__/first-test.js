@@ -1,6 +1,6 @@
 // @flow
 import first from '../first';
-import compare from '../internal/compare';
+import compare from '../internal/__test__/compare-testutil';
 
 compare({
     name: `first() should get first object item`,

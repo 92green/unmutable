@@ -2,8 +2,8 @@
 import flatMap from '../flatMap';
 import set from '../set';
 import push from '../push';
-import compare from '../internal/compare';
-import compareIteratee from '../internal/compareIteratee';
+import compare from '../internal/__test__/compare-testutil';
+import compareIteratee from '../internal/__test__/compareIteratee-testutil';
 
 compare({
     name: `flatMap() on object should work`,

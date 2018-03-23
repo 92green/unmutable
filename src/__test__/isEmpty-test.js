@@ -1,6 +1,6 @@
 // @flow
 import isEmpty from '../isEmpty';
-import compare from '../internal/compare';
+import compare from '../internal/__test__/compare-testutil';
 
 compare({
     name: `isEmpty() should work on objects`,

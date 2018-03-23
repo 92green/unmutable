@@ -1,6 +1,6 @@
 // @flow
 import size from '../size';
-import compare from '../internal/compare';
+import compare from '../internal/__test__/compare-testutil';
 
 compare({
     name: `size() should work on objects`,

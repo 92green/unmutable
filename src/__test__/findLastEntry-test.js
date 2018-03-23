@@ -1,7 +1,7 @@
 // @flow
 import findLastEntry from '../findLastEntry';
-import compare from '../internal/compare';
-import compareIteratee from '../internal/compareIteratee';
+import compare from '../internal/__test__/compare-testutil';
+import compareIteratee from '../internal/__test__/compareIteratee-testutil';
 
 compare({
     name: `findLastEntry() on object should findLastEntry thing`,

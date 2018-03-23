@@ -1,6 +1,6 @@
 // @flow
 import slice from '../slice';
-import compare from '../internal/compare';
+import compare from '../internal/__test__/compare-testutil';
 
 compare({
     name: `slice() should slice an object with no args`,
