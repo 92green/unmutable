@@ -1,6 +1,6 @@
 // @flow
 import concat from '../concat';
-import compare from '../internal/compare';
+import compare from '../internal/__test__/compare-testutil';
 
 compare({
     name: `concat() array should concat an item`,

@@ -4,8 +4,8 @@ import prep from './internal/prep';
 export default prep({
     immutable: "values",
     record: () => (item) => item.toSeq().values(),
-    // $FlowFixMe - flow cannot recognise Symbol.iterator (apparently fixed in later version https://github.com/facebook/flow/issues/1163)
-    object: () => (item: Object): Iterator<*> => {
+    // $FlowFixMe - using * as flow cannot recognise Symbol.iterator as being @@iterator (see https://github.com/facebook/flow/issues/1163)
+    object: () => (item: Object): * => {
         let counter = 0;
         const keys = Object.keys(item);
         return {
@@ -22,6 +22,6 @@ export default prep({
                 })
         };
     },
-    // $FlowFixMe - flow cannot recognise Symbol.iterator (apparently fixed in later version https://github.com/facebook/flow/issues/1163)
-    array: () => (item: Array<*>): Iterator<*> => item[Symbol.iterator]()
+    // $FlowFixMe - flow can't deal with computed properties
+    array: () => (item: Array<*>): * => item[Symbol.iterator]()
 });

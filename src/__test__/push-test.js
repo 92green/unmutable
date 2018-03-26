@@ -1,6 +1,6 @@
 // @flow
 import push from '../push';
-import compare from '../internal/compare';
+import compare from '../internal/__test__/compare-testutil';
 
 compare({
     name: `push() should push an item`,

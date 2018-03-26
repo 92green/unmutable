@@ -1,6 +1,6 @@
 // @flow
 import take from '../take';
-import compare from '../internal/compare';
+import compare from '../internal/__test__/compare-testutil';
 
 compare({
     name: `take() should take an object with 0`,

@@ -1,6 +1,6 @@
 // @flow
 import del from '../delete';
-import compare from '../internal/compare';
+import compare from '../internal/__test__/compare-testutil';
 
 compare({
     name: `delete() deletes a value`,

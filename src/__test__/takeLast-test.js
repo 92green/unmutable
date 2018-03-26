@@ -1,6 +1,6 @@
 // @flow
 import takeLast from '../takeLast';
-import compare from '../internal/compare';
+import compare from '../internal/__test__/compare-testutil';
 
 compare({
     name: `takeLast() should takeLast an object with 0`,

@@ -1,6 +1,6 @@
 // @flow
 import insert from '../insert';
-import compare from '../internal/compare';
+import compare from '../internal/__test__/compare-testutil';
 
 compare({
     name: `insert() should insert an item`,

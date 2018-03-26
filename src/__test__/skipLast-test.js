@@ -1,6 +1,6 @@
 // @flow
 import skipLast from '../skipLast';
-import compare from '../internal/compare';
+import compare from '../internal/__test__/compare-testutil';
 
 compare({
     name: `skipLast() should skipLast an object with 0`,

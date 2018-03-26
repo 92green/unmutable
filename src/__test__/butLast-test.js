@@ -1,6 +1,6 @@
 // @flow
 import butLast from '../butLast';
-import compare from '../internal/compare';
+import compare from '../internal/__test__/compare-testutil';
 
 compare({
     name: `butLast() should do its object thing`,
