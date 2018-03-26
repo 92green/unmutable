@@ -5,7 +5,7 @@ export default prep({
     immutable: "keys",
     record: () => (item: *) => item.toSeq().keys(),
     // $FlowFixMe - flow cannot recognise Symbol.iterator (see https://github.com/facebook/flow/issues/1163)
-    object: () => (item: Object): Iterator<*> => {
+    object: () => (item: Object): * => {
         let counter = 0;
         const keys = Object.keys(item);
         return {
@@ -22,5 +22,5 @@ export default prep({
                 })
         };
     },
-    array: () => (item: Array<*>): Iterator<*> => item.keys()
+    array: () => (item: Array<*>): * => item.keys()
 });

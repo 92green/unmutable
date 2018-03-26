@@ -4,8 +4,8 @@ import get from './get';
 import keyArray from './keyArray';
 
 export default prep({
-    // $FlowFixMe - flow cannot recognise Symbol.iterator (see https://github.com/facebook/flow/issues/1163)
-    all: () => (item: *): Iterator<*> => {
+    // $FlowFixMe - using * as flow cannot recognise Symbol.iterator as being @@iterator (see https://github.com/facebook/flow/issues/1163)
+    all: () => (item: *): * => {
         const keys = keyArray()(item);
         let counter = keys.length - 1;
         return {
