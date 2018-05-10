@@ -2,14 +2,15 @@
 import prep from './internal/prep';
 
 export default prep({
+    name: 'reduceRight',
     immutable: 'reduceRight',
-    object: (reducer: Function, initialReduction: *) => (item: Object): * => {
+    object: (reducer: Function, initialReduction: *) => (value: Object): * => {
         return Object
-            .keys(item)
+            .keys(value)
             .reduceRight(
-                (reduction, key) => reducer(reduction, item[key], key, item),
+                (reduction, key) => reducer(reduction, value[key], key, value),
                 initialReduction
             );
     },
-    array: (reducer: Function, initialReduction: *) => (item: Array<*>): * => item.reduceRight(reducer, initialReduction)
+    array: (reducer: Function, initialReduction: *) => (value: Array<*>): * => value.reduceRight(reducer, initialReduction)
 });

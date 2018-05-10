@@ -3,8 +3,9 @@ import prep from './internal/prep';
 import toArray from './toArray';
 
 export default prep({
+    name: 'join',
     immutable: 'join',
-    all: (separator: string = ",") => (item: *): string => {
-        return toArray()(item).join(separator);
+    all: (separator: string = ",") => (value: *): string => {
+        return toArray()(value).join(separator);
     }
 });

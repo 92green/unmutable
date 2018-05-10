@@ -2,5 +2,6 @@
 import prep from './internal/prep';
 
 export default prep({
-    all: (other: *) => (item: *): boolean => item === other
+    name: 'strictEquals',
+    all: (other: *) => (value: *): boolean => value === other
 });

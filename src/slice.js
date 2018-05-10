@@ -3,18 +3,19 @@ import prep from './internal/prep';
 import pick from './pick';
 
 export default prep({
+    name: 'slice',
     immutable: 'slice',
-    object: (begin: number = 0, end: ?number) => (item: Object): Object => {
-        let keys = Object.keys(item);
+    object: (begin: number = 0, end: ?number) => (value: Object): Object => {
+        let keys = Object.keys(value);
         let keysSliced = (end || end === 0)
             ? keys.slice(begin, end)
             : keys.slice(begin);
 
-        return pick(keysSliced)(item);
+        return pick(keysSliced)(value);
     },
-    array: (begin: number = 0, end: ?number) => (item: Array<*>): Array<*> => {
+    array: (begin: number = 0, end: ?number) => (value: Array<*>): Array<*> => {
         return (end || end === 0)
-            ? item.slice(begin, end)
-            : item.slice(begin);
+            ? value.slice(begin, end)
+            : value.slice(begin);
     }
 });

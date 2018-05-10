@@ -6,19 +6,20 @@ import reduce from './reduce';
 
 
 export default prep({
+    name: 'map',
     immutable: 'map',
-    record: (mapper: Function) => (item: *): * => pipeWith(
-        item,
+    record: (mapper: Function) => (value: *): * => pipeWith(
+        value,
         entryArray(),
-        reduce((record, [key, value]) => record.set(key, mapper(value, key, record)), item)
+        reduce((record, [key, value]) => record.set(key, mapper(value, key, record)), value)
     ),
-    object: (mapper: Function) => (item: Object): * => {
+    object: (mapper: Function) => (value: Object): * => {
         return Object
-            .keys(item)
+            .keys(value)
             .reduce((obj: Object, key: string): Object => {
-                obj[key] = mapper(item[key], key, item);
+                obj[key] = mapper(value[key], key, value);
                 return obj;
             }, {});
     },
-    array: (mapper: Function) => (item: Array<*>): * => item.map(mapper)
+    array: (mapper: Function) => (value: Array<*>): * => value.map(mapper)
 });

@@ -6,6 +6,7 @@ import reduce from './reduce';
 import pipe from './util/pipe';
 
 export default prep({
+    name: 'flatMap',
     immutable: 'flatMap',
     all: (mapper: Function): Function => {
         return pipe(

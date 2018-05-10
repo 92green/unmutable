@@ -2,6 +2,7 @@
 import prep from './internal/prep';
 
 export default prep({
+    name: 'unshift',
     immutable: 'unshift',
-    array: (...values: Array<*>) => (item: Array<*>): Array<*> => [...values, ...item]
+    array: (...newValues: Array<*>) => (value: Array<*>): Array<*> => [...newValues, ...value]
 });

@@ -4,9 +4,10 @@ import get from './get';
 import keyArray from './keyArray';
 
 export default prep({
+    name: 'entriesReverse',
     // $FlowFixMe - using * as flow cannot recognise Symbol.iterator as being @@iterator (see https://github.com/facebook/flow/issues/1163)
-    all: () => (item: *): * => {
-        const keys = keyArray()(item);
+    all: () => (value: *): * => {
+        const keys = keyArray()(value);
         let counter = keys.length - 1;
         return {
             [Symbol.iterator]: function(): Object {
@@ -16,7 +17,7 @@ export default prep({
                 ? ({
                     value: [
                         keys[counter],
-                        get(keys[counter--])(item)
+                        get(keys[counter--])(value)
                     ],
                     done: false
                 })

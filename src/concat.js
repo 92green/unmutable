@@ -2,6 +2,7 @@
 import prep from './internal/prep';
 
 export default prep({
+    name: 'concat',
     immutable: 'concat',
-    array: (...newItems) => (item: Array<*>): Array<*> => item.concat(...newItems)
+    array: (...newValues) => (item: Array<*>): Array<*> => item.concat(...newValues)
 });

@@ -6,15 +6,19 @@ import keyArray from './keyArray';
 import last from './last';
 import pop from './pop';
 
+let keyed = () => (value) => pipeWith(
+    value,
+    del(pipeWith(
+        value,
+        keyArray(),
+        last()
+    ))
+);
+
 export default prep({
+    name: 'butLast',
     immutable: 'butLast',
-    keyed: () => (item) => pipeWith(
-        item,
-        del(pipeWith(
-            item,
-            keyArray(),
-            last()
-        ))
-    ),
+    record: keyed,
+    object: keyed,
     array: pop
 });

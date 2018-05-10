@@ -7,9 +7,10 @@ import pipeWith from './util/pipeWith';
 const hasNext = (collections, index) => collections.every(ii => ii.length > index);
 
 export default prep({
+    name: 'zipWith',
     immutable: 'zipWith',
-    array: (zipper: Function, ...collections: Array<*>) => (item: Array<*>): Array<*> => {
-        collections = [item, ...collections];
+    array: (zipper: Function, ...collections: Array<*>) => (value: Array<*>): Array<*> => {
+        collections = [value, ...collections];
         let zipped = [];
         for(let index = 0; hasNext(collections, index); index++) {
             pipeWith(

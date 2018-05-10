@@ -3,12 +3,13 @@ import prep from './internal/prep';
 import entries from './entries';
 
 export default prep({
+    name: 'findEntry',
     immutable: 'findEntry',
-    all: (predicate: Function, context: *, notSetValue: * = undefined) => (item: Object): * => {
-        let iterator = entries()(item);
+    all: (predicate: Function, context: *, notSetValue: * = undefined) => (value: Object): * => {
+        let iterator = entries()(value);
         for(let entry of iterator) {
-            let [key, value] = entry;
-            if(predicate(value, key, item)) {
+            let [key, childValue] = entry;
+            if(predicate(childValue, key, value)) {
                 return entry;
             }
         }

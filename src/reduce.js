@@ -6,19 +6,20 @@ import reduce from './reduce';
 
 
 export default prep({
+    name: 'reduce',
     immutable: 'reduce',
-    record: (reducer: Function, initialReduction: *) => (item: *): * => pipeWith(
-        item,
+    record: (reducer: Function, initialReduction: *) => (value: *): * => pipeWith(
+        value,
         entryArray(),
-        reduce((reduction, [key, value]) => reducer(reduction, value, key, item), initialReduction)
+        reduce((reduction, [key, childValue]) => reducer(reduction, childValue, key, value), initialReduction)
     ),
-    object: (reducer: Function, initialReduction: *) => (item: Object): * => {
+    object: (reducer: Function, initialReduction: *) => (value: Object): * => {
         return Object
-            .keys(item)
+            .keys(value)
             .reduce(
-                (reduction, key) => reducer(reduction, item[key], key, item),
+                (reduction, key) => reducer(reduction, value[key], key, value),
                 initialReduction
             );
     },
-    array: (reducer: Function, initialReduction: *) => (item: Array<*>): * => item.reduce(reducer, initialReduction)
+    array: (reducer: Function, initialReduction: *) => (value: Array<*>): * => value.reduce(reducer, initialReduction)
 });

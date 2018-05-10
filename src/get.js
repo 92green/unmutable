@@ -3,16 +3,17 @@ import prep from './internal/prep';
 import has from './has';
 
 export default prep({
+    name: 'get',
     immutable: 'get',
     record: 'get',
-    object: (key: string, notFoundValue: * = undefined) => (item: Object): * => {
-        return has(key)(item)
-            ? item[key]
+    object: (key: string, notFoundValue: * = undefined) => (value: Object): * => {
+        return has(key)(value)
+            ? value[key]
             : notFoundValue;
     },
-    array: (key: number, notFoundValue: * = undefined) => (item: Array<*>): * => {
-        return has(key)(item)
-            ? (key < 0 ? item[key + item.length] : item[key])
+    array: (key: number, notFoundValue: * = undefined) => (value: Array<*>): * => {
+        return has(key)(value)
+            ? (key < 0 ? value[key + value.length] : value[key])
             : notFoundValue;
     }
 });

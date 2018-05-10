@@ -7,19 +7,20 @@ import pipeWith from './util/pipeWith';
 // we're not using Immutable.js setIn because it can't cope with mixed types in the keyPath
 
 export default prep({
-    all: (keyPath: string[], value: *) => (item: *): * => {
-        let notFoundContainer = item.toMap
-            ? item.toMap().clear()
+    name: 'setIn',
+    all: (keyPath: string[], childValue: *) => (value: *): * => {
+        let notFoundContainer = value.toMap
+            ? value.toMap().clear()
             : {};
 
         for(var i = keyPath.length - 1; i >= 0; i--) {
             const partialKeyPath = keyPath.slice(0, i);
-            value = pipeWith(
-                item,
+            childValue = pipeWith(
+                value,
                 getIn(partialKeyPath, notFoundContainer),
-                set(keyPath[i], value)
+                set(keyPath[i], childValue)
             );
         }
-        return value;
+        return childValue;
     }
 });

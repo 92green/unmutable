@@ -4,13 +4,14 @@ import isImmutable from './util/isImmutable';
 import isIndexed from './util/isIndexed';
 
 export default prep({
-    all: () => (item: *): * => {
-        if(!isImmutable(item)) {
-            return item;
+    name: 'shallowToJS',
+    all: () => (value: *): * => {
+        if(!isImmutable(value)) {
+            return value;
         }
-        if(isIndexed(item)) {
-            return item.toArray();
+        if(isIndexed(value)) {
+            return value.toArray();
         }
-        return item.toObject();
+        return value.toObject();
     }
 });

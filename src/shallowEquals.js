@@ -5,9 +5,10 @@ import get from './get';
 import size from './size';
 
 export default prep({
-    all: (other: *) => (item: *): boolean => {
-        return size()(item) === size()(other)
-            ? every((value: *, key: *) => value === get(key)(other))(item)
+    name: 'shallowEquals',
+    all: (other: *) => (value: *): boolean => {
+        return size()(value) === size()(other)
+            ? every((childValue: *, key: *) => childValue === get(key)(other))(value)
             : false;
     }
 });
