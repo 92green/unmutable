@@ -37,7 +37,7 @@ const PREP_TYPES: Array<PrepType> = [
         type: "immutable",
         isType: (value: *): boolean => _isImmutableNoRecordChecks(value),
         fn: (name: string, immutable: string|Function) => typeof immutable === 'string'
-            ? (...args: Array<*>) => (value: *) => {
+            ? (...args: Array<*>) => (value: *): * => {
                 if(!value[immutable]) {
                     error(name, value);
                 }
