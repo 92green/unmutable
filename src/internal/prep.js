@@ -4,10 +4,8 @@ import {
     isRecord
 } from '../internal/predicates';
 
-const getName = (name: ?string): string => name ? `${name}()` : `function`;
-
-const error = (name: ?string, value: *) => {
-    throw new Error(`${getName(name)} cannot be called on ${value}`);
+const error = (name: string, value: *) => {
+    throw new Error(`${name}() cannot be called on ${value}`);
 };
 
 type PrepConfig = {
@@ -64,7 +62,6 @@ const PREP_TYPES: Array<PrepType> = [
 ];
 
 export default (config: PrepConfig): Function => {
-    console.log("prep");
     let types: PrepType[] = PREP_TYPES
         .filter(({type}) => config[type])
         .map(({type, isType, fn}) => ({
