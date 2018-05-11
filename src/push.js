@@ -2,6 +2,7 @@
 import prep from './internal/prep';
 
 export default prep({
+    name: 'push',
     immutable: 'push',
-    array: (...values: Array<*>) => (item: Array<*>): Array<*> => [...item, ...values]
+    array: (...newValues: Array<*>) => (value: Array<*>): Array<*> => [...value, ...newValues]
 });

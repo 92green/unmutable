@@ -3,11 +3,12 @@ import prep from './internal/prep';
 import entries from './entries';
 
 export default prep({
+    name: 'some',
     immutable: 'some',
-    all: (predicate: Function) => (item: Object): boolean => {
-        let iterator = entries()(item);
-        for(let [key, value] of iterator) {
-            if(predicate(value, key, item)) {
+    all: (predicate: Function) => (value: Object): boolean => {
+        let iterator = entries()(value);
+        for(let [key, childValue] of iterator) {
+            if(predicate(childValue, key, value)) {
                 return true;
             }
         }

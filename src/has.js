@@ -2,8 +2,9 @@
 import prep from './internal/prep';
 
 export default prep({
+    name: 'has',
     immutable: 'has',
     record: 'has',
-    object: (key: string) => (item): boolean => item.hasOwnProperty(key),
-    array: (key: number) => (item): boolean => key < item.length && key >= -item.length
+    object: (key: string) => (value): boolean => value.hasOwnProperty(key),
+    array: (key: number) => (value): boolean => key < value.length && key >= -value.length
 });

@@ -8,23 +8,24 @@ import set from './set';
 import update from './update';
 
 export default prep({
-    all: () => (item: *): * => {
+    name: 'pivot',
+    all: () => (value: *): * => {
 
         let outerContainer = pipeWith(
-            item,
+            value,
             clear()
         );
 
         let innerContainer = pipeWith(
-            item,
+            value,
             first(),
             clear()
         );
 
         return pipeWith(
-            item,
-            reduce((pivoted: *, outerItem: *, outerKey: *): * => pipeWith(
-                outerItem,
+            value,
+            reduce((pivoted: *, outerValue: *, outerKey: *): * => pipeWith(
+                outerValue,
                 reduce((pp: *, value: *, innerKey: *): * => pipeWith(
                     pp,
                     update(

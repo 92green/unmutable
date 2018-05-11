@@ -3,9 +3,10 @@ import prep from './internal/prep';
 import get from './get';
 
 export default prep({
+    name: 'last',
     immutable: 'last',
-    object: () => (item: Object): * => {
-        return item[get(-1)(Object.keys(item))];
+    object: () => (value: Object): * => {
+        return value[get(-1)(Object.keys(value))];
     },
     array: () => get(-1)
 });

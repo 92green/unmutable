@@ -5,11 +5,12 @@ import set from './set';
 import pipeWith from './util/pipeWith';
 
 export default prep({
-    all: (keyA: string|number, keyB: string|number) => (item: Object): Object => {
+    name: 'swap',
+    all: (keyA: string|number, keyB: string|number) => (value: Object): Object => {
         return pipeWith(
-            item,
-            set(keyA, get(keyB)(item)),
-            set(keyB, get(keyA)(item))
+            value,
+            set(keyA, get(keyB)(value)),
+            set(keyB, get(keyA)(value))
         );
     }
 });

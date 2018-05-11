@@ -2,7 +2,8 @@
 import prep from './internal/prep';
 
 export default prep({
+    name: 'merge',
     immutable: 'merge',
-    object: (newItem: Object) => (item): Object => ({...item, ...newItem}),
-    array: (newItem: Array<*>) => (item: Array<*>): Array<*> => [...item, ...newItem]
+    object: (newValue: Object) => (value): Object => ({...value, ...newValue}),
+    array: (newValue: Array<*>) => (value: Array<*>): Array<*> => [...value, ...newValue]
 });

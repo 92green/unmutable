@@ -3,9 +3,10 @@ import prep from './internal/prep';
 import values from './values';
 
 export default prep({
+    name: 'interpose',
     immutable: 'interpose',
-    array: (separator: *) => (item: Array<*>): Array<*> => {
-        let iterator = values()(item);
+    array: (separator: *) => (value: Array<*>): Array<*> => {
+        let iterator = values()(value);
         let interposed = [];
         for(let value of iterator) {
             if(interposed.length) {

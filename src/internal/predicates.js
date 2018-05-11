@@ -10,6 +10,12 @@ export const isImmutable = (maybeImmutable: *): boolean => {
     return isCollection(maybeImmutable) || isRecord(maybeImmutable);
 };
 
+export const _isImmutableNoRecordChecks = (ii: *): boolean => {
+    return !ii
+        ? false
+        : !!ii[IS_ITERABLE_SENTINEL];
+};
+
 export const isCollection = (ii: *): boolean => {
     return !ii
         ? false

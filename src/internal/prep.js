@@ -1,81 +1,80 @@
 // @flow
-import isImmutable from '../util/isImmutable';
-import isRecord from '../util/isRecord';
+import {
+    _isImmutableNoRecordChecks,
+    isRecord
+} from '../internal/predicates';
 
-const getName = (name: ?string): string => name ? `${name}()` : `function`;
-
-const noMethodError = (name: ?string) => {
-    throw new Error(`Evaluation of ${getName(name)} failed: method doesn't exist`);
+const error = (name: string, value: *) => {
+    throw new Error(`${name}() cannot be called on ${value}`);
 };
 
-export default (config: Object): Function => {
-    let {immutable} = config;
+type PrepConfig = {
+    name: string,
+    record?: string|Function,
+    immutable?: string|Function,
+    array?: Function,
+    object?: Function,
+    all?: Function
+};
 
-    return (...args: *) => (item: *): * => {
-        if(isRecord(item)) {
-            return callRecord(config, args, item);
+type PrepType = {
+    type: string,
+    isType: (value: *) => boolean,
+    fn: Function
+};
+
+const PREP_TYPES: Array<PrepType> = [
+    {
+        type: "record",
+        isType: (value: *): boolean => isRecord(value),
+        fn: (name: string, record: string|Function) => typeof record === 'string'
+            ? (...args: Array<*>) => (value: *) => value[record](...args)
+            : record
+    },
+    {
+        type: "immutable",
+        isType: (value: *): boolean => _isImmutableNoRecordChecks(value),
+        fn: (name: string, immutable: string|Function) => typeof immutable === 'string'
+            ? (...args: Array<*>) => (value: *): * => {
+                if(!value[immutable]) {
+                    error(name, value);
+                }
+                return value[immutable](...args);
+            }
+            : immutable
+    },
+    {
+        type: "array",
+        isType: (value: *): boolean => Array.isArray(value),
+        fn: (name: string, array: Function) => array
+    },
+    {
+        type: "object",
+        isType: (value: *): boolean => typeof value === "object",
+        fn: (name: string, object: Function) => object
+
+    },
+    {
+        type: "all",
+        isType: (): boolean => true,
+        fn: (name: string, all: Function) => all
+    }
+];
+
+export default (config: PrepConfig): Function => {
+    let types: PrepType[] = PREP_TYPES
+        .filter(({type}) => config[type])
+        .map(({type, isType, fn}) => ({
+            type,
+            isType,
+            fn: fn(config.name, config[type])
+        }));
+
+    return (...args: *) => (value: *): * => {
+        let type: ?PrepType = types.find(({isType}) => isType(value));
+        if(type) {
+            return type.fn(...args)(value);
         }
-        if(isImmutable(item)) {
-            return callImmutable(config, args, item);
-        }
-        if(Array.isArray(item)) {
-            return callArray(config, args, item);
-        }
-        if(typeof item === "object") {
-            return callObject(config, args, item);
-        }
-        throw new Error(`Evaluation of ${getName(immutable)} failed: Value is invalid ${item}`);
+        error(config.name, value);
     };
-};
-
-const callImmutable = ({immutable, all}: Object, args: *, item: *): * => {
-    if(immutable) {
-        if(!item[immutable]) {
-            noMethodError(immutable);
-        }
-        return item[immutable](...args);
-    }
-    if(all) {
-        return all(...args)(item);
-    }
-    noMethodError(immutable);
-};
-
-const callRecord = ({immutable, record, keyed, all}: Object, args: *, item: *): * => {
-    if(record) {
-        if(typeof record === 'string') {
-            return item[record](...args);
-        }
-        return record(...args)(item);
-    }
-    if(keyed) {
-        return keyed(...args)(item);
-    }
-    if(all) {
-        return all(...args)(item);
-    }
-    noMethodError(immutable);
-};
-
-const callArray = ({immutable, array, all}: Object, args: *, item: *): * => {
-    if(array) {
-        return array(...args)(item);
-    }
-    if(all) {
-        return all(...args)(item);
-    }
-    noMethodError(immutable);
-};
-
-const callObject = ({immutable, keyed, object, all}: Object, args: *, item: *): * => {
-    if(object) {
-        return object(...args)(item);
-    }
-    if(keyed) {
-        return keyed(...args)(item);
-    }
-    if(all) {
-        return all(...args)(item);
-    }
-    noMethodError(immutable);
 };

@@ -3,5 +3,6 @@ import prep from './internal/prep';
 import entries from './entries';
 
 export default prep({
-    all: () => (item: *): Array<*> => [...entries()(item)]
+    name: 'entriesArray',
+    all: () => (value: *): Array<*> => [...entries()(value)]
 });
