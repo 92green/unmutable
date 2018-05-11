@@ -4,7 +4,7 @@
     "lib"
   ],
   "name": "unmutable",
-  "version": "0.26.0",
+  "version": "0.27.0",
   "description": "Immutable.js functions for collections that may or may not be Immutable.",
   "license": "MIT",
   "author": "Damien Clarke",
