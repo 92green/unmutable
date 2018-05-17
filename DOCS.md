@@ -66,6 +66,8 @@ skip
 skipLast
 slice
 some
+sort - works with arrays, lists and maps, but not objects because objects cannot be sorted
+sortBy - works with arrays, lists and maps, but not objects because objects cannot be sorted
 take
 takeLast
 toArray
@@ -108,8 +110,6 @@ setSize *
 skipWhile
 skipUntil
 splice *
-sort
-sortBy
 takeWhile
 takeUntil
 toJSON
