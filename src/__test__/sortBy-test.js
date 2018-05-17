@@ -9,6 +9,7 @@ compare({
         {a: 3},
         {a: 8},
         {a: 6},
+        {a: 4},
         {a: 4}
     ],
     fn: sortBy(get('a')),
@@ -21,6 +22,7 @@ compare({
         {a: 3},
         {a: 8},
         {a: 6},
+        {a: 4},
         {a: 4}
     ],
     fn: sortBy(get('a'), (a, b) => {
