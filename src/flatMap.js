@@ -1,20 +1,23 @@
 // @flow
 import prep from './internal/prep';
+import clear from './clear';
 import map from './map';
 import merge from './merge';
 import reduce from './reduce';
-import pipe from './util/pipe';
+import pipeWith from './util/pipeWith';
 
 export default prep({
     name: 'flatMap',
     immutable: 'flatMap',
-    all: (mapper: Function): Function => {
-        return pipe(
+    all: (mapper: Function): Function => (value: *) => {
+        return pipeWith(
+            value,
             map(mapper),
             reduce(
                 (merged: *, value: *) => merged ? merge(value)(merged) : value,
                 undefined
-            )
+            ),
+            ii => ii || clear()(value)
         );
     }
 });
