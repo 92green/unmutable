@@ -23,6 +23,13 @@ compareIteratee({
 });
 
 compare({
+    name: `flatMap() on empty object should work`,
+    item: {},
+    fn: flatMap((value, key) => set('key', key)(value)),
+    toJS: true
+});
+
+compare({
     name: `flatMap() on array should work`,
     item: [[1,2],[3,4]],
     fn: flatMap((value, key) => push(key)(value)),
@@ -37,4 +44,11 @@ compareIteratee({
         return value;
     }),
     argsToJS: ['value','iter']
+});
+
+compare({
+    name: `flatMap() on empty array should work`,
+    item: [],
+    fn: flatMap((value, key) => push(key)(value)),
+    toJS: true
 });
