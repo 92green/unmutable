@@ -9,7 +9,7 @@ import pipeWith from './util/pipeWith';
 export default prep({
     name: 'flatMap',
     immutable: 'flatMap',
-    all: (mapper: Function): Function => (value: *) => {
+    all: (mapper: Function): Function => (value: *): * => {
         return pipeWith(
             value,
             map(mapper),
