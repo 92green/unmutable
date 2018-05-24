@@ -159,7 +159,7 @@ If the third argument `ifFalse` is provided, then the value will be passed throu
 `entriesReverse() => (value) => Iterator` - Returns an evaluator that works just like `entries()`, but iterates in the reverse order.
 
 #### entryArray
-`entryArray() => (value) => Array` - Returns an evaluator that returns an array of entries (e.g. `[key, value]` tuples) of the item. Immutable.js has no function that does this, they have `entries()` which returns an iterator, and `entrySeq()` which returns an Immutable.js `Seq`.
+`entryArray() => (value) => Array` - Returns an evaluator that returns an array of entries (e.g. `[key, value]` tuples) of the value. Immutable.js has no function that does this, they have `entries()` which returns an iterator, and `entrySeq()` which returns an Immutable.js `Seq`.
 
 #### identity
 `identity() => (value) => value` - Returns an evaluator that just passes values through with no change. Useful for readable code.
@@ -168,7 +168,7 @@ If the third argument `ifFalse` is provided, then the value will be passed throu
 `isNotEmpty() => (value) => boolean` - Returns an evaluator that returns true when the `value` is not empty.
 
 #### keyArray
-`keyArray() => (value) => Array` - Returns an evaluator that returns an array of keys on the item. Immutable.js has no function that does this, they have `keys()` which returns an iterator, and `keySeq()` which returns an Immutable.js `Seq`.
+`keyArray() => (value) => Array` - Returns an evaluator that returns an array of keys on the value. Immutable.js has no function that does this, they have `keys()` which returns an iterator, and `keySeq()` which returns an Immutable.js `Seq`.
 
 #### log
 `log(message: string = "", type: string = "log") => (value) => value` - Returns an evaluator that passes the value through unchanged, but also calls `console[type](message, value)`. Useful for debugging.
@@ -180,13 +180,13 @@ If the third argument `ifFalse` is provided, then the value will be passed throu
 `pick(keys: string[]|number[]) => (value) => newValue` - For `Map` and object: Returns an evaluator that filters out all keys that aren't listed in `keys`.
 
 #### pivot
-`pivot() => (value) => newValue` - Returns an evaluator that pivots the item. The keys at the first level of nesting are moved to the second level, and the keys of the second level are moved to the first.
+`pivot() => (value) => newValue` - Returns an evaluator that pivots the value. The keys at the first level of nesting are moved to the second level, and the keys of the second level are moved to the first.
 
 #### unit
 `unit(newValue) => (value) => number` - Returns an evaluator that attempts to turn `newValue` into the `value`s data type, and returns `newValue`.
 
 #### size
-`size() => (value) => number` - Returns an evaluator that returns the number of keys on the item. Immutable.js has this as a getter on their collections, Unmutable.js offers this as a function.
+`size() => (value) => number` - Returns an evaluator that returns the number of keys on the value. Immutable.js has this as a getter on their collections, Unmutable.js offers this as a function.
 
 #### shallowEquals
 `shallowEquals(other: *) => (value) => number` - Returns an evaluator that checks if `other` and `value` are shallowly equal, using strict equality. Note: use `equals()` if you want to check deep equality.
@@ -200,8 +200,17 @@ If the third argument `ifFalse` is provided, then the value will be passed throu
 #### swap
 `swap(keyA: string|number, keyB: string|number) => (value) => newValue` - Returns an evaluator that will swap the values at the given keys. Keys that don't exist are assumed to have a value of `undefined`.
 
+#### toIndexed
+`toIndexed() => (value) => newValue` - Returns an evaluator that will turn plain Javascript data types into arrays, and will turn Immutable.js objects into `List`s.
+
+#### toKeyed
+`toKeyed() => (value) => newValue` - Returns an evaluator that will turn plain Javascript data types into objects, and will turn Immutable.js objects into `Map`s.
+
+#### updateInto
+`updateInto(key: string|number, updater: Function) => (value) => *` - Returns an evaluator that passes `value` to `updater`, and will set `value.key` to the result of the `updater`. In practise it works like `update(key, updater) => (value)` but where `updater` receives `value` instead of `value.key`.
+
 #### valueArray
-`valueArray() => (value) => Array` - Returns an evaluator that returns an array of values on the item. Immutable.js has no function that does this, they have `values()` which returns an iterator, and `valueSeq()` which returns an Immutable.js `Seq`.
+`valueArray() => (value) => Array` - Returns an evaluator that returns an array of values on the value. Immutable.js has no function that does this, they have `values()` which returns an iterator, and `valueSeq()` which returns an Immutable.js `Seq`.
 
 ### Extra functions to be implemented
 
@@ -221,11 +230,14 @@ Utils include functions that make Unmutable.js useable and useful, as well as pl
  `pipe(...functions) => (value) => newValue` - Composes (combines) functions together from left to right. Returns an evaluator that returns the output of the operation.
 
 #### util/pipeWith
- `pipeWith(item, ...functions) => newValue` - Accepts an item as the first argument, and composes (combines) functions in the remaining arguments together from left to right. Returns the output of the operation.
+ `pipeWith(value, ...functions) => newValue` - Accepts an value as the first argument, and composes (combines) functions in the remaining arguments together from left to right. Returns the output of the operation.
  
 #### util/compose
  `compose(...functions) => (value) => newValue` - Composes (combines) functions together from right to left. Returns an evaluator that returns the output of the operation.
  
+#### util/composeWith
+ `composeWith(...functions, value) => newValue` - Composes (combines) functions together from right to left, and accepts an value as the *last* argument. Returns an evaluator that returns the output of the operation.
+
 #### util/overload
  `overload({...overloads}, overloadArgs: * = undefined) => Function` - Simulates function overloading in Javascript.
 
