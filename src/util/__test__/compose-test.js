@@ -27,15 +27,15 @@ test('compose throws at runtime if argument is not a function', (tt: Object) => 
     const add = (x, y) => x + y;
 
     // $FlowFixMe - deliberate misuse of types for testing
-    tt.throws(() => compose(square, add, false)(1, 2));
+    tt.throws(() => compose(square, add, false)(1));
     // $FlowFixMe - deliberate misuse of types for testing
-    tt.throws(() => compose(square, add, undefined)(1, 2));
+    tt.throws(() => compose(square, add, undefined)(1));
     // $FlowFixMe - deliberate misuse of types for testing
-    tt.throws(() => compose(square, add, true)(1, 2));
+    tt.throws(() => compose(square, add, true)(1));
     // $FlowFixMe - deliberate misuse of types for testing
-    tt.throws(() => compose(square, add, NaN)(1, 2));
+    tt.throws(() => compose(square, add, NaN)(1));
     // $FlowFixMe - deliberate misuse of types for testing
-    tt.throws(() => compose(square, add, '42')(1, 2));
+    tt.throws(() => compose(square, add, '42')(1));
 });
 
 test('compose returns the first given argument if given no functions', (tt: Object) => {
