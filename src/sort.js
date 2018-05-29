@@ -5,6 +5,6 @@ export default prep({
     name: 'sort',
     immutable: 'sort',
     array: (comparator: Function) => (value: Array<*>): Array<*> => {
-        return value.sort(comparator);
+        return [...value].sort(comparator);
     }
 });
