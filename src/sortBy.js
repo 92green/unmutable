@@ -11,7 +11,7 @@ export default prep({
     name: 'sortBy',
     immutable: 'sortBy',
     array: (comparatorValueMapper: Function, comparator: Function = defaultComparator) => (value: Array<*>): Array<*> => {
-        return value.sort((a, b) => comparator(
+        return [...value].sort((a, b) => comparator(
             comparatorValueMapper(a),
             comparatorValueMapper(b)
         ));
