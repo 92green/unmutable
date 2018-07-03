@@ -150,6 +150,9 @@ withMutations
 #### clone
 `clone() => (value) => newValue` - Returns an evaluator that returns a clone of `value` if `value` is an array or object, or returns the `value` unchanged if given an Immutable.js `Map` or `List`. Immutable.js data types are inherently immutable so do not need to be explicitly cloned.
 
+#### defaults
+`defaults(defaults) => (value) => newValue` - Returns an evaluator that takes `value`, and adds to it any keys (and values) that exist on `defaults` and not on `value`. It is essentially `(defaults) => (value) => merge(value)(defaults)`
+
 #### doIf
 `doIf(predicate: Function, ifTrue: Function, ifFalse: Function = ii => ii) => (value) => newValue` - Returns an evaluator that passes the value to the predicate function. If the predicate returns true, the value is then passed through the `ifTrue` function and the result is returned. If the predicate returns false then the value is simply returned unchanged.
 
