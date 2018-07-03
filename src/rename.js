@@ -7,7 +7,7 @@ import pipeWith from './util/pipeWith';
 
 export default prep({
     name: 'rename',
-    all: (oldKey: string, newKey: string) => (value: *) => {
+    all: (oldKey: string, newKey: string) => (value: *): * => {
         if(oldKey === newKey) {
             return value;
         }
