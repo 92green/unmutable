@@ -185,6 +185,9 @@ If the third argument `ifFalse` is provided, then the value will be passed throu
 #### pivot
 `pivot() => (value) => newValue` - Returns an evaluator that pivots the value. The keys at the first level of nesting are moved to the second level, and the keys of the second level are moved to the first.
 
+#### rename
+`rename() => (oldKey: string|number, newKey: string|number) => newValue` - Returns an evaluator that changes the key of `oldKey` to the key of `newKey`. 
+
 #### unit
 `unit(newValue) => (value) => number` - Returns an evaluator that attempts to turn `newValue` into the `value`s data type, and returns `newValue`.
 
@@ -232,6 +235,9 @@ Utils include functions that make Unmutable.js useable and useful, as well as pl
 #### util/pipe
  `pipe(...functions) => (value) => newValue` - Composes (combines) functions together from left to right. Returns an evaluator that returns the output of the operation.
 
+#### util/pipeIf
+ `pipeIf((value) => boolean, ...functions) => newValue` - Like `pipe()`, but the first argument is a conditional function that is passed the `value`. If a truthy value is returned from the conditional function, all functions in the pipe are executed. If a falsey value is returned, then the remaining functions in the pipe are skipped.
+ 
 #### util/pipeWith
  `pipeWith(value, ...functions) => newValue` - Accepts an value as the first argument, and composes (combines) functions in the remaining arguments together from left to right. Returns the output of the operation.
  
