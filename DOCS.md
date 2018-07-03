@@ -167,6 +167,9 @@ If the third argument `ifFalse` is provided, then the value will be passed throu
 #### isNotEmpty
 `isNotEmpty() => (value) => boolean` - Returns an evaluator that returns true when the `value` is not empty.
 
+#### keyBy
+`keyBy(keyer: Function) => (value) => Object` - Returns an evaluator that iterates over `value` and calls `keyer` on each item, and using the result as a key on the output object. TThe corresponding value of each key is the last element responsible for generating the key.
+
 #### keyArray
 `keyArray() => (value) => Array` - Returns an evaluator that returns an array of keys on the value. Immutable.js has no function that does this, they have `keys()` which returns an iterator, and `keySeq()` which returns an Immutable.js `Seq`.
 
