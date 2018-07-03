@@ -150,6 +150,9 @@ withMutations
 #### clone
 `clone() => (value) => newValue` - Returns an evaluator that returns a clone of `value` if `value` is an array or object, or returns the `value` unchanged if given an Immutable.js `Map` or `List`. Immutable.js data types are inherently immutable so do not need to be explicitly cloned.
 
+#### defaults
+`defaults(defaults) => (value) => newValue` - Returns an evaluator that takes `value`, and adds to it any keys (and values) that exist on `defaults` and not on `value`. It is essentially `(defaults) => (value) => merge(value)(defaults)`
+
 #### doIf
 `doIf(predicate: Function, ifTrue: Function, ifFalse: Function = ii => ii) => (value) => newValue` - Returns an evaluator that passes the value to the predicate function. If the predicate returns true, the value is then passed through the `ifTrue` function and the result is returned. If the predicate returns false then the value is simply returned unchanged.
 
@@ -170,6 +173,9 @@ If the third argument `ifFalse` is provided, then the value will be passed throu
 #### keyArray
 `keyArray() => (value) => Array` - Returns an evaluator that returns an array of keys on the value. Immutable.js has no function that does this, they have `keys()` which returns an iterator, and `keySeq()` which returns an Immutable.js `Seq`.
 
+#### keyBy
+`keyBy(keyer: Function) => (value) => Object` - Returns an evaluator that iterates over `value` and calls `keyer` on each item, and using the result as a key on the output object. TThe corresponding value of each key is the last element responsible for generating the key.
+
 #### log
 `log(message: string = "", type: string = "log") => (value) => value` - Returns an evaluator that passes the value through unchanged, but also calls `console[type](message, value)`. Useful for debugging.
 
@@ -181,6 +187,9 @@ If the third argument `ifFalse` is provided, then the value will be passed throu
 
 #### pivot
 `pivot() => (value) => newValue` - Returns an evaluator that pivots the value. The keys at the first level of nesting are moved to the second level, and the keys of the second level are moved to the first.
+
+#### rename
+`rename() => (oldKey: string|number, newKey: string|number) => newValue` - Returns an evaluator that changes the key of `oldKey` to the key of `newKey`. 
 
 #### unit
 `unit(newValue) => (value) => number` - Returns an evaluator that attempts to turn `newValue` into the `value`s data type, and returns `newValue`.
@@ -229,6 +238,9 @@ Utils include functions that make Unmutable.js useable and useful, as well as pl
 #### util/pipe
  `pipe(...functions) => (value) => newValue` - Composes (combines) functions together from left to right. Returns an evaluator that returns the output of the operation.
 
+#### util/pipeIf
+ `pipeIf((value) => boolean, ...functions) => newValue` - Like `pipe()`, but the first argument is a conditional function that is passed the `value`. If a truthy value is returned from the conditional function, all functions in the pipe are executed. If a falsey value is returned, then the remaining functions in the pipe are skipped.
+ 
 #### util/pipeWith
  `pipeWith(value, ...functions) => newValue` - Accepts an value as the first argument, and composes (combines) functions in the remaining arguments together from left to right. Returns the output of the operation.
  
