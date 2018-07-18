@@ -8,7 +8,7 @@ It's a work in progress so not all functions have been implemented yet.
 
 ## Functions
 
-All `pa` functions return an evaluator. An evaluator is a function that accepts a value and returns a result.
+All top level functions (the ones that aren't in the `util` directory) return an evaluator. An evaluator is a function that accepts a value and returns a result.
 
 - * The asterisk indicates functions which only work with `List`s and arrays.
 - ^ The carat indicates functions that are confirmed to work with `Record`s.
