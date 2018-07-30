@@ -4,6 +4,8 @@ import {
     isRecord
 } from '../internal/predicates';
 
+import isObject from '../util/isObject';
+
 const error = (name: string, value: *) => {
     throw new Error(`${name}() cannot be called on ${value}`);
 };
@@ -50,7 +52,7 @@ const PREP_TYPES: Array<PrepType> = [
     },
     {
         type: "object",
-        isType: (value: *): boolean => typeof value === "object",
+        isType: isObject,
         fn: (name: string, object: Function) => object
 
     },

@@ -6,9 +6,15 @@ Functions that normally work on `List`s will work on `List` and arrays, function
 
 It's a work in progress so not all functions have been implemented yet.
 
+## Class instances and functions-as-objects
+
+Experimental support for class instances and functions being used as objects has been added.
+Currently these should work with methods that don't make changes to the data structure (`get`, `getIn`, `find` etc.)
+There are plans for a standard API that unmutable can use with methods that make data changes.
+
 ## Functions
 
-All `pa` functions return an evaluator. An evaluator is a function that accepts a value and returns a result.
+All functions exported from `unmutable/lib/XXX` return an evaluator. An evaluator is a function that accepts a value and returns a result.
 
 - * The asterisk indicates functions which only work with `List`s and arrays.
 - ^ The carat indicates functions that are confirmed to work with `Record`s.

@@ -59,3 +59,17 @@ test('get() on record should work', (t: *) => {
     const TestRecord = Record({foo: 'bar'});
     t.is(get('foo')(new TestRecord()), 'bar');
 });
+
+test('get() on class instance should work', (t: *) => {
+    class A {
+        foo = 'bar';
+    }
+    t.is(get('foo')(new A()), 'bar');
+});
+
+test('get() on function should work', (t: *) => {
+    let fn = () => {};
+    fn.foo = 'bar';
+    t.is(get('foo')(fn), 'bar');
+});
+

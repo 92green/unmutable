@@ -1,5 +1,7 @@
 // @flow
-import isPlainObject from 'is-plain-object';
-import {isKeyed} from '../internal/predicates';
+import isObject from './isObject';
+import {isImmutable, isKeyed} from '../internal/predicates';
 
-export default (thing: *): boolean => isKeyed(thing) || isPlainObject(thing);
+export default (thing: *): boolean => isImmutable(thing)
+    ? isKeyed(thing)
+    : !Array.isArray(thing) && isObject(thing);
