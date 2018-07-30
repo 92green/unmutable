@@ -1,5 +1,7 @@
 // @flow
-import isPlainObject from 'is-plain-object';
-import {isCollection} from '../internal/predicates';
+import {isCollection, isImmutable} from '../internal/predicates';
+import isObject from './isObject';
 
-export default (thing: *): boolean => isCollection(thing) || Array.isArray(thing) || isPlainObject(thing);
+export default (thing: *): boolean => isImmutable(thing)
+    ? isCollection(thing)
+    : isObject(thing);

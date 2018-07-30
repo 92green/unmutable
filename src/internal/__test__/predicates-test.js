@@ -40,7 +40,9 @@ testTypes({
         set3: true,
         orderedSet3: true,
         seq3: true,
-        stack3: true
+        stack3: true,
+        function: false,
+        classInstance: false
     }
 });
 
@@ -71,7 +73,9 @@ testTypes({
         set3: true,
         orderedSet3: true,
         seq3: true,
-        stack3: true
+        stack3: true,
+        function: false,
+        classInstance: false
     }
 });
 
@@ -102,7 +106,9 @@ testTypes({
         set3: true,
         orderedSet3: true,
         seq3: true,
-        stack3: true
+        stack3: true,
+        function: false,
+        classInstance: false
     }
 });
 
@@ -133,7 +139,9 @@ testTypes({
         set3: false,
         orderedSet3: false,
         seq3: false,
-        stack3: false
+        stack3: false,
+        function: false,
+        classInstance: false
     }
 });
 
@@ -164,7 +172,9 @@ testTypes({
         set3: false,
         orderedSet3: false,
         seq3: true,
-        stack3: true
+        stack3: true,
+        function: false,
+        classInstance: false
     }
 });
 
@@ -195,7 +205,9 @@ testTypes({
         set3: false,
         orderedSet3: false,
         seq3: true,
-        stack3: true
+        stack3: true,
+        function: false,
+        classInstance: false
     }
 });
 
@@ -226,7 +238,9 @@ testTypes({
         set3: false,
         orderedSet3: true,
         seq3: true,
-        stack3: true
+        stack3: true,
+        function: false,
+        classInstance: false
     }
 });
 
@@ -257,7 +271,9 @@ testTypes({
         set3: false,
         orderedSet3: false,
         seq3: false,
-        stack3: false
+        stack3: false,
+        function: false,
+        classInstance: false
     }
 });
 
@@ -288,6 +304,8 @@ testTypes({
         set3: true,
         orderedSet3: true,
         seq3: true,
-        stack3: true
+        stack3: true,
+        function: false,
+        classInstance: false
     }
 });

@@ -35,7 +35,10 @@ class ABRecordExtended extends ABRecord {}
 const ABRecord3 = Record3({a: 1, b: 2});
 class ABRecordExtended3 extends ABRecord3 {}
 
+class A {}
+
 export default ({name, fn, expectedResult}: TestTypesConfig) => {
+
     const types = {
         undefined: undefined,
         null: null,
@@ -60,7 +63,9 @@ export default ({name, fn, expectedResult}: TestTypesConfig) => {
         set3: Set3(),
         orderedSet3: OrderedSet3(),
         seq3: Seq3(),
-        stack3: Stack3()
+        stack3: Stack3(),
+        function: () => {},
+        classInstance: new A()
     };
 
     const result = Object.keys(types).reduce((obj, key) => ({

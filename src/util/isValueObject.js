@@ -1,5 +1,7 @@
 // @flow
-import isPlainObject from 'is-plain-object';
-import {isCollection, isValueObject} from '../internal/predicates';
+import isObject from './isObject';
+export default isObject;
 
-export default (thing: *): boolean => isCollection(thing) || isValueObject(thing) || Array.isArray(thing) || isPlainObject(thing);
+// this file exists to align with immutable.js definition of valueObject
+// isValueObject ends up being the same as isObject()
+// this file is retained for API completeness

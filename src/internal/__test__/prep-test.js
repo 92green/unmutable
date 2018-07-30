@@ -78,6 +78,45 @@ test(`prep should handle Objects`, (tt: *) => {
     tt.is(tt.throws(() => useNone('a')(myObject), Error).message, `noooooo() cannot be called on [object Object]`);
 });
 
+test(`prep should handle class instances`, (tt: *) => {
+    class A {
+        a = 1;
+        b = 2;
+        c = 3;
+    }
+    let myClassInstance = new A();
+    let object = (key) => (item) => `${key}-${item.a}-object`;
+    let all = (key) => (item) => `${key}-${item.a}-all`;
+
+    let useObject = prep({name: "get", immutable: "get", object, all});
+    let useKeyed = prep({name: "get", immutable: "get", all});
+    let useAll = prep({name: "get", immutable: "get", all});
+    let useNone = prep({name: "noooooo", immutable: "noooooo"});
+
+    tt.is("a-1-object", useObject('a')(myClassInstance));
+    tt.is("a-1-all", useAll('a')(myClassInstance));
+    tt.is(tt.throws(() => useNone('a')(myClassInstance), Error).message, `noooooo() cannot be called on [object Object]`);
+});
+
+test(`prep should handle functions`, (tt: *) => {
+    let myFunction = () => {};
+    myFunction.a = 1;
+    myFunction.b = 2;
+    myFunction.c = 3;
+
+    let object = (key) => (item) => `${key}-${item.a}-object`;
+    let all = (key) => (item) => `${key}-${item.a}-all`;
+
+    let useObject = prep({name: "get", immutable: "get", object, all});
+    let useKeyed = prep({name: "get", immutable: "get", all});
+    let useAll = prep({name: "get", immutable: "get", all});
+    let useNone = prep({name: "noooooo", immutable: "noooooo"});
+
+    tt.is("a-1-object", useObject('a')(myFunction));
+    tt.is("a-1-all", useAll('a')(myFunction));
+    tt.is(tt.throws(() => useNone('a')(myFunction), Error).message, `noooooo() cannot be called on function myFunction() {}`);
+});
+
 
 test(`prep should not handle strings as values`, (tt: *) => {
     let useNone = prep({name: "find", array: () => {}});

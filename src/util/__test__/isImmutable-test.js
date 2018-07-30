@@ -29,6 +29,8 @@ testTypes({
         set3: true,
         orderedSet3: true,
         seq3: true,
-        stack3: true
+        stack3: true,
+        function: false,
+        classInstance: false
     }
 });
