@@ -14,7 +14,7 @@ There are plans for a standard API that unmutable can use with methods that make
 
 ## Functions
 
-All functions exported from `unmutable/lib/XXX` return an evaluator. An evaluator is a function that accepts a value and returns a result.
+All top level functions (the ones that aren't in the `util` directory) return an evaluator. An evaluator is a function that accepts a value and returns a result.
 
 - * The asterisk indicates functions which only work with `List`s and arrays.
 - ^ The carat indicates functions that are confirmed to work with `Record`s.
