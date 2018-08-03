@@ -274,8 +274,8 @@ Utils include functions that make Unmutable.js useable and useful, as well as pl
 #### util/isOrdered
  `isOrdered(maybe: *) => boolean` - Works like Immutable.js `isOrdered` but also identifies plain Javascript arrays as being ordered.
 
-#### util/isPlainObject
- `isPlainObject(maybe: *) => boolean` - Tests if something is a plain object according to [`is-plain-object`](https://www.npmjs.com/package/is-plain-object).
+#### util/isObject
+ `isObject(maybe: *) => boolean` - Tests if something extends from `object` and is not primitive, which includes arrays, functions, class instances and all Immutable.js types, and does not include `undefined`, `null`, `string`, `number`, and `boolean`.
 
 #### util/isValueObject
  `isValueObject(maybe: *) => boolean` - Works like Immutable.js `isValueObject` but also works on plain Javascript arrays and objects.
