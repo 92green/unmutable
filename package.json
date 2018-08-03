@@ -22,10 +22,10 @@
     "watch": "yarn run build -- -w",
     "check-coverage": "NODE_ENV=test nyc check-coverage --branches 100.0  --functions 100.0 --lines 100.0",
     "flow": "blueflag-test flow",
+    "flow-coverage": "blueflag-test flow-coverage -M",
     "lint": "blueflag-test lint",
-    "test": "blueflag-test test",
-    "coverage": "blueflag-test coverage --min-coverage=100",
-    "test-all": "yarn lint && yarn coverage",
+    "test": "yarn jest",
+    "test-all": "yarn lint && yarn flow && yarn test && yarn flow-coverage",
     "view-coverage": "yarn run coverage; open ./coverage/lcov-report/index.html"
   },
   "devDependencies": {
@@ -33,7 +33,7 @@
     "babel-core": "^6.23.0",
     "babel-preset-blueflag": "^0.3.0",
     "babel-register": "^6.23.0",
-    "blueflag-test": "^0.18.1",
+    "blueflag-test": "0.20.0",
     "fs-extra": "^4.0.1",
     "immutable": "4.0.0-rc.9",
     "immutable3": "npm:immutable@^3.8.1",
