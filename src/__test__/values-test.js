@@ -1,10 +1,9 @@
 // @flow
 import values from '../values';
-import test from 'ava';
 import {fromJS} from 'immutable';
 import {Record} from 'immutable';
 
-test(`values() on object should work`, (tt: *) => {
+test(`values() on object should work`, () => {
     let objectIterator = values()({a:1, b:2, c:3});
     let immutableIterator = fromJS({a:1, b:2, c:3}).values();
 
@@ -18,13 +17,10 @@ test(`values() on object should work`, (tt: *) => {
         immutableValues.push(a);
     }
 
-    tt.deepEqual(
-        objectValues,
-        immutableValues
-    );
+    expect(objectValues).toEqual(immutableValues);
 });
 
-test(`values() on map should work`, (tt: *) => {
+test(`values() on map should work`, () => {
     let mapIterator = values()(fromJS({a:1, b:2, c:3}));
     let immutableIterator = fromJS({a:1, b:2, c:3}).values();
 
@@ -38,13 +34,10 @@ test(`values() on map should work`, (tt: *) => {
         immutableValues.push(a);
     }
 
-    tt.deepEqual(
-        mapValues,
-        immutableValues
-    );
+    expect(mapValues).toEqual(immutableValues);
 });
 
-test(`values() on array should work`, (tt: *) => {
+test(`values() on array should work`, () => {
     let arrayIterator = values()([1,2,3]);
     let immutableIterator = fromJS([1,2,3]).values();
 
@@ -58,13 +51,10 @@ test(`values() on array should work`, (tt: *) => {
         immutableValues.push(a);
     }
 
-    tt.deepEqual(
-        arrayValues,
-        immutableValues
-    );
+    expect(arrayValues).toEqual(immutableValues);
 });
 
-test(`values() on list should work`, (tt: *) => {
+test(`values() on list should work`, () => {
     let listIterator = values()(fromJS([1,2,3]));
     let immutableIterator = fromJS([1,2,3]).values();
 
@@ -78,13 +68,10 @@ test(`values() on list should work`, (tt: *) => {
         immutableValues.push(a);
     }
 
-    tt.deepEqual(
-        listValues,
-        immutableValues
-    );
+    expect(listValues).toEqual(immutableValues);
 });
 
-test(`values() on record should work`, (tt: *) => {
+test(`values() on record should work`, () => {
     const TestRecord = Record({foo: 'bar'});
-    tt.deepEqual([...values()(new TestRecord({}))], ['bar']);
+    expect([...values()(new TestRecord({}))]).toEqual(['bar']);
 });

@@ -1,6 +1,5 @@
 // @flow
 import deleteIn from '../deleteIn';
-import test from 'ava';
 import {fromJS, Map, List} from 'immutable';
 
 //
@@ -14,33 +13,21 @@ let objectData = {
     }
 };
 
-test(`deleteIn() should delete an existing object value`, (tt: *) => {
-    tt.deepEqual(
-        fromJS(objectData).deleteIn(['a','b']).toJS(),
-        deleteIn(['a','b'])(objectData)
-    );
+test(`deleteIn() should delete an existing object value`, () => {
+    expect(fromJS(objectData).deleteIn(['a','b']).toJS()).toEqual(deleteIn(['a','b'])(objectData));
 });
 
-test(`deleteIn() should delete a non-existing object value`, (tt: *) => {
-    tt.deepEqual(
-        fromJS(objectData).deleteIn(['a','z']).toJS(),
-        deleteIn(['a','z'])(objectData)
-    );
+test(`deleteIn() should delete a non-existing object value`, () => {
+    expect(fromJS(objectData).deleteIn(['a','z']).toJS()).toEqual(deleteIn(['a','z'])(objectData));
 });
 
 
-test(`deleteIn() should delete a deeply non-existing object value`, (tt: *) => {
-    tt.deepEqual(
-        fromJS(objectData).deleteIn(['aa','z']).toJS(),
-        deleteIn(['aa','z'])(objectData)
-    );
+test(`deleteIn() should delete a deeply non-existing object value`, () => {
+    expect(fromJS(objectData).deleteIn(['aa','z']).toJS()).toEqual(deleteIn(['aa','z'])(objectData));
 });
 
-test(`deleteIn() should delete a keyless object value`, (tt: *) => {
-    tt.deepEqual(
-        fromJS(objectData).deleteIn([]),
-        deleteIn([])(objectData)
-    );
+test(`deleteIn() should delete a keyless object value`, () => {
+    expect(fromJS(objectData).deleteIn([])).toEqual(deleteIn([])(objectData));
 });
 
 //
@@ -54,33 +41,21 @@ let mapData = fromJS({
     }
 });
 
-test(`deleteIn() should delete an existing Map value`, (tt: *) => {
-    tt.deepEqual(
-        mapData.deleteIn(['a','b']),
-        deleteIn(['a','b'])(mapData)
-    );
+test(`deleteIn() should delete an existing Map value`, () => {
+    expect(mapData.deleteIn(['a','b'])).toEqual(deleteIn(['a','b'])(mapData));
 });
 
-test(`deleteIn() should delete a non-existing Map value`, (tt: *) => {
-    tt.deepEqual(
-        mapData.deleteIn(['a','z']),
-        deleteIn(['a','z'])(mapData)
-    );
+test(`deleteIn() should delete a non-existing Map value`, () => {
+    expect(mapData.deleteIn(['a','z'])).toEqual(deleteIn(['a','z'])(mapData));
 });
 
 
-test(`deleteIn() should delete a deeply non-existing Map value`, (tt: *) => {
-    tt.deepEqual(
-        mapData.deleteIn(['aa','z']),
-        deleteIn(['aa','z'])(mapData)
-    );
+test(`deleteIn() should delete a deeply non-existing Map value`, () => {
+    expect(mapData.deleteIn(['aa','z'])).toEqual(deleteIn(['aa','z'])(mapData));
 });
 
-test(`deleteIn() should delete a keyless Map value`, (tt: *) => {
-    tt.deepEqual(
-        mapData.deleteIn([]),
-        deleteIn([])(mapData)
-    );
+test(`deleteIn() should delete a keyless Map value`, () => {
+    expect(mapData.deleteIn([])).toEqual(deleteIn([])(mapData));
 });
 
 //
@@ -92,32 +67,20 @@ let arrayData = [
     [456,789,101112]
 ];
 
-test(`deleteIn() should delete an existing array value`, (tt: *) => {
-    tt.deepEqual(
-        fromJS(arrayData).deleteIn([1,2]).toJS(),
-        deleteIn([1,2])(arrayData)
-    );
+test(`deleteIn() should delete an existing array value`, () => {
+    expect(fromJS(arrayData).deleteIn([1,2]).toJS()).toEqual(deleteIn([1,2])(arrayData));
 });
 
-test(`deleteIn() should delete a negative array value`, (tt: *) => {
-    tt.deepEqual(
-        fromJS(arrayData).deleteIn([-1,-1]).toJS(),
-        deleteIn([-1,-1])(arrayData)
-    );
+test(`deleteIn() should delete a negative array value`, () => {
+    expect(fromJS(arrayData).deleteIn([-1,-1]).toJS()).toEqual(deleteIn([-1,-1])(arrayData));
 });
 
-test(`deleteIn() should delete a non-existing array value`, (tt: *) => {
-    tt.deepEqual(
-        fromJS(arrayData).deleteIn([1,12]).toJS(),
-        deleteIn([1,12])(arrayData)
-    );
+test(`deleteIn() should delete a non-existing array value`, () => {
+    expect(fromJS(arrayData).deleteIn([1,12]).toJS()).toEqual(deleteIn([1,12])(arrayData));
 });
 
-test(`deleteIn() should delete a deeply non-existent array value`, (tt: *) => {
-    tt.deepEqual(
-        fromJS(arrayData).deleteIn([2,14]).toJS(),
-        deleteIn([2,14])(arrayData)
-    );
+test(`deleteIn() should delete a deeply non-existent array value`, () => {
+    expect(fromJS(arrayData).deleteIn([2,14]).toJS()).toEqual(deleteIn([2,14])(arrayData));
 });
 
 //
@@ -129,32 +92,20 @@ let listData = fromJS([
     [456,789,101112]
 ]);
 
-test(`deleteIn() should delete an existing list value`, (tt: *) => {
-    tt.deepEqual(
-        listData.deleteIn([1,2]),
-        deleteIn([1,2])(listData)
-    );
+test(`deleteIn() should delete an existing list value`, () => {
+    expect(listData.deleteIn([1,2])).toEqual(deleteIn([1,2])(listData));
 });
 
-test(`deleteIn() should delete a negative list value`, (tt: *) => {
-    tt.deepEqual(
-        listData.deleteIn([-1,-1]),
-        deleteIn([-1,-1])(listData)
-    );
+test(`deleteIn() should delete a negative list value`, () => {
+    expect(listData.deleteIn([-1,-1])).toEqual(deleteIn([-1,-1])(listData));
 });
 
-test(`deleteIn() should delete a non-existing list value`, (tt: *) => {
-    tt.deepEqual(
-        listData.deleteIn([1,-12]),
-        deleteIn([1,-12])(listData)
-    );
+test(`deleteIn() should delete a non-existing list value`, () => {
+    expect(listData.deleteIn([1,-12])).toEqual(deleteIn([1,-12])(listData));
 });
 
-test(`deleteIn() should delete a deeply non-existent list value`, (tt: *) => {
-    tt.deepEqual(
-        listData.deleteIn([10,14]),
-        deleteIn([10,14])(listData)
-    );
+test(`deleteIn() should delete a deeply non-existent list value`, () => {
+    expect(listData.deleteIn([10,14])).toEqual(deleteIn([10,14])(listData));
 });
 
 //
@@ -171,9 +122,6 @@ let mixedData = Map({
     }
 });
 
-test(`deleteIn() should cope with mixed values`, (tt: *) => {
-    tt.deepEqual(
-        mixedData.deleteIn(['a','b',2,0]),
-        deleteIn(['a','b',2,0])(mixedData)
-    );
+test(`deleteIn() should cope with mixed values`, () => {
+    expect(mixedData.deleteIn(['a','b',2,0])).toEqual(deleteIn(['a','b',2,0])(mixedData));
 });

@@ -1,50 +1,49 @@
 // @flow
 
-import test from 'ava';
 import pipe from '../pipe';
 
-test('pipe composes from left to right', (tt: Object) => {
+test('pipe composes from left to right', () => {
     const double = x => x * 2;
     const square = x => x * x;
-    tt.is(pipe(square)(5), 25);
-    tt.is(pipe(square, double)(5), 50);
-    tt.is(pipe(double, square, double)(5), 200);
+    expect(pipe(square)(5)).toBe(25);
+    expect(pipe(square, double)(5)).toBe(50);
+    expect(pipe(double, square, double)(5)).toBe(200);
 });
 
-test('pipe composes functions from left to right', (tt: Object) => {
+test('pipe composes functions from left to right', () => {
     const a = next => x => next('a' + x);
     const b = next => x => next('b' + x);
     const c = next => x => next('c' + x);
     const final = x => x;
 
-    tt.is(pipe(a, b, c)(final)(''), 'abc');
-    tt.is(pipe(b, c, a)(final)(''), 'bca');
-    tt.is(pipe(c, a, b)(final)(''), 'cab');
+    expect(pipe(a, b, c)(final)('')).toBe('abc');
+    expect(pipe(b, c, a)(final)('')).toBe('bca');
+    expect(pipe(c, a, b)(final)('')).toBe('cab');
 });
 
-test('pipe throws at runtime if argument is not a function', (tt: Object) => {
+test('pipe throws at runtime if argument is not a function', () => {
     const square = x => x * x;
     const double = x => x * 2;
 
     // $FlowFixMe - deliberate misuse of types for testing
-    tt.throws(() => pipe(square, double, false)(1));
+    expect(() => pipe(square, double, false)(1)).toThrow();
     // $FlowFixMe - deliberate misuse of types for testing
-    tt.throws(() => pipe(square, double, undefined)(1));
+    expect(() => pipe(square, double, undefined)(1)).toThrow();
     // $FlowFixMe - deliberate misuse of types for testing
-    tt.throws(() => pipe(square, double, true)(1));
+    expect(() => pipe(square, double, true)(1)).toThrow();
     // $FlowFixMe - deliberate misuse of types for testing
-    tt.throws(() => pipe(square, double, NaN)(1));
+    expect(() => pipe(square, double, NaN)(1)).toThrow();
     // $FlowFixMe - deliberate misuse of types for testing
-    tt.throws(() => pipe(square, double, '42')(1));
+    expect(() => pipe(square, double, '42')(1)).toThrow();
 });
 
-test('pipe returns the first given argument if given no functions', (tt: Object) => {
-    tt.is(pipe()(3), 3);
-    tt.is(pipe()(), undefined);
+test('pipe returns the first given argument if given no functions', () => {
+    expect(pipe()(3)).toBe(3);
+    expect(pipe()()).toBe(undefined);
 });
 
-test('pipe returns the first function if given only one', (tt: Object) => {
+test('pipe returns the first function if given only one', () => {
     const fn = () => {};
 
-    tt.is(pipe(fn), fn);
+    expect(pipe(fn)).toBe(fn);
 });

@@ -1,33 +1,32 @@
 // @flow
 
-import test from 'ava';
 import pipeWith from '../pipeWith';
 
-test('pipeWith composes from left to right', (tt: Object) => {
+test('pipeWith composes from left to right', () => {
     const double = x => x * 2;
     const square = x => x * x;
-    tt.is(pipeWith(5, square), 25);
-    tt.is(pipeWith(5, square, double), 50);
-    tt.is(pipeWith(5, double, square, double), 200);
+    expect(pipeWith(5, square)).toBe(25);
+    expect(pipeWith(5, square, double)).toBe(50);
+    expect(pipeWith(5, double, square, double)).toBe(200);
 });
 
-test('pipeWith throws at runtime if argument is not a function', (tt: Object) => {
+test('pipeWith throws at runtime if argument is not a function', () => {
     const square = x => x * x;
     const double = x => x * 2;
 
     // $FlowFixMe - deliberate misuse of types for testing
-    tt.throws(() => pipeWith(1, square, double, false));
+    expect(() => pipeWith(1, square, double, false)).toThrow();
     // $FlowFixMe - deliberate misuse of types for testing
-    tt.throws(() => pipeWith(1, square, double, undefined));
+    expect(() => pipeWith(1, square, double, undefined)).toThrow();
     // $FlowFixMe - deliberate misuse of types for testing
-    tt.throws(() => pipeWith(1, square, double, true));
+    expect(() => pipeWith(1, square, double, true)).toThrow();
     // $FlowFixMe - deliberate misuse of types for testing
-    tt.throws(() => pipeWith(1, square, double, NaN));
+    expect(() => pipeWith(1, square, double, NaN)).toThrow();
     // $FlowFixMe - deliberate misuse of types for testing
-    tt.throws(() => pipeWith(1, square, double, '42'));
+    expect(() => pipeWith(1, square, double, '42')).toThrow();
 });
 
-test('pipeWith returns the first given argument if given no functions', (tt: Object) => {
-    tt.is(pipeWith(3), 3);
-    tt.is(pipeWith(), undefined);
+test('pipeWith returns the first given argument if given no functions', () => {
+    expect(pipeWith(3)).toBe(3);
+    expect(pipeWith()).toBe(undefined);
 });

@@ -1,11 +1,10 @@
 // @flow
 import keys from '../keys';
-import test from 'ava';
 import {fromJS} from 'immutable';
 import {Record} from 'immutable';
 
 
-test(`keys() on object should work`, (tt: *) => {
+test(`keys() on object should work`, () => {
     let objectIterator = keys()({a:1, b:2, c:3});
     let immutableIterator = fromJS({a:1, b:2, c:3}).keys();
 
@@ -19,13 +18,10 @@ test(`keys() on object should work`, (tt: *) => {
         immutableKeys.push(a);
     }
 
-    tt.deepEqual(
-        objectKeys,
-        immutableKeys
-    );
+    expect(objectKeys).toEqual(immutableKeys);
 });
 
-test(`keys() on map should work`, (tt: *) => {
+test(`keys() on map should work`, () => {
     let mapIterator = keys()(fromJS({a:1, b:2, c:3}));
     let immutableIterator = fromJS({a:1, b:2, c:3}).keys();
 
@@ -39,13 +35,10 @@ test(`keys() on map should work`, (tt: *) => {
         immutableKeys.push(a);
     }
 
-    tt.deepEqual(
-        mapKeys,
-        immutableKeys
-    );
+    expect(mapKeys).toEqual(immutableKeys);
 });
 
-test(`keys() on array should work`, (tt: *) => {
+test(`keys() on array should work`, () => {
     let arrayIterator = keys()([1,2,3]);
     let immutableIterator = fromJS([1,2,3]).keys();
 
@@ -59,13 +52,10 @@ test(`keys() on array should work`, (tt: *) => {
         immutableKeys.push(a);
     }
 
-    tt.deepEqual(
-        arrayKeys,
-        immutableKeys
-    );
+    expect(arrayKeys).toEqual(immutableKeys);
 });
 
-test(`keys() on list should work`, (tt: *) => {
+test(`keys() on list should work`, () => {
     let listIterator = keys()(fromJS([1,2,3]));
     let immutableIterator = fromJS([1,2,3]).keys();
 
@@ -79,13 +69,10 @@ test(`keys() on list should work`, (tt: *) => {
         immutableKeys.push(a);
     }
 
-    tt.deepEqual(
-        listKeys,
-        immutableKeys
-    );
+    expect(listKeys).toEqual(immutableKeys);
 });
 
-test(`keys() on record should work`, (tt: *) => {
+test(`keys() on record should work`, () => {
     const TestRecord = Record({foo: 'bar'});
-    tt.deepEqual([...keys()(new TestRecord({}))], ['foo']);
+    expect([...keys()(new TestRecord({}))]).toEqual(['foo']);
 });

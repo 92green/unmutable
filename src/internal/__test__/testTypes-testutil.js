@@ -1,16 +1,5 @@
 // @flow
-import test from 'ava';
-
-import {
-    Map,
-    List,
-    Record,
-    Set,
-    Seq,
-    OrderedMap,
-    OrderedSet,
-    Stack
-} from 'immutable';
+import { Map, List, Record, Set, Seq, OrderedMap, OrderedSet, Stack } from 'immutable';
 
 import {
     Map as Map3,
@@ -68,12 +57,15 @@ export default ({name, fn, expectedResult}: TestTypesConfig) => {
         classInstance: new A()
     };
 
+    // $HackityHacks: call function type to get 100% coverage
+    types.function();
+
     const result = Object.keys(types).reduce((obj, key) => ({
         ...obj,
         [key]: fn(types[key])
     }), {});
 
-    test(name, (tt: *) => {
-        tt.deepEqual(expectedResult, result);
+    test(name, () => {
+        expect(expectedResult).toEqual(result);
     });
 };

@@ -1,6 +1,5 @@
 // @flow
-import test from 'ava';
-import {fromJS} from 'immutable';
+import { fromJS } from 'immutable';
 
 type CompareIterateeConfig = {
     item: *, // the input item to test, in plain javascript.
@@ -33,10 +32,7 @@ export default ({item, name, fn, argsToJS = []}: CompareIterateeConfig) => {
         return argsArray;
     };
 
-    test(name, (tt: *) => {
-        tt.deepEqual(
-            testWith(fromJS(item), true),
-            testWith(item)
-        );
+    test(name, () => {
+        expect(testWith(fromJS(item), true)).toEqual(testWith(item));
     });
 };

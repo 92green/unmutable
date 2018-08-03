@@ -1,18 +1,11 @@
 // @flow
-import omit from '../omit';
-import test from 'ava';
+import deleteAll from '../deleteAll';
 import {fromJS} from 'immutable';
 
-test(`omit() on object should work`, (tt: *) => {
-    tt.deepEqual(
-        {b:2, c:3},
-        omit(['a','z'])({a:1, b:2, c:3})
-    );
+test(`deleteAll() on object should work`, () => {
+    expect({b:2, c:3}).toEqual(deleteAll(['a','z'])({a:1, b:2, c:3}));
 });
 
-test(`omit() on Map should work`, (tt: *) => {
-    tt.deepEqual(
-        fromJS({b:2, c:3}),
-        omit(['a','z'])(fromJS({a:1, b:2, c:3}))
-    );
+test(`deleteAll() on Map should work`, () => {
+    expect(fromJS({b:2, c:3})).toEqual(deleteAll(['a','z'])(fromJS({a:1, b:2, c:3})));
 });

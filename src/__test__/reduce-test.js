@@ -1,6 +1,5 @@
 // @flow
-import test from 'ava';
-import {Record} from 'immutable';
+import { Record } from 'immutable';
 import reduce from '../reduce';
 import compare from '../internal/__test__/compare-testutil';
 import compareIteratee from '../internal/__test__/compareIteratee-testutil';
@@ -44,14 +43,14 @@ compareIteratee({
 //
 
 const TestRecord = Record({foo: 'bar'});
-test('reduce() on should pass correct arguments to iteratee', (t: *) => {
+test('reduce() on should pass correct arguments to iteratee', () => {
     const data = new TestRecord();
 
     reduce((reduction, item, key, record) => {
-        t.is(reduction, 1);
-        t.is(item, 'bar');
-        t.is(key, 'foo');
-        t.is(record, data);
+        expect(reduction).toBe(1);
+        expect(item).toBe('bar');
+        expect(key).toBe('foo');
+        expect(record).toBe(data);
         return reduction;
     }, 1)(data);
 });
