@@ -1,6 +1,5 @@
 // @flow
 import hasIn from '../hasIn';
-import test from 'ava';
 import {fromJS, Map, List} from 'immutable';
 
 let data = {
@@ -9,40 +8,25 @@ let data = {
     }
 };
 
-test(`hasIn() should find a value`, (t: *) => {
-    t.deepEqual(
-        fromJS(data).hasIn(['a','b']),
-        hasIn(['a','b'])(data)
-    );
+test(`hasIn() should find a value`, () => {
+    expect(fromJS(data).hasIn(['a','b'])).toEqual(hasIn(['a','b'])(data));
 });
 
-test(`hasIn() should miss a value`, (t: *) => {
-    t.deepEqual(
-        fromJS(data).hasIn(['a','z']),
-        hasIn(['a','z'])(data)
-    );
+test(`hasIn() should miss a value`, () => {
+    expect(fromJS(data).hasIn(['a','z'])).toEqual(hasIn(['a','z'])(data));
 });
 
 
-test(`hasIn() should deeply miss a value`, (t: *) => {
-    t.deepEqual(
-        fromJS(data).hasIn(['aa','z']),
-        hasIn(['aa','z'])(data)
-    );
+test(`hasIn() should deeply miss a value`, () => {
+    expect(fromJS(data).hasIn(['aa','z'])).toEqual(hasIn(['aa','z'])(data));
 });
 
-test(`hasIn() should overshoot a value`, (t: *) => {
-    t.deepEqual(
-        fromJS(data).hasIn(['a','b','c']),
-        hasIn(['a','b','c'])(data)
-    );
+test(`hasIn() should overshoot a value`, () => {
+    expect(fromJS(data).hasIn(['a','b','c'])).toEqual(hasIn(['a','b','c'])(data));
 });
 
-test(`hasIn() should find a keyless value`, (t: *) => {
-    t.deepEqual(
-        fromJS(data).hasIn([]),
-        hasIn([])(data)
-    );
+test(`hasIn() should find a keyless value`, () => {
+    expect(fromJS(data).hasIn([])).toEqual(hasIn([])(data));
 });
 
 
@@ -51,40 +35,25 @@ data = [
     [456,789,101112]
 ];
 
-test(`hasIn() should find an array value`, (t: *) => {
-    t.deepEqual(
-        fromJS(data).hasIn([1,2]),
-        hasIn([1,2])(data)
-    );
+test(`hasIn() should find an array value`, () => {
+    expect(fromJS(data).hasIn([1,2])).toEqual(hasIn([1,2])(data));
 });
 
-test(`hasIn() should find a negative array value`, (t: *) => {
-    t.deepEqual(
-        fromJS(data).hasIn([-1,-1]),
-        hasIn([-1,-1])(data)
-    );
+test(`hasIn() should find a negative array value`, () => {
+    expect(fromJS(data).hasIn([-1,-1])).toEqual(hasIn([-1,-1])(data));
 });
 
-test(`hasIn() should miss an array value`, (t: *) => {
-    t.deepEqual(
-        fromJS(data).hasIn([1,-12]),
-        hasIn([1,-12])(data)
-    );
+test(`hasIn() should miss an array value`, () => {
+    expect(fromJS(data).hasIn([1,-12])).toEqual(hasIn([1,-12])(data));
 });
 
 
-test(`hasIn() should deeply miss an array value`, (t: *) => {
-    t.deepEqual(
-        fromJS(data).hasIn([10,14]),
-        hasIn([10,14])(data)
-    );
+test(`hasIn() should deeply miss an array value`, () => {
+    expect(fromJS(data).hasIn([10,14])).toEqual(hasIn([10,14])(data));
 });
 
-test(`hasIn() should overshoot an array value`, (t: *) => {
-    t.deepEqual(
-        fromJS(data).hasIn([0,0,0,0]),
-        hasIn([0,0,0,0])(data)
-    );
+test(`hasIn() should overshoot an array value`, () => {
+    expect(fromJS(data).hasIn([0,0,0,0])).toEqual(hasIn([0,0,0,0])(data));
 });
 
 data = Map({
@@ -97,7 +66,7 @@ data = Map({
     }
 });
 
-test(`hasIn() should cope with mixed values`, (t: *) => {
-    t.true(hasIn(['a','b',2,0])(data));
+test(`hasIn() should cope with mixed values`, () => {
+    expect(hasIn(['a','b',2,0])(data)).toBe(true);
 });
 

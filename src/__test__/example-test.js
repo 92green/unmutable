@@ -7,9 +7,8 @@ import filter from '../filter';
 import push from '../push';
 
 import {fromJS} from 'immutable';
-import test from 'ava';
 
-test(`lowly example`, (t: *) => {
+test(`lowly example`, () => {
     let data = [
         {name: "Bob"},
         {name: "Jenny"},
@@ -21,10 +20,10 @@ test(`lowly example`, (t: *) => {
         get('name')
     );
 
-    t.is("Gordon", getlastName(data));
+    expect("Gordon").toBe(getlastName(data));
 });
 
-test(`extravagant example`, (t: *) => {
+test(`extravagant example`, () => {
     let data = [
         {nums: null},
         {nums: [1,2,3]},
@@ -95,8 +94,8 @@ test(`extravagant example`, (t: *) => {
         [100,110,120]
     ];
 
-    t.deepEqual(expectedOutput, immutablejsSteadfastAnswer);
-    t.deepEqual(expectedOutput, unmutableMedicoreAnswer);
-    t.deepEqual(expectedOutput, unmutableBeautifulAnswer);
-    t.deepEqual(expectedOutput, unmutableDelicateAnswer);
+    expect(expectedOutput).toEqual(immutablejsSteadfastAnswer);
+    expect(expectedOutput).toEqual(unmutableMedicoreAnswer);
+    expect(expectedOutput).toEqual(unmutableBeautifulAnswer);
+    expect(expectedOutput).toEqual(unmutableDelicateAnswer);
 });

@@ -1,11 +1,10 @@
 // @flow
 import prep from '../prep';
-import test from 'ava';
 import {List, Map, Record} from 'immutable';
 
 let MyRecord = Record({c:"c"});
 
-test(`prep should handle records`, (t: *) => {
+test(`prep should handle records`, () => {
     let immutable = "recordTest";
     let record = (a,b) => (item) => `${a}${b}${item.c}-record`;
     let all = (a,b) => (item) => `${a}${b}${item.c}-all`;
@@ -15,13 +14,13 @@ test(`prep should handle records`, (t: *) => {
     //let useImmutable = prep({immutable, all});
     let useNone = prep({name: "recordTest", immutable});
 
-    t.is("c", useRecordMethod("c")(new MyRecord()));
-    t.is("abc-record", useRecord("a","b")(new MyRecord()));
+    expect("c").toBe(useRecordMethod("c")(new MyRecord()));
+    expect("abc-record").toBe(useRecord("a","b")(new MyRecord()));
     //t.is("abc-all", useImmutable("a","b")(new MyRecord()));
-    t.is(t.throws(() => useNone("a","b")(new MyRecord()), Error).message, `recordTest() cannot be called on Record { c: "c" }`);
+    expect(() => useNone("a","b")(new MyRecord())).toThrowError(`recordTest() cannot be called on Record { c: "c" }`);
 });
 
-test(`prep should handle Lists`, (t: *) => {
+test(`prep should handle Lists`, () => {
     let myList = List([1,2,3]);
     let all = (key) => (item) => `${key}-${item.get(0)}`;
 
@@ -30,13 +29,13 @@ test(`prep should handle Lists`, (t: *) => {
     let useMissing = prep({name: "noooooo", immutable: "noooooo"});
     let useNone = prep({name: "get"});
 
-    t.is(2, useImmutable(1)(myList));
-    t.is("1-1", useAll(1)(myList));
-    t.is(t.throws(() => useMissing(1)(myList), Error).message, `noooooo() cannot be called on List [ 1, 2, 3 ]`);
-    t.is(t.throws(() => useNone(1)(myList), Error).message, `get() cannot be called on List [ 1, 2, 3 ]`);
+    expect(2).toBe(useImmutable(1)(myList));
+    expect("1-1").toBe(useAll(1)(myList));
+    expect(() => useMissing(1)(myList)).toThrowError(`noooooo() cannot be called on List [ 1, 2, 3 ]`);
+    expect(() => useNone(1)(myList)).toThrowError(`get() cannot be called on List [ 1, 2, 3 ]`);
 });
 
-test(`prep should handle Maps`, (t: *) => {
+test(`prep should handle Maps`, () => {
     let myMap = Map({a:1,b:2,c:3});
     let all = (key) => (item) => `${key}-${item.get('a')}`;
 
@@ -44,12 +43,12 @@ test(`prep should handle Maps`, (t: *) => {
     let useAll = prep({name: "get", all});
     let useNone = prep({name: "noooooo", immutable: "noooooo"});
 
-    t.is(1, useImmutable('a')(myMap));
-    t.is("a-1", useAll('a')(myMap));
-    t.is(t.throws(() => useNone('a')(myMap), Error).message, `noooooo() cannot be called on Map { "a": 1, "b": 2, "c": 3 }`);
+    expect(1).toBe(useImmutable('a')(myMap));
+    expect("a-1").toBe(useAll('a')(myMap));
+    expect(() => useNone('a')(myMap)).toThrowError(`noooooo() cannot be called on Map { "a": 1, "b": 2, "c": 3 }`);
 });
 
-test(`prep should handle arrays`, (t: *) => {
+test(`prep should handle arrays`, () => {
     let myArray = [1,2,3];
     let array = (key) => (item) => `${key}-${item[0]}-array`;
     let all = (key) => (item) => `${key}-${item[0]}-all`;
@@ -58,12 +57,12 @@ test(`prep should handle arrays`, (t: *) => {
     let useAll = prep({name: "get", immutable: "get", all});
     let useNone = prep({name: "noooooo", immutable: "noooooo"});
 
-    t.is("1-1-array", useArray(1)(myArray));
-    t.is("1-1-all", useAll(1)(myArray));
-    t.is(t.throws(() => useNone(1)(myArray), Error).message, `noooooo() cannot be called on 1,2,3`);
+    expect("1-1-array").toBe(useArray(1)(myArray));
+    expect("1-1-all").toBe(useAll(1)(myArray));
+    expect(() => useNone(1)(myArray)).toThrowError(`noooooo() cannot be called on 1,2,3`);
 });
 
-test(`prep should handle Objects`, (t: *) => {
+test(`prep should handle Objects`, () => {
     let myObject = {a:1,b:2,c:3};
     let object = (key) => (item) => `${key}-${item.a}-object`;
     let all = (key) => (item) => `${key}-${item.a}-all`;
@@ -73,12 +72,12 @@ test(`prep should handle Objects`, (t: *) => {
     let useAll = prep({name: "get", immutable: "get", all});
     let useNone = prep({name: "noooooo", immutable: "noooooo"});
 
-    t.is("a-1-object", useObject('a')(myObject));
-    t.is("a-1-all", useAll('a')(myObject));
-    t.is(t.throws(() => useNone('a')(myObject), Error).message, `noooooo() cannot be called on [object Object]`);
+    expect("a-1-object").toBe(useObject('a')(myObject));
+    expect("a-1-all").toBe(useAll('a')(myObject));
+    expect(() => useNone('a')(myObject)).toThrowError(`noooooo() cannot be called on [object Object]`);
 });
 
-test(`prep should handle class instances`, (t: *) => {
+test(`prep should handle class instances`, () => {
     class A {
         a = 1;
         b = 2;
@@ -93,12 +92,12 @@ test(`prep should handle class instances`, (t: *) => {
     let useAll = prep({name: "get", immutable: "get", all});
     let useNone = prep({name: "noooooo", immutable: "noooooo"});
 
-    t.is("a-1-object", useObject('a')(myClassInstance));
-    t.is("a-1-all", useAll('a')(myClassInstance));
-    t.is(t.throws(() => useNone('a')(myClassInstance), Error).message, `noooooo() cannot be called on [object Object]`);
+    expect("a-1-object").toBe(useObject('a')(myClassInstance));
+    expect("a-1-all").toBe(useAll('a')(myClassInstance));
+    expect(() => useNone('a')(myClassInstance)).toThrowError(`noooooo() cannot be called on [object Object]`);
 });
 
-test(`prep should handle functions`, (t: *) => {
+test(`prep should handle functions`, () => {
     let myFunction = () => {};
     myFunction.a = 1;
     myFunction.b = 2;
@@ -112,13 +111,13 @@ test(`prep should handle functions`, (t: *) => {
     let useAll = prep({name: "get", immutable: "get", all});
     let useNone = prep({name: "noooooo", immutable: "noooooo"});
 
-    t.is("a-1-object", useObject('a')(myFunction));
-    t.is("a-1-all", useAll('a')(myFunction));
-    t.is(t.throws(() => useNone('a')(myFunction), Error).message, `noooooo() cannot be called on function myFunction() {}`);
+    expect("a-1-object").toBe(useObject('a')(myFunction));
+    expect("a-1-all").toBe(useAll('a')(myFunction));
+    expect(() => useNone('a')(myFunction)).toThrowError(`noooooo() cannot be called on function myFunction() {}`);
 });
 
 
-test(`prep should not handle strings as values`, (t: *) => {
+test(`prep should not handle strings as values`, () => {
     let useNone = prep({name: "find", array: () => {}});
-    t.is(t.throws(() => useNone()("IMNOTACOLLECTION"), Error).message, `find() cannot be called on IMNOTACOLLECTION`);
+    expect(() => useNone()("IMNOTACOLLECTION")).toThrowError(`find() cannot be called on IMNOTACOLLECTION`);
 });

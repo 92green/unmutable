@@ -1,24 +1,23 @@
 // @flow
 import clone from '../clone';
-import test from 'ava';
 import {fromJS} from 'immutable';
 
-test(`clone() on object should work`, (t: *) => {
+test(`clone() on object should work`, () => {
     let obj = {a:4, b:6};
-    t.not(obj, clone()(obj));
+    expect(obj).not.toBe(clone()(obj));
 });
 
-test(`clone() on Map should pass through`, (t: *) => {
+test(`clone() on Map should pass through`, () => {
     let map = fromJS({a:1, b:2});
-    t.is(map, clone()(map));
+    expect(map).toBe(clone()(map));
 });
 
-test(`clone() on array should work`, (t: *) => {
+test(`clone() on array should work`, () => {
     let arr = [1,2,3];
-    t.not(arr, clone()(arr));
+    expect(arr).not.toBe(clone()(arr));
 });
 
-test(`clone() on List should pass through`, (t: *) => {
+test(`clone() on List should pass through`, () => {
     let list = fromJS([1,2,3]);
-    t.is(list, clone()(list));
+    expect(list).toBe(clone()(list));
 });

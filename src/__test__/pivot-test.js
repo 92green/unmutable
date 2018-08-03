@@ -1,9 +1,8 @@
 // @flow
 import pivot from '../pivot';
-import test from 'ava';
 import {fromJS} from 'immutable';
 
-test('pivot should pivot arrays and lists', (t: *) => {
+test('pivot should pivot arrays and lists', () => {
     let data = [
         [1,2,3],
         [4,5,6]
@@ -15,11 +14,11 @@ test('pivot should pivot arrays and lists', (t: *) => {
         [3,6]
     ];
 
-    t.deepEqual(expectedData, pivot()(data));
-    t.deepEqual(expectedData, pivot()(fromJS(data)).toJS());
+    expect(expectedData).toEqual(pivot()(data));
+    expect(expectedData).toEqual(pivot()(fromJS(data)).toJS());
 });
 
-test('pivot should pivot objects and maps', (t: *) => {
+test('pivot should pivot objects and maps', () => {
     let data = {
         a: {
             x: {
@@ -68,6 +67,6 @@ test('pivot should pivot objects and maps', (t: *) => {
         }
     };
 
-    t.deepEqual(expectedData, pivot()(data));
-    t.deepEqual(expectedData, pivot()(fromJS(data)).toJS());
+    expect(expectedData).toEqual(pivot()(data));
+    expect(expectedData).toEqual(pivot()(fromJS(data)).toJS());
 });

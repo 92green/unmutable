@@ -1,38 +1,37 @@
 // @flow
 
-import test from 'ava';
 import composeWith from '../composeWith';
 
-test('composeWith composes from right to left', (t: Object) => {
+test('composeWith composes from right to left', () => {
     const double = x => x * 2;
     const square = x => x * x;
-    t.is(composeWith(square, 5), 25);
-    t.is(composeWith(square, double, 5), 100);
-    t.is(composeWith(double, square, double, 5), 200);
+    expect(composeWith(square, 5)).toBe(25);
+    expect(composeWith(square, double, 5)).toBe(100);
+    expect(composeWith(double, square, double, 5)).toBe(200);
 });
 
-test('composeWith throws at runtime if argument is not a function', (t: Object) => {
+test('composeWith throws at runtime if argument is not a function', () => {
     const square = x => x * x;
     const add = (x, y) => x + y;
 
     // $FlowFixMe - deliberate misuse of types for testing
-    t.throws(() => composeWith(square, add, false, 1));
+    expect(() => composeWith(square, add, false, 1)).toThrow();
     // $FlowFixMe - deliberate misuse of types for testing
-    t.throws(() => composeWith(square, add, undefined, 1));
+    expect(() => composeWith(square, add, undefined, 1)).toThrow();
     // $FlowFixMe - deliberate misuse of types for testing
-    t.throws(() => composeWith(square, add, true, 1));
+    expect(() => composeWith(square, add, true, 1)).toThrow();
     // $FlowFixMe - deliberate misuse of types for testing
-    t.throws(() => composeWith(square, add, NaN, 1));
+    expect(() => composeWith(square, add, NaN, 1)).toThrow();
     // $FlowFixMe - deliberate misuse of types for testing
-    t.throws(() => composeWith(square, add, '42', 1));
+    expect(() => composeWith(square, add, '42', 1)).toThrow();
 });
 
-test('composeWith returns the first given argument if given no functions', (t: Object) => {
-    t.is(composeWith(3), 3);
-    t.is(composeWith(), undefined);
+test('composeWith returns the first given argument if given no functions', () => {
+    expect(composeWith(3)).toBe(3);
+    expect(composeWith()).toBe(undefined);
 });
 
-test('composeWith returns the first given argument if given no functions', (t: Object) => {
-    t.is(composeWith(3), 3);
-    t.is(composeWith(), undefined);
+test('composeWith returns the first given argument if given no functions', () => {
+    expect(composeWith(3)).toBe(3);
+    expect(composeWith()).toBe(undefined);
 });

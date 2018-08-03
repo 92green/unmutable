@@ -4,6 +4,6 @@ module.exports = {
     collectCoverageFrom: [
         "src/**/*.{js,jsx}"
     ],
-    testMatch: ["**/__test__/**/*.js?(x)"],
+    testMatch: ["**/__test__/**/*-test.js?(x)"],
     testURL: 'http://localhost'
 };

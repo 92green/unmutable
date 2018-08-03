@@ -1,10 +1,9 @@
 // @flow
 import entries from '../entries';
-import test from 'ava';
 import {fromJS} from 'immutable';
 import {Record} from 'immutable';
 
-test(`entries() on object should work`, (t: *) => {
+test(`entries() on object should work`, () => {
     let objectIterator = entries()({a:1, b:2, c:3});
     let immutableIterator = fromJS({a:1, b:2, c:3}).entries();
 
@@ -18,13 +17,10 @@ test(`entries() on object should work`, (t: *) => {
         immutableEntries.push(a);
     }
 
-    t.deepEqual(
-        objectEntries,
-        immutableEntries
-    );
+    expect(objectEntries).toEqual(immutableEntries);
 });
 
-test(`entries() on map should work`, (t: *) => {
+test(`entries() on map should work`, () => {
     let mapIterator = entries()(fromJS({a:1, b:2, c:3}));
     let immutableIterator = fromJS({a:1, b:2, c:3}).entries();
 
@@ -38,13 +34,10 @@ test(`entries() on map should work`, (t: *) => {
         immutableEntries.push(a);
     }
 
-    t.deepEqual(
-        mapEntries,
-        immutableEntries
-    );
+    expect(mapEntries).toEqual(immutableEntries);
 });
 
-test(`entries() on array should work`, (t: *) => {
+test(`entries() on array should work`, () => {
     let arrayIterator = entries()([1,2,3]);
     let immutableIterator = fromJS([1,2,3]).entries();
 
@@ -58,13 +51,10 @@ test(`entries() on array should work`, (t: *) => {
         immutableEntries.push(a);
     }
 
-    t.deepEqual(
-        arrayEntries,
-        immutableEntries
-    );
+    expect(arrayEntries).toEqual(immutableEntries);
 });
 
-test(`entries() on list should work`, (t: *) => {
+test(`entries() on list should work`, () => {
     let listIterator = entries()(fromJS([1,2,3]));
     let immutableIterator = fromJS([1,2,3]).entries();
 
@@ -78,13 +68,10 @@ test(`entries() on list should work`, (t: *) => {
         immutableEntries.push(a);
     }
 
-    t.deepEqual(
-        listEntries,
-        immutableEntries
-    );
+    expect(listEntries).toEqual(immutableEntries);
 });
 
-test(`entries() on record should work`, (t: *) => {
+test(`entries() on record should work`, () => {
     const TestRecord = Record({foo: 'bar'});
-    t.deepEqual([...entries()(new TestRecord({}))], [['foo','bar']]);
+    expect([...entries()(new TestRecord({}))]).toEqual([['foo','bar']]);
 });

@@ -1,7 +1,6 @@
 // @flow
 import get from '../get';
 import compare from '../internal/__test__/compare-testutil';
-import test from 'ava';
 import {Record} from 'immutable';
 
 compare({
@@ -55,21 +54,21 @@ compare({
     fn: get(3, '!')
 });
 
-test('get() on record should work', (t: *) => {
+test('get() on record should work', () => {
     const TestRecord = Record({foo: 'bar'});
-    t.is(get('foo')(new TestRecord()), 'bar');
+    expect(get('foo')(new TestRecord())).toBe('bar');
 });
 
-test('get() on class instance should work', (t: *) => {
+test('get() on class instance should work', () => {
     class A {
         foo = 'bar';
     }
-    t.is(get('foo')(new A()), 'bar');
+    expect(get('foo')(new A())).toBe('bar');
 });
 
-test('get() on function should work', (t: *) => {
+test('get() on function should work', () => {
     let fn = () => {};
     fn.foo = 'bar';
-    t.is(get('foo')(fn), 'bar');
+    expect(get('foo')(fn)).toBe('bar');
 });
 

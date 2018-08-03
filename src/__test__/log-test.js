@@ -1,18 +1,17 @@
 // @flow
 import log from '../log';
-import test from 'ava';
 
-test(`log() should return value`, (t: *) => {
+test(`log() should return value`, () => {
     let obj = {};
-    t.is(obj, log()(obj));
+    expect(obj).toBe(log()(obj));
 });
 
-test(`log() should return value and have message`, (t: *) => {
+test(`log() should return value and have message`, () => {
     let obj = {};
-    t.is(obj, log("Message")(obj));
+    expect(obj).toBe(log("Message")(obj));
 });
 
-test(`log() should return value and have message and type`, (t: *) => {
+test(`log() should return value and have message and type`, () => {
     let obj = {};
-    t.is(obj, log("Message", "warn")(obj));
+    expect(obj).toBe(log("Message", "warn")(obj));
 });

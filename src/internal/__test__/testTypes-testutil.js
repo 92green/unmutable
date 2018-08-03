@@ -1,16 +1,5 @@
 // @flow
-import test from 'ava';
-
-import {
-    Map,
-    List,
-    Record,
-    Set,
-    Seq,
-    OrderedMap,
-    OrderedSet,
-    Stack
-} from 'immutable';
+import { Map, List, Record, Set, Seq, OrderedMap, OrderedSet, Stack } from 'immutable';
 
 import {
     Map as Map3,
@@ -73,7 +62,7 @@ export default ({name, fn, expectedResult}: TestTypesConfig) => {
         [key]: fn(types[key])
     }), {});
 
-    test(name, (t: *) => {
-        t.deepEqual(expectedResult, result);
+    test(name, () => {
+        expect(expectedResult).toEqual(result);
     });
 };

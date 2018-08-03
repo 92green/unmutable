@@ -1,6 +1,5 @@
 // @flow
-import test from 'ava';
-import {fromJS, Record} from 'immutable';
+import { fromJS, Record } from 'immutable';
 import {isRecord} from '../predicates';
 
 let defaultValues = {
@@ -25,15 +24,12 @@ export default ({item, name, fn, toJS, record}: CompareConfig) => {
         ? ii => ii.toJS()
         : ii => ii;
 
-    test(name, (t: *) => {
-        t.deepEqual(
-            plainify(fn(fromJS(item))),
-            fn(item)
-        );
+    test(name, () => {
+        expect(plainify(fn(fromJS(item)))).toEqual(fn(item));
     });
 
     if(record) {
-        test(`Record test: ${name}`, (t: *) => {
+        test(`Record test: ${name}`, () => {
             let plainResult = fn(item);
             let recordResult = fn(new MyRecord(item));
 
@@ -44,7 +40,7 @@ export default ({item, name, fn, toJS, record}: CompareConfig) => {
                     ...plainResult
                 };
             }
-            t.deepEqual(plainResult, recordResult);
+            expect(plainResult).toEqual(recordResult);
         });
     }
 };
