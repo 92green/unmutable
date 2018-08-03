@@ -25,7 +25,7 @@
     "flow-coverage": "blueflag-test flow-coverage -M",
     "lint": "blueflag-test lint",
     "test": "yarn jest",
-    "test-all": "yarn lint && yarn flow && yarn test && yarn flow-coverage",
+    "test-all": "yarn lint && yarn flow && yarn test",
     "view-coverage": "yarn run coverage; open ./coverage/lcov-report/index.html"
   },
   "devDependencies": {
