@@ -4,7 +4,7 @@ import test from 'ava';
 import {fromJS} from 'immutable';
 import {Record} from 'immutable';
 
-test(`values() on object should work`, (tt: *) => {
+test(`values() on object should work`, (t: *) => {
     let objectIterator = values()({a:1, b:2, c:3});
     let immutableIterator = fromJS({a:1, b:2, c:3}).values();
 
@@ -18,13 +18,13 @@ test(`values() on object should work`, (tt: *) => {
         immutableValues.push(a);
     }
 
-    tt.deepEqual(
+    t.deepEqual(
         objectValues,
         immutableValues
     );
 });
 
-test(`values() on map should work`, (tt: *) => {
+test(`values() on map should work`, (t: *) => {
     let mapIterator = values()(fromJS({a:1, b:2, c:3}));
     let immutableIterator = fromJS({a:1, b:2, c:3}).values();
 
@@ -38,13 +38,13 @@ test(`values() on map should work`, (tt: *) => {
         immutableValues.push(a);
     }
 
-    tt.deepEqual(
+    t.deepEqual(
         mapValues,
         immutableValues
     );
 });
 
-test(`values() on array should work`, (tt: *) => {
+test(`values() on array should work`, (t: *) => {
     let arrayIterator = values()([1,2,3]);
     let immutableIterator = fromJS([1,2,3]).values();
 
@@ -58,13 +58,13 @@ test(`values() on array should work`, (tt: *) => {
         immutableValues.push(a);
     }
 
-    tt.deepEqual(
+    t.deepEqual(
         arrayValues,
         immutableValues
     );
 });
 
-test(`values() on list should work`, (tt: *) => {
+test(`values() on list should work`, (t: *) => {
     let listIterator = values()(fromJS([1,2,3]));
     let immutableIterator = fromJS([1,2,3]).values();
 
@@ -78,13 +78,13 @@ test(`values() on list should work`, (tt: *) => {
         immutableValues.push(a);
     }
 
-    tt.deepEqual(
+    t.deepEqual(
         listValues,
         immutableValues
     );
 });
 
-test(`values() on record should work`, (tt: *) => {
+test(`values() on record should work`, (t: *) => {
     const TestRecord = Record({foo: 'bar'});
-    tt.deepEqual([...values()(new TestRecord({}))], ['bar']);
+    t.deepEqual([...values()(new TestRecord({}))], ['bar']);
 });

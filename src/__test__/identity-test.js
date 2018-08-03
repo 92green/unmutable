@@ -2,7 +2,7 @@
 import identity from '../identity';
 import test from 'ava';
 
-test(`identity() should return a function that just passes values through`, (tt: *) => {
+test(`identity() should return a function that just passes values through`, (t: *) => {
     let obj = {};
-    tt.is(obj, identity()(obj));
+    t.is(obj, identity()(obj));
 });

@@ -9,7 +9,7 @@ import push from '../push';
 import {fromJS} from 'immutable';
 import test from 'ava';
 
-test(`lowly example`, (tt: *) => {
+test(`lowly example`, (t: *) => {
     let data = [
         {name: "Bob"},
         {name: "Jenny"},
@@ -21,10 +21,10 @@ test(`lowly example`, (tt: *) => {
         get('name')
     );
 
-    tt.is("Gordon", getlastName(data));
+    t.is("Gordon", getlastName(data));
 });
 
-test(`extravagant example`, (tt: *) => {
+test(`extravagant example`, (t: *) => {
     let data = [
         {nums: null},
         {nums: [1,2,3]},
@@ -95,8 +95,8 @@ test(`extravagant example`, (tt: *) => {
         [100,110,120]
     ];
 
-    tt.deepEqual(expectedOutput, immutablejsSteadfastAnswer);
-    tt.deepEqual(expectedOutput, unmutableMedicoreAnswer);
-    tt.deepEqual(expectedOutput, unmutableBeautifulAnswer);
-    tt.deepEqual(expectedOutput, unmutableDelicateAnswer);
+    t.deepEqual(expectedOutput, immutablejsSteadfastAnswer);
+    t.deepEqual(expectedOutput, unmutableMedicoreAnswer);
+    t.deepEqual(expectedOutput, unmutableBeautifulAnswer);
+    t.deepEqual(expectedOutput, unmutableDelicateAnswer);
 });

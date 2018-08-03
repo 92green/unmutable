@@ -25,15 +25,15 @@ export default ({item, name, fn, toJS, record}: CompareConfig) => {
         ? ii => ii.toJS()
         : ii => ii;
 
-    test(name, (tt: *) => {
-        tt.deepEqual(
+    test(name, (t: *) => {
+        t.deepEqual(
             plainify(fn(fromJS(item))),
             fn(item)
         );
     });
 
     if(record) {
-        test(`Record test: ${name}`, (tt: *) => {
+        test(`Record test: ${name}`, (t: *) => {
             let plainResult = fn(item);
             let recordResult = fn(new MyRecord(item));
 
@@ -44,7 +44,7 @@ export default ({item, name, fn, toJS, record}: CompareConfig) => {
                     ...plainResult
                 };
             }
-            tt.deepEqual(plainResult, recordResult);
+            t.deepEqual(plainResult, recordResult);
         });
     }
 };

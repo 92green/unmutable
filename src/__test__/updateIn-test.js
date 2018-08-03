@@ -13,17 +13,17 @@ let objectData = {
     }
 };
 
-test(`updateIn() should update an existing object value`, (tt: *) => {
-    tt.deepEqual(
+test(`updateIn() should update an existing object value`, (t: *) => {
+    t.deepEqual(
         fromJS(objectData).updateIn(['a','b'], () => "???").toJS(),
         updateIn(['a','b'], () => "???")(objectData)
     );
 });
 
-test(`updateIn() should receive value when an existing object value`, (tt: *) => {
-    tt.plan(1);
+test(`updateIn() should receive value when an existing object value`, (t: *) => {
+    t.plan(1);
     updateIn(['a','b'], (value) => {
-        tt.is(
+        t.is(
             123,
             value
         );
@@ -32,17 +32,17 @@ test(`updateIn() should receive value when an existing object value`, (tt: *) =>
 
 });
 
-test(`updateIn() should update a non-existing object value`, (tt: *) => {
-    tt.deepEqual(
+test(`updateIn() should update a non-existing object value`, (t: *) => {
+    t.deepEqual(
         fromJS(objectData).updateIn(['a','z'], () => "???").toJS(),
         updateIn(['a','z'], () => "???")(objectData)
     );
 });
 
-test(`updateIn() should receive undefined when updating an existing object value`, (tt: *) => {
-    tt.plan(1);
+test(`updateIn() should receive undefined when updating an existing object value`, (t: *) => {
+    t.plan(1);
     updateIn(['a','z'], (value) => {
-        tt.is(
+        t.is(
             undefined,
             value
         );
@@ -50,24 +50,24 @@ test(`updateIn() should receive undefined when updating an existing object value
     })(objectData);
 });
 
-test(`updateIn() should update a non-existing object value with notSetValue`, (tt: *) => {
-    tt.deepEqual(
+test(`updateIn() should update a non-existing object value with notSetValue`, (t: *) => {
+    t.deepEqual(
         fromJS(objectData).updateIn(['a','z'], "NOTSET", ii => ii+"!").toJS(),
         updateIn(['a','z'], "NOTSET", ii => ii+"!")(objectData)
     );
 });
 
-test(`updateIn() should NOT update a non-existing object value with notSetValue if notSetValue is strictly equal to reult of updater`, (tt: *) => {
-    tt.deepEqual(
+test(`updateIn() should NOT update a non-existing object value with notSetValue if notSetValue is strictly equal to reult of updater`, (t: *) => {
+    t.deepEqual(
         fromJS(objectData).updateIn(['a','z'], "NOTSET", ii => ii).toJS(),
         updateIn(['a','z'], "NOTSET", ii => ii)(objectData)
     );
 });
 
-test(`updateIn() should receive notSetValue when updating an existing object value`, (tt: *) => {
-    tt.plan(1);
+test(`updateIn() should receive notSetValue when updating an existing object value`, (t: *) => {
+    t.plan(1);
     updateIn(['a','z'], "NOTSET", (value) => {
-        tt.is(
+        t.is(
             "NOTSET",
             value
         );
@@ -75,24 +75,24 @@ test(`updateIn() should receive notSetValue when updating an existing object val
     })(objectData);
 });
 
-test(`updateIn() should update a deeply non-existing object value`, (tt: *) => {
-    tt.deepEqual(
+test(`updateIn() should update a deeply non-existing object value`, (t: *) => {
+    t.deepEqual(
         fromJS(objectData).updateIn(['aa','z'], () => "???").toJS(),
         updateIn(['aa','z'], () => "???")(objectData)
     );
 });
 
-test(`updateIn() should update a keyless object value`, (tt: *) => {
-    tt.deepEqual(
+test(`updateIn() should update a keyless object value`, (t: *) => {
+    t.deepEqual(
         fromJS(objectData).updateIn([], () => "???"),
         updateIn([], () => "???")(objectData)
     );
 });
 
-test(`updateIn() should receive original value when updating a keyless object value`, (tt: *) => {
-    tt.plan(1);
+test(`updateIn() should receive original value when updating a keyless object value`, (t: *) => {
+    t.plan(1);
     updateIn([], (value) => {
-        tt.is(
+        t.is(
             objectData,
             value
         );
@@ -111,30 +111,30 @@ let mapData = fromJS({
     }
 });
 
-test(`updateIn() should update an existing Map value`, (tt: *) => {
-    tt.deepEqual(
+test(`updateIn() should update an existing Map value`, (t: *) => {
+    t.deepEqual(
         mapData.updateIn(['a','b'], () => "???"),
         updateIn(['a','b'], () => "???")(mapData)
     );
 });
 
-test(`updateIn() should update a non-existing Map value`, (tt: *) => {
-    tt.deepEqual(
+test(`updateIn() should update a non-existing Map value`, (t: *) => {
+    t.deepEqual(
         mapData.updateIn(['a','z'], () => "???"),
         updateIn(['a','z'], () => "???")(mapData)
     );
 });
 
 
-test(`updateIn() should update a deeply non-existing Map value`, (tt: *) => {
-    tt.deepEqual(
+test(`updateIn() should update a deeply non-existing Map value`, (t: *) => {
+    t.deepEqual(
         mapData.updateIn(['aa','z'], () => "???"),
         updateIn(['aa','z'], () => "???")(mapData)
     );
 });
 
-test(`updateIn() should update a keyless Map value`, (tt: *) => {
-    tt.deepEqual(
+test(`updateIn() should update a keyless Map value`, (t: *) => {
+    t.deepEqual(
         mapData.updateIn([], () => "???"),
         updateIn([], () => "???")(mapData)
     );
@@ -149,29 +149,29 @@ let arrayData = [
     [456,789,101112]
 ];
 
-test(`updateIn() should update an existing array value`, (tt: *) => {
-    tt.deepEqual(
+test(`updateIn() should update an existing array value`, (t: *) => {
+    t.deepEqual(
         fromJS(arrayData).updateIn([1,2], () => "???").toJS(),
         updateIn([1,2], () => "???")(arrayData)
     );
 });
 
-test(`updateIn() should update a negative array value`, (tt: *) => {
-    tt.deepEqual(
+test(`updateIn() should update a negative array value`, (t: *) => {
+    t.deepEqual(
         fromJS(arrayData).updateIn([-1,-1], () => "???").toJS(),
         updateIn([-1,-1], () => "???")(arrayData)
     );
 });
 
-test(`updateIn() should update a non-existing array value`, (tt: *) => {
-    tt.deepEqual(
+test(`updateIn() should update a non-existing array value`, (t: *) => {
+    t.deepEqual(
         fromJS(arrayData).updateIn([1,12], () => "???").toJS(),
         updateIn([1,12], () => "???")(arrayData)
     );
 });
 
-test(`updateIn() should update a deeply non-existent array value`, (tt: *) => {
-    tt.deepEqual(
+test(`updateIn() should update a deeply non-existent array value`, (t: *) => {
+    t.deepEqual(
         fromJS(arrayData).updateIn([2,14], () => "???").toJS(),
         updateIn([2,14], () => "???")(arrayData)
     );
@@ -186,29 +186,29 @@ let listData = fromJS([
     [456,789,101112]
 ]);
 
-test(`updateIn() should update an existing list value`, (tt: *) => {
-    tt.deepEqual(
+test(`updateIn() should update an existing list value`, (t: *) => {
+    t.deepEqual(
         listData.updateIn([1,2], () => "???"),
         updateIn([1,2], () => "???")(listData)
     );
 });
 
-test(`updateIn() should update a negative list value`, (tt: *) => {
-    tt.deepEqual(
+test(`updateIn() should update a negative list value`, (t: *) => {
+    t.deepEqual(
         listData.updateIn([-1,-1], () => "???"),
         updateIn([-1,-1], () => "???")(listData)
     );
 });
 
-test(`updateIn() should update a non-existing list value`, (tt: *) => {
-    tt.deepEqual(
+test(`updateIn() should update a non-existing list value`, (t: *) => {
+    t.deepEqual(
         listData.updateIn([1,-12], () => "???"),
         updateIn([1,-12], () => "???")(listData)
     );
 });
 
-test(`updateIn() should update a deeply non-existent list value`, (tt: *) => {
-    tt.deepEqual(
+test(`updateIn() should update a deeply non-existent list value`, (t: *) => {
+    t.deepEqual(
         listData.updateIn([10,14], () => "???"),
         updateIn([10,14], () => "???")(listData)
     );
@@ -228,8 +228,8 @@ let mixedData = Map({
     }
 });
 
-test(`updateIn() should cope with mixed values`, (tt: *) => {
-    tt.deepEqual(
+test(`updateIn() should cope with mixed values`, (t: *) => {
+    t.deepEqual(
         mixedData.updateIn(['a','b',2,0], () => "???"),
         updateIn(['a','b',2,0], () => "???")(mixedData)
     );

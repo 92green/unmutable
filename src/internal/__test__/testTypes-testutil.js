@@ -73,7 +73,7 @@ export default ({name, fn, expectedResult}: TestTypesConfig) => {
         [key]: fn(types[key])
     }), {});
 
-    test(name, (tt: *) => {
-        tt.deepEqual(expectedResult, result);
+    test(name, (t: *) => {
+        t.deepEqual(expectedResult, result);
     });
 };

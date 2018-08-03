@@ -3,7 +3,7 @@ import pivot from '../pivot';
 import test from 'ava';
 import {fromJS} from 'immutable';
 
-test('pivot should pivot arrays and lists', (tt: *) => {
+test('pivot should pivot arrays and lists', (t: *) => {
     let data = [
         [1,2,3],
         [4,5,6]
@@ -15,11 +15,11 @@ test('pivot should pivot arrays and lists', (tt: *) => {
         [3,6]
     ];
 
-    tt.deepEqual(expectedData, pivot()(data));
-    tt.deepEqual(expectedData, pivot()(fromJS(data)).toJS());
+    t.deepEqual(expectedData, pivot()(data));
+    t.deepEqual(expectedData, pivot()(fromJS(data)).toJS());
 });
 
-test('pivot should pivot objects and maps', (tt: *) => {
+test('pivot should pivot objects and maps', (t: *) => {
     let data = {
         a: {
             x: {
@@ -68,6 +68,6 @@ test('pivot should pivot objects and maps', (tt: *) => {
         }
     };
 
-    tt.deepEqual(expectedData, pivot()(data));
-    tt.deepEqual(expectedData, pivot()(fromJS(data)).toJS());
+    t.deepEqual(expectedData, pivot()(data));
+    t.deepEqual(expectedData, pivot()(fromJS(data)).toJS());
 });

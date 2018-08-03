@@ -3,7 +3,7 @@ import entriesReverse from '../entriesReverse';
 import test from 'ava';
 import {fromJS} from 'immutable';
 
-test(`entriesReverse() on object should work`, (tt: *) => {
+test(`entriesReverse() on object should work`, (t: *) => {
     let objectIterator = entriesReverse()({a:1, b:2, c:3});
 
     let objectEntries = [];
@@ -11,13 +11,13 @@ test(`entriesReverse() on object should work`, (tt: *) => {
         objectEntries.push(a);
     }
 
-    tt.deepEqual(
+    t.deepEqual(
         [['c',3],['b',2],['a',1]],
         objectEntries
     );
 });
 
-test(`entriesReverse() on map should work`, (tt: *) => {
+test(`entriesReverse() on map should work`, (t: *) => {
     let mapIterator = entriesReverse()(fromJS({a:1, b:2, c:3}));
 
     let mapEntries = [];
@@ -25,13 +25,13 @@ test(`entriesReverse() on map should work`, (tt: *) => {
         mapEntries.push(a);
     }
 
-    tt.deepEqual(
+    t.deepEqual(
         [['c',3],['b',2],['a',1]],
         mapEntries
     );
 });
 
-test(`entriesReverse() on array should work`, (tt: *) => {
+test(`entriesReverse() on array should work`, (t: *) => {
     let arrayIterator = entriesReverse()([1,2,3]);
 
     let arrayEntries = [];
@@ -39,13 +39,13 @@ test(`entriesReverse() on array should work`, (tt: *) => {
         arrayEntries.push(a);
     }
 
-    tt.deepEqual(
+    t.deepEqual(
         [[2,3],[1,2],[0,1]],
         arrayEntries
     );
 });
 
-test(`entriesReverse() on list should work`, (tt: *) => {
+test(`entriesReverse() on list should work`, (t: *) => {
     let listIterator = entriesReverse()(fromJS([1,2,3]));
 
     let listEntries = [];
@@ -53,7 +53,7 @@ test(`entriesReverse() on list should work`, (tt: *) => {
         listEntries.push(a);
     }
 
-    tt.deepEqual(
+    t.deepEqual(
         [[2,3],[1,2],[0,1]],
         listEntries
     );

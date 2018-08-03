@@ -33,8 +33,8 @@ export default ({item, name, fn, argsToJS = []}: CompareIterateeConfig) => {
         return argsArray;
     };
 
-    test(name, (tt: *) => {
-        tt.deepEqual(
+    test(name, (t: *) => {
+        t.deepEqual(
             testWith(fromJS(item), true),
             testWith(item)
         );

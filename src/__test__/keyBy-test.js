@@ -23,29 +23,29 @@ let expectedOutput = {
     C: {id: "C", foo: "-"}
 };
 
-test(`keyBy() on array should work`, (tt: *) => {
-    tt.deepEqual(
+test(`keyBy() on array should work`, (t: *) => {
+    t.deepEqual(
         expectedOutput,
         keyBy(_ => _.id)(arrayInput)
     );
 });
 
-test(`keyBy() on List should work`, (tt: *) => {
-    tt.deepEqual(
+test(`keyBy() on List should work`, (t: *) => {
+    t.deepEqual(
         expectedOutput,
         keyBy(_ => _.id)(List(arrayInput))
     );
 });
 
-test(`keyBy() on object should work`, (tt: *) => {
-    tt.deepEqual(
+test(`keyBy() on object should work`, (t: *) => {
+    t.deepEqual(
         expectedOutput,
         keyBy(_ => _.id)(objectInput)
     );
 });
 
-test(`keyBy() on Map should work`, (tt: *) => {
-    tt.deepEqual(
+test(`keyBy() on Map should work`, (t: *) => {
+    t.deepEqual(
         expectedOutput,
         keyBy(_ => _.id)(Map(objectInput))
     );

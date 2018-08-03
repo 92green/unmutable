@@ -4,7 +4,7 @@ import test from 'ava';
 import {fromJS} from 'immutable';
 import {Record} from 'immutable';
 
-test(`entries() on object should work`, (tt: *) => {
+test(`entries() on object should work`, (t: *) => {
     let objectIterator = entries()({a:1, b:2, c:3});
     let immutableIterator = fromJS({a:1, b:2, c:3}).entries();
 
@@ -18,13 +18,13 @@ test(`entries() on object should work`, (tt: *) => {
         immutableEntries.push(a);
     }
 
-    tt.deepEqual(
+    t.deepEqual(
         objectEntries,
         immutableEntries
     );
 });
 
-test(`entries() on map should work`, (tt: *) => {
+test(`entries() on map should work`, (t: *) => {
     let mapIterator = entries()(fromJS({a:1, b:2, c:3}));
     let immutableIterator = fromJS({a:1, b:2, c:3}).entries();
 
@@ -38,13 +38,13 @@ test(`entries() on map should work`, (tt: *) => {
         immutableEntries.push(a);
     }
 
-    tt.deepEqual(
+    t.deepEqual(
         mapEntries,
         immutableEntries
     );
 });
 
-test(`entries() on array should work`, (tt: *) => {
+test(`entries() on array should work`, (t: *) => {
     let arrayIterator = entries()([1,2,3]);
     let immutableIterator = fromJS([1,2,3]).entries();
 
@@ -58,13 +58,13 @@ test(`entries() on array should work`, (tt: *) => {
         immutableEntries.push(a);
     }
 
-    tt.deepEqual(
+    t.deepEqual(
         arrayEntries,
         immutableEntries
     );
 });
 
-test(`entries() on list should work`, (tt: *) => {
+test(`entries() on list should work`, (t: *) => {
     let listIterator = entries()(fromJS([1,2,3]));
     let immutableIterator = fromJS([1,2,3]).entries();
 
@@ -78,13 +78,13 @@ test(`entries() on list should work`, (tt: *) => {
         immutableEntries.push(a);
     }
 
-    tt.deepEqual(
+    t.deepEqual(
         listEntries,
         immutableEntries
     );
 });
 
-test(`entries() on record should work`, (tt: *) => {
+test(`entries() on record should work`, (t: *) => {
     const TestRecord = Record({foo: 'bar'});
-    tt.deepEqual([...entries()(new TestRecord({}))], [['foo','bar']]);
+    t.deepEqual([...entries()(new TestRecord({}))], [['foo','bar']]);
 });

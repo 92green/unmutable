@@ -2,8 +2,8 @@
 import doIf from '../doIf';
 import test from 'ava';
 
-test(`doIf() should do the thing if true`, (tt: *) => {
-    tt.deepEqual(
+test(`doIf() should do the thing if true`, (t: *) => {
+    t.deepEqual(
         [2,4,6],
         doIf(
             () => true,
@@ -12,8 +12,8 @@ test(`doIf() should do the thing if true`, (tt: *) => {
     );
 });
 
-test(`doIf() should not do the thing if false`, (tt: *) => {
-    tt.deepEqual(
+test(`doIf() should not do the thing if false`, (t: *) => {
+    t.deepEqual(
         [1,2,3],
         doIf(
             () => false,
@@ -22,20 +22,20 @@ test(`doIf() should not do the thing if false`, (tt: *) => {
     );
 });
 
-test(`doIf() should be passed the value`, (tt: *) => {
+test(`doIf() should be passed the value`, (t: *) => {
     let theValue = [1,2,3];
 
     doIf(
         (vv: *): * => {
-            tt.is(theValue, vv);
+            t.is(theValue, vv);
             return false;
         },
         value => value
     )(theValue);
 });
 
-test(`doIf() should do the thing if true with 3 args`, (tt: *) => {
-    tt.deepEqual(
+test(`doIf() should do the thing if true with 3 args`, (t: *) => {
+    t.deepEqual(
         [2,4,6],
         doIf(
             () => true,
@@ -45,8 +45,8 @@ test(`doIf() should do the thing if true with 3 args`, (tt: *) => {
     );
 });
 
-test(`doIf() should do the other thing if false with 3 args`, (tt: *) => {
-    tt.deepEqual(
+test(`doIf() should do the other thing if false with 3 args`, (t: *) => {
+    t.deepEqual(
         [3,6,9],
         doIf(
             () => false,
