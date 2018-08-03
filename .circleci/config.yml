@@ -13,7 +13,6 @@ jobs:
             - v1-dependencies-
       - run: yarn install
       - run: yarn build
-      - run: yarn build-docs
       - save_cache:
           paths:
             - node_modules
