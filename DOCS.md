@@ -289,5 +289,24 @@ Utils include functions that make Unmutable.js useable and useful, as well as pl
  toLowerCase()("HELLO"); // "hello"
  ```
 
+#### util/overload
+`overload(overloads: Object) => Function` - Simulates function overloading. It accepts an object with number strings as keys, and functions to call as values. It returns the overloaded function. When the overloaded function is called with `x` arguments, the function with the key of `x` on the passed-in object will be called. If the overloaded function is called with a number of arguments not specified in the passed-in object, an error is thrown.
+
+```
+import overload from 'unmutable/lib/util/overload';
+let fn = overload({
+    ["2"]: (a, b) => `${a} ${b}`,
+    ["3"]: (a, b, c) => `(${a} ${b}) ${c}`,
+});
+
+fn("!", "?"); // returns "! ?"
+fn("!", "?", "*"); // returns "(! ?) *"
+fun("!") // throws an error
+
+```
+
+#### util/range
+`range([start=0], end, [step=1])` - Helper function to generate an array of sequential numbers. Simply a re-export of [lodash.range](https://lodash.com/docs/4.17.10#range)
+
 #### util/recordAsObject
  `recordAsObject(updater: Function, value: *, returnRecord: boolean) => *` - Helper function that allows you to update an Immutable.js `Record`. The updater receives an object version of the `Record`. If `returnRecord = true`, the result of the updater will be passed back into the `Record`'s constructor before being returned. If `returnRecord = false`, the data returned from `updater` will be returned directly from `recordAsObject` without change.

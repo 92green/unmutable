@@ -6,16 +6,17 @@ import overload from './util/overload';
 
 // we're not using Immutable.js updateIn because it can't cope with mixed types in the keyPath
 
+let updateIn = (keyPath: string[], updater: Function, notSetValue: * = undefined) => (value: *): * => {
+    let updated: * = updater(getIn(keyPath, notSetValue)(value));
+    return updated === notSetValue
+        ? value
+        : setIn(keyPath, updated)(value);
+};
+
 export default prep({
     name: 'updateIn',
     all: overload({
-        ["2"]: (fn) => (keyPath: string[], updater: Function) => fn(keyPath, updater),
-        ["3"]: (fn) => (keyPath: string[], notSetValue: *, updater: Function) => fn(keyPath, updater, notSetValue)
-    },
-    (keyPath: string[], updater: Function, notSetValue: * = undefined) => (value: *): * => {
-        let updated: * = updater(getIn(keyPath, notSetValue)(value));
-        return updated === notSetValue
-            ? value
-            : setIn(keyPath, updated)(value);
+        ["2"]: (keyPath: string[], updater: Function) => updateIn(keyPath, updater),
+        ["3"]: (keyPath: string[], notSetValue: *, updater: Function) => updateIn(keyPath, updater, notSetValue)
     })
 });
