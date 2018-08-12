@@ -296,7 +296,7 @@ Utils include functions that make Unmutable.js useable and useful, as well as pl
 import overload from 'unmutable/lib/util/overload';
 let fn = overload({
     ["2"]: (a, b) => `${a} ${b}`,
-    ["3"]: (c, a, b) => `(${a} ${b}) ${c}`,
+    ["3"]: (a, b, c) => `(${a} ${b}) ${c}`,
 });
 
 fn("!", "?"); // returns "! ?"
