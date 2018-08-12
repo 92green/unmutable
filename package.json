@@ -41,6 +41,7 @@
   },
   "dependencies": {
     "fast-deep-equal": "^1.0.0",
-    "is-plain-object": "^2.0.4"
+    "is-plain-object": "^2.0.4",
+    "lodash.range": "^3.2.0"
   }
 }
