@@ -52,6 +52,7 @@ has ^
 hashCode - non-Immutable.js values are JSON stringified
 hasIn ^
 includes
+indexOf *
 insert *
 interpose *
 isEmpty ^
@@ -59,6 +60,7 @@ join
 keyOf
 keys ^
 last
+lastIndexOf *
 lastKeyOf
 map ^
 merge
@@ -98,11 +100,9 @@ zipWith *
 ```
 flatten
 flip
-indexOf *
 interleave *
 isSubset
 isSuperset
-lastIndexOf *
 mapKeys
 mapEntries
 max
