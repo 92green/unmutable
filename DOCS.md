@@ -71,6 +71,7 @@ reverse
 set ^
 setIn ^
 shift *
+splice *
 size
 skip
 skipLast
@@ -116,7 +117,6 @@ minBy
 setSize *
 skipWhile
 skipUntil
-splice *
 takeWhile
 takeUntil
 toJSON
