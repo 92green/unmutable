@@ -44,10 +44,14 @@ findLastIndex
 findLastKey
 first
 flatMap
+forEach
 get ^
 getIn ^
+groupBy - object and arrays cannot be grouped on deeply equal keys because plain objects cannot have objects as keys
 has ^
+hashCode - non-Immutable.js values are JSON stringified
 hasIn ^
+includes
 insert *
 interpose *
 isEmpty ^
@@ -93,9 +97,6 @@ zipWith *
 ```
 flatten
 flip
-forEach
-groupBy
-includes
 indexOf *
 interleave *
 isSubset
@@ -132,7 +133,6 @@ asImmutable
 countBy
 entrySeq
 fromEntrySeq
-hashCode
 keySeq
 toList
 toMap
@@ -185,6 +185,9 @@ If the third argument `ifFalse` is provided, then the value will be passed throu
 #### log
 `log(message: string = "", type: string = "log") => (value) => value` - Returns an evaluator that passes the value through unchanged, but also calls `console[type](message, value)`. Useful for debugging.
 
+#### notEquals
+`notEquals(other) => (value) => boolean` - Returns an evaluator that returns `true` if `value` and `other` are not deeply equal, or `false` otherwise.
+
 #### omit
 `omit(keys: string[]|number[]) => (value) => newValue` - For `Map` and object: Returns an evaluator that filters out all keys listed in `keys`.
 
@@ -223,6 +226,12 @@ If the third argument `ifFalse` is provided, then the value will be passed throu
 
 #### updateInto
 `updateInto(key: string|number, updater: Function) => (value) => *` - Returns an evaluator that passes `value` to `updater`, and will set `value.key` to the result of the `updater`. In practise it works like `update(key, updater) => (value)` but where `updater` receives `value` instead of `value.key`.
+
+#### unique
+`unique() => (value) => *` - Returns an evaluator that filters `value` so that any element with a duplicate value is filtered out. If a non-primitive is returned from `getter`, it is compared deeply.
+
+#### uniqueBy
+`uniqueBy(getter: Function) => (value) => *` - Returns an evaluator that filters `value` according to the result of `getter`, so that any element with a duplicate result of `getter` is filtered out. If a non-primitive is returned from `getter`, it is compared deeply.
 
 #### valueArray
 `valueArray() => (value) => Array` - Returns an evaluator that returns an array of values on the value. Immutable.js has no function that does this, they have `values()` which returns an iterator, and `valueSeq()` which returns an Immutable.js `Seq`.
