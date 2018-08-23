@@ -44,6 +44,7 @@ findLastIndex
 findLastKey
 first
 flatMap
+flatten
 forEach
 get ^
 getIn ^
@@ -52,6 +53,7 @@ has ^
 hashCode - non-Immutable.js values are JSON stringified
 hasIn ^
 includes
+indexOf *
 insert *
 interpose *
 isEmpty ^
@@ -59,9 +61,14 @@ join
 keyOf
 keys ^
 last
+lastIndexOf *
 lastKeyOf
 map ^
+max
+maxBy
 merge
+min
+minBy
 pop *
 push *
 reduce ^
@@ -70,7 +77,9 @@ rest
 reverse
 set ^
 setIn ^
+setSize *
 shift *
+splice *
 size
 skip
 skipLast
@@ -95,28 +104,19 @@ zipWith *
 ### To be implemented
 
 ```
-flatten
 flip
-indexOf *
 interleave *
 isSubset
 isSuperset
-lastIndexOf *
 mapKeys
 mapEntries
-max
-maxBy
 mergeWith
 mergeDeep
 mergeDeepIn
 mergeDeepWith
 mergeIn
-min
-minBy
-setSize *
 skipWhile
 skipUntil
-splice *
 takeWhile
 takeUntil
 toJSON

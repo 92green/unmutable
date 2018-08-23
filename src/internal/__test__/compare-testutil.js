@@ -25,7 +25,7 @@ export default ({item, name, fn, toJS, record}: CompareConfig) => {
         : ii => ii;
 
     test(name, () => {
-        expect(plainify(fn(fromJS(item)))).toEqual(fn(item));
+        expect(fn(item)).toEqual(plainify(fn(fromJS(item))));
     });
 
     if(record) {
