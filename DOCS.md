@@ -64,7 +64,11 @@ last
 lastIndexOf *
 lastKeyOf
 map ^
+max
+maxBy
 merge
+min
+minBy
 pop *
 push *
 reduce ^
@@ -73,6 +77,7 @@ rest
 reverse
 set ^
 setIn ^
+setSize *
 shift *
 splice *
 size
@@ -105,16 +110,11 @@ isSubset
 isSuperset
 mapKeys
 mapEntries
-max
-maxBy
 mergeWith
 mergeDeep
 mergeDeepIn
 mergeDeepWith
 mergeIn
-min
-minBy
-setSize *
 skipWhile
 skipUntil
 takeWhile
