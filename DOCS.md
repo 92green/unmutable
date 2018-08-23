@@ -44,6 +44,7 @@ findLastIndex
 findLastKey
 first
 flatMap
+flatten
 forEach
 get ^
 getIn ^
@@ -98,7 +99,6 @@ zipWith *
 ### To be implemented
 
 ```
-flatten
 flip
 interleave *
 isSubset
