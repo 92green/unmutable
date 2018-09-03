@@ -33,3 +33,12 @@ compare({
     item: [1,2,3],
     fn: has(3)
 });
+
+test('has() on getter on class should work', () => {
+    class A {
+        get foo() {
+            return "bar";
+        }
+    };
+    expect(has('foo')(new A())).toBe(true);
+});
