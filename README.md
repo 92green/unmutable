@@ -8,6 +8,8 @@
 yarn add unmutable
 ```
 
+[**See the Unmutable Docs**](DOCS.md)
+
 [Immutable.js](https://facebook.github.io/immutable-js/docs/) is good because:
 - Wonderful API.
 - Immutable data.
