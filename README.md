@@ -8,7 +8,11 @@
 yarn add unmutable
 ```
 
+## Docs
+
 [**See the Unmutable Docs**](DOCS.md)
+
+## About unmutable
 
 [Immutable.js](https://facebook.github.io/immutable-js/docs/) is good because:
 - Wonderful API.
@@ -98,7 +102,6 @@ let name = pipeWith(
 
 **Delicacy!**
 
-## Docs
 
 We're adding lots of functions in. We'll add them in as we go. If any added functions match names of Immutable.js Map or List methods, they will match Immutable.js' function signatures and do the same things. On top of this, we reserve the right to add extra cool functions that we might find useful.
 
