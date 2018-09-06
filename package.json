@@ -26,7 +26,7 @@
     "lint": "blueflag-test lint",
     "test": "yarn jest",
     "test-all": "yarn lint && yarn flow && yarn test",
-    "view-coverage": "yarn run coverage; open ./coverage/lcov-report/index.html"
+    "view-coverage": "open ./coverage/lcov-report/index.html"
   },
   "devDependencies": {
     "babel-cli": "^6.23.0",
