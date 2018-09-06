@@ -67,6 +67,11 @@ map ^
 max
 maxBy
 merge
+mergeDeep
+mergeDeepIn
+mergeDeepWith
+mergeIn
+mergeWith
 min
 minBy
 pop *
@@ -104,17 +109,13 @@ zipWith *
 ### To be implemented
 
 ```
+countBy - will return an object rather than Seq.keyed for plain objects and arrays
 flip
 interleave *
 isSubset
 isSuperset
 mapKeys
 mapEntries
-mergeWith
-mergeDeep
-mergeDeepIn
-mergeDeepWith
-mergeIn
 skipWhile
 skipUntil
 takeWhile
@@ -130,7 +131,6 @@ The following functions will not be implemented in Unmutable.js
 [Symbol.iterator]()
 asMutable
 asImmutable
-countBy
 entrySeq
 fromEntrySeq
 keySeq
