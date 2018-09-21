@@ -2,18 +2,30 @@
 import prep from './internal/prep';
 import get from './get';
 import overload from './util/overload';
-import set from './set';
+import {objectSet} from './set';
+import {arraySet} from './set';
 
-let update = (key: string, updater: Function, notSetValue: * = undefined) => (value): * => {
-    return set(key, updater(get(key, notSetValue)(value)))(value);
+let updateSelf = (updater: Function) => (value) => updater(value);
+
+let updateObject = (key: string, updater: Function, notSetValue: * = undefined) => (value): * => {
+    return objectSet(key, updater(get(key, notSetValue)(value)))(value);
+};
+
+let updateArray = (key: number, updater: Function, notSetValue: * = undefined) => (value): * => {
+    return arraySet(key, updater(get(key, notSetValue)(value)))(value);
 };
 
 export default prep({
     name: 'update',
     immutable: 'update',
-    all: overload({
-        ["1"]: (updater: Function) => (value) => updater(value),
-        ["2"]: (key: string, updater: Function) => update(key, updater),
-        ["3"]: (key: string, notSetValue: *, updater: Function) => update(key, updater, notSetValue)
+    object: overload({
+        ["1"]: updateSelf,
+        ["2"]: (key: string, updater: Function) => updateObject(key, updater),
+        ["3"]: (key: string, notSetValue: *, updater: Function) => updateObject(key, updater, notSetValue)
+    }),
+    array: overload({
+        ["1"]: updateSelf,
+        ["2"]: (key: number, updater: Function) => updateArray(key, updater),
+        ["3"]: (key: number, notSetValue: *, updater: Function) => updateArray(key, updater, notSetValue)
     })
 });
