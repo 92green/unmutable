@@ -2,7 +2,8 @@
 module.exports = {
     preset: 'blueflag-test',
     collectCoverageFrom: [
-        "src/**/*.{js,jsx}"
+        "src/**/*.{js,jsx}",
+        "!**/*-testutil.js"
     ],
     coverageThreshold: {
         global: {
