@@ -16,4 +16,5 @@ export default class UnmutableCompatible {
             [key]: childValue
         });
     };
+    toObject = (): * => this._data;
 }

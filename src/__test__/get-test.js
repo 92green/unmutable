@@ -7,21 +7,24 @@ compare({
     name: `get() finds a value`,
     item: {a:1, b:2},
     fn: get('a'),
-    record: true
+    record: true,
+    unmutableCompatible: true
 });
 
 compare({
     name: `get() doesnt find a value`,
     item: {a:1, b:2},
     fn: get('z'),
-    record: true
+    record: true,
+    unmutableCompatible: true
 });
 
 compare({
     name: `get() doesnt find a value with a notSetValue`,
     item: {a:1, b:2},
     fn: get('z', '!'),
-    record: true
+    record: true,
+    unmutableCompatible: true
 });
 
 compare({

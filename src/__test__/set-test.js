@@ -8,7 +8,8 @@ compare({
     item: {a:1, b:2},
     fn: set('c', 123),
     toJS: true,
-    record: true
+    record: true,
+    unmutableCompatible: true
 });
 
 compare({
@@ -16,7 +17,8 @@ compare({
     item: {a:1, b:2},
     fn: set('a', 123),
     toJS: true,
-    record: true
+    record: true,
+    unmutableCompatible: true
 });
 
 compare({
