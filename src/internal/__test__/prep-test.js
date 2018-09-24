@@ -1,7 +1,7 @@
 // @flow
 import prep from '../prep';
 import {List, Map, Record} from 'immutable';
-
+import UnmutableCompatible from './UnmutableCompatible-testutil';
 let MyRecord = Record({c:"c"});
 
 test(`prep should handle records`, () => {
@@ -116,6 +116,18 @@ test(`prep should handle functions`, () => {
     expect(() => useNone('a')(myFunction)).toThrowError(`noooooo() cannot be called on function myFunction() {}`);
 });
 
+test(`prep should handle unmutable compatible data types`, () => {
+    let myUnmutableCompatible = new UnmutableCompatible({a:1, b:2, c:3});
+    let all = (key) => (item) => `all`;
+
+    let useUnmutable = prep({name: "get", all});
+    let useAll = prep({name: "getThatDoesntExistOnUmutableCompatibleThing", all});
+    let useNone = prep({name: "noooooo"});
+
+    expect(useUnmutable('a')(myUnmutableCompatible)).toBe(1); // use unmutable compatible method
+    expect(useAll('a')(myUnmutableCompatible)).toBe("all"); // fallback to all if unmutable compatible method doesnt exist
+    expect(() => useNone('a')(myUnmutableCompatible)).toThrowError(`noooooo() cannot be called on [object Object]`); // error if method doesnt exist and all doesnt exist
+});
 
 test(`prep should not handle strings as values`, () => {
     let useNone = prep({name: "find", array: () => {}});
