@@ -1,6 +1,6 @@
 // @flow
 import { fromJS, Record } from 'immutable';
-import {isRecord} from '../predicates';
+import {isRecord} from '../immutableJsPredicates';
 
 let defaultValues = {
     a: null,

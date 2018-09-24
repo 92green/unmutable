@@ -1,3 +1,3 @@
 // @flow
-import {isRecord} from '../internal/predicates';
+import {isRecord} from '../internal/immutableJsPredicates';
 export default isRecord;
