@@ -8,7 +8,12 @@ export default class UnmutableCompatible {
     __UNMUTABLE_COMPATIBLE__ = true;
     _data: *;
 
-    get = (key: string) => {
-        return this._data[key];
+    has = (key: string): boolean => this._data.hasOwnProperty(key);
+    get = (key: string, notSetValue: *): * => this.has(key) ? this._data[key] : notSetValue;
+    set = (key: string, childValue: *): UnmutableCompatible => {
+        return new UnmutableCompatible({
+            ...this._data,
+            [key]: childValue
+        });
     };
 }
