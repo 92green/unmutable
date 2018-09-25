@@ -1,8 +1,7 @@
 // @flow
-import {
-    _isImmutableNoRecordChecks,
-    isRecord
-} from '../internal/predicates';
+import {_isImmutableNoRecordChecks} from '../internal/immutableJsPredicates';
+import {isRecord} from '../internal/immutableJsPredicates';
+import {isUnmutableCompatible} from '../internal/unmutablePredicates';
 
 import isObject from '../util/isObject';
 
@@ -12,6 +11,7 @@ const error = (name: string, value: *) => {
 
 type PrepConfig = {
     name: string,
+    unmutable?: string,
     record?: string|Function,
     immutable?: string|Function,
     array?: Function,
@@ -23,6 +23,20 @@ type PrepType = {
     type: string,
     isType: (value: *) => boolean,
     fn: Function
+};
+
+const UNMUTABLE_COMPATIBLE_TYPE: PrepType = {
+    type: "unmutable",
+    isType: (value: *): boolean => isUnmutableCompatible(value),
+    fn: (name: string, ignore: *, all: Function) => (...args: Array<*>) => (value: *): * => {
+        if(!value[name]) {
+            if(all) {
+                return all(...args)(value);
+            }
+            error(name, value);
+        }
+        return value[name](...args);
+    }
 };
 
 const PREP_TYPES: Array<PrepType> = [
@@ -54,7 +68,6 @@ const PREP_TYPES: Array<PrepType> = [
         type: "object",
         isType: isObject,
         fn: (name: string, object: Function) => object
-
     },
     {
         type: "all",
@@ -64,12 +77,14 @@ const PREP_TYPES: Array<PrepType> = [
 ];
 
 export default (config: PrepConfig): Function => {
-    let types: PrepType[] = PREP_TYPES
-        .filter(({type}) => config[type])
+    let types: PrepType[] = [
+        UNMUTABLE_COMPATIBLE_TYPE,
+        ...PREP_TYPES.filter(({type}) => config[type])
+    ]
         .map(({type, isType, fn}) => ({
             type,
             isType,
-            fn: fn(config.name, config[type])
+            fn: fn(config.name, config[type], config.all)
         }));
 
     return (...args: *) => (value: *): * => {

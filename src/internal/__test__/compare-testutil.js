@@ -1,6 +1,8 @@
 // @flow
 import { fromJS, Record } from 'immutable';
-import {isRecord} from '../predicates';
+import {isRecord} from '../immutableJsPredicates';
+import {isUnmutableCompatible} from '../unmutablePredicates';
+import UnmutableCompatible from './UnmutableCompatible-testutil';
 
 let defaultValues = {
     a: null,
@@ -16,10 +18,11 @@ type CompareConfig = {
     name: string, // the name of the test
     fn: Function, // the function to test
     toJS?: boolean, // a boolean indicating whether the result of performing the function on fromJS(item) will need to be turned back into plain javascript for comparison
-    record?: boolean // set to true to also test against Immutable.js Records
+    record?: boolean, // set to true to also test against Immutable.js Records
+    unmutableCompatible?: boolean, // set to true to also test against the Unmutable compatible class testutil
 };
 
-export default ({item, name, fn, toJS, record}: CompareConfig) => {
+export default ({item, name, fn, toJS, record, unmutableCompatible}: CompareConfig) => {
     let plainify = toJS
         ? ii => ii.toJS()
         : ii => ii;
@@ -40,7 +43,19 @@ export default ({item, name, fn, toJS, record}: CompareConfig) => {
                     ...plainResult
                 };
             }
-            expect(plainResult).toEqual(recordResult);
+            expect(recordResult).toEqual(plainResult);
+        });
+    }
+
+    if(unmutableCompatible) {
+        test(`Unmutable compatible test: ${name}`, () => {
+            let plainResult = fn(item);
+            let ucResult = fn(new UnmutableCompatible(item));
+
+            if(isUnmutableCompatible(ucResult)) {
+                ucResult = ucResult.toObject();
+            }
+            expect(ucResult).toEqual(plainResult);
         });
     }
 };

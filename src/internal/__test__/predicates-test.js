@@ -9,7 +9,7 @@ import {
     isOrdered,
     isRecord,
     isValueObject
-} from '../predicates';
+} from '../immutableJsPredicates';
 
 import testTypes from '../../internal/__test__/testTypes-testutil';
 

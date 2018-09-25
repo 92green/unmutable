@@ -8,9 +8,12 @@ It's a work in progress so not all functions have been implemented yet.
 
 ## Class instances and functions-as-objects
 
-Experimental support for class instances and functions being used as objects has been added.
+Experimental support has been added for class instances and functions being used as objects.
 Currently these should work with methods that don't make changes to the data structure (`get`, `getIn`, `find` etc.)
-There are plans for a standard API that unmutable can use with methods that make data changes.
+
+## Custom data types
+
+Experimental support has been added for custom data types, such as classes that you may write yourself. For a class instance to be unmutable compatible, it must have a key of `__UNMUTABLE_COMPATIBLE__` and set this to `true`. When unmutable finds this key on a `value`, it will try to call a method on that `value` and pass all arguments through. It is up to you to write the behaviour of each of the methods that unmutable may call on your class, and to ensure these behave immutably. If a method cannot be found on the `value`, and if a type-agnostic execution for the current function already exists in unmutable (this is a function called "all" in the unmutable source code), then unmutable will use the type-agnostic function instead. This means that by implementing a few basic methods like `has`, `get`, `set`, `delete`, `entries` etc, you should also be able to use unmutable functions such as `getIn`, `update`, `find` etc.
 
 ## Functions
 

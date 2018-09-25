@@ -8,7 +8,8 @@ import compareIteratee from '../internal/__test__/compareIteratee-testutil';
 compare({
     name: `update() without key should work`,
     item: {a:1, b:2, c:3, d:4},
-    fn: update(value => 2)
+    fn: update(value => 2),
+    unmutableCompatible: true
 });
 
 compareIteratee({
@@ -21,13 +22,16 @@ compareIteratee({
     argsToJS: ['value']
 });
 
+
+
 // 2 arguments
 
 compare({
     name: `update() key on object should work`,
     item: {a:1, b:2, c:3, d:4},
     fn: update('a', value => value * 2),
-    toJS: true
+    toJS: true,
+    unmutableCompatible: true
 });
 
 compareIteratee({
@@ -43,7 +47,8 @@ compare({
     name: `update() key on object should work with wrong key`,
     item: {a:1, b:2, c:3, d:4},
     fn: update('z', value => value * 2),
-    toJS: true
+    toJS: true,
+    unmutableCompatible: true
 });
 
 compareIteratee({
@@ -102,7 +107,8 @@ compare({
     name: `update() key on object should work with wrong key and notSetValue`,
     item: {a:1, b:2, c:3, d:4},
     fn: update('z', 100, value => value * 2),
-    toJS: true
+    toJS: true,
+    unmutableCompatible: true
 });
 
 compareIteratee({
@@ -129,3 +135,5 @@ compareIteratee({
         return value;
     })
 });
+
+

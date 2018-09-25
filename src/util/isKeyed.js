@@ -1,6 +1,6 @@
 // @flow
 import isObject from './isObject';
-import {isImmutable, isKeyed} from '../internal/predicates';
+import {isImmutable, isKeyed} from '../internal/immutableJsPredicates';
 
 export default (thing: *): boolean => isImmutable(thing)
     ? isKeyed(thing)
