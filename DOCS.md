@@ -159,6 +159,9 @@ withMutations
 #### clone
 `clone() => (value) => newValue` - Returns an evaluator that returns a clone of `value` if `value` is an array or object, or returns the `value` unchanged if given an Immutable.js `Map` or `List`. Immutable.js data types are inherently immutable so do not need to be explicitly cloned.
 
+#### chunkBy
+`chunkBy(predicate: Function) => (value) => newValue` - Returns an evaluator that returns an array of "chunks". This function splits `value` up into chunks, where the size of each chunk is determined by the `predicate`. It iterates over `value` and calls `predicate` for each item on the collection. Whenever `predicate` returns true, a new chunk is started. It returns an array containing all the chunks that were created.
+
 #### defaults
 `defaults(defaults) => (value) => newValue` - Returns an evaluator that takes `value`, and adds to it any keys (and values) that exist on `defaults` and not on `value`. It is essentially `(defaults) => (value) => merge(value)(defaults)`
 
