@@ -165,6 +165,9 @@ withMutations
 #### chunkBy
 `chunkBy(predicate: Function) => (value) => newValue` - Returns an evaluator that returns an array of "chunks". This function splits `value` up into chunks, where the size of each chunk is determined by the `predicate`. It iterates over `value` and calls `predicate` for each item on the collection. Whenever `predicate` returns true, a new chunk is started. It returns an array containing all the chunks that were created.
 
+#### deal
+`deal(groups: number) => (value) => newValue` - Returns an evaluator that returns an array of "chunks". This function iterates over `value`, dividing it into the number of groups specified by the `groups` argument. It works in a similar way to someone dealing out cards to a number of players, putting the first item in the first group, the second item in the second group etc. Once the last group is reached, the next item is put in the first group again, and the deal continues cyclically until no items are left.
+
 #### defaults
 `defaults(defaults) => (value) => newValue` - Returns an evaluator that takes `value`, and adds to it any keys (and values) that exist on `defaults` and not on `value`. It is essentially `(defaults) => (value) => merge(value)(defaults)`
 
