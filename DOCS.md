@@ -91,6 +91,7 @@ splice *
 size
 skip
 skipLast
+skipUntil
 slice
 some
 sort - works with arrays, lists and maps, but not objects because objects cannot be sorted
@@ -122,7 +123,6 @@ isSuperset
 mapKeys
 mapEntries
 skipWhile
-skipUntil
 toJSON
 ```
 
