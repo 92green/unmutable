@@ -98,6 +98,7 @@ sortBy - works with arrays, lists and maps, but not objects because objects cann
 take
 takeLast
 takeUntil
+takeWhile
 toArray
 toJS
 toObject
@@ -122,7 +123,6 @@ mapKeys
 mapEntries
 skipWhile
 skipUntil
-takeWhile
 toJSON
 ```
 
