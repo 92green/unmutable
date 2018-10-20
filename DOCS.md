@@ -191,6 +191,9 @@ If the third argument `ifFalse` is provided, then the value will be passed throu
 #### log
 `log(message: string = "", type: string = "log") => (value) => value` - Returns an evaluator that passes the value through unchanged, but also calls `console[type](message, value)`. Useful for debugging.
 
+#### move
+`move(fromIndex: number, toIndex: number) => (value) => newValue` - Returns an evaluator that moves the element at `fromIndex` to the position of `toIndex`.
+
 #### notEquals
 `notEquals(other) => (value) => boolean` - Returns an evaluator that returns `true` if `value` and `other` are not deeply equal, or `false` otherwise.
 
