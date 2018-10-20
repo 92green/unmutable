@@ -103,6 +103,7 @@ takeUntil
 takeWhile
 toArray
 toJS
+toJSON
 toObject
 unshift *
 update
@@ -123,7 +124,6 @@ isSubset
 isSuperset
 mapKeys
 mapEntries
-toJSON
 ```
 
 ### Exceptions
@@ -216,7 +216,7 @@ If the third argument `ifFalse` is provided, then the value will be passed throu
 `shallowEquals(other: *) => (value) => number` - Returns an evaluator that checks if `other` and `value` are shallowly equal, using strict equality. Note: use `equals()` if you want to check deep equality.
 
 #### shallowToJS
-`shallowToJS() => (value) => *` - Returns an evaluator that turns the `value` into plain Javascript if it is an Immutable.js data type. Internally if `value` is a `List` then `.toArray()` is called, and if value is a `Map` then `toObject()` is called.
+`shallowToJS() => (value) => *` - Returns an evaluator that turns the `value` into plain Javascript if it is an Immutable.js data type. Internally if `value` is a `List` then `.toArray()` is called, and if value is a `Map` then `toObject()` is called. This is equivalent to Immutable.js `toJSON` function.
 
 #### strictEquals
 `strictEquals(other: *) => (value) => number` - Returns an evaluator that checks if `other` and `value` are strictly equal. This complements `equals()`, which checks for deep value equality.
