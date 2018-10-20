@@ -1,20 +1,17 @@
 // @flow
 import prep from './internal/prep';
-import clear from './clear';
-import entries from './entries';
+import filter from './filter';
 
 export default prep({
     name: 'takeUntil',
     immutable: 'takeUntil',
     all: (predicate: Function) => (value: *): * => {
-        let result = clear()(value);
-        let iterator = entries()(value);
-        for(let [key, childValue] of iterator) {
-            if(predicate(childValue, key, value)) {
-                continue;
+        let keeping = true;
+        return filter((childValue: *, key: *, iter: *) => {
+            if(keeping && predicate(childValue, key, iter)) {
+                keeping = false;
             }
-            result[key] = childValue;
-        }
-        return result;
+            return keeping;
+        })(value);
     }
 });
