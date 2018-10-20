@@ -7,8 +7,8 @@ export default prep({
     immutable: 'findIndex',
     all: (predicate: Function) => (value: Object): * => {
         let iterator = entries()(value);
-        for(let [key, value] of iterator) {
-            if(predicate(value, key, value)) {
+        for(let [key, childValue] of iterator) {
+            if(predicate(childValue, key, value)) {
                 return key;
             }
         }

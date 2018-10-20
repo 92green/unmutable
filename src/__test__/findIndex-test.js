@@ -28,3 +28,9 @@ compareIteratee({
     }),
     argsToJS: ['iter']
 });
+
+test(`findIndex() on array should pass correct iter to iteratee`, () => {
+    let predicate = jest.fn();
+    findIndex(predicate)([0,1,2,3]);
+    expect(predicate.mock.calls[0][2]).toEqual([0,1,2,3]);
+});
