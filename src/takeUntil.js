@@ -1,16 +1,20 @@
 // @flow
 import prep from './internal/prep';
-import findIndex from './findIndex';
-import slice from './slice';
+import clear from './clear';
+import entries from './entries';
 
 export default prep({
     name: 'takeUntil',
     immutable: 'takeUntil',
-    array: (predicate: Function) => (value: *): * => {
-        let index: number = findIndex(predicate)(value);
-        if(index === -1) {
-            return value;
+    all: (predicate: Function) => (value: *): * => {
+        let result = clear()(value);
+        let iterator = entries()(value);
+        for(let [key, childValue] of iterator) {
+            if(predicate(childValue, key, value)) {
+                continue;
+            }
+            result[key] = childValue;
         }
-        return slice(0, index)(value);
+        return result;
     }
 });
