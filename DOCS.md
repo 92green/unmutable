@@ -97,6 +97,7 @@ sort - works with arrays, lists and maps, but not objects because objects cannot
 sortBy - works with arrays, lists and maps, but not objects because objects cannot be sorted
 take
 takeLast
+takeUntil
 toArray
 toJS
 toObject
@@ -122,7 +123,6 @@ mapEntries
 skipWhile
 skipUntil
 takeWhile
-takeUntil
 toJSON
 ```
 
