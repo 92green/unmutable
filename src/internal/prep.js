@@ -6,7 +6,7 @@ import {isUnmutableCompatible} from '../internal/unmutablePredicates';
 import isObject from '../util/isObject';
 
 const error = (name: string, value: *) => {
-    throw new Error(`${name}() cannot be called on ${value}`);
+    throw new Error(`Unmutable error: ${name}() cannot be called on ${value}`);
 };
 
 type PrepConfig = {
