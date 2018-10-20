@@ -159,6 +159,9 @@ withMutations
 #### clone
 `clone() => (value) => newValue` - Returns an evaluator that returns a clone of `value` if `value` is an array or object, or returns the `value` unchanged if given an Immutable.js `Map` or `List`. Immutable.js data types are inherently immutable so do not need to be explicitly cloned.
 
+#### cycle
+`cycle(shift: number) => (value) => newValue` - Returns an evaluator that cycles the elements in arrays and `Lists` around, according to the value of `shift`. A positive `shift` will move elements to the left, appending cycled elements to the end of the array, where as a negative `shift` will move elements to the right, prepending cycled elements to the start of the array.
+
 #### defaults
 `defaults(defaults) => (value) => newValue` - Returns an evaluator that takes `value`, and adds to it any keys (and values) that exist on `defaults` and not on `value`. It is essentially `(defaults) => (value) => merge(value)(defaults)`
 
