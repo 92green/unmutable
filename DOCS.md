@@ -159,9 +159,6 @@ withMutations
 #### clone
 `clone() => (value) => newValue` - Returns an evaluator that returns a clone of `value` if `value` is an array or object, or returns the `value` unchanged if given an Immutable.js `Map` or `List`. Immutable.js data types are inherently immutable so do not need to be explicitly cloned.
 
-#### cycle
-`cycle(shift: number) => (value) => newValue` - Returns an evaluator that cycles the elements in arrays and `Lists` around, according to the value of `shift`. A positive `shift` will move elements to the left, appending cycled elements to the end of the array, where as a negative `shift` will move elements to the right, prepending cycled elements to the start of the array.
-
 #### defaults
 `defaults(defaults) => (value) => newValue` - Returns an evaluator that takes `value`, and adds to it any keys (and values) that exist on `defaults` and not on `value`. It is essentially `(defaults) => (value) => merge(value)(defaults)`
 
@@ -209,8 +206,8 @@ If the third argument `ifFalse` is provided, then the value will be passed throu
 #### rename
 `rename() => (oldKey: string|number, newKey: string|number) => newValue` - Returns an evaluator that changes the key of `oldKey` to the key of `newKey`. 
 
-#### unit
-`unit(newValue) => (value) => number` - Returns an evaluator that attempts to turn `newValue` into the `value`s data type, and returns `newValue`.
+#### rotate
+`rotate(shift: number) => (value) => newValue` - Returns an evaluator that rotates the elements in arrays and `Lists` around, according to the value of `shift`. A positive `shift` will move elements to the left, appending rotated elements to the end of the array, where as a negative `shift` will move elements to the right, prepending rotated elements to the start of the array.
 
 #### size
 `size() => (value) => number` - Returns an evaluator that returns the number of keys on the value. Immutable.js has this as a getter on their collections, Unmutable.js offers this as a function.
@@ -241,6 +238,9 @@ If the third argument `ifFalse` is provided, then the value will be passed throu
 
 #### uniqueBy
 `uniqueBy(getter: Function) => (value) => *` - Returns an evaluator that filters `value` according to the result of `getter`, so that any element with a duplicate result of `getter` is filtered out. If a non-primitive is returned from `getter`, it is compared deeply.
+
+#### unit
+`unit(newValue) => (value) => number` - Returns an evaluator that attempts to turn `newValue` into the `value`s data type, and returns `newValue`.
 
 #### valueArray
 `valueArray() => (value) => Array` - Returns an evaluator that returns an array of values on the value. Immutable.js has no function that does this, they have `values()` which returns an iterator, and `valueSeq()` which returns an Immutable.js `Seq`.
