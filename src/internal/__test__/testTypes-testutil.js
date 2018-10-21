@@ -1,5 +1,6 @@
 // @flow
 import { Map, List, Record, Set, Seq, OrderedMap, OrderedSet, Stack } from 'immutable';
+import UnmutableCompatible from './UnmutableCompatible-testutil';
 
 import {
     Map as Map3,
@@ -54,7 +55,8 @@ export default ({name, fn, expectedResult}: TestTypesConfig) => {
         seq3: Seq3(),
         stack3: Stack3(),
         function: () => {},
-        classInstance: new A()
+        classInstance: new A(),
+        unmutableCompatible: new UnmutableCompatible()
     };
 
     // $HackityHacks: call function type to get 100% coverage

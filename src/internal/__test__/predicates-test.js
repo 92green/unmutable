@@ -42,7 +42,8 @@ testTypes({
         seq3: true,
         stack3: true,
         function: false,
-        classInstance: false
+        classInstance: false,
+        unmutableCompatible: false
     }
 });
 
@@ -75,7 +76,8 @@ testTypes({
         seq3: true,
         stack3: true,
         function: false,
-        classInstance: false
+        classInstance: false,
+        unmutableCompatible: false
     }
 });
 
@@ -108,7 +110,8 @@ testTypes({
         seq3: true,
         stack3: true,
         function: false,
-        classInstance: false
+        classInstance: false,
+        unmutableCompatible: false
     }
 });
 
@@ -141,7 +144,8 @@ testTypes({
         seq3: false,
         stack3: false,
         function: false,
-        classInstance: false
+        classInstance: false,
+        unmutableCompatible: false
     }
 });
 
@@ -174,7 +178,8 @@ testTypes({
         seq3: true,
         stack3: true,
         function: false,
-        classInstance: false
+        classInstance: false,
+        unmutableCompatible: false
     }
 });
 
@@ -207,7 +212,8 @@ testTypes({
         seq3: true,
         stack3: true,
         function: false,
-        classInstance: false
+        classInstance: false,
+        unmutableCompatible: false
     }
 });
 
@@ -240,7 +246,8 @@ testTypes({
         seq3: true,
         stack3: true,
         function: false,
-        classInstance: false
+        classInstance: false,
+        unmutableCompatible: false
     }
 });
 
@@ -273,7 +280,8 @@ testTypes({
         seq3: false,
         stack3: false,
         function: false,
-        classInstance: false
+        classInstance: false,
+        unmutableCompatible: false
     }
 });
 
@@ -306,6 +314,7 @@ testTypes({
         seq3: true,
         stack3: true,
         function: false,
-        classInstance: false
+        classInstance: false,
+        unmutableCompatible: false
     }
 });
