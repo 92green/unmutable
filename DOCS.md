@@ -91,14 +91,19 @@ splice *
 size
 skip
 skipLast
+skipUntil
+skipWhile
 slice
 some
 sort - works with arrays, lists and maps, but not objects because objects cannot be sorted
 sortBy - works with arrays, lists and maps, but not objects because objects cannot be sorted
 take
 takeLast
+takeUntil
+takeWhile
 toArray
 toJS
+toJSON
 toObject
 unshift *
 update
@@ -119,11 +124,6 @@ isSubset
 isSuperset
 mapKeys
 mapEntries
-skipWhile
-skipUntil
-takeWhile
-takeUntil
-toJSON
 ```
 
 ### Exceptions
@@ -159,6 +159,15 @@ withMutations
 #### clone
 `clone() => (value) => newValue` - Returns an evaluator that returns a clone of `value` if `value` is an array or object, or returns the `value` unchanged if given an Immutable.js `Map` or `List`. Immutable.js data types are inherently immutable so do not need to be explicitly cloned.
 
+#### chunk
+`chunk(size: number) => (value) => newValue` - Returns an evaluator that returns an array of "chunks". This function splits `value` up into chunks, where each chunk is of the same type as `value`, and contains `size` number of values.
+
+#### chunkBy
+`chunkBy(predicate: Function) => (value) => newValue` - Returns an evaluator that returns an array of "chunks". This function splits `value` up into chunks, where the size of each chunk is determined by the `predicate`. It iterates over `value` and calls `predicate` for each item on the collection. Whenever `predicate` returns true, a new chunk is started. It returns an array containing all the chunks that were created.
+
+#### deal
+`deal(groups: number) => (value) => newValue` - Returns an evaluator that returns an array of "chunks". This function iterates over `value`, dividing it into the number of groups specified by the `groups` argument. It works in a similar way to someone dealing out cards to a number of players, putting the first item in the first group, the second item in the second group etc. Once the last group is reached, the next item is put in the first group again, and the deal continues cyclically until no items are left.
+
 #### defaults
 `defaults(defaults) => (value) => newValue` - Returns an evaluator that takes `value`, and adds to it any keys (and values) that exist on `defaults` and not on `value`. It is essentially `(defaults) => (value) => merge(value)(defaults)`
 
@@ -188,6 +197,9 @@ If the third argument `ifFalse` is provided, then the value will be passed throu
 #### log
 `log(message: string = "", type: string = "log") => (value) => value` - Returns an evaluator that passes the value through unchanged, but also calls `console[type](message, value)`. Useful for debugging.
 
+#### move
+`move(fromIndex: number, toIndex: number) => (value) => newValue` - Returns an evaluator that moves the element at `fromIndex` to the position of `toIndex`.
+
 #### notEquals
 `notEquals(other) => (value) => boolean` - Returns an evaluator that returns `true` if `value` and `other` are not deeply equal, or `false` otherwise.
 
@@ -203,8 +215,8 @@ If the third argument `ifFalse` is provided, then the value will be passed throu
 #### rename
 `rename() => (oldKey: string|number, newKey: string|number) => newValue` - Returns an evaluator that changes the key of `oldKey` to the key of `newKey`. 
 
-#### unit
-`unit(newValue) => (value) => number` - Returns an evaluator that attempts to turn `newValue` into the `value`s data type, and returns `newValue`.
+#### rotate
+`rotate(shift: number) => (value) => newValue` - Returns an evaluator that rotates the elements in arrays and `Lists` around, according to the value of `shift`. A positive `shift` will move elements to the left, appending rotated elements to the end of the array, where as a negative `shift` will move elements to the right, prepending rotated elements to the start of the array.
 
 #### size
 `size() => (value) => number` - Returns an evaluator that returns the number of keys on the value. Immutable.js has this as a getter on their collections, Unmutable.js offers this as a function.
@@ -213,7 +225,7 @@ If the third argument `ifFalse` is provided, then the value will be passed throu
 `shallowEquals(other: *) => (value) => number` - Returns an evaluator that checks if `other` and `value` are shallowly equal, using strict equality. Note: use `equals()` if you want to check deep equality.
 
 #### shallowToJS
-`shallowToJS() => (value) => *` - Returns an evaluator that turns the `value` into plain Javascript if it is an Immutable.js data type. Internally if `value` is a `List` then `.toArray()` is called, and if value is a `Map` then `toObject()` is called.
+`shallowToJS() => (value) => *` - Returns an evaluator that turns the `value` into plain Javascript if it is an Immutable.js data type. Internally if `value` is a `List` then `.toArray()` is called, and if value is a `Map` then `toObject()` is called. This is equivalent to Immutable.js `toJSON` function.
 
 #### strictEquals
 `strictEquals(other: *) => (value) => number` - Returns an evaluator that checks if `other` and `value` are strictly equal. This complements `equals()`, which checks for deep value equality.
@@ -236,6 +248,9 @@ If the third argument `ifFalse` is provided, then the value will be passed throu
 #### uniqueBy
 `uniqueBy(getter: Function) => (value) => *` - Returns an evaluator that filters `value` according to the result of `getter`, so that any element with a duplicate result of `getter` is filtered out. If a non-primitive is returned from `getter`, it is compared deeply.
 
+#### unit
+`unit(newValue) => (value) => number` - Returns an evaluator that attempts to turn `newValue` into the `value`s data type, and returns `newValue`.
+
 #### valueArray
 `valueArray() => (value) => Array` - Returns an evaluator that returns an array of values on the value. Immutable.js has no function that does this, they have `values()` which returns an iterator, and `valueSeq()` which returns an Immutable.js `Seq`.
 
@@ -253,59 +268,62 @@ uniqueBy
 
 Utils include functions that make Unmutable.js useable and useful, as well as plain-Javascript friendly versions of some of Immutable.js top level functions.
 
-#### util/pipe
+#### pipe
  `pipe(...functions) => (value) => newValue` - Composes (combines) functions together from left to right. Returns an evaluator that returns the output of the operation.
 
-#### util/pipeIf
+#### pipeIf
  `pipeIf((value) => boolean, ...functions) => newValue` - Like `pipe()`, but the first argument is a conditional function that is passed the `value`. If a truthy value is returned from the conditional function, all functions in the pipe are executed. If a falsey value is returned, then the remaining functions in the pipe are skipped.
  
-#### util/pipeWith
+#### pipeWith
  `pipeWith(value, ...functions) => newValue` - Accepts an value as the first argument, and composes (combines) functions in the remaining arguments together from left to right. Returns the output of the operation.
  
-#### util/compose
+#### compose
  `compose(...functions) => (value) => newValue` - Composes (combines) functions together from right to left. Returns an evaluator that returns the output of the operation.
  
-#### util/composeWith
+#### composeWith
  `composeWith(...functions, value) => newValue` - Composes (combines) functions together from right to left, and accepts an value as the *last* argument. Returns an evaluator that returns the output of the operation.
 
-#### util/overload
+#### overload
  `overload({...overloads}, overloadArgs: * = undefined) => Function` - Simulates function overloading in Javascript.
 
-#### util/isAssociative
+#### isAssociative
  `isAssociative(maybe: *) => boolean` - Works like Immutable.js `isAssociative` but also identifies plain Javascript arrays and objects as being associative.
 
-#### util/isCollection
+#### isCollection
  `isCollection(maybe: *) => boolean` - Works like Immutable.js `isCollection` but also identifies plain Javascript arrays and objects as being collections.
 
-#### util/isIndexed
+#### isIndexed
  `isIndexed(maybe: *) => boolean` - Works like Immutable.js `isIndexed` but also identifies plain Javascript arrays as being indexed.
 
-#### util/isKeyed
+#### isKeyed
  `isKeyed(maybe: *) => boolean` - Works like Immutable.js `isKeyed` but also works on plain Javascript objects.
 
-#### util/isOrdered
+#### isOrdered
  `isOrdered(maybe: *) => boolean` - Works like Immutable.js `isOrdered` but also identifies plain Javascript arrays as being ordered.
 
-#### util/isObject
+#### isObject
  `isObject(maybe: *) => boolean` - Tests if something extends from `object` and is not primitive, which includes arrays, functions, class instances and all Immutable.js types, and does not include `undefined`, `null`, `string`, `number`, and `boolean`.
 
-#### util/isValueObject
- `isValueObject(maybe: *) => boolean` - Works like Immutable.js `isValueObject` but also works on plain Javascript arrays and objects.
+#### isValueObject
+ `isValueObject(maybe: *) => boolean` - An alias for `isObject` to align with Immutable.js naming convention.
 
-#### util/method
+#### isWriteable
+ `isWriteable(maybe: *) => boolean` - Tests if a data type can be used with unmutable functions that write or modify data. Returns true for anu Immutable.js types, array and plain objects.
+
+#### method
  `method(method: string) => (...methodArgs) => (value) => *` - Helper function that allows you to turn any method into a point-free version. For example, this creates a point free version of `toLowerCase()` that would call `value.toLowerCase()` once evaluated.
 
  ```
- import method from 'unmutable/lib/util/method';
+ import method from 'unmutable/lib/method';
  let toLowerCase = method('toLowerCase');
  toLowerCase()("HELLO"); // "hello"
  ```
 
-#### util/overload
+#### overload
 `overload(overloads: Object) => Function` - Simulates function overloading. It accepts an object with number strings as keys, and functions to call as values. It returns the overloaded function. When the overloaded function is called with `x` arguments, the function with the key of `x` on the passed-in object will be called. If the overloaded function is called with a number of arguments not specified in the passed-in object, an error is thrown.
 
 ```
-import overload from 'unmutable/lib/util/overload';
+import overload from 'unmutable/lib/overload';
 let fn = overload({
     ["2"]: (a, b) => `${a} ${b}`,
     ["3"]: (a, b, c) => `(${a} ${b}) ${c}`,
@@ -317,8 +335,8 @@ fun("!") // throws an error
 
 ```
 
-#### util/range
+#### range
 `range([start=0], end, [step=1])` - Helper function to generate an array of sequential numbers. Simply a re-export of [lodash.range](https://lodash.com/docs/4.17.10#range)
 
-#### util/recordAsObject
+#### recordAsObject
  `recordAsObject(updater: Function, value: *, returnRecord: boolean) => *` - Helper function that allows you to update an Immutable.js `Record`. The updater receives an object version of the `Record`. If `returnRecord = true`, the result of the updater will be passed back into the `Record`'s constructor before being returned. If `returnRecord = false`, the data returned from `updater` will be returned directly from `recordAsObject` without change.

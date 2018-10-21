@@ -2,11 +2,11 @@
 import toJS from '../toJS';
 import {fromJS} from 'immutable';
 
-test(`toJS() should toJS() immutable lists only one level`, () => {
+test(`toJS() should toJS() immutable lists deeply`, () => {
     expect(toJS()(fromJS([1,2,[1,2,3]]))).toEqual([1,2,[1,2,3]]);
 });
 
-test(`toJS() should toJS() immutable maps only one level`, () => {
+test(`toJS() should toJS() immutable maps deeply`, () => {
     expect(toJS()(fromJS({a:1,b:2,c:[1,2,3]}))).toEqual({a:1,b:2,c:[1,2,3]});
 });
 

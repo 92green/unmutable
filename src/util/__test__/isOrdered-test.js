@@ -31,6 +31,7 @@ testTypes({
         seq3: true,
         stack3: true,
         function: false,
-        classInstance: false
+        classInstance: false,
+        unmutableCompatible: false
     }
 });

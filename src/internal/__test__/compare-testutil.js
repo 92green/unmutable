@@ -27,8 +27,14 @@ export default ({item, name, fn, toJS, record, unmutableCompatible}: CompareConf
         ? ii => ii.toJS()
         : ii => ii;
 
+    let stringified = JSON.stringify(item);
+
     test(name, () => {
         expect(fn(item)).toEqual(plainify(fn(fromJS(item))));
+    });
+
+    test(name + " and not mutate", () => {
+        expect(JSON.stringify(item)).toBe(stringified);
     });
 
     if(record) {
