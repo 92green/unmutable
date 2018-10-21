@@ -305,7 +305,10 @@ Utils include functions that make Unmutable.js useable and useful, as well as pl
  `isObject(maybe: *) => boolean` - Tests if something extends from `object` and is not primitive, which includes arrays, functions, class instances and all Immutable.js types, and does not include `undefined`, `null`, `string`, `number`, and `boolean`.
 
 #### isValueObject
- `isValueObject(maybe: *) => boolean` - Works like Immutable.js `isValueObject` but also works on plain Javascript arrays and objects.
+ `isValueObject(maybe: *) => boolean` - An alias for `isObject` to align with Immutable.js naming convention.
+
+#### isWriteable
+ `isWriteable(maybe: *) => boolean` - Tests if a data type can be used with unmutable functions that write or modify data. Returns true for anu Immutable.js types, array and plain objects.
 
 #### method
  `method(method: string) => (...methodArgs) => (value) => *` - Helper function that allows you to turn any method into a point-free version. For example, this creates a point free version of `toLowerCase()` that would call `value.toLowerCase()` once evaluated.

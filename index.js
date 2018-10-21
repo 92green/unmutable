@@ -130,6 +130,7 @@ export {default as isOrdered} from './lib/util/isOrdered';
 export {default as isPlainObject} from './lib/util/isPlainObject';
 export {default as isRecord} from './lib/util/isRecord';
 export {default as isValueObject} from './lib/util/isValueObject';
+export {default as isWriteable} from './lib/util/isWriteable';
 export {default as method} from './lib/util/method';
 export {default as overload} from './lib/util/overload';
 export {default as pipeIf} from './lib/util/pipeIf';

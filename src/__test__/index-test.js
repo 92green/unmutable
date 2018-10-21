@@ -133,6 +133,7 @@ let files = [
     "isPlainObject",
     "isRecord",
     "isValueObject",
+    "isWriteable",
     "method",
     "overload",
     "pipeIf",
