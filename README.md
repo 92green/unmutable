@@ -48,7 +48,7 @@ Or if you prefer to pass your data in first, use Unmutable.js' `pipeWith` functi
 
 ```js
 import get from 'unmutable/lib/get';
-import pipeWith from 'unmutable/lib/util/pipeWith';
+import pipeWith from 'unmutable/lib/pipeWith';
 
 pipeWith(myData, get('hello', 'notFoundValue')); // hi!
 ```
@@ -74,7 +74,7 @@ let name = fromJS(data)
 ```js
 import get from 'unmutable/lib/get';
 import last from 'unmutable/lib/last';
-import pipe from 'unmutable/lib/util/pipe';
+import pipe from 'unmutable/lib/pipe';
 
 let getLastName = pipe(
     last(),
@@ -91,7 +91,7 @@ let name = getLastName(data); // Gordon
 Or if you prefer to pass your data in first, use Unmutable.js' `pipeWith` function:
 
 ```js
-import pipeWith from 'unmutable/lib/util/pipeWith';
+import pipeWith from 'unmutable/lib/pipeWith';
 
 let name = pipeWith(
     data,

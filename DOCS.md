@@ -268,59 +268,59 @@ uniqueBy
 
 Utils include functions that make Unmutable.js useable and useful, as well as plain-Javascript friendly versions of some of Immutable.js top level functions.
 
-#### util/pipe
+#### pipe
  `pipe(...functions) => (value) => newValue` - Composes (combines) functions together from left to right. Returns an evaluator that returns the output of the operation.
 
-#### util/pipeIf
+#### pipeIf
  `pipeIf((value) => boolean, ...functions) => newValue` - Like `pipe()`, but the first argument is a conditional function that is passed the `value`. If a truthy value is returned from the conditional function, all functions in the pipe are executed. If a falsey value is returned, then the remaining functions in the pipe are skipped.
  
-#### util/pipeWith
+#### pipeWith
  `pipeWith(value, ...functions) => newValue` - Accepts an value as the first argument, and composes (combines) functions in the remaining arguments together from left to right. Returns the output of the operation.
  
-#### util/compose
+#### compose
  `compose(...functions) => (value) => newValue` - Composes (combines) functions together from right to left. Returns an evaluator that returns the output of the operation.
  
-#### util/composeWith
+#### composeWith
  `composeWith(...functions, value) => newValue` - Composes (combines) functions together from right to left, and accepts an value as the *last* argument. Returns an evaluator that returns the output of the operation.
 
-#### util/overload
+#### overload
  `overload({...overloads}, overloadArgs: * = undefined) => Function` - Simulates function overloading in Javascript.
 
-#### util/isAssociative
+#### isAssociative
  `isAssociative(maybe: *) => boolean` - Works like Immutable.js `isAssociative` but also identifies plain Javascript arrays and objects as being associative.
 
-#### util/isCollection
+#### isCollection
  `isCollection(maybe: *) => boolean` - Works like Immutable.js `isCollection` but also identifies plain Javascript arrays and objects as being collections.
 
-#### util/isIndexed
+#### isIndexed
  `isIndexed(maybe: *) => boolean` - Works like Immutable.js `isIndexed` but also identifies plain Javascript arrays as being indexed.
 
-#### util/isKeyed
+#### isKeyed
  `isKeyed(maybe: *) => boolean` - Works like Immutable.js `isKeyed` but also works on plain Javascript objects.
 
-#### util/isOrdered
+#### isOrdered
  `isOrdered(maybe: *) => boolean` - Works like Immutable.js `isOrdered` but also identifies plain Javascript arrays as being ordered.
 
-#### util/isObject
+#### isObject
  `isObject(maybe: *) => boolean` - Tests if something extends from `object` and is not primitive, which includes arrays, functions, class instances and all Immutable.js types, and does not include `undefined`, `null`, `string`, `number`, and `boolean`.
 
-#### util/isValueObject
+#### isValueObject
  `isValueObject(maybe: *) => boolean` - Works like Immutable.js `isValueObject` but also works on plain Javascript arrays and objects.
 
-#### util/method
+#### method
  `method(method: string) => (...methodArgs) => (value) => *` - Helper function that allows you to turn any method into a point-free version. For example, this creates a point free version of `toLowerCase()` that would call `value.toLowerCase()` once evaluated.
 
  ```
- import method from 'unmutable/lib/util/method';
+ import method from 'unmutable/lib/method';
  let toLowerCase = method('toLowerCase');
  toLowerCase()("HELLO"); // "hello"
  ```
 
-#### util/overload
+#### overload
 `overload(overloads: Object) => Function` - Simulates function overloading. It accepts an object with number strings as keys, and functions to call as values. It returns the overloaded function. When the overloaded function is called with `x` arguments, the function with the key of `x` on the passed-in object will be called. If the overloaded function is called with a number of arguments not specified in the passed-in object, an error is thrown.
 
 ```
-import overload from 'unmutable/lib/util/overload';
+import overload from 'unmutable/lib/overload';
 let fn = overload({
     ["2"]: (a, b) => `${a} ${b}`,
     ["3"]: (a, b, c) => `(${a} ${b}) ${c}`,
@@ -332,8 +332,8 @@ fun("!") // throws an error
 
 ```
 
-#### util/range
+#### range
 `range([start=0], end, [step=1])` - Helper function to generate an array of sequential numbers. Simply a re-export of [lodash.range](https://lodash.com/docs/4.17.10#range)
 
-#### util/recordAsObject
+#### recordAsObject
  `recordAsObject(updater: Function, value: *, returnRecord: boolean) => *` - Helper function that allows you to update an Immutable.js `Record`. The updater receives an object version of the `Record`. If `returnRecord = true`, the result of the updater will be passed back into the `Record`'s constructor before being returned. If `returnRecord = false`, the data returned from `updater` will be returned directly from `recordAsObject` without change.
