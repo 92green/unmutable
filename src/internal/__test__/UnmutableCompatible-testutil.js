@@ -1,7 +1,7 @@
 // @flow
 
 export default class UnmutableCompatible {
-    constructor(props: *) {
+    constructor(props: * = {}) {
         this._data = props;
     }
 
@@ -16,5 +16,7 @@ export default class UnmutableCompatible {
             [key]: childValue
         });
     };
+    clear = (): UnmutableCompatible => new UnmutableCompatible();
+    clone = (): UnmutableCompatible => new UnmutableCompatible(this._data);
     toObject = (): * => this._data;
 }
