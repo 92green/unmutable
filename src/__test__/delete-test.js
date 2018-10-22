@@ -7,7 +7,8 @@ compare({
     item: {a:1, b:2},
     fn: del('a'),
     toJS: true,
-    record: true
+    record: true,
+    unmutableCompatible: true
 });
 
 compare({
@@ -15,7 +16,8 @@ compare({
     item: {a:1, b:2},
     fn: del('z'),
     toJS: true,
-    record: true
+    record: true,
+    unmutableCompatible: true
 });
 
 compare({
