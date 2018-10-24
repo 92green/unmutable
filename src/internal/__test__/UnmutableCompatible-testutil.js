@@ -1,6 +1,7 @@
 // @flow
 import set from '../../set';
 import del from '../../delete';
+import entries from '../../entries';
 
 export default class UnmutableCompatible {
     constructor(props: * = {}) {
@@ -16,5 +17,6 @@ export default class UnmutableCompatible {
     delete = (key: string): UnmutableCompatible => new UnmutableCompatible(del(key)(this._data));
     clear = (): UnmutableCompatible => new UnmutableCompatible();
     clone = (): UnmutableCompatible => new UnmutableCompatible(this._data);
+    entries = () => entries()(this._data);
     toObject = (): * => this._data;
 }
