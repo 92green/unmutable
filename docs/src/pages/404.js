@@ -1,11 +1,13 @@
-import React from 'react'
-import Layout from '../components/layout'
+// @flow
+import React from 'react';
+import {Box, CenteredLanding, Text} from 'dcme-style';
+import Link from '../component/Link';
 
-const NotFoundPage = () => (
-  <Layout>
-    <h1>NOT FOUND</h1>
-    <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
-  </Layout>
-)
-
-export default NotFoundPage
+export default () => <Box>
+    <CenteredLanding
+        top={() => <Text element="h1" modifier="sizeTera center">404</Text>}
+        bottom={() => <Text element="p" modifier="monospace center margin">
+            There's nothing here. Try heading back to the <Link to="/">homepage</Link>.
+        </Text>}
+    />
+</Box>;

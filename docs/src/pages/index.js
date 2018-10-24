@@ -1,19 +1,29 @@
-import React from 'react'
-import { Link } from 'gatsby'
+// @flow
+import React from 'react';
+import {Box, CenteredLanding, Grid, GridItem, Image, Text, Wrapper} from 'dcme-style';
+import Layout from '../layout/Layout';
 
-import Layout from '../components/layout'
-import Image from '../components/image'
-
-const IndexPage = () => (
-  <Layout>
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: '300px', marginBottom: '1.45rem' }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
-)
-
-export default IndexPage
+export default () => <Layout>
+    <Box modifier="invertedCopy invertedBackground">
+        <Wrapper>
+            <CenteredLanding
+                modifier="heightHalf"
+                top={() => <Text element="h1" modifier="sizeTera superDuper">dataparcels</Text>}
+                bottom={() => <Grid>
+                    <GridItem modifier="8 padding">
+                        <Text element="p" modifier="monospace margin">A library for editing data structures that works really well with React.</Text>
+                        <Text element="p" modifier="monospace"><a className="Link" href="https://github.com/blueflag/dataparcels">github</a></Text>
+                    </GridItem>
+                    <GridItem modifier="4 padding">
+                        <Image modifier="center logo" src="" />
+                    </GridItem>
+                </Grid>}
+            />
+        </Wrapper>
+    </Box>
+    <Box modifier="paddingTopKilo">
+        <Wrapper modifier="marginBottom">
+            Hi
+        </Wrapper>
+    </Box>
+</Layout>;
