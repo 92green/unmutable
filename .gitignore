@@ -9,7 +9,8 @@
 coverage
 flow-coverage
 dist
-docs
 lib
 node_modules
 *.log
+docs/.cache
+docs/public

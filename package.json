@@ -18,7 +18,8 @@
   "private": false,
   "scripts": {
     "build": "rm -rf lib && node ./scripts/flow.js && babel src --out-dir lib --ignore **/__test__/*-test.js,**/__test__/*-testutil.js",
-    "prepublish": "yarn run build",
+    "build-docs": "cd docs && yarn gatsby build",
+    "prepublish": "yarn run build cd docs && yarn",
     "watch": "yarn run build -- -w",
     "check-coverage": "NODE_ENV=test nyc check-coverage --branches 100.0  --functions 100.0 --lines 100.0",
     "flow": "blueflag-test flow",
@@ -26,7 +27,9 @@
     "lint": "blueflag-test lint",
     "test": "yarn jest",
     "test-all": "yarn lint && yarn flow && yarn test",
-    "view-coverage": "open ./coverage/lcov-report/index.html"
+    "view-coverage": "open ./coverage/lcov-report/index.html",
+    "watch": "yarn run build -w && watch-docs",
+    "watch-docs": "cd docs && yarn watch"
   },
   "devDependencies": {
     "babel-cli": "^6.23.0",
