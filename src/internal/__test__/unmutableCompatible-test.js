@@ -16,7 +16,7 @@ let files = {
     // deleteAll: [],
     deleteIn: [['def', 'ghi']],
     delete: ['abc'],
-    doIf: [],
+    doIf: [() => true, _ => _, _ => _],
     entries: [],
     // entriesReverse: [],
     entryArray: [],
