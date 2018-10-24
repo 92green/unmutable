@@ -1,28 +1,29 @@
 // @flow
 import prep from './internal/prep';
+import entries from './entries';
 
 export default prep({
     name: "values",
     immutable: "values",
     record: () => (value) => value.toSeq().values(),
+    // $FlowFixMe - flow can't deal with computed properties
+    array: () => (value: Array<*>): * => value[Symbol.iterator](),
     // $FlowFixMe - using * as flow cannot recognise Symbol.iterator as being @@iterator (see https://github.com/facebook/flow/issues/1163)
-    object: () => (value: Object): * => {
-        let counter = 0;
-        const keys = Object.keys(value);
+    all: () => (value: Object): * => {
+        let entryIterator = entries()(value);
         return {
             [Symbol.iterator]: function(): Object {
                 return this;
             },
-            next: () => keys.hasOwnProperty(counter)
-                ? ({
-                    value: value[keys[counter++]],
-                    done: false
-                })
-                : ({
-                    done: true
-                })
+            next: () => {
+                let entry = entryIterator.next();
+                return entry.done
+                    ? entry
+                    : {
+                        done: false,
+                        value: entry.value[1]
+                    };
+            }
         };
-    },
-    // $FlowFixMe - flow can't deal with computed properties
-    array: () => (value: Array<*>): * => value[Symbol.iterator]()
+    }
 });
