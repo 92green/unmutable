@@ -3397,13 +3397,14 @@ date-time@^2.1.0:
   dependencies:
     time-zone "^1.0.0"
 
-dcme-style@^0.17.0:
-  version "0.17.0"
-  resolved "https://registry.yarnpkg.com/dcme-style/-/dcme-style-0.17.0.tgz#18b093f27d3de7b422fd519a3711aed46a7d5152"
+dcme-style@^0.18.0:
+  version "0.18.0"
+  resolved "https://registry.yarnpkg.com/dcme-style/-/dcme-style-0.18.0.tgz#7e641a58315ad18747e021239ba740b26d7e1c74"
   dependencies:
     react-goose "^0.5.0"
     react-select "^1.0.0-rc.4"
-    stampy "^0.41.0"
+    react-spruce "^0.1.0"
+    stampy "^0.43.3"
     unmutable "^0.29.2"
 
 death@^1.0.0:
@@ -6425,6 +6426,10 @@ lodash.merge@^4.6.0:
   version "4.6.1"
   resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.1.tgz#adc25d9cb99b9391c59624f379fbba60d7111d54"
 
+lodash.range@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/lodash.range/-/lodash.range-3.2.0.tgz#f461e588f66683f7eadeade513e38a69a565a15d"
+
 lodash.tail@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/lodash.tail/-/lodash.tail-4.1.1.tgz#d2333a36d9e7717c8ad2f7cacafec7c32b444664"
@@ -9252,17 +9257,6 @@ stackframe@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/stackframe/-/stackframe-1.0.4.tgz#357b24a992f9427cba6b545d96a14ed2cbca187b"
 
-stampy@^0.41.0:
-  version "0.41.0"
-  resolved "https://registry.yarnpkg.com/stampy/-/stampy-0.41.0.tgz#06b35daef74d8c9606822095df28ea0e2f36d0a9"
-  dependencies:
-    blueflag-test "^0.18.1"
-    classnames "^2.2.5"
-    element-resize-detector "^1.1.12"
-    is-plain-object "^2.0.3"
-    unmutable "^0.29.2"
-    url-search-params "^0.9.0"
-
 stampy@^0.42.0:
   version "0.42.1"
   resolved "https://registry.yarnpkg.com/stampy/-/stampy-0.42.1.tgz#656978b63bc362c7a6735c9d46ac19ce0e8f7d12"
@@ -9272,6 +9266,16 @@ stampy@^0.42.0:
     element-resize-detector "^1.1.12"
     is-plain-object "^2.0.3"
     unmutable "^0.29.2"
+    url-search-params "^0.9.0"
+
+stampy@^0.43.3:
+  version "0.43.3"
+  resolved "https://registry.yarnpkg.com/stampy/-/stampy-0.43.3.tgz#62960ce37f80920649b7b6418fa99f6cd9457d4a"
+  dependencies:
+    classnames "^2.2.5"
+    element-resize-detector "^1.1.12"
+    is-plain-object "^2.0.3"
+    unmutable "^0.34.1"
     url-search-params "^0.9.0"
 
 static-extend@^0.1.1:
@@ -9831,6 +9835,14 @@ unmutable@^0.29.2:
   dependencies:
     fast-deep-equal "^1.0.0"
     is-plain-object "^2.0.4"
+
+unmutable@^0.34.1:
+  version "0.34.1"
+  resolved "https://registry.yarnpkg.com/unmutable/-/unmutable-0.34.1.tgz#e417973cf11540756565fb15027402275401b311"
+  dependencies:
+    fast-deep-equal "^1.0.0"
+    is-plain-object "^2.0.4"
+    lodash.range "^3.2.0"
 
 unpipe@1.0.0, unpipe@~1.0.0:
   version "1.0.0"
