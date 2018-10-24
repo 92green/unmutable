@@ -1,6 +1,7 @@
 // @flow
 import shallowToJS from '../shallowToJS';
 import {fromJS} from 'immutable';
+import UnmutableCompatible from '../internal/__test__/UnmutableCompatible-testutil';
 
 let deepMap = fromJS({x:10,y:20});
 
@@ -10,6 +11,10 @@ test(`shallowToJS() should toJS() immutable lists only one level`, () => {
 
 test(`shallowToJS() should toJS() immutable maps only one level`, () => {
     expect(shallowToJS()(fromJS({a:1,b:2,c:deepMap}))).toEqual({a:1,b:2,c:deepMap});
+});
+
+test(`shallowToJS() should toJS() unmutable compatible only one level`, () => {
+    expect(shallowToJS()(new UnmutableCompatible({a:1,b:2,c:deepMap}))).toEqual({a:1,b:2,c:deepMap});
 });
 
 test(`shallowToJS() should pass through objects`, () => {

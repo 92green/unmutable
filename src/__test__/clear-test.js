@@ -6,7 +6,8 @@ compare({
     name: `clear() works on objects`,
     item: {a:1, b:2},
     fn: clear(),
-    toJS: true
+    toJS: true,
+    unmutableCompatible: true
 });
 
 compare({

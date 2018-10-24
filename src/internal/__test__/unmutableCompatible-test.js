@@ -1,0 +1,146 @@
+// @flow
+var fs = require('fs');
+import * as src from '../../../index';
+import UnmutableCompatible from './UnmutableCompatible-testutil';
+
+let files = {
+    // butLast: [],
+    // chunkBy: [],
+    // chunk: [],
+    clear: [],
+    clone: [],
+    // concat: [],
+    // count: [],
+    // deal: [],
+    // defaults: [],
+    // deleteAll: [],
+    deleteIn: [['def', 'ghi']],
+    delete: ['abc'],
+    doIf: [() => true, _ => _, _ => _],
+    entries: [],
+    // entriesReverse: [],
+    entryArray: [],
+    // equals: [],
+    // every: [],
+    filter: [_ => _],
+    // filterNot: [],
+    // findEntry: [],
+    // findIndex: [],
+    // find: [],
+    // findKey: [],
+    // findLastEntry: [],
+    // findLastIndex: [],
+    // findLast: [],
+    // findLastKey: [],
+    // first: [],
+    // flatMap: [],
+    // flatten: [],
+    // forEach: [],
+    getIn: [['def', 'ghi']],
+    get: ['abc'],
+    // groupBy: [],
+    // hashCode: [],
+    hasIn: [['def', 'ghi']],
+    has: ['abc'],
+    identity: [],
+    // includes: [],
+    // indexOf: [],
+    // insert: [],
+    // interpose: [],
+    // isEmpty: [],
+    // isNotEmpty: [],
+    // join: [],
+    keyArray: [],
+    // keyBy: [],
+    // keyOf: [],
+    keys: [],
+    // lastIndexOf: [],
+    // last: [],
+    // lastKeyOf: [],
+    log: [],
+    map: [_ => _],
+    // maxBy: [],
+    // max: [],
+    // mergeDeepIn: [],
+    // mergeDeep: [],
+    // mergeDeepWith: [],
+    // mergeIn: [],
+    // merge: [],
+    // mergeWith: [],
+    // minBy: [],
+    // min: [],
+    // move: [],
+    // notEquals: [],
+    // omit: [],
+    // pick: [['abc']],
+    // pivot: [],
+    // pop: [],
+    // push: [],
+    reduce: [_ => _, {}],
+    // reduceRight: [],
+    // rename: [],
+    // rest: [],
+    // reverse: [],
+    // rotate: [],
+    setIn: [['def', 'ghi'], 789],
+    set: ['abc', 789],
+    // setSize: [],
+    // shallowEquals: [],
+    // shallowToJS: [],
+    // shift: [],
+    // size: [],
+    // skip: [],
+    // skipLast: [],
+    // skipUntil: [],
+    // skipWhile: [],
+    // slice: [],
+    // some: [],
+    // sortBy: [],
+    // sort: [],
+    // splice: [],
+    // strictEquals: [],
+    // swap: [],
+    // take: [],
+    // takeLast: [],
+    // takeUntil: [],
+    // takeWhile: [],
+    // toArray: [],
+    // toIndexed: [],
+    // toJS: [],
+    // toJSON: [],
+    // toKeyed: [],
+    toObject: [],
+    // uniqueBy: [],
+    // unique: [],
+    // unit: [],
+    // unshift: [],
+    updateIn: [['def', 'ghi'], _ => _],
+    // updateInto: [],
+    update: ['abc', _ => _],
+    valueArray: [],
+    values: [],
+    // zipAll: [],
+    // zip: [],
+    // zipWith: []
+};
+
+let value = new UnmutableCompatible({
+    abc: 123,
+    def: {
+        ghi: 456
+    }
+});
+
+Object.keys(files).forEach((file) => {
+    test(`Unmutable Compatible should be able to call ${file}`, () => {
+        let fn = src[file](...files[file]);
+        let passed = true;
+        try {
+            fn(value);
+        } catch(e) {
+            console.log(`Error running Unmutable Compatible ${file}:`, e.message);
+            passed = false;
+        }
+        expect(passed).toBe(true);
+    });
+});

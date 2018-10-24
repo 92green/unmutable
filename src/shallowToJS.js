@@ -3,6 +3,6 @@ import prep from './internal/prep';
 import toJSON from './toJSON';
 
 export default prep({
-    name: 'deleteAll',
+    name: 'shallowToJS',
     all: toJSON
 });

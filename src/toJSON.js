@@ -1,9 +1,11 @@
 // @flow
 import prep from './internal/prep';
-import identity from './identity';
+import toArray from './toArray';
+import toObject from './toObject';
+import isIndexed from './util/isIndexed';
 
 export default prep({
     name: "toJSON",
     immutable: "toJSON",
-    all: () => identity()
+    all: () => (value) => isIndexed(value) ? toArray()(value) : toObject()(value)
 });

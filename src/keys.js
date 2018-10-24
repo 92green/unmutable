@@ -1,27 +1,28 @@
 // @flow
 import prep from './internal/prep';
+import entries from './entries';
 
 export default prep({
     name: "keys",
     immutable: "keys",
     record: () => (value: *) => value.toSeq().keys(),
+    array: () => (value: Array<*>): * => value.keys(),
     // $FlowFixMe - flow cannot recognise Symbol.iterator (see https://github.com/facebook/flow/issues/1163)
-    object: () => (value: Object): * => {
-        let counter = 0;
-        const keys = Object.keys(value);
+    all: () => (value: Object): * => {
+        let entryIterator = entries()(value);
         return {
             [Symbol.iterator]: function(): Object {
                 return this;
             },
-            next: () => keys.hasOwnProperty(counter)
-                ? ({
-                    value: keys[counter++],
-                    done: false
-                })
-                : ({
-                    done: true
-                })
+            next: () => {
+                let entry = entryIterator.next();
+                return entry.done
+                    ? entry
+                    : {
+                        done: false,
+                        value: entry.value[0]
+                    };
+            }
         };
-    },
-    array: () => (value: Array<*>): * => value.keys()
+    }
 });
