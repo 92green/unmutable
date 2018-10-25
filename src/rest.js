@@ -2,18 +2,15 @@
 import prep from './internal/prep';
 import pipeWith from './util/pipeWith';
 import del from './delete';
-import first from './first';
 import shift from './shift';
+import keys from './keys';
 
 export default prep({
     name: 'rest',
     immutable: 'rest',
-    object: () => (value) => pipeWith(
+    array: shift,
+    all: () => (value) => pipeWith(
         value,
-        del(pipeWith(
-            Object.keys(value),
-            first()
-        ))
-    ),
-    array: shift
+        del(keys()(value).next().value)
+    )
 });

@@ -1,12 +1,15 @@
 // @flow
 import prep from './internal/prep';
 import get from './get';
+import valueArray from './valueArray';
+import pipe from './util/pipe';
 
 export default prep({
     name: 'last',
     immutable: 'last',
-    object: () => (value: Object): * => {
-        return value[get(-1)(Object.keys(value))];
-    },
-    array: () => get(-1)
+    array: () => get(-1),
+    all: () => pipe(
+        valueArray(),
+        get(-1)
+    )
 });
