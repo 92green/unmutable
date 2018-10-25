@@ -51,9 +51,10 @@
 @include DcmeTerminal;
 @include DcmeText {
     &-superDuper {
-        text-shadow: -6px 6px 0px darken(color('primary'), 15),
-            -12px 12px 0px darken(color('secondary'), 40)
+        text-shadow: -6px 6px 0px #90298e, -12px 12px 0px #472636;
     }
 }
 @include DcmeTypography;
 @include DcmeWrapper;
+
+// #d75252

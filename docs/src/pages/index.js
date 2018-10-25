@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import {Box, CenteredLanding, Grid, GridItem, Image, Text, Wrapper} from 'dcme-style';
+import {Box, CenteredLanding, Grid, GridItem, Link as HtmlLink, Image, Text, Wrapper} from 'dcme-style';
 import Layout from '../layout/Layout';
 
 export default () => <Layout>
@@ -8,11 +8,11 @@ export default () => <Layout>
         <Wrapper>
             <CenteredLanding
                 modifier="heightHalf"
-                top={() => <Text element="h1" modifier="sizeTera superDuper">dataparcels</Text>}
+                top={() => <Text element="h1" modifier="sizeTera superDuper">unmutable</Text>}
                 bottom={() => <Grid>
                     <GridItem modifier="8 padding">
-                        <Text element="p" modifier="monospace margin">A library for editing data structures that works really well with React.</Text>
-                        <Text element="p" modifier="monospace"><a className="Link" href="https://github.com/blueflag/dataparcels">github</a></Text>
+                        <Text element="p" modifier="monospace margin">An immutable, functional data collection library for plain old Javascript.</Text>
+                        <Text element="p" modifier="monospace"><HtmlLink href="https://github.com/blueflag/unmutable">github</HtmlLink> | <HtmlLink href="https://www.npmjs.com/package/unmutable">npm</HtmlLink></Text>
                     </GridItem>
                     <GridItem modifier="4 padding">
                         <Image modifier="center logo" src="" />
@@ -23,7 +23,6 @@ export default () => <Layout>
     </Box>
     <Box modifier="paddingTopKilo">
         <Wrapper modifier="marginBottom">
-            Hi
         </Wrapper>
     </Box>
 </Layout>;

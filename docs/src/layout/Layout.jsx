@@ -19,5 +19,5 @@ export default ({children}: Props): Node => <div>
         ]}
     />
     <Head />
-    {children()}
+    {children}
 </div>;
