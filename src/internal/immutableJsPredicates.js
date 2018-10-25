@@ -6,54 +6,54 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export const isImmutable = (maybeImmutable: *): boolean => {
+export const isImmutable = (maybeImmutable: any): boolean => {
     return isCollection(maybeImmutable) || isRecord(maybeImmutable);
 };
 
-export const _isImmutableNoRecordChecks = (ii: *): boolean => {
+export const _isImmutableNoRecordChecks = (ii: any): boolean => {
     return !ii
         ? false
         : !!ii[IS_ITERABLE_SENTINEL];
 };
 
-export const isCollection = (ii: *): boolean => {
+export const isCollection = (ii: any): boolean => {
     return !ii
         ? false
         : !!((ii[IS_ITERABLE_SENTINEL] && !isVersion3Record(ii)));
 };
 
-export const isKeyed = (ii: *): boolean => {
+export const isKeyed = (ii: any): boolean => {
     return !ii
         ? false
         : !!((ii[IS_KEYED_SENTINEL] && !isVersion3Record(ii)));
 };
 
-export const isIndexed = (ii: *): boolean => {
+export const isIndexed = (ii: any): boolean => {
     return !ii
         ? false
         : !!(ii[IS_INDEXED_SENTINEL]);
 };
 
-export const isAssociative = (ii: *): boolean => {
+export const isAssociative = (ii: any): boolean => {
     return isKeyed(ii) || isIndexed(ii);
 };
 
-export const isOrdered = (ii: *): boolean => {
+export const isOrdered = (ii: any): boolean => {
     return !ii
         ? false
         : !!(ii[IS_ORDERED_SENTINEL]);
 };
-export const isRecord = (ii: *): boolean => {
+export const isRecord = (ii: any): boolean => {
     return !ii
         ? false
         : !!(ii[IS_RECORD_SENTINEL] || isVersion3Record(ii));
 };
 
-export const isVersion3Record = (ii: *): boolean => {
+export const isVersion3Record = (ii: any): boolean => {
     return !!(ii._defaultValues);
 };
 
-export const isValueObject = (ii: *): boolean => {
+export const isValueObject = (ii: any): boolean => {
     return !ii
         ? false
         : typeof ii.equals === 'function'
