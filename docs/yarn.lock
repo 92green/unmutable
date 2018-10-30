@@ -2783,9 +2783,9 @@ date-now@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/date-now/-/date-now-0.1.4.tgz#eaf439fd4d4848ad74e5cc7dbef200672b9e345b"
 
-dcme-style@^0.18.1:
-  version "0.18.1"
-  resolved "https://registry.yarnpkg.com/dcme-style/-/dcme-style-0.18.1.tgz#993f05be4d4ad6acbfb4ad107b5c36da2f67b457"
+dcme-style@^0.19.0:
+  version "0.19.0"
+  resolved "https://registry.yarnpkg.com/dcme-style/-/dcme-style-0.19.0.tgz#b17774a60d8cc6c05e24de52ce26d5acd9cc76f7"
   dependencies:
     react-goose "^0.6.1"
     react-select "^1.0.0-rc.4"

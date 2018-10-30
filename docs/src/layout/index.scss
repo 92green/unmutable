@@ -2,8 +2,10 @@
 @include BruceReset;
 @include BruceBoxSizing;
 @import '~dcme-style/lib/all';
-@include DcmeConfig;
 
+$primary: #d42d9e;
+
+@include DcmeConfig;
 @include DcmeBase;
 @include DcmeBox {
     &-example {

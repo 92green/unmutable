@@ -1,7 +1,8 @@
 // @flow
 import React from 'react';
-import {Box, CenteredLanding, Grid, GridItem, Link as HtmlLink, Image, Text, Wrapper} from 'dcme-style';
+import {Box, CenteredLanding, Grid, GridItem, Link as HtmlLink, Image, Text, Typography, Wrapper} from 'dcme-style';
 import Layout from '../layout/Layout';
+import IndexMarkdown from './index.md';
 
 export default () => <Layout>
     <Box modifier="invertedCopy invertedBackground">
@@ -23,6 +24,9 @@ export default () => <Layout>
     </Box>
     <Box modifier="paddingTopKilo">
         <Wrapper modifier="marginBottom">
+            <Typography>
+                <IndexMarkdown />
+            </Typography>
         </Wrapper>
     </Box>
 </Layout>;
