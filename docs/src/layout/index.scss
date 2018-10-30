@@ -3,7 +3,7 @@
 @include BruceBoxSizing;
 @import '~dcme-style/lib/all';
 
-$primary: #d42d9e;
+$primary: #ce6f1c;
 
 @include DcmeConfig;
 @include DcmeBase;
@@ -53,7 +53,7 @@ $primary: #d42d9e;
 @include DcmeTerminal;
 @include DcmeText {
     &-superDuper {
-        text-shadow: -6px 6px 0px #90298e, -12px 12px 0px #472636;
+        text-shadow: -6px 6px 0px #944d0f, -12px 12px 0px #561230;
     }
 }
 @include DcmeTypography;
