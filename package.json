@@ -41,6 +41,7 @@
     "sinon": "^2.1.0"
   },
   "dependencies": {
+    "@babel/runtime": "^7.1.5",
     "fast-deep-equal": "^1.0.0",
     "is-plain-object": "^2.0.4",
     "lodash.range": "^3.2.0"
