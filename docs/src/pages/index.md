@@ -8,7 +8,7 @@ Unmutable follows [immutable.js](https://facebook.github.io/immutable-js/)'s API
 
 Unmutable also works seamlessly on plain Javascript objects and arrays, Immutable.js Maps, Lists and Records. It can also works on your own classes if you make them [unmutable-compatible](#).
 
-## Example
+## Examples
 
 For now, Unmutable is for use with objects and arrays, Immutable.js `Map`s, `List`s, and `Record`s, and [unmutable-compatible](#) classes.
 

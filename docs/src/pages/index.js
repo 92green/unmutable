@@ -34,6 +34,7 @@ export default () => <Layout>
                 </Box>}
                 nav={() => <NavigationList>
                     <NavigationListItem><HtmlLink href={`#What-is-it`}>What is it?</HtmlLink></NavigationListItem>
+                    <NavigationListItem><HtmlLink href={`#Examples`}>Examples</HtmlLink></NavigationListItem>
                     <NavigationListItem><HtmlLink href={`#Inspiration`}>Inspiration</HtmlLink></NavigationListItem>
                     <NavigationListItem><HtmlLink href={`#Getting-Started`}>Getting Started</HtmlLink></NavigationListItem>
                     <NavigationListItem><HtmlLink href={`#API`}>API</HtmlLink></NavigationListItem>

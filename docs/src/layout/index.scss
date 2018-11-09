@@ -55,6 +55,13 @@ $primary: #ff0048;
     &-superDuper {
         text-shadow: -6px 6px 0px #c90055, -12px 12px 0px #59002f;
     }
+
+    &-superDuperReadme {
+        color: #000;
+        line-height: 4rem;
+        padding-left: .5rem;
+        text-shadow: -6px 6px 0px #fb828f, -12px 12px 0px #e0ccd6;
+    }
 }
 @include DcmeTypography;
 @include DcmeWrapper;
