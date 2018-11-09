@@ -12,5 +12,5 @@
 ## Packages
 
 ```
-yarn add [unmutable](https://www.npmjs.com/package/unmutable)
+yarn add unmutable
 ```
