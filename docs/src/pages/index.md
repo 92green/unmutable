@@ -8,6 +8,76 @@ Unmutable follows [immutable.js](https://facebook.github.io/immutable-js/)'s API
 
 Unmutable also works seamlessly on plain Javascript objects and arrays, Immutable.js Maps, Lists and Records. It can also works on your own classes if you make them [unmutable-compatible](#).
 
+## Example
+
+For now, Unmutable is for use with objects and arrays, Immutable.js `Map`s, `List`s, and `Record`s, and [unmutable-compatible](#) classes.
+
+Each Unmutable function returns a function that accepts the value to operate on:
+
+
+```js
+import getIn from 'unmutable/lib/getIn';
+
+let data = {
+    cat: {
+       name: "Gordon!"
+    }
+};
+
+getIn(['cat', 'name'])(data); // Gordon!
+```
+
+Or if you prefer to pass your data in first, use Unmutable' `pipeWith` function:
+
+```js
+import getIn from 'unmutable/lib/getIn';
+import pipeWith from 'unmutable/lib/pipeWith';
+
+pipeWith(
+    data,
+    getIn(['cat', 'name'])
+); // Gordon!
+```
+
+Then if you want to call more functions in a chain you can use Unmutable' `pipe` function, which can be used to squish a set of functions together, like this:
+
+```js
+import get from 'unmutable/lib/get';
+import last from 'unmutable/lib/last';
+import pipe from 'unmutable/lib/pipe';
+
+let data = [
+    {name: "Bob"},
+    {name: "Jenny"},
+    {name: "Herbert!"}
+];
+
+let getLastName = pipe(
+    last(),
+    get('name')
+);
+
+let name = getLastName(data); // Herbert!
+
+// you dont pass your data in until the very end by calling the returned function.
+// this is known as point-free programming, and allows for very composable functions.
+
+```
+
+Or if you prefer to pass your data in first, use Unmutable' `pipeWith` function:
+
+```js
+import pipeWith from 'unmutable/lib/pipeWith';
+
+let name = pipeWith(
+    data,
+    last(),
+    get('name')
+); // Herbert!
+```
+
+<Link to="/api">Unmutable's API</Link> follows [Immutable.js' lovely API for Maps and Lists](https://facebook.github.io/immutable-js/docs/) as closely as it can, while adding more useful functions that lodash users might be used to, such as `pick`.
+
 ## Inspiration
 
 Immutable.js has a wonderfully symmetrical and well thought out API, and it deals with data [immutably](https://facebook.github.io/immutable-js/#the-case-for-immutability).
@@ -19,7 +89,11 @@ And both of those libraries use [currying](https://hughfdjackson.com/javascript/
 
 ## Getting Started
 
-...
+Do this:
+
+```
+yarn add unmutable
+```
 
 ## API
 
