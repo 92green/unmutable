@@ -182,6 +182,9 @@ If the third argument `ifFalse` is provided, then the value will be passed throu
 #### entryArray
 `entryArray() => (value) => Array` - Returns an evaluator that returns an array of entries (e.g. `[key, value]` tuples) of the value. Immutable.js has no function that does this, they have `entries()` which returns an iterator, and `entrySeq()` which returns an Immutable.js `Seq`.
 
+#### fork
+`fork() => (newValue) => (value) => newValue` - Returns an evaluator that forks the value. It expects `newValue` to be a collection with functions for children. It maps over `newValue`s functions, calling each of them with `value`. `newValue` is then returned.
+
 #### identity
 `identity() => (value) => value` - Returns an evaluator that just passes values through with no change. Useful for readable code.
 
