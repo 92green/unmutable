@@ -25,7 +25,7 @@
     "flow": "blueflag-test flow",
     "flow-coverage": "blueflag-test flow-coverage -M",
     "lint": "blueflag-test lint",
-    "test": "yarn jest",
+    "test": "yarn jest --maxWorkers=4",
     "test-all": "yarn lint && yarn flow && yarn test",
     "view-coverage": "open ./coverage/lcov-report/index.html",
     "watch-docs": "cd docs && yarn watch"
