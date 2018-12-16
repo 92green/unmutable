@@ -7,7 +7,7 @@
 
 ## Docs
 
-**[See the docs](https://unmutable.blueflag.codes)**
+**[See the docs](/DOCS.md)**
 
 ## Packages
 
