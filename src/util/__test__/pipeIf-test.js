@@ -1,6 +1,6 @@
 // @flow
 
-import pipeIf from '../pipeIf';
+import pipeIf from '../../pipeIf';
 
 test('pipeIf composes from left to right', () => {
     const double = x => x * 2;

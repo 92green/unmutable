@@ -1,6 +1,6 @@
 // @flow
 import testTypes from '../../internal/__test__/testTypes-testutil';
-import isIndexed from '../isIndexed';
+import isIndexed from '../../isIndexed';
 
 testTypes({
     name: "isIndexed",

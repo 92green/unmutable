@@ -1,5 +1,5 @@
 // @flow
-import isValueObject from '../isValueObject';
+import isValueObject from '../../isValueObject';
 import testTypes from '../../internal/__test__/testTypes-testutil';
 
 testTypes({

@@ -1,5 +1,5 @@
 // @flow
-import method from '../method';
+import method from '../../method';
 
 test(`Call method in the pointy free stylee`, () => {
     let toLowerCase = method('toLowerCase');

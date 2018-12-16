@@ -1,5 +1,5 @@
 // @flow
-import isRecord from '../isRecord';
+import isRecord from '../../isRecord';
 import testTypes from '../../internal/__test__/testTypes-testutil';
 
 testTypes({

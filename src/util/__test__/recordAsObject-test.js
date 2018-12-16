@@ -1,5 +1,5 @@
 // @flow
-import recordAsObject from '../recordAsObject';
+import recordAsObject from '../../recordAsObject';
 import {Record} from 'immutable';
 
 test(`sanity check - Record.equals() works`, () => {

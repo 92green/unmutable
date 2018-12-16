@@ -1,6 +1,6 @@
 // @flow
 
-import composeWith from '../composeWith';
+import composeWith from '../../composeWith';
 
 test('composeWith composes from right to left', () => {
     const double = x => x * 2;

@@ -1,5 +1,5 @@
 // @flow
-import isCollection from '../isCollection';
+import isCollection from '../../isCollection';
 import testTypes from '../../internal/__test__/testTypes-testutil';
 
 testTypes({
