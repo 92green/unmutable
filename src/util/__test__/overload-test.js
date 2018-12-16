@@ -1,5 +1,5 @@
 // @flow
-import overload from '../overload';
+import overload from '../../overload';
 import {fromJS} from 'immutable';
 
 test(`overload() should call correct sub functions`, () => {

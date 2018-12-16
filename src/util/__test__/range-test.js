@@ -1,6 +1,6 @@
 // @flow
 
-import range from '../range';
+import range from '../../range';
 
 test('range makes a range with from zero', () => {
     expect(range(4)).toEqual([0, 1, 2, 3]);

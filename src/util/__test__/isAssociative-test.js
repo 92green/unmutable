@@ -1,5 +1,5 @@
 // @flow
-import isAssociative from '../isAssociative';
+import isAssociative from '../../isAssociative';
 import testTypes from '../../internal/__test__/testTypes-testutil';
 
 testTypes({

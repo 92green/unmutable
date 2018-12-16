@@ -1,5 +1,5 @@
 // @flow
-import isKeyed from '../isKeyed';
+import isKeyed from '../../isKeyed';
 import testTypes from '../../internal/__test__/testTypes-testutil';
 
 testTypes({

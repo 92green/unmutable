@@ -1,5 +1,5 @@
 // @flow
-import isWriteable from '../isWriteable';
+import isWriteable from '../../isWriteable';
 import testTypes from '../../internal/__test__/testTypes-testutil';
 
 testTypes({

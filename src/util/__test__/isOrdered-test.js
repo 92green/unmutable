@@ -1,5 +1,5 @@
 // @flow
-import isOrdered from '../isOrdered';
+import isOrdered from '../../isOrdered';
 import testTypes from '../../internal/__test__/testTypes-testutil';
 
 testTypes({

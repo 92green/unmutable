@@ -1,0 +1,69 @@
+@import '~bruce/bruce';
+@include BruceReset;
+@include BruceBoxSizing;
+@import '~dcme-style/lib/all';
+
+$primary: #ff0048;
+
+@include DcmeConfig;
+@include DcmeBase;
+@include DcmeBox {
+    &-example {
+        margin-left: -2rem;
+        margin-right: -2rem;
+    }
+    &-exampleInner {
+        border: 2px dashed grey(90);
+        padding: 2rem;
+    }
+}
+@include DcmeBulletList;
+@include DcmeButton;
+@include DcmeCenteredLanding;
+@include DcmeDivider;
+@include DcmeGrid;
+@include DcmeImage {
+    &-logo {
+        @include BruceBreakpoint('small') {
+            margin-top: -50%;
+        }
+    }
+    &-apiPageIcon {
+        display: none !important;
+        float: right;
+        width: 30%;
+        margin-top: -2rem;
+        margin-bottom: 0;
+        margin-left: 1rem;
+
+        @include BruceBreakpoint('large') {
+            display: block !important;
+        }
+    }
+}
+@include DcmeInput;
+@include DcmeLink;
+@include DcmeLabel;
+@include DcmeMessage;
+@include DcmeNavigationList {
+    padding-top: 0;
+}
+@include DcmeOrderedList;
+@include DcmeTable;
+@include DcmeTerminal;
+@include DcmeText {
+    &-superDuper {
+        text-shadow: -6px 6px 0px #c90055, -12px 12px 0px #59002f;
+    }
+
+    &-superDuperReadme {
+        color: #000;
+        line-height: 4rem;
+        padding-left: .5rem;
+        text-shadow: -6px 6px 0px #fb828f, -12px 12px 0px #e0ccd6;
+    }
+}
+@include DcmeTypography;
+@include DcmeWrapper;
+
+// #d75252

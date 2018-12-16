@@ -1,10 +1,10 @@
 // @flow
-import isValueObject from '../../isValueObject';
+import isObject from '../../isObject';
 import testTypes from '../../internal/__test__/testTypes-testutil';
 
 testTypes({
-    name: "isValueObject",
-    fn: isValueObject,
+    name: "isObject",
+    fn: isObject,
     expectedResult: {
         undefined: false,
         null: false,

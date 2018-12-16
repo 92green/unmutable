@@ -1,6 +1,6 @@
 // @flow
 
-import pipe from '../pipe';
+import pipe from '../../pipe';
 
 test('pipe composes from left to right', () => {
     const double = x => x * 2;
