@@ -19,7 +19,8 @@
   "scripts": {
     "build": "rm -rf lib && node ./scripts/flow.js && babel src --out-dir lib --ignore **/__test__/*-test.js,**/__test__/*-testutil.js",
     "build-docs": "cd docs && yarn gatsby build",
-    "prepublish": "yarn run build && cd docs && yarn",
+    "postinstall": "cd docs && yarn",
+    "prepublishOnly": "yarn run build && cd docs && yarn",
     "watch": "yarn run build -w && watch-docs",
     "check-coverage": "NODE_ENV=test nyc check-coverage --branches 100.0  --functions 100.0 --lines 100.0",
     "flow": "blueflag-test flow",
