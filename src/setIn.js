@@ -1,5 +1,5 @@
 // @flow
-import prep from './internal/prep';
+import prep from './internal/unmutable';
 import getIn from './getIn';
 import set from './set';
 import pipeWith from './util/pipeWith';

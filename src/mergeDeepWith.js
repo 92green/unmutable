@@ -1,5 +1,5 @@
 // @flow
-import prep from './internal/prep';
+import prep from './internal/unmutable';
 import mergeWith from './mergeWith';
 import toArray from './toArray';
 import isIndexed from './util/isIndexed';

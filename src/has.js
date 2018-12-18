@@ -1,5 +1,5 @@
 // @flow
-import prep from './internal/prep';
+import prep from './internal/unmutable';
 
 export const objectHas = (key: string) => (value: *): boolean => key in value;
 export const arrayHas = (key: number) => (value: Array<*>): boolean => key < value.length && key >= -value.length;

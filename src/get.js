@@ -1,5 +1,5 @@
 // @flow
-import prep from './internal/prep';
+import prep from './internal/unmutable';
 import {objectHas} from './has';
 import {arrayHas} from './has';
 

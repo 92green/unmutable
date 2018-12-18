@@ -1,10 +1,11 @@
 // @flow
-import prep from '../prep';
+import prep from '../unmutable';
 import {List, Map, Record} from 'immutable';
 import UnmutableCompatible from './UnmutableCompatible-testutil';
+import pick from '../../pick';
 let MyRecord = Record({c:"c"});
 
-test(`prep should handle records`, () => {
+test(`unmutable prep should handle records`, () => {
     let immutable = "recordTest";
     let record = (a,b) => (item) => `${a}${b}${item.c}-record`;
     let all = (a,b) => (item) => `${a}${b}${item.c}-all`;
@@ -17,10 +18,10 @@ test(`prep should handle records`, () => {
     expect("c").toBe(useRecordMethod("c")(new MyRecord()));
     expect("abc-record").toBe(useRecord("a","b")(new MyRecord()));
     //t.is("abc-all", useImmutable("a","b")(new MyRecord()));
-    expect(() => useNone("a","b")(new MyRecord())).toThrowError(`recordTest() cannot be called on Record { c: "c" }`);
+    expect(() => useNone("a","b")(new MyRecord())).toThrowError(`recordTest() cannot be called with a value of Record { c: "c" }`);
 });
 
-test(`prep should handle Lists`, () => {
+test(`unmutable prep should handle Lists`, () => {
     let myList = List([1,2,3]);
     let all = (key) => (item) => `${key}-${item.get(0)}`;
 
@@ -31,11 +32,11 @@ test(`prep should handle Lists`, () => {
 
     expect(2).toBe(useImmutable(1)(myList));
     expect("1-1").toBe(useAll(1)(myList));
-    expect(() => useMissing(1)(myList)).toThrowError(`noooooo() cannot be called on List [ 1, 2, 3 ]`);
-    expect(() => useNone(1)(myList)).toThrowError(`get() cannot be called on List [ 1, 2, 3 ]`);
+    expect(() => useMissing(1)(myList)).toThrowError(`noooooo() cannot be called with a value of List [ 1, 2, 3 ]`);
+    expect(() => useNone(1)(myList)).toThrowError(`get() cannot be called with a value of List [ 1, 2, 3 ]`);
 });
 
-test(`prep should handle Maps`, () => {
+test(`unmutable prep should handle Maps`, () => {
     let myMap = Map({a:1,b:2,c:3});
     let all = (key) => (item) => `${key}-${item.get('a')}`;
 
@@ -45,10 +46,10 @@ test(`prep should handle Maps`, () => {
 
     expect(1).toBe(useImmutable('a')(myMap));
     expect("a-1").toBe(useAll('a')(myMap));
-    expect(() => useNone('a')(myMap)).toThrowError(`noooooo() cannot be called on Map { "a": 1, "b": 2, "c": 3 }`);
+    expect(() => useNone('a')(myMap)).toThrowError(`noooooo() cannot be called with a value of Map { "a": 1, "b": 2, "c": 3 }`);
 });
 
-test(`prep should handle arrays`, () => {
+test(`unmutable prep should handle arrays`, () => {
     let myArray = [1,2,3];
     let array = (key) => (item) => `${key}-${item[0]}-array`;
     let all = (key) => (item) => `${key}-${item[0]}-all`;
@@ -59,10 +60,10 @@ test(`prep should handle arrays`, () => {
 
     expect("1-1-array").toBe(useArray(1)(myArray));
     expect("1-1-all").toBe(useAll(1)(myArray));
-    expect(() => useNone(1)(myArray)).toThrowError(`noooooo() cannot be called on 1,2,3`);
+    expect(() => useNone(1)(myArray)).toThrowError(`noooooo() cannot be called with a value of 1,2,3`);
 });
 
-test(`prep should handle Objects`, () => {
+test(`unmutable prep should handle Objects`, () => {
     let myObject = {a:1,b:2,c:3};
     let object = (key) => (item) => `${key}-${item.a}-object`;
     let all = (key) => (item) => `${key}-${item.a}-all`;
@@ -74,10 +75,10 @@ test(`prep should handle Objects`, () => {
 
     expect("a-1-object").toBe(useObject('a')(myObject));
     expect("a-1-all").toBe(useAll('a')(myObject));
-    expect(() => useNone('a')(myObject)).toThrowError(`noooooo() cannot be called on [object Object]`);
+    expect(() => useNone('a')(myObject)).toThrowError(`noooooo() cannot be called with a value of [object Object]`);
 });
 
-test(`prep should handle class instances`, () => {
+test(`unmutable prep should handle class instances`, () => {
     class A {
         a = 1;
         b = 2;
@@ -94,10 +95,10 @@ test(`prep should handle class instances`, () => {
 
     expect("a-1-object").toBe(useObject('a')(myClassInstance));
     expect("a-1-all").toBe(useAll('a')(myClassInstance));
-    expect(() => useNone('a')(myClassInstance)).toThrowError(`noooooo() cannot be called on [object Object]`);
+    expect(() => useNone('a')(myClassInstance)).toThrowError(`noooooo() cannot be called with a value of [object Object]`);
 });
 
-test(`prep should handle functions`, () => {
+test(`unmutable prep should handle functions`, () => {
     let myFunction = () => {};
     myFunction.a = 1;
     myFunction.b = 2;
@@ -113,10 +114,10 @@ test(`prep should handle functions`, () => {
 
     expect("a-1-object").toBe(useObject('a')(myFunction));
     expect("a-1-all").toBe(useAll('a')(myFunction));
-    expect(() => useNone('a')(myFunction)).toThrowError(`noooooo() cannot be called on function myFunction() {}`);
+    expect(() => useNone('a')(myFunction)).toThrowError(`noooooo() cannot be called with a value of function myFunction() {}`);
 });
 
-test(`prep should handle unmutable compatible data types`, () => {
+test(`unmutable prep should handle unmutable compatible data types`, () => {
     let myUnmutableCompatible = new UnmutableCompatible({a:1, b:2, c:3});
     let all = (key) => (item) => `all`;
 
@@ -126,10 +127,32 @@ test(`prep should handle unmutable compatible data types`, () => {
 
     expect(useUnmutable('a')(myUnmutableCompatible)).toBe(1); // use unmutable compatible method
     expect(useAll('a')(myUnmutableCompatible)).toBe("all"); // fallback to all if unmutable compatible method doesnt exist
-    expect(() => useNone('a')(myUnmutableCompatible)).toThrowError(`noooooo() cannot be called on [object Object]`); // error if method doesnt exist and all doesnt exist
+    expect(() => useNone('a')(myUnmutableCompatible)).toThrowError(`noooooo() cannot be called with a value of [object Object]`); // error if method doesnt exist and all doesnt exist
 });
 
-test(`prep should not handle strings as values`, () => {
+test(`unmutable prep should not handle strings as values`, () => {
     let useNone = prep({name: "find", array: () => {}});
-    expect(() => useNone()("IMNOTACOLLECTION")).toThrowError(`find() cannot be called on IMNOTACOLLECTION`);
+    expect(() => useNone()("IMNOTACOLLECTION")).toThrowError(`find() cannot be called with a value of IMNOTACOLLECTION`);
 });
+
+test(`unmutable prep should throw bad value errors from the top export of the function being called, not from an internal one`, () => {
+    expect(() => {
+        pick(['a'])(undefined); // deliberately pass undefined into pick's value, so something deep inside pick will break
+    }).toThrowError(`Unmutable pick() cannot be called with a value of undefined`);
+});
+
+test(`unmutable prep should throw other errors from the top export of the function being called, not from an internal one`, () => {
+    let errorToThrow;
+    try {
+        let keys = undefined;
+        // $FlowFixMe - deliberate misuse of types
+        keys.includes(0);
+    } catch(e) {
+        errorToThrow = e.message;
+    }
+
+    expect(() => {
+        pick(undefined)([0,1,2]); // deliberately pass undefined into pick key array, so something deep inside pick will break
+    }).toThrowError(errorToThrow);
+});
+

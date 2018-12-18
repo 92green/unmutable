@@ -1,5 +1,5 @@
 // @flow
-import prep from './internal/prep';
+import prep from './internal/unmutable';
 import groupBy from './groupBy';
 import reduce from './reduce';
 import toArray from './toArray';

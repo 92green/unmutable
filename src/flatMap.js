@@ -1,5 +1,5 @@
 // @flow
-import prep from './internal/prep';
+import prep from './internal/unmutable';
 import clear from './clear';
 import map from './map';
 import merge from './merge';
