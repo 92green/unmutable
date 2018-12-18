@@ -17,7 +17,7 @@
   },
   "private": false,
   "scripts": {
-    "build": "rm -rf lib && node ./scripts/flow.js && babel src --out-dir lib --ignore **/__test__/*-test.js,**/__test__/*-testutil.js && yarn make-gitignore",
+    "build": "rm -rf lib && babel src --out-dir lib --ignore '**/__test__/*.js' && yarn make-gitignore",
     "build-docs": "cd docs && yarn gatsby build",
     "create-top-level-files": "node scripts/create-top-level-files.js",
     "delete-top-level-files": "node scripts/delete-top-level-files.js",
