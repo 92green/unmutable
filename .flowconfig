@@ -14,3 +14,4 @@ module.system.node.resolve_dirname=src
 <PROJECT_ROOT>/dist/.*
 <PROJECT_ROOT>/node_modules/immutable/.*
 <PROJECT_ROOT>/docs/.*
+<PROJECT_ROOT>/scripts/.*

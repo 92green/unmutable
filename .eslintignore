@@ -2,3 +2,4 @@
 **/*-testutil.js
 src/unmutable/tracking.js
 src/unmutable/meta.js
+scripts/*.js
