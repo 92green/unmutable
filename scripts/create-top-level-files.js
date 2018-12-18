@@ -1,4 +1,4 @@
-const listLibFiles = require('./list-lib-files.js').default;
+const listLibFiles = require('./list-lib-files.js');
 var fs = require('fs');
 
 listLibFiles(files => {

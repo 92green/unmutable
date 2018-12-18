@@ -1,4 +1,4 @@
-const listLibFiles = require('./list-lib-files.js').default;
+const listLibFiles = require('./list-lib-files.js');
 
 const gitignore = `
 .DS_Store

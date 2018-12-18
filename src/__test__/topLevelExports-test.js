@@ -1,5 +1,5 @@
 // @flow
-let ListLibFiles = require('../../scripts/list-lib-files.js').default;
+let ListLibFiles = require('../../scripts/list-lib-files.js');
 
 test(`Files should be importable from top level`, done => {
     ListLibFiles((files) => {
