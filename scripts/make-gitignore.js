@@ -1,14 +1,7 @@
 const listLibFiles = require('./list-lib-files.js').default;
 
 const gitignore = `
-# Config Files
-**/.idea/tasks.xml
-**/.idea/workspace.xml
 .DS_Store
-.env
-.nyc_output
-
-# Folders
 coverage
 flow-coverage
 dist
