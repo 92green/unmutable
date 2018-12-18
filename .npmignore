@@ -1,8 +1,0 @@
-.DS_Store
-coverage
-flow-coverage
-*.log
-docs/.cache
-docs/public
-**/__test__
-lib
