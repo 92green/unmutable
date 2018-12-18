@@ -96,7 +96,7 @@ export default (config: PrepConfig): Function => {
             try {
                 return type.fn(...args)(value);
             } catch(e) {
-                if((e.message || '').startsWith('Unmutable')) {
+                if(e.message.startsWith('Unmutable')) {
                     throwTypeError();
                 }
                 throw e;
