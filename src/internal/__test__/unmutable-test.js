@@ -135,8 +135,24 @@ test(`unmutable prep should not handle strings as values`, () => {
     expect(() => useNone()("IMNOTACOLLECTION")).toThrowError(`find() cannot be called with a value of IMNOTACOLLECTION`);
 });
 
-test(`unmutable prep should throw errors from the top export of the function being called, not from an internal one`, () => {
+test(`unmutable prep should throw bad value errors from the top export of the function being called, not from an internal one`, () => {
     expect(() => {
-        pick(['a'])(undefined); // deliberately pass undefined into pick, so something deep inside pick will break
+        pick(['a'])(undefined); // deliberately pass undefined into pick's value, so something deep inside pick will break
     }).toThrowError(`Unmutable pick() cannot be called with a value of undefined`);
 });
+
+test(`unmutable prep should throw other errors from the top export of the function being called, not from an internal one`, () => {
+    let errorToThrow;
+    try {
+        let keys = undefined;
+        // $FlowFixMe - deliberate misuse of types
+        keys.includes(0);
+    } catch(e) {
+        errorToThrow = e.message;
+    }
+
+    expect(() => {
+        pick(undefined)([0,1,2]); // deliberately pass undefined into pick key array, so something deep inside pick will break
+    }).toThrowError(errorToThrow);
+});
+
