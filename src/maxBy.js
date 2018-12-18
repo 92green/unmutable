@@ -1,5 +1,5 @@
 // @flow
-import prep from './internal/prep';
+import prep from './internal/unmutable';
 import count from './count';
 import first from './first';
 import reduce from './reduce';

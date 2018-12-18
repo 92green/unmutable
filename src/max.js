@@ -1,5 +1,5 @@
 // @flow
-import prep from './internal/prep';
+import prep from './internal/unmutable';
 import maxBy from './maxBy';
 
 const defaultComparator = (a: *, b: *): number => {

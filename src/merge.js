@@ -1,5 +1,5 @@
 // @flow
-import prep from './internal/prep';
+import prep from './internal/unmutable';
 import toArray from './toArray';
 import toObject from './toObject';
 import pipe from './util/pipe';

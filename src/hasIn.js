@@ -1,5 +1,5 @@
 // @flow
-import prep from './internal/prep';
+import prep from './internal/unmutable';
 import get from './get';
 import has from './has';
 import isValueObject from './util/isValueObject';

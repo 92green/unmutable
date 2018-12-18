@@ -1,5 +1,5 @@
 // @flow
-import prep from './internal/prep';
+import prep from './internal/unmutable';
 import clear from './clear';
 import merge from './merge';
 import shallowToJS from './shallowToJS';

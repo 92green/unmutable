@@ -1,5 +1,5 @@
 // @flow
-import prep from './internal/prep';
+import prep from './internal/unmutable';
 
 const defaultComparator = (a: *, b: *): number => {
     if(a < b) { return -1; }

@@ -1,10 +1,10 @@
 // @flow
-import prep from '../prep';
+import prep from '../unmutable';
 import {List, Map, Record} from 'immutable';
 import UnmutableCompatible from './UnmutableCompatible-testutil';
 let MyRecord = Record({c:"c"});
 
-test(`prep should handle records`, () => {
+test(`unmutable prep should handle records`, () => {
     let immutable = "recordTest";
     let record = (a,b) => (item) => `${a}${b}${item.c}-record`;
     let all = (a,b) => (item) => `${a}${b}${item.c}-all`;
@@ -20,7 +20,7 @@ test(`prep should handle records`, () => {
     expect(() => useNone("a","b")(new MyRecord())).toThrowError(`recordTest() cannot be called on Record { c: "c" }`);
 });
 
-test(`prep should handle Lists`, () => {
+test(`unmutable prep should handle Lists`, () => {
     let myList = List([1,2,3]);
     let all = (key) => (item) => `${key}-${item.get(0)}`;
 
@@ -35,7 +35,7 @@ test(`prep should handle Lists`, () => {
     expect(() => useNone(1)(myList)).toThrowError(`get() cannot be called on List [ 1, 2, 3 ]`);
 });
 
-test(`prep should handle Maps`, () => {
+test(`unmutable prep should handle Maps`, () => {
     let myMap = Map({a:1,b:2,c:3});
     let all = (key) => (item) => `${key}-${item.get('a')}`;
 
@@ -48,7 +48,7 @@ test(`prep should handle Maps`, () => {
     expect(() => useNone('a')(myMap)).toThrowError(`noooooo() cannot be called on Map { "a": 1, "b": 2, "c": 3 }`);
 });
 
-test(`prep should handle arrays`, () => {
+test(`unmutable prep should handle arrays`, () => {
     let myArray = [1,2,3];
     let array = (key) => (item) => `${key}-${item[0]}-array`;
     let all = (key) => (item) => `${key}-${item[0]}-all`;
@@ -62,7 +62,7 @@ test(`prep should handle arrays`, () => {
     expect(() => useNone(1)(myArray)).toThrowError(`noooooo() cannot be called on 1,2,3`);
 });
 
-test(`prep should handle Objects`, () => {
+test(`unmutable prep should handle Objects`, () => {
     let myObject = {a:1,b:2,c:3};
     let object = (key) => (item) => `${key}-${item.a}-object`;
     let all = (key) => (item) => `${key}-${item.a}-all`;
@@ -77,7 +77,7 @@ test(`prep should handle Objects`, () => {
     expect(() => useNone('a')(myObject)).toThrowError(`noooooo() cannot be called on [object Object]`);
 });
 
-test(`prep should handle class instances`, () => {
+test(`unmutable prep should handle class instances`, () => {
     class A {
         a = 1;
         b = 2;
@@ -97,7 +97,7 @@ test(`prep should handle class instances`, () => {
     expect(() => useNone('a')(myClassInstance)).toThrowError(`noooooo() cannot be called on [object Object]`);
 });
 
-test(`prep should handle functions`, () => {
+test(`unmutable prep should handle functions`, () => {
     let myFunction = () => {};
     myFunction.a = 1;
     myFunction.b = 2;
@@ -116,7 +116,7 @@ test(`prep should handle functions`, () => {
     expect(() => useNone('a')(myFunction)).toThrowError(`noooooo() cannot be called on function myFunction() {}`);
 });
 
-test(`prep should handle unmutable compatible data types`, () => {
+test(`unmutable prep should handle unmutable compatible data types`, () => {
     let myUnmutableCompatible = new UnmutableCompatible({a:1, b:2, c:3});
     let all = (key) => (item) => `all`;
 
@@ -129,7 +129,7 @@ test(`prep should handle unmutable compatible data types`, () => {
     expect(() => useNone('a')(myUnmutableCompatible)).toThrowError(`noooooo() cannot be called on [object Object]`); // error if method doesnt exist and all doesnt exist
 });
 
-test(`prep should not handle strings as values`, () => {
+test(`unmutable prep should not handle strings as values`, () => {
     let useNone = prep({name: "find", array: () => {}});
     expect(() => useNone()("IMNOTACOLLECTION")).toThrowError(`find() cannot be called on IMNOTACOLLECTION`);
 });

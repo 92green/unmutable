@@ -1,5 +1,5 @@
 // @flow
-import prep from './internal/prep';
+import prep from './internal/unmutable';
 import overload from './util/overload';
 import get from './get';
 import {objectGet} from './get';
