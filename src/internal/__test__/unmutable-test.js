@@ -2,6 +2,7 @@
 import prep from '../unmutable';
 import {List, Map, Record} from 'immutable';
 import UnmutableCompatible from './UnmutableCompatible-testutil';
+import pick from '../../pick';
 let MyRecord = Record({c:"c"});
 
 test(`unmutable prep should handle records`, () => {
@@ -134,3 +135,8 @@ test(`unmutable prep should not handle strings as values`, () => {
     expect(() => useNone()("IMNOTACOLLECTION")).toThrowError(`find() cannot be called with a value of IMNOTACOLLECTION`);
 });
 
+test(`unmutable prep should throw errors from the top export of the function being called, not from an internal one`, () => {
+    expect(() => {
+        pick(['a'])(undefined); // deliberately pass undefined into pick, so something deep inside pick will break
+    }).toThrowError(`Unmutable pick() cannot be called with a value of undefined`);
+});

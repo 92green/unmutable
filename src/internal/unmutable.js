@@ -88,10 +88,20 @@ export default (config: PrepConfig): Function => {
         }));
 
     return (...args: *) => (value: *): * => {
+
+        let throwTypeError = () => error(config.name, value);
         let type: ?PrepType = types.find(({isType}) => isType(value));
+
         if(type) {
-            return type.fn(...args)(value);
+            try {
+                return type.fn(...args)(value);
+            } catch(e) {
+                if((e.message || '').startsWith('Unmutable')) {
+                    throwTypeError();
+                }
+                throw e;
+            }
         }
-        error(config.name, value);
+        throwTypeError();
     };
 };
