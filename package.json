@@ -155,6 +155,7 @@
   },
   "private": false,
   "scripts": {
+    "install-docs": "cd docs && yarn",
     "build": "rm -rf lib && babel src --out-dir lib --ignore '**/__test__/*.js' && yarn make-gitignore",
     "build-docs": "cd docs && yarn gatsby build",
     "create-top-level-files": "node scripts/create-top-level-files.js && node scripts/update-publishable-files-list.js",
