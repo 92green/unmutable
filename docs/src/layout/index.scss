@@ -40,11 +40,20 @@ $primary: #ff0048;
             display: block !important;
         }
     }
+    &-icon {
+        max-height: 12rem;
+
+        @include BruceBreakpoint('small') {
+            max-height: auto;
+        }
+    }
 }
 @include DcmeInput;
 @include DcmeLink;
 @include DcmeLabel;
-@include DcmeMessage;
+@include DcmeMessage {
+    background-color: #fef7f7;
+}
 @include DcmeNavigationList {
     padding-top: 0;
 }
@@ -53,14 +62,22 @@ $primary: #ff0048;
 @include DcmeTerminal;
 @include DcmeText {
     &-superDuper {
-        text-shadow: -6px 6px 0px #c90055, -12px 12px 0px #59002f;
+        text-shadow: -3px 3px 0px #c90055, -6px 6px 0px #59002f;
+
+        @include BruceBreakpoint('small') {
+            text-shadow: -6px 6px 0px #c90055, -12px 12px 0px #59002f;
+        }
     }
 
     &-superDuperReadme {
         color: #000;
         line-height: 4rem;
         padding-left: .5rem;
-        text-shadow: -6px 6px 0px #fb828f, -12px 12px 0px #e0ccd6;
+        text-shadow: -3px 3px 0px #fb828f, -6px 6px 0px #e0ccd6;
+
+        @include BruceBreakpoint('small') {
+            text-shadow: -6px 6px 0px #fb828f, -12px 12px 0px #e0ccd6;
+        }
     }
 }
 @include DcmeTypography;

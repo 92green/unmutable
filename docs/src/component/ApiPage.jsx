@@ -1,77 +1,139 @@
 // @flow
+import type {ComponentType} from 'react';
 import type {Node} from 'react';
+
 import React from 'react';
 import {Fragment} from 'react';
-import {Box, NavigationList, NavigationListItem, Text, Typography} from 'dcme-style';
+
+import {Box} from 'dcme-style';
+import {NavigationList} from 'dcme-style';
+import {NavigationListItem} from 'dcme-style';
+import {Text} from 'dcme-style';
+
 import Link from './Link';
 import PageLayout from './PageLayout';
 
-const renderApi = (api) => api
-    .split('\n')
-    .map((line: string): Node => {
-        if(line.slice(0,2) === "# ") {
-            return line.slice(2);
-        }
-        if(!line) {
-            return <br />;
-        }
-        return <a className="Link" href={`#${line.replace("()","")}`}>{line.replace("()","")}</a>;
-    })
-    .map((line, key) => <NavigationListItem key={key}>{line}</NavigationListItem>);
+import filter from 'unmutable/lib/filter';
+import flatMap from 'unmutable/lib/flatMap';
+import identity from 'unmutable/lib/identity';
+import map from 'unmutable/lib/map';
+import pipe from 'unmutable/lib/pipe';
+import pipeWith from 'unmutable/lib/pipeWith';
 
-const renderDoclets = ({api, md}) => api
-    .split('\n')
-    .filter(_ => _)
-    .map((name, key) => {
-        let simpleName = name.replace("()","");
-        if(name.slice(0,2) === "# ") {
-            return <Box key={key}>
-                <a name={name.slice(2).toLowerCase().replace(/\s+/g, "_")} />
-                <Text element="h2" modifier="sizeMega marginMega weightMicro">{name.slice(2)}</Text>
-            </Box>;
-        }
-        let Component = md[simpleName];
-        if(!Component) {
-            Component = () => <span>...</span>;
-        }
-        return <Box key={key} modifier="marginBottomGiga">
-            <a name={simpleName} />
-            <Text element="h3" modifier="sizeKilo marginKilo">{name}</Text>
-            <Typography>
-                <Component />
-            </Typography>
-        </Box>;
-    })
-    .filter(_ => _);
-
-type Props = {
+type Item = {
     name: string,
-    api: string,
-    md: *
+    description?: Node,
+    renderWith: ComponentType<*>
 };
 
-export default ({name, api, md}: Props) => {
-    let Description = md._desc;
-    let After = md._after;
+type Section = {
+    title?: string,
+    description?: Node,
+    items: Array<Item|Section>
+};
+
+type Props = {
+    after?: Node,
+    before?: Node,
+    sections: Section[],
+    name?: string
+};
+
+const getSimpleName = (name: string): string => name.replace("()","");
+
+const renderNavigation = map((section: Section) => {
+
+    let renderList = map((itemOrSection: Item|Section, key: number): Node => {
+        if(itemOrSection.items) {
+            return <NavigationListItem key={key}>
+                <NavigationList modifier="margin">
+                    {section.title && <NavigationListItem>{itemOrSection.title}</NavigationListItem>}
+                    {renderList(itemOrSection.items)}
+                </NavigationList>
+            </NavigationListItem>;
+        }
+
+        let simpleName = getSimpleName(itemOrSection.name);
+        return <NavigationListItem key={key}>
+            <a className="Link" href={`#${simpleName}`}>{simpleName}</a>
+        </NavigationListItem>;
+    });
+
+    let links = renderList(section.items);
+
+    return <NavigationList modifier="margin">
+        {section.title && <NavigationListItem>{section.title}</NavigationListItem>}
+        {links}
+    </NavigationList>;
+});
+
+const sizes = ["Mega", "Kilo", "Hecto"];
+
+const renderContentNodes = (depth = 0) => flatMap((itemOrSection: Item|Section): Node[] => {
+    let {
+        items,
+        name,
+        renderWith: RenderWith = ({description}) => description,
+        title
+    } = itemOrSection;
+
+    if(items) {
+        let elements = [];
+        if(title) {
+            let anchor = title
+                .toLowerCase()
+                .replace(/\s+/g, "_");
+
+            let size = sizes[depth];
+
+            elements.push(
+                <Box>
+                    <a name={anchor} />
+                    <Text element="h2" modifier={`size${size} margin${size} weightMicro`}>{title}</Text>
+                </Box>
+            );
+        }
+        return elements.concat(
+            renderContentNodes(depth + 1)(items)
+        );
+    }
+
+    let simpleName = getSimpleName(name);
+    return [
+        <Box modifier="marginBottomGiga">
+            <a name={simpleName} />
+            <Text element="h3" modifier="sizeKilo marginKilo">{name}</Text>
+            <RenderWith {...itemOrSection} />
+        </Box>
+    ];
+});
+
+const renderContent = pipe(
+    renderContentNodes(),
+    filter(identity()),
+    map((element, key) => <Box key={key}>{element}</Box>)
+);
+
+const renderExtra = (content) => content && <Box modifier="marginBottomGiga">{content}</Box>;
+
+export default ({after, before, sections, name}: Props) => {
     return <PageLayout
         modifier="marginBottom"
         content={() => <Box>
-            <Box modifier="marginBottomGiga">
-                <Typography>
-                    <Description />
-                </Typography>
-            </Box>
-            {renderDoclets({api, md})}
-            {After && <Typography><After /></Typography>}
+            {renderExtra(before)}
+            {renderContent(sections)}
+            {renderExtra(after)}
         </Box>}
         nav={() => <Fragment>
-            <NavigationList>
+            <NavigationList modifier="margin">
                 <NavigationListItem><Link to="/api">Api</Link></NavigationListItem>
             </NavigationList>
-            <NavigationList>
-                {name && <NavigationListItem>{name}</NavigationListItem>}
-                {renderApi(api)}
-            </NavigationList>
+            {name &&
+                <NavigationList modifier="margin">
+                    <NavigationListItem>{name}</NavigationListItem>
+                </NavigationList>
+            }
+            {renderNavigation(sections)}
         </Fragment>}
     />;
 };

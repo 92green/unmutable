@@ -7,6 +7,8 @@ module.exports = {
     plugins: [
         'gatsby-plugin-sass',
         'gatsby-plugin-react-helmet',
+        'gatsby-plugin-offline',
+        // 'gatsby-mdx'
         // {
         //     resolve: `gatsby-source-filesystem`,
         //     options: {
@@ -14,6 +16,5 @@ module.exports = {
         //         path: `${__dirname}/src/images`
         //     }
         // },
-        'gatsby-plugin-offline'
     ]
 };
