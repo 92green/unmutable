@@ -15,7 +15,7 @@ docs/public
 var fs = require('fs');
 
 listLibFiles((files) => {
-    let file = gitignore + "\n" + files.join("\n");
+    let file = gitignore + "\n" + files.map(file => `/${file}`).join("\n");
     fs.writeFile(".gitignore", file, (err) => {
         if(err) {
             return console.log(err); /* eslint-disable-line */
