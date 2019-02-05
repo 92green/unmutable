@@ -137,4 +137,3 @@ export {default as pipeIf} from './lib/util/pipeIf';
 export {default as pipe} from './lib/util/pipe';
 export {default as pipeWith} from './lib/util/pipeWith';
 export {default as range} from './lib/util/range';
-export {default as recordAsObject} from './lib/util/recordAsObject';
