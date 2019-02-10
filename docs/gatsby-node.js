@@ -1,7 +1,6 @@
 /* eslint-disable */
 
 const path = require('path');
-const rehypePrism = require('@mapbox/rehype-prism');
 
 exports.onCreateWebpackConfig = ({
  stage, getConfig, rules, loaders, actions
@@ -13,12 +12,7 @@ exports.onCreateWebpackConfig = ({
           test: /\.mdx?$/,
           use: [
             loaders.js(),
-            {
-              loader: '@mdx-js/loader',
-              options: {
-                hastPlugins: [rehypePrism]
-              }
-            }
+            'mdx-loader'
           ]
         }
       ]
