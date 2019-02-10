@@ -16,7 +16,7 @@ export default ({children}: Props): Node => <div>
         <meta charSet="utf-8" />
         <title>Unmutable</title>
         <meta name="description" content="An immutable, functional data collection library for plain old Javascript." />
-        <Head />
     </Helmet>
+    <Head />
     {children}
 </div>;
