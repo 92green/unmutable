@@ -28,7 +28,24 @@ const sections = [
                         description: "Returns a new collection also containing the new key, value pair. If an equivalent key already exists in this collection, it will be replaced."
                         + "\n\nWhen used with an indexed data type, `key` may be a negative number, which indexes back from the end of the collection."
                         + "\n\nIf index larger than size, the returned collections's size will be large enough to include the index.",
-                        types: ["object", "array", "uc", "imap", "ilist", "irecord"]
+                        types: ["object", "array", "uc", "imap", "ilist", "irecord"],
+                        example: [
+                            `
+                                let data = {a: 'foo', b: 'bar'};
+
+                                set('a', 'baz')(data);
+                            `,
+                            `
+                                let data = ['foo','bar','baz'];
+
+                                set(1, 'qux')(data);
+                            `,
+                            `
+                                let data = ['foo','bar','baz'];
+
+                                set(-1, 'qux')(data);
+                            `
+                        ]
                     },
                     {
                         name: "delete()",
@@ -37,7 +54,24 @@ const sections = [
                         description: "Returns a new collection which excludes this key."
                         + "\n\nWhen used with an indexed data type, this returns a new collection which excludes this index and with a size 1 less than this collection. Values at indices above index are shifted down by 1 to fill the position.",
                         aliases: ["remove"],
-                        types: ["object", "array", "uc", "imap", "ilist", "irecord"]
+                        types: ["object", "array", "uc", "imap", "ilist", "irecord"],
+                        example: [
+                            `
+                                let data = {a: 'foo', b: 'bar'};
+
+                                delete('a')(data);
+                            `,
+                            `
+                                let data = ['foo','bar','baz'];
+
+                                delete(1)(data);
+                            `,
+                            `
+                                let data = ['foo','bar','baz'];
+
+                                delete(-1)(data);
+                            `
+                        ]
                     },
                     {
                         name: "deleteAll()",
@@ -45,48 +79,102 @@ const sections = [
                         immutablejs: true,
                         description: "Returns a new collection which excludes the provided keys.",
                         aliases: ["omit"],
-                        types: ["object", "uc", "imap"]
+                        types: ["object", "uc", "imap"],
+                        example: [
+                            `
+                                let data = {a: 'foo', b: 'bar', c: 'baz'};
+
+                                deleteAll(['a','b'])(data);
+                            `
+                        ]
                     },
                     {
                         name: "pick()",
                         definition: "pick(keys: string[]|number[]) => (collection) => newCollection",
                         description: "Returns a new collection which excludes all keys that aren't listed in `keys`.",
-                        types: ["object", "uc", "imap"]
+                        types: ["object", "uc", "imap"],
+                        example: [
+                            `
+                                let data = {a: 'foo', b: 'bar', c: 'baz'};
+
+                                pick(['a','b'])(data);
+                            `
+                        ]
                     },
                     {
                         name: "clear()",
                         definition: "clear() => (collection) => newCollection",
                         immutablejs: true,
                         description: "Returns a new collection containing no keys or values.",
-                        types: ["object", "array", "uc", "imap", "ilist", "irecord"]
+                        types: ["object", "array", "uc", "imap", "ilist", "irecord"],
+                        example: [
+                            `
+                                let data = {a: 'foo', b: 'bar'};
+
+                                clear()(data);
+                            `,
+                            `
+                                let data = ['foo','bar','baz'];
+
+                                clear()(data);
+                            `
+                        ]
                     },
                     {
                         name: "push()",
                         definition: "push(...values: Array<any>) => (collection) => newCollection",
                         immutablejs: true,
                         description: "Returns a new collection with the provided `values` appended, starting at this collection's `size`.",
-                        types: ["array", "ilist"]
+                        types: ["array", "ilist"],
+                        example: [
+                            `
+                                let data = ['foo','bar','baz'];
+
+                                push('qux')(data);
+                            `
+                        ]
                     },
                     {
                         name: "pop()",
                         definition: "pop() => (collection) => newCollection",
                         immutablejs: true,
                         description: "Returns a new collection with a size ones less than this collection, excluding the last index in this collection.",
-                        types: ["array", "ilist"]
+                        types: ["array", "ilist"],
+                        example: [
+                            `
+                                let data = ['foo','bar','baz'];
+
+                                pop()(data);
+                            `
+                        ]
                     },
                     {
                         name: "unshift()",
                         definition: "unshift(...values: Array<any>) => (collection) => newCollection",
                         immutablejs: true,
                         description: "Returns a new collection with the provided `values` prepended, shifting other values ahead to higher indices.",
-                        types: ["array", "ilist"]
+                        types: ["array", "ilist"],
+                        example: [
+                            `
+                                let data = ['foo','bar','baz'];
+
+                                unshift('qux')(data);
+                            `
+                        ]
                     },
                     {
                         name: "shift()",
                         definition: "shift() => (collection) => newCollection",
                         immutablejs: true,
                         description: "Returns a new collection with a size ones less than this collection, excluding the first index in this collection, shifting all other values to a lower index.",
-                        types: ["array", "ilist"]
+                        types: ["array", "ilist"],
+                        example: [
+                            `
+                                let data = ['foo','bar','baz'];
+
+                                shift()(data);
+                            `
+                        ]
                     },
                     {
                         name: "update()",
@@ -139,7 +227,7 @@ update(updater: (collection: any) => any) => (collection) => newCollection`,
                         name: "butLast()",
                         definition: "butLast() => (collection) => newCollection",
                         description: "Returns a new collection of the same type containing all entries except the last.",
-                        example: "butLast()([0,1,2])"
+                        example: "butLast()([0,1,2,3])"
                     },
                     {
                         name: "chunk()",

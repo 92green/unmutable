@@ -80,6 +80,9 @@ $primary: #ff0048;
         }
     }
 }
+@include DcmeTextarea {
+    min-height: 5rem;
+}
 @include DcmeTypography;
 @include DcmeWrapper;
 

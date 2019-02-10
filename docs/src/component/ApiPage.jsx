@@ -41,7 +41,7 @@ type Props = {
 
 const getSimpleName = (name: string): string => name.replace("()","");
 
-const renderNavigation = map((section: Section) => {
+const renderNavigation = map((section: Section, key: number) => {
 
     let renderList = map((itemOrSection: Item|Section, key: number): Node => {
         if(itemOrSection.items) {
@@ -61,7 +61,7 @@ const renderNavigation = map((section: Section) => {
 
     let links = renderList(section.items);
 
-    return <NavigationList modifier="margin">
+    return <NavigationList modifier="margin" key={key}>
         {section.title && <NavigationListItem>{section.title}</NavigationListItem>}
         {links}
     </NavigationList>;
