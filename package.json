@@ -179,7 +179,9 @@
     "babel-preset-blueflag": "^1.0.0",
     "blueflag-test": "^0.22.0",
     "immutable": "4.0.0-rc.9",
-    "immutable3": "npm:immutable@^3.8.1"
+    "immutable3": "npm:immutable@^3.8.1",
+    "@commitlint/cli": "^7.2.1",
+    "husky": "^1.1.2"
   },
   "dependencies": {
     "@babel/runtime": "^7.1.5",
@@ -187,5 +189,10 @@
     "is-plain-object": "^2.0.4",
     "lodash.range": "^3.2.0"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  }
 }
