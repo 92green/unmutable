@@ -168,7 +168,7 @@
     "flow-coverage": "blueflag-test flow-coverage -M",
     "lint": "blueflag-test lint",
     "make-gitignore": "node scripts/make-gitignore.js",
-    "test": "(yarn create-top-level-files && yarn jest --maxWorkers=4 && yarn delete-top-level-files) || (yarn delete-top-level-files && exit 1)",
+    "test": "(yarn create-top-level-files && yarn jest --maxWorkers=1 && yarn delete-top-level-files) || (yarn delete-top-level-files && exit 1)",
     "test-all": "yarn lint && yarn flow && yarn test",
     "view-coverage": "open ./coverage/lcov-report/index.html",
     "watch-docs": "cd docs && yarn watch"
