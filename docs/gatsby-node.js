@@ -1,8 +1,6 @@
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/node-apis/
- */
+/* eslint-disable */
+
+const path = require('path');
 
 exports.onCreateWebpackConfig = ({
  stage, getConfig, rules, loaders, actions
@@ -12,9 +10,17 @@ exports.onCreateWebpackConfig = ({
       rules: [
         {
           test: /\.mdx?$/,
-          use: [loaders.js(), 'mdx-loader']
-        },
-      ],
+          use: [
+            loaders.js(),
+            'mdx-loader'
+          ]
+        }
+      ]
     },
+    resolve: {
+      alias: {
+        'unmutable': path.resolve(__dirname, "../")
+      }
+    }
   });
 }

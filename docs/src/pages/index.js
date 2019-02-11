@@ -4,7 +4,8 @@ import {Box, CenteredLanding, Grid, GridItem, Link as HtmlLink, Image, Navigatio
 import Link from '../component/Link';
 import PageLayout from '../component/PageLayout';
 import Layout from '../layout/Layout';
-import IndexMarkdown from './index.md';
+import IndexMarkdown from './indexMdx.mdx';
+import IconUnmutable from '../content/unmutable-icon.gif';
 
 export default () => <Layout>
     <Box modifier="invertedCopy invertedBackground">
@@ -15,10 +16,10 @@ export default () => <Layout>
                 bottom={() => <Grid>
                     <GridItem modifier="8 padding">
                         <Text element="p" modifier="monospace margin">An immutable, functional data collection library for plain old Javascript.</Text>
-                        <Text element="p" modifier="monospace"><HtmlLink href="https://github.com/blueflag/unmutable">github</HtmlLink> | <HtmlLink href="https://www.npmjs.com/package/unmutable">npm</HtmlLink> | <Link to="/api">api</Link></Text>
+                        <Text element="p" modifier="monospace"><HtmlLink href="https://github.com/blueflag/unmutable">github</HtmlLink> | <HtmlLink href="https://www.npmjs.com/package/unmutable">npm</HtmlLink> | <Link to="/api">api documentation</Link></Text>
                     </GridItem>
                     <GridItem modifier="4 padding">
-                        <Image modifier="center logo" src="" />
+                        <Image modifier="center logo icon" src={IconUnmutable} />
                     </GridItem>
                 </Grid>}
             />
@@ -35,9 +36,9 @@ export default () => <Layout>
                 nav={() => <NavigationList>
                     <NavigationListItem><HtmlLink href={`#What-is-it`}>What is it?</HtmlLink></NavigationListItem>
                     <NavigationListItem><HtmlLink href={`#Examples`}>Examples</HtmlLink></NavigationListItem>
-                    <NavigationListItem><HtmlLink href={`#Inspiration`}>Inspiration</HtmlLink></NavigationListItem>
                     <NavigationListItem><HtmlLink href={`#Getting-Started`}>Getting Started</HtmlLink></NavigationListItem>
                     <NavigationListItem><HtmlLink href={`#API`}>API</HtmlLink></NavigationListItem>
+                    <NavigationListItem><HtmlLink href={`#Inspiration`}>Inspiration</HtmlLink></NavigationListItem>
                 </NavigationList>}
             />
         </Wrapper>

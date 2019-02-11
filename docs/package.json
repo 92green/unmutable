@@ -4,8 +4,9 @@
   "version": "0.0.0",
   "author": "Damien Clarke",
   "dependencies": {
+    "browser-util-inspect": "^0.2.0",
     "bruce": "4.0.0",
-    "dcme-style": "^0.19.0",
+    "dcme-style": "^0.22.1",
     "gatsby": "^2.0.19",
     "gatsby-image": "^2.0.15",
     "gatsby-plugin-offline": "^2.0.5",
@@ -19,6 +20,8 @@
     "react": "^16.5.1",
     "react-dom": "^16.5.1",
     "react-helmet": "^5.2.0",
+    "react-markdown": "^4.0.6",
+    "react-runkit": "^0.9.0",
     "react-spruce": "^0.1.0"
   },
   "keywords": [

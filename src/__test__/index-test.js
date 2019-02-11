@@ -139,8 +139,7 @@ let files = [
     "pipeIf",
     "pipe",
     "pipeWith",
-    "range",
-    "recordAsObject"
+    "range"
 ];
 
 files.forEach((file) => {
