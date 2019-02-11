@@ -711,6 +711,32 @@ update(updater: (collection: any) => any) => (collection) => newCollection`,
                         definition: "size() => (collection) => number",
                         description: "Returns the number of keys on the collection. Immutable.js has this as a getter on their collections, Unmutable.js offers this as a function.",
                         aliases: ["count()"]
+                    },
+                    {
+                        name: "startsWith()",
+                        definition: "startsWith(otherCollection) => (collection) => boolean",
+                        description: "Returns true when the `collection` starts with `otherCollection`. The elements of `otherCollection` are compared deeply with those in `collection`.",
+                        types: ["object", "array", "uc", "imap", "ilist"],
+                        example: [
+                            `
+                                let data = ['foo','bar','baz'];
+
+                                startsWith(['foo','bar'])(data);
+                            `
+                        ]
+                    },
+                    {
+                        name: "endsWith()",
+                        definition: "endsWith(otherCollection) => (collection) => boolean",
+                        description: "Returns true when the `collection` starts with `otherCollection`. The elements of `otherCollection` are compared deeply with those in `collection`.",
+                        types: ["object", "array", "uc", "imap", "ilist"],
+                        example: [
+                            `
+                                let data = ['foo','bar','baz'];
+
+                                endsWith(['bar','baz'])(data);
+                            `
+                        ]
                     }
                 ])
             },

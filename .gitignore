@@ -24,6 +24,7 @@ docs/public
 /deleteAll.js
 /deleteIn.js
 /doIf.js
+/endsWith.js
 /entries.js
 /entriesReverse.js
 /entryArray.js
@@ -123,6 +124,7 @@ docs/public
 /sort.js
 /sortBy.js
 /splice.js
+/startsWith.js
 /strictEquals.js
 /swap.js
 /take.js

@@ -17,6 +17,7 @@
     "deleteAll.js",
     "deleteIn.js",
     "doIf.js",
+    "endsWith.js",
     "entries.js",
     "entriesReverse.js",
     "entryArray.js",
@@ -116,6 +117,7 @@
     "sort.js",
     "sortBy.js",
     "splice.js",
+    "startsWith.js",
     "strictEquals.js",
     "swap.js",
     "take.js",
@@ -168,7 +170,7 @@
     "flow-coverage": "blueflag-test flow-coverage -M",
     "lint": "blueflag-test lint",
     "make-gitignore": "node scripts/make-gitignore.js",
-    "test": "(yarn create-top-level-files && yarn jest --maxWorkers=4 && yarn delete-top-level-files) || (yarn delete-top-level-files && exit 1)",
+    "test": "(yarn create-top-level-files && yarn jest --maxWorkers=1 && yarn delete-top-level-files) || (yarn delete-top-level-files && exit 1)",
     "test-all": "yarn lint && yarn flow && yarn test",
     "view-coverage": "open ./coverage/lcov-report/index.html",
     "watch-docs": "cd docs && yarn watch"
@@ -178,10 +180,10 @@
     "@babel/core": "^7.1.2",
     "babel-preset-blueflag": "^1.0.0",
     "blueflag-test": "^0.22.0",
-    "fs-extra": "^4.0.1",
     "immutable": "4.0.0-rc.9",
     "immutable3": "npm:immutable@^3.8.1",
-    "sinon": "^2.1.0"
+    "@commitlint/cli": "^7.2.1",
+    "husky": "^1.1.2"
   },
   "dependencies": {
     "@babel/runtime": "^7.1.5",
@@ -189,5 +191,10 @@
     "is-plain-object": "^2.0.4",
     "lodash.range": "^3.2.0"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  }
 }
