@@ -19,7 +19,7 @@ exports.onCreateWebpackConfig = ({
     },
     resolve: {
       alias: {
-        'unmutable': path.resolve(__dirname, "../")
+        'unmutable': path.resolve(__dirname, "../unmutable/")
       }
     }
   });

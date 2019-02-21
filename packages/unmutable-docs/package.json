@@ -1,5 +1,6 @@
 {
   "name": "unmutable-docs",
+  "private": true,
   "description": "Unmutable docs",
   "version": "0.0.0",
   "author": "Damien Clarke",
@@ -30,11 +31,13 @@
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",
-    "watch": "gatsby develop",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "gatsby develop"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/blueflag/unmutable"
+  },
+  "devDependencies": {
+    "babel-preset-blueflag": "^1.0.0"
   }
 }
