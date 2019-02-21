@@ -1,16 +1,6 @@
 const listLibFiles = require('./list-lib-files.js');
 
-const gitignore = `
-.DS_Store
-coverage
-flow-coverage
-dist
-lib
-node_modules
-*.log
-docs/.cache
-docs/public
-`;
+const gitignore = ``;
 
 var fs = require('fs');
 
