@@ -23,7 +23,8 @@ module.exports = {
                 'refactor',
                 'test',
                 'docs',
-                'build'
+                'build',
+                'wip'
             ]
         ]
     }

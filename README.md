@@ -7,10 +7,10 @@
 
 ## Docs
 
-**[See the docs](/DOCS.md)**
+**[See the docs](https://unmutable.blueflag.codes)**
 
 ## Packages
 
-```
+```sh
 yarn add unmutable
 ```
