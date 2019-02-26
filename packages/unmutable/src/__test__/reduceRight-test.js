@@ -9,6 +9,24 @@ compare({
     fn: reduceRight((reduction, value) => [...reduction, value], [])
 });
 
+compare({
+    name: `reduceRight() on object should work without initial reduction`,
+    item: {a:1, b:2, c:3, d:4},
+    fn: reduceRight((a, b) => a - b)
+});
+
+compare({
+    name: `reduceRight() on object should work without initial reduction when only one item`,
+    item: {a:1},
+    fn: reduceRight((a, b) => a - b)
+});
+
+compare({
+    name: `reduceRight() on object should work without initial reduction when empty`,
+    item: {},
+    fn: reduceRight((a, b) => a - b)
+});
+
 compareIteratee({
     name: `reduceRight() on object should pass correct arguments to iteratee`,
     item: {a:1, b:2, c:3, d:4},
@@ -23,6 +41,12 @@ compare({
     name: `reduceRight() on array should work`,
     item:[1,2,3,4],
     fn: reduceRight((reduction, value) => [value, ...reduction], [])
+});
+
+compare({
+    name: `reduceRight() on array should work without initial reduction`,
+    item:[1,2,3,4],
+    fn: reduceRight((a, b) => a - b)
 });
 
 compareIteratee({
