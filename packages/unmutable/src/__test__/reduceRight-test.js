@@ -10,6 +10,20 @@ compare({
 });
 
 compare({
+    name: `reduceRight() on object should work when only one item`,
+    item: {a:1},
+    fn: reduceRight((reduction, value) => [...reduction, value], [])
+});
+
+
+compare({
+    name: `reduceRight() on object should work when empty`,
+    item: {},
+    fn: reduceRight((reduction, value) => [...reduction, value], [])
+});
+
+
+compare({
     name: `reduceRight() on object should work without initial reduction`,
     item: {a:1, b:2, c:3, d:4},
     fn: reduceRight((a, b) => a - b)

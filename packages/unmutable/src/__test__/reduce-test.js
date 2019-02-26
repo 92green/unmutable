@@ -19,7 +19,7 @@ compare({
 
 compare({
     name: `reduce() on object should work when empty`,
-    item: {a:1},
+    item: {},
     fn: reduce((reduction, value) => [...reduction, value], [])
 });
 
