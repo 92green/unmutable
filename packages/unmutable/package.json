@@ -98,6 +98,8 @@
     "reduceRight.js",
     "remove.js",
     "rename.js",
+    "replaceEqual.js",
+    "replaceEqualDeep.js",
     "rest.js",
     "reverse.js",
     "rotate.js",

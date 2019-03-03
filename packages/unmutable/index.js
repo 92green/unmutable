@@ -75,6 +75,8 @@ export {default as push} from './lib/push';
 export {default as reduce} from './lib/reduce';
 export {default as reduceRight} from './lib/reduceRight';
 export {default as rename} from './lib/rename';
+export {default as replaceEqual} from './lib/replaceEqual';
+export {default as replaceEqualDeep} from './lib/replaceEqualDeep';
 export {default as rest} from './lib/rest';
 export {default as reverse} from './lib/reverse';
 export {default as rotate} from './lib/rotate';
