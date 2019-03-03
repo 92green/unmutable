@@ -747,6 +747,38 @@ update(updater: (collection: any) => any) => (collection) => newCollection`,
                         name: "clone()",
                         definition: "clone() => (collection) => newCollection",
                         description: "Returns a clone of `collection` if `collection` is an array or object, or returns the `collection` unchanged if given an Immutable.js `Map` or `List`. Immutable.js data types are inherently immutable so do not need to be explicitly cloned."
+                    },
+                    {
+                        name: "replaceEqual()",
+                        definition: "replaceEqual(otherCollection) => (collection) => newCollection",
+                        description: "If `otherCollection` is deeply equal to `collection`, `otherCollection` is returned, or else `collection` is returned.\n\nThis can be useful if you have a data source that always recreates a data structure, such as `JSON.parse()`, but you want to avoid needlessly passing new instances of unchanged objects and arrays downstream.",
+                        types: ["object", "array", "uc", "imap", "ilist", "irecord"],
+                        example: [
+                            `
+                                let oldData = ['foo','bar','baz'];
+                                let newData = ['foo','bar','baz'];
+
+                                let data = replaceEqual(oldData)(newData);
+                                // data equals ['foo','bar','baz']
+                                data === oldData
+                            `
+                        ]
+                    },
+                    {
+                        name: "replaceEqualDeep()",
+                        definition: "replaceEqualDeep(otherCollection) => (collection) => newCollection",
+                        description: "If `otherCollection` is deeply equal to `collection`, `otherCollection` is returned. If not, each of `collection`s children are compared against `otherCollection`, and if they are deeply equal then that part of `otherCollection` is inserted into the result. This process continues recursively down the data structure.\n\nThis can be useful if you have a data source that always recreates a data structure, such as `JSON.parse()`, but you want to avoid needlessly passing new instances of unchanged objects and arrays downstream.",
+                        types: ["object", "array", "uc", "imap", "ilist", "irecord"],
+                        example: [
+                            `
+                                let oldData = [1,2,[10,20]];
+                                let newData = [3,4,[10,20]];
+
+                                let data = replaceEqualDeep(oldData)(newData);
+                                // data equals [3,4,[10,20]]
+                                data[2] === oldData[2]
+                            `
+                        ]
                     }
                 ])
             },
