@@ -1,26 +1,43 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/unmutable
+    working_directory: ~/repo
     docker:
-      - image: circleci/node:8
+      - image: blueflag/client-build:0.0.7
 
     steps:
       - checkout
+
       - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "yarn.lock" }}
-            - v1-dependencies-
+          keys: ['unmutable-deps-{{ checksum "yarn.lock" }}']
+      - restore_cache:
+          keys: ['deep-memo-deps-{{ checksum "yarn.lock" }}']
+      - restore_cache:
+          keys: ['unmutable-docs-deps-{{ checksum "yarn.lock" }}']
+
       - run: yarn install
       - run: yarn bootstrap
       - run: yarn build
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "yarn.lock" }}
 
-      # run tests!
+      - save_cache:
+          key: unmutable-deps-{{ checksum "yarn.lock" }}
+          paths: ['packages/unmutable/node_modules']
+
+      - save_cache:
+          key: deep-memo-deps-{{ checksum "yarn.lock" }}
+          paths: ['packages/deep-memo/node_modules']
+
+      - save_cache:
+          key: unmutable-docs-deps-{{ checksum "yarn.lock" }}
+          paths: ['packages/unmutable-docs/node_modules']
+
       - run: git diff | cat
       - run: test -z "$(git status --porcelain)"
       - run: yarn test-all
 
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build:
+          context: org-global
