@@ -159,9 +159,7 @@
   },
   "private": false,
   "scripts": {
-    "install-docs": "cd docs && yarn",
     "build": "rm -rf lib && babel src --out-dir lib --ignore '**/__test__/*.js' && yarn make-gitignore",
-    "build-docs": "cd docs && yarn gatsby build",
     "create-top-level-files": "node scripts/create-top-level-files.js && node scripts/update-publishable-files-list.js",
     "delete-top-level-files": "node scripts/delete-top-level-files.js",
     "prepublishOnly": "yarn run build && yarn create-top-level-files",
@@ -174,8 +172,7 @@
     "make-gitignore": "node scripts/make-gitignore.js",
     "test": "(yarn create-top-level-files && yarn jest --maxWorkers=1 && yarn delete-top-level-files) || (yarn delete-top-level-files && exit 1)",
     "test-all": "yarn lint && yarn flow && yarn test",
-    "view-coverage": "open ./coverage/lcov-report/index.html",
-    "watch-docs": "cd docs && yarn watch"
+    "view-coverage": "open ./coverage/lcov-report/index.html"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.2",
