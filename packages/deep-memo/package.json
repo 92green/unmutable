@@ -17,7 +17,7 @@
   },
   "private": false,
   "scripts": {
-    "build": "rm -rf lib && babel src --out-dir lib --ignore '**/__test__/*.js' && yarn make-gitignore",
+    "build": "rm -rf lib && babel src --out-dir lib --ignore '**/__test__/*.js'",
     "prepublishOnly": "yarn run build",
     "watch": "yarn run build",
     "check-coverage": "NODE_ENV=test nyc check-coverage --branches 100.0  --functions 100.0 --lines 100.0",
