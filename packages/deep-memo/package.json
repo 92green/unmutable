@@ -1,0 +1,52 @@
+{
+  "main": "lib/deepMemo.js",
+  "files": [
+    "lib"
+  ],
+  "name": "deep-memo",
+  "version": "0.44.0",
+  "description": "A memoize-one function that analyses the function output and retains previous object references wherever data hasn't changed",
+  "license": "MIT",
+  "author": "Damien Clarke",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:blueflag/unmutable.git"
+  },
+  "bugs": {
+    "url": "https://github.com/blueflag/unmutable/issues"
+  },
+  "private": false,
+  "scripts": {
+    "build": "rm -rf lib && babel src --out-dir lib --ignore '**/__test__/*.js' && yarn make-gitignore",
+    "prepublishOnly": "yarn run build",
+    "watch": "yarn run build",
+    "check-coverage": "NODE_ENV=test nyc check-coverage --branches 100.0  --functions 100.0 --lines 100.0",
+    "flow": "blueflag-test flow",
+    "flow-coverage": "blueflag-test flow-coverage -M",
+    "lint": "blueflag-test lint",
+    "test": "yarn jest",
+    "test-all": "yarn lint && yarn flow && yarn test",
+    "view-coverage": "open ./coverage/lcov-report/index.html"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@commitlint/cli": "^7.2.1",
+    "babel-preset-blueflag": "^1.0.0",
+    "blueflag-test": "^0.22.0",
+    "husky": "^1.1.2"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.1.5",
+    "fast-deep-equal": "^1.0.0",
+    "is-plain-object": "^2.0.4",
+    "lodash.range": "^3.2.0",
+    "unmutable": "^0.44.0"
+  },
+  "sideEffects": false,
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  }
+}
