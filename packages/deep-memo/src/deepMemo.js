@@ -1,6 +1,6 @@
 // @flow
-import replaceEqualDeep from 'unmutable/replaceEqualDeep';
-import shallowEquals from 'unmutable/shallowEquals';
+import replaceEqualDeep from 'unmutable/lib/replaceEqualDeep';
+import shallowEquals from 'unmutable/lib/shallowEquals';
 
 export default (fn: Function): Function => {
     let cachedInput;
