@@ -6,6 +6,12 @@ Deep memo only caches the result of the most recent arguments. In addition to th
 
 Internally `deepMemo` uses [fast-deep-equal](https://github.com/epoberezkin/fast-deep-equal) for equality checking by value, and [unmutable](http://unmutable.blueflag.codes) for the iteration and replace operations on the result.
 
+## Why?
+
+If you need to perform many checks to work out if data has changed value, you might consider using a bunch of deep equality checks. But deep equality checks are expensive and generally require an external library. They also occur when data is *read*, rather than when data is *written*, and reads generally happen much more often than writes. 
+
+Memoizing deeply like `deepMemo` allows you to use *fast strict equality checks* to answer whether data has changed its value. The execution of `deepMemo` is a little more expensive to allow downstream equality checks to be fast and painless.
+
 ## Example
 
 ```js
