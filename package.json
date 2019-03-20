@@ -1,9 +1,9 @@
 {
   "private": true,
   "scripts": {
-    "test-all": "lerna run test-all --concurrency 2",
-    "build": "cp README.md packages/unmutable/README.md && lerna run build",
-    "bootstrap": "lerna bootstrap"
+    "test-all": "yarn lerna run test-all --concurrency 2",
+    "build": "cp README.md packages/unmutable/README.md && yarn lerna run build",
+    "bootstrap": "yarn lerna bootstrap"
   },
   "dependencies": {
     "lerna": "^3.10.7"
