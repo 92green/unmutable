@@ -4,7 +4,7 @@
     "lib"
   ],
   "name": "deep-memo",
-  "version": "0.44.0",
+  "version": "0.0.0",
   "description": "A memoize-one function that analyses the function output and retains previous object references wherever data hasn't changed",
   "license": "MIT",
   "author": "Damien Clarke",
