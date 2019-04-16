@@ -6,3 +6,5 @@ dist
 lib
 node_modules
 *.log
+.cache
+docs
