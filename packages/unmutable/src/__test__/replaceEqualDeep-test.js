@@ -80,3 +80,19 @@ test(`replaceEqualDeep() on object should work when a child is deeply equal`, ()
     expect(replaceEqualDeep(data)(newDataDifferent).b).toBe(data.b);
     expect(replaceEqualDeep(data)(newDataDifferent).b).toEqual(data.b);
 });
+
+test(`replaceEqualDeep() should cope with children of different types`, () => {
+    let data = {
+        a: 1,
+        b: 123
+    };
+
+    let newDataDifferent = {
+        a: 10,
+        b: {
+            c: 2
+        }
+    };
+
+    expect(replaceEqualDeep(data)(newDataDifferent)).toEqual(newDataDifferent);
+});
