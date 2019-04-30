@@ -27,38 +27,41 @@ class ABRecordExtended3 extends ABRecord3 {}
 
 class A {}
 
+export const typeFactory = () => ({
+    undefined: undefined,
+    null: null,
+    string: "string",
+    number: 123,
+    object: {object: true},
+    array: ["array"],
+    map: Map(),
+    orderedMap: OrderedMap(),
+    list: List(),
+    record: new ABRecord({b: 3}),
+    recordExtended: new ABRecordExtended({b: 3}),
+    set: Set(),
+    orderedSet: OrderedSet(),
+    seq: Seq(),
+    stack: Stack(),
+    map3: Map3(),
+    orderedMap3: OrderedMap3(),
+    list3: List3(),
+    record3: new ABRecord3({b: 3}),
+    recordExtended3: new ABRecordExtended3({b: 3}),
+    set3: Set3(),
+    orderedSet3: OrderedSet3(),
+    seq3: Seq3(),
+    stack3: Stack3(),
+    function: () => {},
+    classInstance: new A(),
+    unmutableCompatible: new UnmutableCompatible()
+});
+
+
+
 export default ({name, fn, expectedResult}: TestTypesConfig) => {
 
-    const types = {
-        undefined: undefined,
-        null: null,
-        string: "string",
-        number: 123,
-        object: {object: true},
-        array: ["array"],
-        map: Map(),
-        orderedMap: OrderedMap(),
-        list: List(),
-        record: new ABRecord({b: 3}),
-        recordExtended: new ABRecordExtended({b: 3}),
-        set: Set(),
-        orderedSet: OrderedSet(),
-        seq: Seq(),
-        stack: Stack(),
-        map3: Map3(),
-        orderedMap3: OrderedMap3(),
-        list3: List3(),
-        record3: new ABRecord3({b: 3}),
-        recordExtended3: new ABRecordExtended3({b: 3}),
-        set3: Set3(),
-        orderedSet3: OrderedSet3(),
-        seq3: Seq3(),
-        stack3: Stack3(),
-        function: () => {},
-        classInstance: new A(),
-        unmutableCompatible: new UnmutableCompatible()
-    };
-
+    let types = typeFactory();
     // $HackityHacks: call function type to get 100% coverage
     types.function();
 
@@ -68,6 +71,6 @@ export default ({name, fn, expectedResult}: TestTypesConfig) => {
     }), {});
 
     test(name, () => {
-        expect(expectedResult).toEqual(result);
+        expect(result).toEqual(expectedResult);
     });
 };

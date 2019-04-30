@@ -17,6 +17,7 @@ export {default as entries} from './lib/entries';
 export {default as entriesReverse} from './lib/entriesReverse';
 export {default as entryArray} from './lib/entryArray';
 export {default as equals} from './lib/equals';
+export {default as equalsType} from './lib/equalsType';
 export {default as every} from './lib/every';
 export {default as filter} from './lib/filter';
 export {default as filterNot} from './lib/filterNot';

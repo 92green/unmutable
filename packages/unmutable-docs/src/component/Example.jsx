@@ -13,6 +13,10 @@ import join from 'unmutable/lib/join';
 import keyArray from 'unmutable/lib/keyArray';
 import map from 'unmutable/lib/map';
 
+if(typeof window !== "undefined") {
+    window.Unmutable = UnmutableMethods;
+}
+
 // import Prism from 'prismjs';
 
 // require(`prismjs/components/prism-flow.js`);

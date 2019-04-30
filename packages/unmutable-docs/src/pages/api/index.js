@@ -522,7 +522,8 @@ update(updater: (collection: any) => any) => (collection) => newCollection`,
                     {
                         name: "equals()",
                         definition: "`equals(otherValue) => (value) => boolean`",
-                        description: "Returns `true` if `value` and `otherValue` are deeply equal, or `false` otherwise."
+                        description: "Returns `true` if `value` and `otherValue` are deeply equal, or `false` otherwise.",
+                        note: "This function compares items by value, so two different class instances containing the same data in the same manner (e.g. an array and an Immutable.js List) will be regarded as equal. Consider also using equalsType() if this is a problem for you."
                     },
                     {
                         name: "notEquals()",
@@ -531,18 +532,23 @@ update(updater: (collection: any) => any) => (collection) => newCollection`,
                     },
                     {
                         name: "strictEquals()",
-                        definition: "strictEquals(otherCollection: *) => (collection) => number",
+                        definition: "strictEquals(otherCollection: any) => (collection: any) => number",
                         description: "Checks if `collection` and `otherCollection` are strictly equal. This complements `equals()`, which checks for deep value equality."
                     },
                     {
                         name: "shallowEquals()",
-                        definition: "shallowEquals(otherCollection: *) => (collection) => number",
+                        definition: "shallowEquals(otherCollection: any) => (collection: any) => number",
                         description: "Checks if `collection` and `otherCollection` are shallowly equal, using strict equality.",
                         note: "Use `equals()` if you want to check deep equality."
                     },
                     {
                         name: "hashCode()",
                         description: ""
+                    },
+                    {
+                        name: "equalsType()",
+                        definition: "`equalsType(otherValue: any) => (value: any) => boolean`",
+                        description: "Returns `true` if `value` and `otherValue` are of the same type, or `false` otherwise. Class instances only count as equal if they are instances of the same class. Also unlike the type returned by `typeof`, `null` is *not* equal to objects, and are only equal to `null`."
                     }
                 ])
             },
