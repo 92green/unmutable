@@ -147,7 +147,7 @@
     "zipWith.js"
   ],
   "name": "unmutable",
-  "version": "0.45.0",
+  "version": "0.45.1",
   "description": "Immutable.js functions for collections that may or may not be Immutable.",
   "license": "MIT",
   "author": "Damien Clarke",
