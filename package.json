@@ -2,8 +2,9 @@
   "private": true,
   "scripts": {
     "test-all": "yarn lerna run test-all --concurrency 2",
-    "build": "cp README.md packages/unmutable/README.md && yarn lerna run build",
-    "bootstrap": "yarn lerna bootstrap",
+    "build": "yarn lerna run build",
+    "build-docs": "cp README.md packages/unmutable/README.md && yarn lerna run build-docs",
+    "prep": "yarn && yarn lerna bootstrap && yarn build",
     "bump": "yarn lerna publish -m \"build: publish\""
   },
   "dependencies": {

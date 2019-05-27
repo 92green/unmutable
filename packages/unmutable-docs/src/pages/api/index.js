@@ -957,8 +957,8 @@ update(updater: (collection: any) => any) => (collection) => newCollection`,
 
 export default () => <Layout>
     <ApiPage
-        after={<Typography><MarkdownAfter /></Typography>}
-        before={<Typography><MarkdownBefore /></Typography>}
+        after={<MarkdownAfter />}
+        before={<MarkdownBefore />}
         sections={sections}
     />
 </Layout>;

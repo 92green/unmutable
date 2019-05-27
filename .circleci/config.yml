@@ -15,9 +15,8 @@ jobs:
       - restore_cache:
           keys: ['unmutable-docs-deps-{{ checksum "yarn.lock" }}']
 
-      - run: yarn install
-      - run: yarn bootstrap
-      - run: yarn build
+      - run: yarn prep
+      - run: yarn build-docs
 
       - save_cache:
           key: unmutable-deps-{{ checksum "yarn.lock" }}

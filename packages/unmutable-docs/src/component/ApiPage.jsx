@@ -41,32 +41,6 @@ type Props = {
 
 const getSimpleName = (name: string): string => name.replace("()","");
 
-const renderNavigation = map((section: Section, key: number) => {
-
-    let renderList = map((itemOrSection: Item|Section, key: number): Node => {
-        if(itemOrSection.items) {
-            return <NavigationListItem key={key}>
-                <NavigationList modifier="margin">
-                    {section.title && <NavigationListItem>{itemOrSection.title}</NavigationListItem>}
-                    {renderList(itemOrSection.items)}
-                </NavigationList>
-            </NavigationListItem>;
-        }
-
-        let simpleName = getSimpleName(itemOrSection.name);
-        return <NavigationListItem key={key}>
-            <a className="Link" href={`#${simpleName}`}>{simpleName}</a>
-        </NavigationListItem>;
-    });
-
-    let links = renderList(section.items);
-
-    return <NavigationList modifier="margin" key={key}>
-        {section.title && <NavigationListItem>{section.title}</NavigationListItem>}
-        {links}
-    </NavigationList>;
-});
-
 const sizes = ["Mega", "Kilo", "Hecto"];
 
 const renderContentNodes = (depth = 0) => flatMap((itemOrSection: Item|Section): Node[] => {
@@ -116,24 +90,16 @@ const renderContent = pipe(
 
 const renderExtra = (content) => content && <Box modifier="marginBottomGiga">{content}</Box>;
 
-export default ({after, before, sections, name}: Props) => {
-    return <PageLayout
-        modifier="marginBottom"
-        content={() => <Box>
+export default ({after, before, sections}: Props) => {
+    console.log("sections", sections);
+    return <ContentNav
+        content={() => <>
             {renderExtra(before)}
             {renderContent(sections)}
             {renderExtra(after)}
-        </Box>}
-        nav={() => <Fragment>
-            <NavigationList modifier="margin">
-                <NavigationListItem><Link to="/api">Api</Link></NavigationListItem>
-            </NavigationList>
-            {name &&
-                <NavigationList modifier="margin">
-                    <NavigationListItem>{name}</NavigationListItem>
-                </NavigationList>
-            }
-            {renderNavigation(sections)}
-        </Fragment>}
+        </>}
+        pageNav={[
+            '# API'
+        ]}
     />;
 };
