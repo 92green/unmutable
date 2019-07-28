@@ -5,7 +5,7 @@
     "dist"
   ],
   "name": "unmutable",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0-alpha.1",
   "description": "An immutable, point-free, functional data collection library for plain old Javascript.",
   "license": "MIT",
   "author": "Damien Clarke",
