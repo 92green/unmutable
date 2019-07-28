@@ -16,7 +16,7 @@ Each Unmutable function returns a function that accepts the value to operate on:
 
 
 ```js
-import getIn from 'unmutable/getIn';
+import {getIn} from 'unmutable';
 
 let data = {
     cat: {
@@ -30,8 +30,8 @@ getIn(['cat', 'name'])(data); // Gordon!
 Or if you prefer to pass your data in first, use Unmutable's `pipeWith` function:
 
 ```js
-import getIn from 'unmutable/getIn';
-import pipeWith from 'unmutable/pipeWith';
+import {getIn} from 'unmutable';
+import {pipeWith} from 'unmutable';
 
 pipeWith(
     data,
@@ -42,9 +42,9 @@ pipeWith(
 Then if you want to call more functions in a chain you can use Unmutable's `pipe` function, which can be used to squish a set of functions together, like this:
 
 ```js
-import get from 'unmutable/get';
-import last from 'unmutable/last';
-import pipe from 'unmutable/pipe';
+import {get} from 'unmutable';
+import {last} from 'unmutable';
+import {pipe} from 'unmutable';
 
 let data = [
     {name: "Bob"},
@@ -67,7 +67,7 @@ let name = getLastName(data); // Herbert!
 Or if you prefer to pass your data in first, use Unmutable's `pipeWith` function:
 
 ```js
-import pipeWith from 'unmutable/pipeWith';
+import {pipeWith} from 'unmutable';
 
 let name = pipeWith(
     data,

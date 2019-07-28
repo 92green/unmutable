@@ -12,13 +12,12 @@ import {Text} from 'dcme-style';
 
 import Link from './Link';
 import PageLayout from './PageLayout';
-
-import filter from 'unmutable/lib/filter';
-import flatMap from 'unmutable/lib/flatMap';
-import identity from 'unmutable/lib/identity';
-import map from 'unmutable/lib/map';
-import pipe from 'unmutable/lib/pipe';
-import pipeWith from 'unmutable/lib/pipeWith';
+import {filter} from 'unmutable';
+import {flatMap} from 'unmutable';
+import {identity} from 'unmutable';
+import {map} from 'unmutable';
+import {pipe} from 'unmutable';
+import {pipeWith} from 'unmutable';
 
 type Item = {
     name: string,

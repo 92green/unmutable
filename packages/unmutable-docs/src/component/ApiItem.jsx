@@ -12,10 +12,9 @@ import {Typography} from 'dcme-style';
 
 import Code from './Code';
 import Example from './Example';
-
-import interpose from 'unmutable/lib/interpose';
-import map from 'unmutable/lib/map';
-import pipeWith from 'unmutable/lib/pipeWith';
+import {interpose} from 'unmutable';
+import {map} from 'unmutable';
+import {pipeWith} from 'unmutable';
 
 type Props = {
     aliases?: string[],

@@ -16,11 +16,6 @@ exports.onCreateWebpackConfig = ({
           ]
         }
       ]
-    },
-    resolve: {
-      alias: {
-        'unmutable': path.resolve(__dirname, "../unmutable/")
-      }
     }
   });
 }

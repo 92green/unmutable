@@ -8,10 +8,10 @@ import {Textarea} from 'dcme-style';
 import * as UnmutableMethods from 'unmutable';
 import Code from './Code';
 
-import pipeWith from 'unmutable/lib/pipeWith';
-import join from 'unmutable/lib/join';
-import keyArray from 'unmutable/lib/keyArray';
-import map from 'unmutable/lib/map';
+import {pipeWith} from 'unmutable';
+import {join} from 'unmutable';
+import {keyArray} from 'unmutable';
+import {map} from 'unmutable';
 
 if(typeof window !== "undefined") {
     window.Unmutable = UnmutableMethods;

@@ -7,9 +7,8 @@ import MarkdownAfter from '../../docs/api/after.mdx';
 import MarkdownBefore from '../../docs/api/before.mdx';
 
 import {Typography} from 'dcme-style';
-
-import map from 'unmutable/lib/map';
-import set from 'unmutable/lib/set';
+import {map} from 'unmutable';
+import {set} from 'unmutable';
 
 const withRenderer = map(set('renderWith', ApiItem));
 
@@ -911,7 +910,7 @@ update(updater: (collection: any) => any) => (collection) => newCollection`,
                         name: "method()",
                         description: "A helper function that allows you to turn any method into a point-free function.",
                         example: `// this creates a point free version of \`toLowerCase()\` that would call \`value.toLowerCase()\` once evaluated.
-         import method from 'unmutable/lib/method';
+import {method} from 'unmutable';
          let toLowerCase = method('toLowerCase');
          toLowerCase()("HELLO"); // "hello"`
                     },
