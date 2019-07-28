@@ -2,6 +2,8 @@
 import babel from 'rollup-plugin-babel';
 import {terser} from 'rollup-plugin-terser';
 
+const listLibFiles = require('./scripts/list-lib-files.js');
+
 let plugins = [
     babel({
         exclude: 'node_modules/**',
@@ -16,34 +18,35 @@ let external = [
     'lodash.range'
 ];
 
-export default [
-    {
-        input: 'index.js',
-        output: {
-            index: 'dist/unmutable.min.js',
-            format: 'umd',
-            name: 'unmutable',
-            esModule: false
+export default listLibFiles().then(files => {
+
+    let input = {
+        index: 'index.js'
+    };
+
+    files.forEach(file => {
+        let name = file.replace('.js', '');
+        input[name] = `src/${file}`;
+    });
+
+    return [
+        {
+            input,
+            output: {
+                dir: 'dist/cjs',
+                format: 'cjs'
+            },
+            plugins,
+            external
         },
-        plugins,
-        external
-    },
-    {
-        input: 'index.js',
-        output: {
-            file: 'dist/cjs/index.js',
-            format: 'cjs'
-        },
-        plugins,
-        external
-    },
-    {
-        input: 'index.js',
-        output: {
-            file: 'dist/esm/index.js',
-            format: 'esm'
-        },
-        plugins,
-        external
-    }
-];
+        {
+            input,
+            output: {
+                dir: 'dist/esm',
+                format: 'esm'
+            },
+            plugins,
+            external
+        }
+    ];
+});

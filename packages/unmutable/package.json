@@ -18,7 +18,7 @@
   },
   "private": false,
   "scripts": {
-    "build": "rm -rf dist && yarn make-index && yarn rollup --config",
+    "build": "rm -rf dist && yarn make-index && yarn rollup --config && rm index.js",
     "prepublishOnly": "yarn run build",
     "watch": "yarn run build -w && watch-docs",
     "check-coverage": "NODE_ENV=test nyc check-coverage --branches 100.0  --functions 100.0 --lines 100.0",
