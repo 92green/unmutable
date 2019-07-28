@@ -19,7 +19,7 @@
   "private": false,
   "scripts": {
     "build": "rm -rf dist && yarn make-index && yarn rollup --config",
-    "prepublishOnly": "yarn run build && yarn create-top-level-files",
+    "prepublishOnly": "yarn run build",
     "postpublish": "yarn delete-top-level-files",
     "watch": "yarn run build -w && watch-docs",
     "check-coverage": "NODE_ENV=test nyc check-coverage --branches 100.0  --functions 100.0 --lines 100.0",
