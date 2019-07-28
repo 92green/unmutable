@@ -6,10 +6,10 @@ import shift from './shift';
 import keys from './keys';
 
 export default prep({
-    name: 'rest',
-    immutable: 'rest',
-    array: shift,
-    all: () => (value) => pipeWith(
+    n: 'rest',
+    i: 'rest',
+    a: shift,
+    _: () => (value) => pipeWith(
         value,
         del(keys()(value).next().value)
     )

@@ -4,10 +4,10 @@ import identity from './identity';
 import reduce from './reduce';
 
 export default prep({
-    name: "toObject",
-    immutable: "toObject",
-    object: () => identity(),
-    array: () => reduce((obj: Object, value: *, index: number) => ({
+    n: 'toObject',
+    i: 'toObject',
+    o: identity,
+    a: () => reduce((obj: Object, value: *, index: number) => ({
         ...obj,
         [index]: value
     }), {})

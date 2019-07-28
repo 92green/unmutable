@@ -3,8 +3,8 @@ import prep from './internal/unmutable';
 import isObject from './isObject';
 
 export default prep({
-    name: 'equalsType',
-    all: (other: *) => (value: *): boolean => {
+    n: 'equalsType',
+    _: (other: *) => (value: *): boolean => {
         if(typeof value !== typeof other) {
             return false;
         }

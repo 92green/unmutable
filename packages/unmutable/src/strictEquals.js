@@ -2,6 +2,6 @@
 import prep from './internal/unmutable';
 
 export default prep({
-    name: 'strictEquals',
-    all: (other: *) => (value: *): boolean => value === other
+    n: 'strictEquals',
+    _: (other: *) => (value: *): boolean => value === other
 });

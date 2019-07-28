@@ -8,7 +8,7 @@ import isValueObject from './util/isValueObject';
 
 export default prep({
     name : 'getIn',
-    all: (keyPath: string[], notFoundValue: * = undefined) => (value: *): * => {
+    _: (keyPath: string[], notFoundValue: * = undefined) => (value: *): * => {
         let ii = value;
         for(let key of keyPath) {
             if(!isValueObject(ii) || !has(key)(ii)) {

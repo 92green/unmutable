@@ -11,9 +11,9 @@ export const arraySet = (key: number, childValue: *) => (value: Array<*>): Array
 };
 
 export default prep({
-    name: 'set',
-    immutable: 'set',
-    record: 'set',
-    object: objectSet,
-    array: arraySet
+    n: 'set',
+    i: 'set',
+    r: 'set',
+    o: objectSet,
+    a: arraySet
 });

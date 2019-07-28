@@ -7,8 +7,8 @@ import pipeWith from './util/pipeWith';
 // we're not using Immutable.js setIn because it can't cope with mixed types in the keyPath
 
 export default prep({
-    name: 'setIn',
-    all: (keyPath: string[], childValue: *) => (value: *): * => {
+    n: 'setIn',
+    _: (keyPath: string[], childValue: *) => (value: *): * => {
         let notFoundContainer = value.toMap
             ? value.toMap().clear()
             : {};

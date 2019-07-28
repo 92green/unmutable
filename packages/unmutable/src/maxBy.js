@@ -13,9 +13,9 @@ const defaultComparator = (a: *, b: *): number => {
 };
 
 export default prep({
-    name: 'maxBy',
-    immutable: 'maxBy',
-    all: (comparatorValueMapper: Function, comparator: Function = defaultComparator) => (value: *): * => {
+    n: 'maxBy',
+    i: 'maxBy',
+    _: (comparatorValueMapper: Function, comparator: Function = defaultComparator) => (value: *): * => {
         let counted = count()(value);
         if(counted === 0) {
             return undefined;

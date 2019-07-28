@@ -9,7 +9,7 @@ const defaultComparator = (a: *, b: *): number => {
 };
 
 export default prep({
-    name: 'max',
-    immutable: 'max',
-    all: (comparator: Function = defaultComparator) => maxBy(_ => _, comparator)
+    n: 'max',
+    i: 'max',
+    _: (comparator: Function = defaultComparator) => maxBy(_ => _, comparator)
 });

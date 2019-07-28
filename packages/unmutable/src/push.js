@@ -2,7 +2,7 @@
 import prep from './internal/unmutable';
 
 export default prep({
-    name: 'push',
-    immutable: 'push',
-    array: (...newValues: Array<*>) => (value: Array<*>): Array<*> => [...value, ...newValues]
+    n: 'push',
+    i: 'push',
+    a: (...newValues: Array<*>) => (value: Array<*>): Array<*> => [...value, ...newValues]
 });

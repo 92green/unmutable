@@ -3,12 +3,12 @@ import prep from './internal/unmutable';
 import entries from './entries';
 
 export default prep({
-    name: "keys",
-    immutable: "keys",
-    record: () => (value: *) => value.toSeq().keys(),
-    array: () => (value: Array<*>): * => value.keys(),
+    n: 'keys',
+    i: 'keys',
+    r: () => (value: *) => value.toSeq().keys(),
+    a: () => (value: Array<*>): * => value.keys(),
     // $FlowFixMe - flow cannot recognise Symbol.iterator (see https://github.com/facebook/flow/issues/1163)
-    all: () => (value: Object): * => {
+    _: () => (value: Object): * => {
         let entryIterator = entries()(value);
         return {
             [Symbol.iterator]: function(): Object {

@@ -4,10 +4,10 @@ import keyArray from './keyArray';
 import pipe from './util/pipe';
 
 export default prep({
-    name: 'count',
-    immutable: 'count',
-    array: () => (value: Array<*>): number => value.length,
-    all: () => pipe(
+    n: 'count',
+    i: 'count',
+    a: () => (value: Array<*>): number => value.length,
+    _: () => pipe(
         keyArray(),
         keys => keys.length
     )

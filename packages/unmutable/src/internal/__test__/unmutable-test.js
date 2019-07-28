@@ -6,14 +6,14 @@ import pick from '../../pick';
 let MyRecord = Record({c:"c"});
 
 test(`unmutable prep should handle records`, () => {
-    let immutable = "recordTest";
-    let record = (a,b) => (item) => `${a}${b}${item.c}-record`;
-    let all = (a,b) => (item) => `${a}${b}${item.c}-all`;
+    let i = "recordTest";
+    let r = (a,b) => (item) => `${a}${b}${item.c}-record`;
+    let _ = (a,b) => (item) => `${a}${b}${item.c}-all`;
 
-    let useRecordMethod = prep({name: "recordTest", record: "get"});
-    let useRecord = prep({name: "recordTest", immutable, record, all});
-    //let useImmutable = prep({immutable, all});
-    let useNone = prep({name: "recordTest", immutable});
+    let useRecordMethod = prep({n: "recordTest", r: "get"});
+    let useRecord = prep({n: "recordTest", i, r, _});
+    //let useImmutable = prep({i, all});
+    let useNone = prep({n: "recordTest", i});
 
     expect("c").toBe(useRecordMethod("c")(new MyRecord()));
     expect("abc-record").toBe(useRecord("a","b")(new MyRecord()));
@@ -23,12 +23,12 @@ test(`unmutable prep should handle records`, () => {
 
 test(`unmutable prep should handle Lists`, () => {
     let myList = List([1,2,3]);
-    let all = (key) => (item) => `${key}-${item.get(0)}`;
+    let _ = (key) => (item) => `${key}-${item.get(0)}`;
 
-    let useImmutable = prep({name: "get", immutable: "get", all});
-    let useAll = prep({name: "get", all});
-    let useMissing = prep({name: "noooooo", immutable: "noooooo"});
-    let useNone = prep({name: "get"});
+    let useImmutable = prep({n: "get", i: "get", _});
+    let useAll = prep({n: "get", _});
+    let useMissing = prep({n: "noooooo", i: "noooooo"});
+    let useNone = prep({n: "get"});
 
     expect(2).toBe(useImmutable(1)(myList));
     expect("1-1").toBe(useAll(1)(myList));
@@ -38,11 +38,11 @@ test(`unmutable prep should handle Lists`, () => {
 
 test(`unmutable prep should handle Maps`, () => {
     let myMap = Map({a:1,b:2,c:3});
-    let all = (key) => (item) => `${key}-${item.get('a')}`;
+    let _ = (key) => (item) => `${key}-${item.get('a')}`;
 
-    let useImmutable = prep({name: "get", immutable: "get", all});
-    let useAll = prep({name: "get", all});
-    let useNone = prep({name: "noooooo", immutable: "noooooo"});
+    let useImmutable = prep({n: "get", i: "get", _});
+    let useAll = prep({n: "get", _});
+    let useNone = prep({n: "noooooo", i: "noooooo"});
 
     expect(1).toBe(useImmutable('a')(myMap));
     expect("a-1").toBe(useAll('a')(myMap));
@@ -51,12 +51,12 @@ test(`unmutable prep should handle Maps`, () => {
 
 test(`unmutable prep should handle arrays`, () => {
     let myArray = [1,2,3];
-    let array = (key) => (item) => `${key}-${item[0]}-array`;
-    let all = (key) => (item) => `${key}-${item[0]}-all`;
+    let a = (key) => (item) => `${key}-${item[0]}-array`;
+    let _ = (key) => (item) => `${key}-${item[0]}-all`;
 
-    let useArray = prep({name: "get", immutable: "get", array, all});
-    let useAll = prep({name: "get", immutable: "get", all});
-    let useNone = prep({name: "noooooo", immutable: "noooooo"});
+    let useArray = prep({n: "get", i: "get", a, _});
+    let useAll = prep({n: "get", i: "get", _});
+    let useNone = prep({n: "noooooo", i: "noooooo"});
 
     expect("1-1-array").toBe(useArray(1)(myArray));
     expect("1-1-all").toBe(useAll(1)(myArray));
@@ -65,13 +65,13 @@ test(`unmutable prep should handle arrays`, () => {
 
 test(`unmutable prep should handle Objects`, () => {
     let myObject = {a:1,b:2,c:3};
-    let object = (key) => (item) => `${key}-${item.a}-object`;
-    let all = (key) => (item) => `${key}-${item.a}-all`;
+    let o = (key) => (item) => `${key}-${item.a}-object`;
+    let _ = (key) => (item) => `${key}-${item.a}-all`;
 
-    let useObject = prep({name: "get", immutable: "get", object, all});
-    let useKeyed = prep({name: "get", immutable: "get", all});
-    let useAll = prep({name: "get", immutable: "get", all});
-    let useNone = prep({name: "noooooo", immutable: "noooooo"});
+    let useObject = prep({n: "get", i: "get", o, _});
+    let useKeyed = prep({n: "get", i: "get", _});
+    let useAll = prep({n: "get", i: "get", _});
+    let useNone = prep({n: "noooooo", i: "noooooo"});
 
     expect("a-1-object").toBe(useObject('a')(myObject));
     expect("a-1-all").toBe(useAll('a')(myObject));
@@ -85,13 +85,13 @@ test(`unmutable prep should handle class instances`, () => {
         c = 3;
     }
     let myClassInstance = new A();
-    let object = (key) => (item) => `${key}-${item.a}-object`;
-    let all = (key) => (item) => `${key}-${item.a}-all`;
+    let o = (key) => (item) => `${key}-${item.a}-object`;
+    let _ = (key) => (item) => `${key}-${item.a}-all`;
 
-    let useObject = prep({name: "get", immutable: "get", object, all});
-    let useKeyed = prep({name: "get", immutable: "get", all});
-    let useAll = prep({name: "get", immutable: "get", all});
-    let useNone = prep({name: "noooooo", immutable: "noooooo"});
+    let useObject = prep({n: "get", i: "get", o, _});
+    let useKeyed = prep({n: "get", i: "get", _});
+    let useAll = prep({n: "get", i: "get", _});
+    let useNone = prep({n: "noooooo", i: "noooooo"});
 
     expect("a-1-object").toBe(useObject('a')(myClassInstance));
     expect("a-1-all").toBe(useAll('a')(myClassInstance));
@@ -104,13 +104,13 @@ test(`unmutable prep should handle functions`, () => {
     myFunction.b = 2;
     myFunction.c = 3;
 
-    let object = (key) => (item) => `${key}-${item.a}-object`;
-    let all = (key) => (item) => `${key}-${item.a}-all`;
+    let o = (key) => (item) => `${key}-${item.a}-object`;
+    let _ = (key) => (item) => `${key}-${item.a}-all`;
 
-    let useObject = prep({name: "get", immutable: "get", object, all});
-    let useKeyed = prep({name: "get", immutable: "get", all});
-    let useAll = prep({name: "get", immutable: "get", all});
-    let useNone = prep({name: "noooooo", immutable: "noooooo"});
+    let useObject = prep({n: "get", i: "get", o, _});
+    let useKeyed = prep({n: "get", i: "get", _});
+    let useAll = prep({n: "get", i: "get", _});
+    let useNone = prep({n: "noooooo", i: "noooooo"});
 
     expect("a-1-object").toBe(useObject('a')(myFunction));
     expect("a-1-all").toBe(useAll('a')(myFunction));
@@ -119,11 +119,11 @@ test(`unmutable prep should handle functions`, () => {
 
 test(`unmutable prep should handle unmutable compatible data types`, () => {
     let myUnmutableCompatible = new UnmutableCompatible({a:1, b:2, c:3});
-    let all = (key) => (item) => `all`;
+    let _ = (key) => (item) => `all`;
 
-    let useUnmutable = prep({name: "get", all});
-    let useAll = prep({name: "getThatDoesntExistOnUmutableCompatibleThing", all});
-    let useNone = prep({name: "noooooo"});
+    let useUnmutable = prep({n: "get", _});
+    let useAll = prep({n: "getThatDoesntExistOnUmutableCompatibleThing", _});
+    let useNone = prep({n: "noooooo"});
 
     expect(useUnmutable('a')(myUnmutableCompatible)).toBe(1); // use unmutable compatible method
     expect(useAll('a')(myUnmutableCompatible)).toBe("all"); // fallback to all if unmutable compatible method doesnt exist
@@ -131,7 +131,7 @@ test(`unmutable prep should handle unmutable compatible data types`, () => {
 });
 
 test(`unmutable prep should not handle strings as values`, () => {
-    let useNone = prep({name: "find", array: () => {}});
+    let useNone = prep({n: "find", a: () => {}});
     expect(() => useNone()("IMNOTACOLLECTION")).toThrowError(`find() cannot be called with a value of IMNOTACOLLECTION`);
 });
 

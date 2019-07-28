@@ -4,8 +4,8 @@ import get from './get';
 import values from './values';
 
 export default prep({
-    name: 'first',
-    immutable: 'first',
-    array: () => get(0),
-    all: () => (value) => values()(value).next().value
+    n: 'first',
+    i: 'first',
+    a: () => get(0),
+    _: () => (value) => values()(value).next().value
 });

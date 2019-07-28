@@ -2,8 +2,8 @@
 import prep from './internal/unmutable';
 
 export default prep({
-    name: 'clear',
-    immutable: 'clear',
-    object: () => (): Object => ({}),
-    array: () => (): Array<*> => []
+    n: 'clear',
+    i: 'clear',
+    o: () => (): Object => ({}),
+    a: () => (): Array<*> => []
 });

@@ -14,8 +14,8 @@ let updateIn = (keyPath: string[], updater: Function, notSetValue: * = undefined
 };
 
 export default prep({
-    name: 'updateIn',
-    all: overload({
+    n: 'updateIn',
+    _: overload({
         ["2"]: (keyPath: string[], updater: Function) => updateIn(keyPath, updater),
         ["3"]: (keyPath: string[], notSetValue: *, updater: Function) => updateIn(keyPath, updater, notSetValue)
     })

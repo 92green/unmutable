@@ -2,9 +2,9 @@
 import prep from './internal/unmutable';
 
 export default prep({
-    name: 'sort',
-    immutable: 'sort',
-    array: (comparator: Function) => (value: Array<*>): Array<*> => {
+    n: 'sort',
+    i: 'sort',
+    a: (comparator: Function) => (value: Array<*>): Array<*> => {
         return [...value].sort(comparator);
     }
 });

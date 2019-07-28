@@ -7,10 +7,10 @@ import last from './last';
 import pop from './pop';
 
 export default prep({
-    name: 'butLast',
-    immutable: 'butLast',
-    array: pop,
-    all: () => (value) => pipeWith(
+    n: 'butLast',
+    i: 'butLast',
+    a: pop,
+    _: () => (value) => pipeWith(
         value,
         del(pipeWith(
             value,

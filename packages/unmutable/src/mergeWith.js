@@ -4,9 +4,9 @@ import toObject from './toObject';
 import pipe from './util/pipe';
 
 export default prep({
-    name: 'mergeWith',
-    immutable: 'mergeWith',
-    object: (merger: Function, ...newValues: Array<*>) => pipe(
+    n: 'mergeWith',
+    i: 'mergeWith',
+    o: (merger: Function, ...newValues: Array<*>) => pipe(
         ...newValues.map(pipe(
             toObject(),
             (newValue) => (value) => {

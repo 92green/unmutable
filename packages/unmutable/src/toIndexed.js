@@ -3,7 +3,7 @@ import prep from './internal/unmutable';
 import toArray from './toArray';
 
 export default prep({
-    name: 'toIndexed',
-    immutable: 'toList',
-    all: toArray
+    n: 'toIndexed',
+    i: 'toList',
+    _: toArray
 });

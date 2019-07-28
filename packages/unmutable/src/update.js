@@ -23,19 +23,19 @@ let updateArray = (key: number, updater: Function, notSetValue: * = undefined) =
 };
 
 export default prep({
-    name: 'update',
-    immutable: 'update',
-    object: overload({
+    n: 'update',
+    i: 'update',
+    o: overload({
         ["1"]: updateSelf,
         ["2"]: (key: string, updater: Function) => updateObject(key, updater),
         ["3"]: (key: string, notSetValue: *, updater: Function) => updateObject(key, updater, notSetValue)
     }),
-    array: overload({
+    a: overload({
         ["1"]: updateSelf,
         ["2"]: (key: number, updater: Function) => updateArray(key, updater),
         ["3"]: (key: number, notSetValue: *, updater: Function) => updateArray(key, updater, notSetValue)
     }),
-    all: overload({
+    _: overload({
         ["1"]: updateSelf,
         ["2"]: (key: number, updater: Function) => updateAll(key, updater),
         ["3"]: (key: number, notSetValue: *, updater: Function) => updateAll(key, updater, notSetValue)

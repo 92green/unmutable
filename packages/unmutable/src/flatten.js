@@ -18,9 +18,9 @@ let getDepth = (depthOrShallow: ?boolean|number): number => {
 };
 
 export default prep({
-    name: 'flatten',
-    immutable: 'flatten',
-    all: (depthOrShallow: ?boolean|number): Function => (value: *): * => {
+    n: 'flatten',
+    i: 'flatten',
+    _: (depthOrShallow: ?boolean|number): Function => (value: *): * => {
         let depth: number = getDepth(depthOrShallow);
 
         for(let i = 0; i < depth; i++) {

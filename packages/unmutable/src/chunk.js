@@ -5,8 +5,8 @@ import toArray from './toArray';
 import pipeWith from './util/pipeWith';
 
 export default prep({
-    name: "chunk",
-    all: (size: number): * => (value: *): *[] => {
+    n: 'chunk',
+    _: (size: number): * => (value: *): *[] => {
         let chunkNumber: number = -1;
         return pipeWith(
             value,

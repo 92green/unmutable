@@ -2,7 +2,7 @@
 import prep from './internal/unmutable';
 
 export default prep({
-    name: 'reverse',
-    immutable: 'reverse',
-    array: () => (item: Array<*>): Array<*> => [...item].reverse()
+    n: 'reverse',
+    i: 'reverse',
+    a: () => (item: Array<*>): Array<*> => [...item].reverse()
 });

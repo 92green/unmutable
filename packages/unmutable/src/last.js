@@ -5,10 +5,10 @@ import valueArray from './valueArray';
 import pipe from './util/pipe';
 
 export default prep({
-    name: 'last',
-    immutable: 'last',
-    array: () => get(-1),
-    all: () => pipe(
+    n: 'last',
+    i: 'last',
+    a: () => get(-1),
+    _: () => pipe(
         valueArray(),
         get(-1)
     )

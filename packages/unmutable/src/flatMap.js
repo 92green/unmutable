@@ -7,9 +7,9 @@ import reduce from './reduce';
 import pipeWith from './util/pipeWith';
 
 export default prep({
-    name: 'flatMap',
-    immutable: 'flatMap',
-    all: (mapper: Function): Function => (value: *): * => {
+    n: 'flatMap',
+    i: 'flatMap',
+    _: (mapper: Function): Function => (value: *): * => {
         return pipeWith(
             value,
             map(mapper),

@@ -2,15 +2,15 @@
 import prep from './internal/unmutable';
 
 export default prep({
-    name: 'delete',
-    immutable: 'delete',
-    record: 'delete',
-    object: (key: string) => (value: Object): Object => {
+    n: 'delete',
+    i: 'delete',
+    r: 'delete',
+    o: (key: string) => (value: Object): Object => {
         let clone = {...value};
         delete clone[key];
         return clone;
     },
-    array: (key: number) => (value: Array<*>): Array<*> => {
+    a: (key: number) => (value: Array<*>): Array<*> => {
         let clone = [...value];
         clone.splice(key, 1);
         return clone;

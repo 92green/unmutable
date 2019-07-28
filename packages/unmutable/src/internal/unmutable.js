@@ -10,13 +10,13 @@ const error = (name: string, value: *) => {
 };
 
 type PrepConfig = {
-    name: string,
-    unmutable?: string,
-    record?: string|Function,
-    immutable?: string|Function,
-    array?: Function,
-    object?: Function,
-    all?: Function
+    n: string,
+    u?: string,
+    r?: string|Function,
+    i?: string|Function,
+    a?: Function,
+    o?: Function,
+    _?: Function
 };
 
 type PrepType = {
@@ -26,7 +26,7 @@ type PrepType = {
 };
 
 const UNMUTABLE_COMPATIBLE_TYPE: PrepType = {
-    type: "unmutable",
+    type: 'u',
     isType: (value: *): boolean => isUnmutableCompatible(value),
     fn: (name: string, ignore: *, all: Function) => (...args: Array<*>) => (value: *): * => {
         if(!value[name]) {
@@ -41,14 +41,14 @@ const UNMUTABLE_COMPATIBLE_TYPE: PrepType = {
 
 const PREP_TYPES: Array<PrepType> = [
     {
-        type: "record",
+        type: 'r',
         isType: (value: *): boolean => isRecord(value),
         fn: (name: string, record: string|Function) => typeof record === 'string'
             ? (...args: Array<*>) => (value: *) => value[record](...args)
             : record
     },
     {
-        type: "immutable",
+        type: 'i',
         isType: (value: *): boolean => _isImmutableNoRecordChecks(value),
         fn: (name: string, immutable: string|Function) => typeof immutable === 'string'
             ? (...args: Array<*>) => (value: *): * => {
@@ -60,17 +60,17 @@ const PREP_TYPES: Array<PrepType> = [
             : immutable
     },
     {
-        type: "array",
+        type: 'a',
         isType: (value: *): boolean => Array.isArray(value),
         fn: (name: string, array: Function) => array
     },
     {
-        type: "object",
+        type: 'o',
         isType: isObject,
         fn: (name: string, object: Function) => object
     },
     {
-        type: "all",
+        type: '_',
         isType: (): boolean => true,
         fn: (name: string, all: Function) => all
     }
@@ -84,12 +84,12 @@ export default (config: PrepConfig): Function => {
         .map(({type, isType, fn}) => ({
             type,
             isType,
-            fn: fn(config.name, config[type], config.all)
+            fn: fn(config.n, config[type], config._)
         }));
 
     return (...args: *) => (value: *): * => {
 
-        let throwTypeError = () => error(config.name, value);
+        let throwTypeError = () => error(config.n, value);
         let type: ?PrepType = types.find(({isType}) => isType(value));
 
         if(type) {

@@ -5,8 +5,8 @@ import toArray from './toArray';
 import pipeWith from './util/pipeWith';
 
 export default prep({
-    name: "deal",
-    all: (groups: number): * => (value: *): *[] => {
+    n: 'deal',
+    _: (groups: number): * => (value: *): *[] => {
         let groupNumber: number = -1;
         return pipeWith(
             value,

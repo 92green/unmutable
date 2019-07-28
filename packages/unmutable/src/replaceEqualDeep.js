@@ -24,6 +24,6 @@ const replaceEqualDeep = (other: any) => (collection: *): * => {
 };
 
 export default prep({
-    name: 'replaceEqualDeep',
-    all: replaceEqualDeep
+    n: 'replaceEqualDeep',
+    _: replaceEqualDeep
 });

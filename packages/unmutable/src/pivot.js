@@ -8,8 +8,8 @@ import set from './set';
 import update from './update';
 
 export default prep({
-    name: 'pivot',
-    all: () => (value: *): * => {
+    n: 'pivot',
+    _: () => (value: *): * => {
 
         let outerContainer = pipeWith(
             value,

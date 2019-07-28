@@ -3,6 +3,6 @@ import prep from './internal/unmutable';
 import keys from './keys';
 
 export default prep({
-    name: 'keyArray',
-    all: () => (value: Array<*>): Array<*> => [...keys()(value)]
+    n: 'keyArray',
+    _: () => (value: Array<*>): Array<*> => [...keys()(value)]
 });

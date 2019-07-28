@@ -13,9 +13,9 @@ const defaultComparator = (a: *, b: *): number => {
 };
 
 export default prep({
-    name: 'minBy',
-    immutable: 'minBy',
-    all: (comparatorValueMapper: Function, comparator: Function = defaultComparator) => (value: *): * => {
+    n: 'minBy',
+    i: 'minBy',
+    _: (comparatorValueMapper: Function, comparator: Function = defaultComparator) => (value: *): * => {
         let counted = count()(value);
         if(counted === 0) {
             return undefined;

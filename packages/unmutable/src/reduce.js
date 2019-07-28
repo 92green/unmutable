@@ -4,14 +4,14 @@ import pipeWith from './util/pipeWith';
 import entryArray from './entryArray';
 
 export default prep({
-    name: 'reduce',
-    immutable: 'reduce',
-    array: (reducer: Function, ...initialReduction: *[]) => (value: Array<*>): * => {
+    n: 'reduce',
+    i: 'reduce',
+    a: (reducer: Function, ...initialReduction: *[]) => (value: Array<*>): * => {
         return initialReduction.length
             ? value.reduce(reducer, initialReduction[0])
             : value.reduce(reducer);
     },
-    all: (reducer: Function, ...initialReduction: *[]) => (value: *): * => {
+    _: (reducer: Function, ...initialReduction: *[]) => (value: *): * => {
         let fn = (reduction, [key, childValue]) => reducer(reduction, childValue, key, value);
         return pipeWith(
             value,

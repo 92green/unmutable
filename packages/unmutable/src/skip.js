@@ -3,7 +3,7 @@ import prep from './internal/unmutable';
 import slice from './slice';
 
 export default prep({
-    name: 'skip',
-    immutable: 'skip',
-    all: (amount: number) => slice(amount)
+    n: 'skip',
+    i: 'skip',
+    _: (amount: number) => slice(amount)
 });

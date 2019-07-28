@@ -6,8 +6,8 @@ import filter from './filter';
 import notEquals from './notEquals';
 
 export default prep({
-    name: 'uniqueBy',
-    all: (getter: Function): Function => {
+    n: 'uniqueBy',
+    _: (getter: Function): Function => {
         let hashes = {};
         let values = [];
         return filter((value: *, key: *, iter: *): boolean => {

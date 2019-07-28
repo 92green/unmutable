@@ -9,7 +9,7 @@ const defaultComparator = (a: *, b: *): number => {
 };
 
 export default prep({
-    name: 'min',
-    immutable: 'min',
-    all: (comparator: Function = defaultComparator) => minBy(_ => _, comparator)
+    n: 'min',
+    i: 'min',
+    _: (comparator: Function = defaultComparator) => minBy(_ => _, comparator)
 });

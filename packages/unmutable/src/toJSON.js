@@ -5,7 +5,7 @@ import toObject from './toObject';
 import isIndexed from './util/isIndexed';
 
 export default prep({
-    name: "toJSON",
-    immutable: "toJSON",
-    all: () => (value) => isIndexed(value) ? toArray()(value) : toObject()(value)
+    n: 'toJSON',
+    i: 'toJSON',
+    _: () => (value) => isIndexed(value) ? toArray()(value) : toObject()(value)
 });

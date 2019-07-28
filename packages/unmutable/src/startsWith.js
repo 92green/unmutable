@@ -6,8 +6,8 @@ import take from './take';
 import pipe from './util/pipe';
 
 export default prep({
-    name: "startsWith",
-    all: (other: Array<any>) => pipe(
+    n: 'startsWith',
+    _: (other: Array<any>) => pipe(
         take(size()(other)),
         equals(other)
     )

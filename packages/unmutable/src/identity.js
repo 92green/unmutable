@@ -2,6 +2,6 @@
 import prep from './internal/unmutable';
 
 export default prep({
-    name: 'identity',
-    all: () => (ii: *): * => ii
+    n: 'identity',
+    _: () => (ii: *): * => ii
 });

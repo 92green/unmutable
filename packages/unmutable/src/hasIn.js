@@ -7,8 +7,8 @@ import isValueObject from './util/isValueObject';
 // we're not using Immutable.js hasIn because it can't cope with mixed types in the keyPath
 
 export default prep({
-    name: 'hasIn',
-    all: (keyPath: string[]) => (value: *): boolean => {
+    n: 'hasIn',
+    _: (keyPath: string[]) => (value: *): boolean => {
         let ii = value;
         for(let key of keyPath) {
             if(!isValueObject(ii) || !has(key)(ii)) {

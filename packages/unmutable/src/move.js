@@ -6,8 +6,8 @@ import splice from './splice';
 import pipeWith from './util/pipeWith';
 
 export default prep({
-    name: "move",
-    all: (fromIndex: number, toIndex: number): * => (value: *) => {
+    n: 'move',
+    _: (fromIndex: number, toIndex: number): * => (value: *) => {
         let valueToMove = get(fromIndex)(value);
         let insert = splice(toIndex, 0, valueToMove);
         if(toIndex < 0) {

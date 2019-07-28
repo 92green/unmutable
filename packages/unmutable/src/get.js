@@ -16,9 +16,9 @@ export const arrayGet = (key: number, notFoundValue: * = undefined) => (value: A
 };
 
 export default prep({
-    name: 'get',
-    immutable: 'get',
-    record: 'get',
-    object: objectGet,
-    array: arrayGet
+    n: 'get',
+    i: 'get',
+    r: 'get',
+    o: objectGet,
+    a: arrayGet
 });

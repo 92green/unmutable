@@ -6,8 +6,8 @@ import takeLast from './takeLast';
 import pipe from './util/pipe';
 
 export default prep({
-    name: "endsWith",
-    all: (other: Array<any>) => pipe(
+    n: 'endsWith',
+    _: (other: Array<any>) => pipe(
         takeLast(size()(other)),
         equals(other)
     )

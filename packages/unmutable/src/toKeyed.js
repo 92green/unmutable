@@ -4,8 +4,8 @@ import identity from './identity';
 import toObject from './toObject';
 
 export default prep({
-    name: "toKeyed",
-    immutable: "toMap",
-    object: () => identity(),
-    array: toObject
+    n: 'toKeyed',
+    i: 'toMap',
+    o: identity,
+    a: toObject
 });

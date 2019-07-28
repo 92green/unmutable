@@ -6,8 +6,8 @@ import toArray from './toArray';
 import pipeWith from './util/pipeWith';
 
 export default prep({
-    name: "chunkBy",
-    all: (predicate: Function): * => (value: *): *[] => {
+    n: 'chunkBy',
+    _: (predicate: Function): * => (value: *): *[] => {
         let chunkNumber: number = 0;
 
         let chunks: *[] = reduce((chunks, childValue, key) => {

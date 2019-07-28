@@ -3,9 +3,9 @@ import prep from './internal/unmutable';
 import entries from './entries';
 
 export default prep({
-    name: 'forEach',
-    immutable: 'forEach',
-    all: (sideEffect: Function) => (value: Object): number => {
+    n: 'forEach',
+    i: 'forEach',
+    _: (sideEffect: Function) => (value: Object): number => {
         let iterator = entries()(value);
         let i = 0;
         for(let [key, childValue] of iterator) {

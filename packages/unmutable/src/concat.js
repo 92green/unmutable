@@ -2,7 +2,7 @@
 import prep from './internal/unmutable';
 
 export default prep({
-    name: 'concat',
-    immutable: 'concat',
-    array: (...newValues) => (item: Array<*>): Array<*> => item.concat(...newValues)
+    n: 'concat',
+    i: 'concat',
+    a: (...newValues) => (item: Array<*>): Array<*> => item.concat(...newValues)
 });

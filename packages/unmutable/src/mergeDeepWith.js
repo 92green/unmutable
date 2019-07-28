@@ -24,7 +24,7 @@ let mergeDeepWith = (merger: Function, ...newValues: Array<*>) => mergeWith(
 );
 
 export default prep({
-    name: 'mergeDeepWith',
-    immutable: 'mergeDeepWith',
-    object: mergeDeepWith
+    n: 'mergeDeepWith',
+    i: 'mergeDeepWith',
+    o: mergeDeepWith
 });
