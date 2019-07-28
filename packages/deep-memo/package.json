@@ -4,7 +4,7 @@
     "lib"
   ],
   "name": "deep-memo",
-  "version": "1.0.0-alpha.4",
+  "version": "1.0.0-alpha.5",
   "description": "A memoize-one function that analyses the function output and retains previous object references wherever data hasn't changed",
   "license": "MIT",
   "author": "Damien Clarke",
@@ -41,7 +41,7 @@
     "fast-deep-equal": "^1.0.0",
     "is-plain-object": "^2.0.4",
     "lodash.range": "^3.2.0",
-    "unmutable": "^1.0.0-alpha.4"
+    "unmutable": "^1.0.0-alpha.5"
   },
   "sideEffects": false,
   "husky": {
