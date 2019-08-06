@@ -340,7 +340,24 @@ update(updater: (collection: any) => any) => (collection) => newCollection`,
                     },
                     {
                         name: "map()",
-                        description: ""
+                        definition: "map(mapper: (value: any, key: string|number, original: any) => newValue) => (collection) => newCollection",
+                        immutablejs: true,
+                        description: "Returns a new collection with values passed through a mapper function.",
+                        types: ["object", "array", "uc", "imap", "ilist", "irecord"]
+                    },
+                    {
+                        name: "mapKeys()",
+                        definition: "mapKeys(mapper: (key: string|number, value: any, original: any) => newKey) => (collection) => newCollection",
+                        immutablejs: true,
+                        description: "Returns a new collection with keys passed through a mapper function.",
+                        types: ["object", "uc", "imap"]
+                    },
+                    {
+                        name: "mapEntries()",
+                        definition: "mapEntries(mapper: ([key, value]: any, index: number, original: any) => [newKey, newValue]) => (collection) => newCollection",
+                        immutablejs: true,
+                        description: "Returns a new collection with key value pairs passed through a mapper function.",
+                        types: ["object", "uc", "imap"]
                     },
                     {
                         name: "flatMap()",
@@ -349,6 +366,13 @@ update(updater: (collection: any) => any) => (collection) => newCollection`,
                     {
                         name: "filter()",
                         description: ""
+                    },
+                    {
+                        name: "flip()",
+                        definition: "flip() => (collection) => newCollection",
+                        immutablejs: true,
+                        description: "Returns a new collection with its key values pairs flipped, so values become keys and keys become values",
+                        types: ["object", "uc", "imap"]
                     },
                     {
                         name: "zip()",
@@ -478,6 +502,10 @@ update(updater: (collection: any) => any) => (collection) => newCollection`,
                 items: withRenderer([
                     {
                         name: "interpose()",
+                        description: ""
+                    },
+                    {
+                        name: "interleave()",
                         description: ""
                     },
                     {
