@@ -255,7 +255,55 @@ update(updater: (collection: any) => any) => (collection) => newCollection`,
                         name: "unit()",
                         definition: "unit(otherCollection) => (collection) => newCollection",
                         description: "Attempts to turn `otherCollection` into `collection`s data type, and returns `newCollection`."
-                    }
+                    },
+                    {
+                        name: "setMutate()",
+                        definition: "setMutate(key: string|number, value: any) => (collection) => alteredCollection",
+                        immutablejs: false,
+                        description: "Like `set()` but performs mutations on `value` for objects and arrays. It is less expensive than `set()`.",
+                        types: ["object", "array", "uc", "imap", "ilist", "irecord"],
+                        example: [
+                            `
+                                let data = {a: 'foo', b: 'bar'};
+
+                                setMutate('a', 'baz')(data);
+                            `,
+                            `
+                                let data = ['foo','bar','baz'];
+
+                                setMutate(1, 'qux')(data);
+                            `,
+                            `
+                                let data = ['foo','bar','baz'];
+
+                                setMutate(-1, 'qux')(data);
+                            `
+                        ]
+                    },
+                    {
+                        name: "deleteMutate()",
+                        definition: "deleteMutate(key: string|number, value: any) => (collection) => alteredCollection",
+                        immutablejs: false,
+                        description: "Like `delete()` but performs mutations on `value` for objects and arrays. It is less expensive than `delete()`.",
+                        types: ["object", "array", "uc", "imap", "ilist", "irecord"],
+                        example: [
+                            `
+                                let data = {a: 'foo', b: 'bar'};
+
+                                deleteMutate('a', 'baz')(data);
+                            `,
+                            `
+                                let data = ['foo','bar','baz'];
+
+                                deleteMutate(1, 'qux')(data);
+                            `,
+                            `
+                                let data = ['foo','bar','baz'];
+
+                                deleteMutate(-1, 'qux')(data);
+                            `
+                        ]
+                    },
                 ])
             },
             {

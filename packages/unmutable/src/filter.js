@@ -1,8 +1,9 @@
 // @flow
 import prep from './internal/unmutable';
 import pipeWith from './util/pipeWith';
-import del from './delete'; // TODO - should be deleteMutate
+import deleteMutate from './deleteMutate';
 import entryArray from './entryArray';
+import clone from './clone';
 
 export default prep({
     name: 'filter',
@@ -16,6 +17,13 @@ export default prep({
     all: (predicate: Function) => (value: *): * => pipeWith(
         value,
         entryArray(),
-        entries => entries.reduce((reduction, [key, childValue]) => predicate(childValue, key, value) ? reduction : del(key)(reduction), value)
+        entries => entries.reduce(
+            (reduction, [key, childValue]) => {
+                return predicate(childValue, key, value)
+                    ? reduction
+                    : deleteMutate(key)(reduction);
+            },
+            clone()(value)
+        )
     )
 });
