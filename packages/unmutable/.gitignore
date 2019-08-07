@@ -13,6 +13,7 @@
 /delete.js
 /deleteAll.js
 /deleteIn.js
+/deleteMutate.js
 /doIf.js
 /endsWith.js
 /entries.js
@@ -34,6 +35,7 @@
 /first.js
 /flatMap.js
 /flatten.js
+/flip.js
 /forEach.js
 /get.js
 /getIn.js
@@ -45,6 +47,7 @@
 /includes.js
 /indexOf.js
 /insert.js
+/interleave.js
 /interpose.js
 /isAssociative.js
 /isCollection.js
@@ -69,6 +72,8 @@
 /lastKeyOf.js
 /log.js
 /map.js
+/mapEntries.js
+/mapKeys.js
 /max.js
 /maxBy.js
 /merge.js
@@ -103,6 +108,7 @@
 /rotate.js
 /set.js
 /setIn.js
+/setMutate.js
 /setSize.js
 /shallowEquals.js
 /shallowToJS.js

@@ -2,7 +2,8 @@
 import prep from './internal/unmutable';
 import pipeWith from './util/pipeWith';
 import entryArray from './entryArray';
-import set from './set'; // TODO - should be setMutate
+import setMutate from './setMutate';
+import clone from './clone';
 
 export default prep({
     name: 'map',
@@ -16,6 +17,11 @@ export default prep({
     all: (mapper: Function) => (value: Object): * => pipeWith(
         value,
         entryArray(),
-        entries => entries.reduce((reduction, [key, childValue]) => set(key, mapper(childValue, key, value))(reduction), value)
+        entries => entries.reduce(
+            (reduction, [key, childValue]) => {
+                return setMutate(key, mapper(childValue, key, value))(reduction);
+            },
+            clone()(value)
+        )
     )
 });
