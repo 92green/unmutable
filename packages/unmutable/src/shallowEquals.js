@@ -8,7 +8,7 @@ export default prep({
     name: 'shallowEquals',
     all: (other: *) => (value: *): boolean => {
         return size()(value) === size()(other)
-            ? every((childValue: *, key: *) => childValue === get(key)(other))(value)
+            ? every((childValue: *, key: *) => Object.is(childValue, get(key)(other)))(value)
             : false;
     }
 });
