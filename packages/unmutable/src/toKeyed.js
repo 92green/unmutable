@@ -7,5 +7,6 @@ export default prep({
     name: "toKeyed",
     immutable: "toMap",
     object: () => identity(),
-    array: toObject
+    array: toObject,
+    ap: true
 });

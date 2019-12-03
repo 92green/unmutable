@@ -8,5 +8,7 @@ export default prep({
         let cloned = [...value];
         cloned.splice(index, removeNum, ...values);
         return cloned;
-    }
+    },
+    ap: true,
+    of: true
 });

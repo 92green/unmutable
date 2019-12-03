@@ -10,5 +10,7 @@ export default prep({
     array: (...collections: Array<*>) => pipe(
         zip(...collections),
         flatten(true)
-    )
+    ),
+    ap: true,
+    of: true
 });

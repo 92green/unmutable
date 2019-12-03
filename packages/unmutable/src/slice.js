@@ -17,5 +17,7 @@ export default prep({
         return (end || end === 0)
             ? value.slice(begin, end)
             : value.slice(begin);
-    }
+    },
+    ap: true,
+    of: true
 });

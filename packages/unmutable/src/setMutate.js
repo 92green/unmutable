@@ -18,5 +18,7 @@ export default prep({
     record: 'set',
     object: objectSetMutate,
     array: arraySetMutate,
-    all: (...args) => value => value.set(...args)
+    all: (...args) => value => value.set(...args),
+    ap: true,
+    of: true
 });

@@ -10,6 +10,8 @@ const error = (name: string, value: *) => {
 };
 
 type PrepConfig = {
+    ap?: boolean,
+    of?: boolean,
     name: string,
     unmutable?: string,
     record?: string|Function,
@@ -87,8 +89,9 @@ export default (config: PrepConfig): Function => {
             fn: fn(config.name, config[type], config.all)
         }));
 
-    return (...args: *) => (value: *): * => {
+    const {ap, of} = config;
 
+    const processPrimitiveValue = (...args: Array<mixed>) => (value: mixed) => {
         let throwTypeError = () => error(config.name, value);
         let type: ?PrepType = types.find(({isType}) => isType(value));
 
@@ -103,5 +106,16 @@ export default (config: PrepConfig): Function => {
             }
         }
         throwTypeError();
+    }
+
+    return (...args: *) => (value: *): * => {
+        let isAp = ap && value && typeof value.ap === 'function' && typeof value.of === 'function';
+        const params = processPrimitiveValue(...args);
+
+        if(isAp) {
+            let newValue = value.ap(params);
+            return of ? value.of(newValue) : newValue;
+        }
+        return params(value);
     };
 };

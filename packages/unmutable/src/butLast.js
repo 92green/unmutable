@@ -7,6 +7,8 @@ import last from './last';
 import pop from './pop';
 
 export default prep({
+    ap: true,
+    of: true,
     name: 'butLast',
     immutable: 'butLast',
     array: pop,

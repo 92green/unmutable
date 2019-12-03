@@ -26,5 +26,6 @@ export default prep({
                 })
         };
     },
-    array: () => (value: Array<*>): * => value.entries()
+    array: () => (value: Array<*>): * => value.entries(),
+    ap: true
 });

@@ -15,5 +15,7 @@ export default prep({
             comparatorValueMapper(a),
             comparatorValueMapper(b)
         ));
-    }
+    },
+    ap: true,
+    of: true
 });

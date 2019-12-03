@@ -10,5 +10,6 @@ export default prep({
     array: () => reduce((obj: Object, value: *, index: number) => ({
         ...obj,
         [index]: value
-    }), {})
+    }), {}),
+    ap: true
 });

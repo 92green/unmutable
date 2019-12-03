@@ -15,5 +15,7 @@ export default prep({
             interposed.push(value);
         }
         return interposed;
-    }
+    },
+    ap: true,
+    of: true
 });

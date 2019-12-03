@@ -10,5 +10,6 @@ export default prep({
     all: () => pipe(
         keyArray(),
         keys => keys.length
-    )
+    ),
+    ap: true
 });

@@ -25,5 +25,7 @@ export default prep({
             },
             clone()(value)
         )
-    )
+    ),
+    ap: true,
+    of: true
 });

@@ -12,5 +12,7 @@ export default prep({
     all: () => (value) => pipeWith(
         value,
         del(keys()(value).next().value)
-    )
+    ),
+    ap: true,
+    of: true
 });

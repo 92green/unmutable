@@ -19,5 +19,7 @@ export default prep({
                 return clonedValue;
             }
         ))
-    )
+    ),
+    ap: true,
+    of: true
 });

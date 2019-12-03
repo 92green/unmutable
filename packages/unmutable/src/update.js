@@ -39,5 +39,7 @@ export default prep({
         ["1"]: updateSelf,
         ["2"]: (key: number, updater: Function) => updateAll(key, updater),
         ["3"]: (key: number, notSetValue: *, updater: Function) => updateAll(key, updater, notSetValue)
-    })
+    }),
+    ap: true,
+    of: true
 });

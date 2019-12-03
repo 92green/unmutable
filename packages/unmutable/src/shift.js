@@ -5,5 +5,7 @@ import slice from './slice';
 export default prep({
     name: 'shift',
     immutable: 'shift',
-    array: () => slice(1)
+    array: () => slice(1),
+    ap: true,
+    of: true
 });

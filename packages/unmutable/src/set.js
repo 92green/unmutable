@@ -15,5 +15,7 @@ export default prep({
     immutable: 'set',
     record: 'set',
     object: objectSet,
-    array: arraySet
+    array: arraySet,
+    ap: true,
+    of: true
 });

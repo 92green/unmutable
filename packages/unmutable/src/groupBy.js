@@ -20,5 +20,6 @@ export default prep({
         }
         grouped[groupKey][key] = ii;
         return grouped;
-    }, {})
+    }, {}),
+    ap: true
 });

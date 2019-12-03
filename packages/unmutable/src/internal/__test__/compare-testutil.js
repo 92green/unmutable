@@ -19,7 +19,8 @@ type CompareConfig = {
     fn: Function, // the function to test
     toJS?: boolean, // a boolean indicating whether the result of performing the function on fromJS(item) will need to be turned back into plain javascript for comparison
     record?: boolean, // set to true to also test against Immutable.js Records
-    unmutableCompatible?: boolean, // set to true to also test against the Unmutable compatible class testutil
+    unmutableCompatible?: boolean, // set to true to also test against the Unmutable compatible class testutil,
+    of?: boolean // set to true if the function should call ApTest.of
 };
 
 export default ({item, name, fn, toJS, record, unmutableCompatible}: CompareConfig) => {
@@ -64,4 +65,24 @@ export default ({item, name, fn, toJS, record, unmutableCompatible}: CompareConf
             expect(ucResult).toEqual(plainResult);
         });
     }
+
+    test.only(`ap test: ${name}`, () => {
+        class ApTest<A> {
+            _data: A;
+            constructor(data: A) {
+                this._data = data;
+            }
+            ap<B>(fn: A => B) {
+                return fn(this._data);
+            }
+            of<B>(data): ApTest<B> {
+                return new ApTest(data);
+            }
+        }
+
+        const nextAp = fn(new ApTest(item));
+        const compareValue = (nextAp && nextAp._data) || nextAp;
+        expect(fn(item)).toEqual(compareValue);
+    });
+
 };

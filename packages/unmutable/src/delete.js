@@ -14,5 +14,7 @@ export default prep({
         let clone = [...value];
         clone.splice(key, 1);
         return clone;
-    }
+    },
+    ap: true,
+    of: true
 });

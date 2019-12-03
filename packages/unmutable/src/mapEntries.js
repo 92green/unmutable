@@ -18,5 +18,7 @@ export default prep({
             },
             clear()(value)
         )
-    )
+    ),
+    ap: true,
+    of: true
 });

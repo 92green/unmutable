@@ -21,5 +21,7 @@ export default prep({
             );
         }
         return zipped;
-    }
+    },
+    ap: true,
+    of: true
 });

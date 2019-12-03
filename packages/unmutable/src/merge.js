@@ -18,5 +18,7 @@ export default prep({
             toArray(),
             (newValue) => (value) => [...value, ...newValue]
         ))
-    )
+    ),
+    ap: true,
+    of: true
 });
