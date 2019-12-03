@@ -123,6 +123,7 @@
 /sort.js
 /sortBy.js
 /splice.js
+/stableSortBy.js
 /startsWith.js
 /strictEquals.js
 /swap.js
@@ -131,6 +132,7 @@
 /takeUntil.js
 /takeWhile.js
 /toArray.js
+/toEntries.js
 /toIndexed.js
 /toJS.js
 /toJSON.js

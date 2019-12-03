@@ -403,6 +403,11 @@ update(updater: (collection: any) => any) => (collection) => newCollection`,
                         description: ""
                     },
                     {
+                        name: "stableSortBy()",
+                        definition: "stableSortBy(comparatorValueMapper: value => valueToCompare, comparator?: Function) => (collection) => newCollection",
+                        description: "Like sortBy(), but guarantees that items are stable sorted, meaning that the order of items that produce equivalent sort values are retained."
+                    },
+                    {
                         name: "groupBy()",
                         description: ""
                     },
@@ -469,6 +474,11 @@ update(updater: (collection: any) => any) => (collection) => newCollection`,
                     {
                         name: "toObject()",
                         description: ""
+                    },
+                    {
+                        name: "toEntries()",
+                        definition: "toEntries() => (collection) => newCollection",
+                        description: "Converts collections into arrays of [key, value] tuples."
                     }
                 ])
             },
