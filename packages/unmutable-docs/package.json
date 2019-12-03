@@ -2,7 +2,7 @@
   "name": "unmutable-docs",
   "private": true,
   "description": "Unmutable docs",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": "Damien Clarke",
   "dependencies": {
     "browser-util-inspect": "^0.2.0",
