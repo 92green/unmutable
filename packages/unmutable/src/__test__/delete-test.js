@@ -8,7 +8,8 @@ compare({
     fn: del('a'),
     toJS: true,
     record: true,
-    unmutableCompatible: true
+    unmutableCompatible: true,
+    of: true
 });
 
 compare({
@@ -17,26 +18,30 @@ compare({
     fn: del('z'),
     toJS: true,
     record: true,
-    unmutableCompatible: true
+    unmutableCompatible: true,
+    of: true
 });
 
 compare({
     name: `delete() deletes an index`,
     item: [1,2,3],
     fn: del(2),
-    toJS: true
+    toJS: true,
+    of: true
 });
 
 compare({
     name: `delete() deletes a negative index`,
     item: [1,2,3],
     fn: del(-1),
-    toJS: true
+    toJS: true,
+    of: true
 });
 
 compare({
     name: `delete() deletes an index that doesnt exist`,
     item: [1,2,3],
     fn: del(3),
-    toJS: true
+    toJS: true,
+    of: true
 });

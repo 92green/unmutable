@@ -13,7 +13,8 @@ compare({
         {a: 4}
     ],
     fn: sortBy(get('a')),
-    toJS: true
+    toJS: true,
+    of: true
 });
 
 compare({
@@ -30,5 +31,6 @@ compare({
         if(a > b) { return -1; }
         if(a === b) { return 0; }
     }),
-    toJS: true
+    toJS: true,
+    of: true
 });

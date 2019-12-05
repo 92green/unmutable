@@ -6,12 +6,14 @@ compare({
     name: `pop() should do its thing`,
     item: [1,2,3],
     fn: pop(),
-    toJS: true
+    toJS: true,
+    of: true
 });
 
 compare({
     name: `pop() should do its thing on empty`,
     item: [],
     fn: pop(),
-    toJS: true
+    toJS: true,
+    of: true
 });

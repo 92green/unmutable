@@ -9,7 +9,8 @@ compare({
     item: {a:1, b:2, c:3, d:4},
     fn: map(value => value * 2),
     toJS: true,
-    record: true
+    record: true,
+    of: true
 });
 
 compareIteratee({
@@ -26,7 +27,8 @@ compare({
     name: `map() on array should work`,
     item: [1,2,3,4],
     fn: map(value => value * 2),
-    toJS: true
+    toJS: true,
+    of: true
 });
 
 compareIteratee({

@@ -67,21 +67,22 @@ export default ({item, name, fn, toJS, record, unmutableCompatible}: CompareConf
     }
 
     test.only(`ap test: ${name}`, () => {
-        class ApTest<A> {
-            _data: A;
+        class MockApplicative<A> {
+            _testData: A;
             constructor(data: A) {
-                this._data = data;
+                this._testData = data;
             }
             ap<B>(fn: A => B) {
-                return fn(this._data);
+                return fn(this._testData);
             }
-            of<B>(data): ApTest<B> {
-                return new ApTest(data);
+            of<B>(data): MockApplicative<B> {
+                return new MockApplicative(data);
             }
         }
 
-        const nextAp = fn(new ApTest(item));
-        const compareValue = (nextAp && nextAp._data) || nextAp;
+        const nextAp = fn(new MockApplicative(item));
+        // Either the function a new applicative or a primitive.
+        const compareValue = (nextAp && nextAp._testData) || nextAp;
         expect(fn(item)).toEqual(compareValue);
     });
 

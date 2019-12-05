@@ -8,7 +8,8 @@ compare({
     item: {a:1, b:2, c:3, d:4},
     fn: mapEntries(([value, key]) => [key + "!", value * 2]),
     toJS: true,
-    record: true
+    record: true,
+    of: true
 });
 
 compareIteratee({

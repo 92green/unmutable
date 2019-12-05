@@ -6,26 +6,30 @@ compare({
     name: `setSize() should shorten arrays`,
     item: [1,2,3],
     fn: setSize(2),
-    toJS: true
+    toJS: true,
+    of: true
 });
 
 compare({
     name: `setSize() should empty arrays`,
     item: [1,2,3],
     fn: setSize(0),
-    toJS: true
+    toJS: true,
+    of: true
 });
 
 compare({
     name: `setSize() should same arrays`,
     item: [1,2,3],
     fn: setSize(3),
-    toJS: true
+    toJS: true,
+    of: true
 });
 
 compare({
     name: `setSize() should lengthen arrays`,
     item: [1,2,3],
     fn: setSize(5),
-    toJS: true
+    toJS: true,
+    of: true
 });

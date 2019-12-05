@@ -6,5 +6,6 @@ compare({
     name: `reverse() should reverse an item`,
     item: [1,2,3],
     fn: reverse(),
-    toJS: true
+    toJS: true,
+    of: true
 });

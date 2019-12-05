@@ -7,6 +7,7 @@ compare({
     name: `skipWhile() on object should skip while predicate returns true`,
     item: {a:1, b:2, c:3, d:4},
     fn: skipWhile(value => value < 3),
+    of: true,
     toJS: true
 });
 
@@ -14,6 +15,7 @@ compare({
     name: `skipWhile() on object should skip while predicate returns true`,
     item: [1,2,3,4],
     fn: skipWhile(value => value < 3),
+    of: true,
     toJS: true
 });
 
@@ -24,5 +26,6 @@ compareIteratee({
         checkArgs({value, key, iter});
         return true;
     }),
-    argsToJS: ['iter']
+    argsToJS: ['iter'],
+    of: true
 });

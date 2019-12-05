@@ -6,12 +6,14 @@ compare({
     name: `shift() should do its thing`,
     item: [1,2,3],
     fn: shift(),
-    toJS: true
+    toJS: true,
+    of: true
 });
 
 compare({
     name: `shift() should do its thing on empty`,
     item: [],
     fn: shift(),
-    toJS: true
+    toJS: true,
+    of: true
 });

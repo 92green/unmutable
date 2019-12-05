@@ -3,6 +3,7 @@ import get from '../get';
 import compare from '../internal/__test__/compare-testutil';
 import {Record} from 'immutable';
 
+
 compare({
     name: `get() finds a value`,
     item: {a:1, b:2},

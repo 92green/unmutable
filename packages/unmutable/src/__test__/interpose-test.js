@@ -6,12 +6,14 @@ compare({
     name: `interpose() should do its thing`,
     item: [1,2,3],
     fn: interpose(0),
-    toJS: true
+    toJS: true,
+    of: true
 });
 
 compare({
     name: `interpose() should do its thing on empty`,
     item: [],
     fn: interpose(),
-    toJS: true
+    toJS: true,
+    of: true
 });
