@@ -36,8 +36,23 @@ compare({
 });
 
 compare({
-    name: `set() array sets a negative value`,
+    name: `set() array sets an existing negative value`,
     item: [1,2,3],
     fn: set(-2, 123),
     toJS: true
 });
+
+compare({
+    name: `set() array sets a new negative value`,
+    item: [],
+    fn: set(-1, 123),
+    toJS: true
+});
+
+compare({
+    name: `set() array sets a new negative value with existing values`,
+    item: [1,2,3],
+    fn: set(-5, 123),
+    toJS: true
+});
+
