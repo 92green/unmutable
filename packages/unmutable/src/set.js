@@ -5,6 +5,7 @@ export const objectSet = (key: string, childValue: *) => (value: Object): Object
 
 export const arraySet = (key: number, childValue: *) => (value: Array<*>): Array<*> => {
     key = key < 0 ? key + value.length : key;
+    if(key < 0) return [childValue, ...Array(-key-1), ...value];
     let clone = [...value];
     clone[key] = childValue;
     return clone;
