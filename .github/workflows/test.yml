@@ -9,6 +9,6 @@ jobs:
       with:
         persist-credentials: false
     - name: Build
-      run: yarn prep && yarn build && yarn build-docs
+      run: yarn prep && yarn build
     - name: Test
       run: yarn test-all
