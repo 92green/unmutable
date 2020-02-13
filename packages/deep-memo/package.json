@@ -10,10 +10,10 @@
   "author": "Damien Clarke",
   "repository": {
     "type": "git",
-    "url": "git@github.com:blueflag/unmutable.git"
+    "url": "git@github.com:92green/unmutable.git"
   },
   "bugs": {
-    "url": "https://github.com/blueflag/unmutable/issues"
+    "url": "https://github.com/92green/unmutable/issues"
   },
   "private": false,
   "scripts": {

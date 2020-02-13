@@ -5,7 +5,8 @@
     "build": "cp README.md packages/unmutable/README.md && yarn lerna run build",
     "bootstrap": "yarn lerna bootstrap",
     "prep": "yarn && yarn lerna bootstrap",
-    "bump": "yarn lerna publish -m \"build: publish\""
+    "bump": "yarn lerna publish -m \"build: publish\"",
+    "reinstall": "rm -rf node_modules && rm -rf packages/*/node_modules && yarn prep"
   },
   "dependencies": {
     "lerna": "^3.10.7"
