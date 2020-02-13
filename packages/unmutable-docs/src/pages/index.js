@@ -92,17 +92,17 @@ let result = pipeWith(
 // wow!
 `;
 
-const USAGE_2 = `var data = ;
+const USAGE_2 = `var data = {
+    foo: 1,
+    bar: null,
+    baz: 3
+};
 
 var filterNulls = filter((val) => {
     return val === null;
 });
 
-let result = filterNulls({
-    foo: 1,
-    bar: null,
-    baz: 3
-});
+let result = filterNulls(data);
 
 // result is {foo: 1, baz: 3}
 // golly!
