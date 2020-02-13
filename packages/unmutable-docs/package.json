@@ -7,13 +7,14 @@
   "license": "MIT",
   "main": "n/a",
   "scripts": {
-    "build": "gatsby build",
-    "watch": "gatsby develop",
-    "build-docs": "gatsby build --prefix-paths"
+    "build": "yarn gatsby build",
+    "watch": "yarn gatsby develop",
+    "build-docs": "yarn gatsby build --prefix-paths",
+    "preview": "yarn gatsby build && yarn gatsby serve"
   },
   "dependencies": {
     "dcme-gatsby": "^1.0.8",
-    "dcme-style": "^1.1.8",
+    "dcme-style": "^1.1.9",
     "gatsby": "^2.13.20",
     "unmutable": "0.47.0"
   }

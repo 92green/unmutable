@@ -128,7 +128,7 @@ export const Api = (props: Props): Node => {
                             <Box mb={2}>{description}</Box>
                         }
                         {items.map((item, key) => {
-                            return <Item item={item} key={key} />;
+                            return <Item item={item} key={item.name} />;
                         })}
                     </Box>;
                 })}

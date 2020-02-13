@@ -11,15 +11,16 @@ import {styled} from 'dcme-style/core';
 import {Icon} from 'dcme-style/affordance';
 import {Link} from 'dcme-style/affordance';
 import {Text} from 'dcme-style/affordance';
-import {Pre} from 'dcme-style/affordance';
 import {ContentNav} from 'dcme-style';
-import {CodeHighlight} from 'dcme-style';
 
 import {Api} from 'component/Api';
 import {ApiData} from 'data/ApiData';
 import Description from 'mdx/description.mdx';
 import Description2 from 'mdx/description2.mdx';
 import Description3 from 'mdx/description3.mdx';
+import Usage1 from 'mdx/usage1.mdx';
+import Usage2 from 'mdx/usage2.mdx';
+import Usage3 from 'mdx/usage3.mdx';
 
 const SuperDuper = styled(H1)`
     color: #000;
@@ -79,43 +80,6 @@ export default () => <Page>
     </ContentNav>
 </Page>;
 
-const USAGE_1 = `var data = [1,2,3];
-
-let result = pipeWith(
-    data,
-    push(4),
-    reverse(),
-    map(num => num * 10)
-);
-
-// result is [40,30,20,10]
-// wow!
-`;
-
-const USAGE_2 = `var data = {
-    foo: 1,
-    bar: null,
-    baz: 3
-};
-
-var filterNulls = filter((val) => {
-    return val === null;
-});
-
-let result = filterNulls(data);
-
-// result is {foo: 1, baz: 3}
-// golly!
-`;
-
-const USAGE_3 = `var data = [1,3,3,2,1];
-
-let result = unique()(data);
-
-// result is [1,3,2]
-// yee!
-`;
-
 const Usage = () => {
     return <Flex display={['block','block','block','flex']}>
         <Box width={[1,1,1,1/3]} pr={[0,0,0,3]} mb={[3,3,3,0]}>
@@ -123,9 +87,7 @@ const Usage = () => {
                 <Text as="div" textAlign="center" textStyle="em">Use it in a pipe!</Text>
             </Box>
             <Box mb={3}>
-                <Pre bounded>
-                    <CodeHighlight language="flow">{USAGE_1}</CodeHighlight>
-                </Pre>
+                <Usage1 />
             </Box>
         </Box>
         <Box width={[1,1,1,1/3]} pr={[0,0,0,3]} mb={[3,3,3,0]}>
@@ -133,9 +95,7 @@ const Usage = () => {
                 <Text as="div" textAlign="center" textStyle="em">Use it partially applied!</Text>
             </Box>
             <Box mb={3}>
-                <Pre bounded>
-                    <CodeHighlight language="flow">{USAGE_2}</CodeHighlight>
-                </Pre>
+                <Usage2 />
             </Box>
         </Box>
         <Box width={[1,1,1,1/3]} mb={[3,3,3,0]}>
@@ -143,9 +103,7 @@ const Usage = () => {
                 <Text as="div" textAlign="center" textStyle="em">Use it in one line!</Text>
             </Box>
             <Box mb={3}>
-                <Pre bounded>
-                    <CodeHighlight language="flow">{USAGE_3}</CodeHighlight>
-                </Pre>
+                <Usage3 />
             </Box>
         </Box>
     </Flex>;

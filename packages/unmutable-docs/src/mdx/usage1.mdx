@@ -1,0 +1,13 @@
+```flow
+var data = [1,2,3];
+
+let result = pipeWith(
+    data,
+    push(4),
+    reverse(),
+    map(num => num * 10)
+);
+
+// result is [40,30,20,10]
+// wow!
+```

@@ -1,4 +1,4 @@
-![unmutable](https://user-images.githubusercontent.com/345320/48247150-63529400-e446-11e8-9c42-c36821b93a16.png)
+![unmutable](https://user-images.githubusercontent.com/345320/74409039-fbc99680-4e89-11ea-8d2d-d7ca7bdf1e15.png)
 
 <a href="https://www.npmjs.com/package/unmutable"><img src="https://img.shields.io/npm/v/unmutable.svg?style=flat-square"></a>
 
