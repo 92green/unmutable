@@ -1,0 +1,17 @@
+## Inspiration
+
+Immutable.js has a wonderfully symmetrical and well thought out API, and it deals with data [immutably](https://facebook.github.io/immutable-js/#the-case-for-immutability).
+Its a fantastic library, but its drawbacks are that it's large in size and impossible to take only the parts of the API you want, which makes it quite unsuitable for small Javascript libraries. It also requires you use its special data types which can involve a lot of to-ing and fro-ing between normal Javascript types and Immutable.js types.
+
+Ramdajs and Lodash/fp both allow for functions to be composed together *[point-free style](https://en.wikipedia.org/wiki/Tacit_programming)*, which is a really nice way of programming, and it naturally keeps the bundle size small as you only import what you need.
+Lodash/fp's main drawback is that its API is large, unwieldy and unpredictable. Ramdajs' API is better planned, but it's overall pretty esoteric and alien to programmers who are not used to fully functional languages.
+And both of those libraries use [currying](https://hughfdjackson.com/javascript/why-curry-helps/), which unmutable deliberately avoids*.
+
+<small>Unmutable deliberately avoids currying because currying in Javascript requires functions to have fixed arity, and Unmutable cannot have fixed arity functions because it must match Immutable.js which uses optional arguments / variable arity functions.</small>
+
+## Development
+
+Unmutable is written and maintained by [Damien Clarke](https://damienclarke.me/), with feedback from others at [92green](https://github.com/92green).
+All online library discussion happens over on [Github](https://github.com/92green/unmutable).
+
+I hope this library helps solve some Javascript data manipulation problems for you. 🎉

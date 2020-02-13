@@ -1,20 +1,12 @@
 // @flow
+const {gatsbyConfig} = require('dcme-gatsby/src/gatsby/gatsby-config');
+
 module.exports = {
-    pathPrefix: '/unmutable',
     siteMetadata: {
-        title: 'Unmutable'
+        title: 'Unmutable - An immutable, functional data collection library for plain old Javascript.'
     },
-    plugins: [
-        'gatsby-plugin-sass',
-        'gatsby-plugin-react-helmet',
-        'gatsby-plugin-offline',
-        // 'gatsby-mdx'
-        // {
-        //     resolve: `gatsby-source-filesystem`,
-        //     options: {
-        //         name: `images`,
-        //         path: `${__dirname}/src/images`
-        //     }
-        // },
-    ]
+    pathPrefix: '/unmutable',
+    ...gatsbyConfig({
+        compileModules: [`dcme-gatsby`, `dcme-style`]
+    })
 };

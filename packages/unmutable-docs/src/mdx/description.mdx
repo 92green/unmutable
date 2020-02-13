@@ -1,0 +1,26 @@
+import {Code} from 'dcme-style/affordance';
+import {Text} from 'dcme-style/affordance';
+import {Box} from 'dcme-style/layout';
+import {Flex} from 'dcme-style/layout';
+
+An immutable, functional data collection library for plain old Javascript.
+
+It combines my favourite parts of [immutable.js](https://facebook.github.io/immutable-js/), [lodash/fp](https://github.com/lodash/lodash/wiki/FP-Guide) and [ramdajs](https://ramdajs.com/) together.
+
+Unmutable follows [immutable.js](https://facebook.github.io/immutable-js/)'s API almost exactly, and but exports each method individually as a [point-free function](https://en.wikipedia.org/wiki/Tacit_programming), in the same way as [lodash/fp](https://github.com/lodash/lodash/wiki/FP-Guide) does. These functions are all immutable, and can be composed together easily.
+
+Unmutable also works seamlessly on plain Javascript objects and arrays, Immutable.js Maps, Lists and Records.
+
+## Installation
+
+<Flex display={['block','flex']}>
+    <Box>
+        <Text textStyle="code">npm install unmutable --save</Text>
+    </Box>
+    <Box mx={[0,3]} my={[1,0]}>or</Box>
+    <Box>
+        <Text textStyle="code">yarn add unmutable</Text>
+    </Box>
+</Flex>
+
+## Usage

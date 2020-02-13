@@ -1,26 +1,18 @@
 /* eslint-disable */
+const {onCreateWebpackConfig} = require('dcme-gatsby/src/gatsby/gatsby-node');
+exports.onCreateWebpackConfig = onCreateWebpackConfig({
+    dirname: __dirname
+});
 
-const path = require('path');
+// kill all jest child processes that hang around after build,
+// which stop netlify from recognising that build is complete
+// this likely happens due to the usage of setInterval within code that
+// ends up in the gatsby site
 
-exports.onCreateWebpackConfig = ({
- stage, getConfig, rules, loaders, actions
-}) => {
-  actions.setWebpackConfig({
-    module: {
-      rules: [
-        {
-          test: /\.mdx?$/,
-          use: [
-            loaders.js(),
-            'mdx-loader'
-          ]
-        }
-      ]
-    },
-    resolve: {
-      alias: {
-        'unmutable': path.resolve(__dirname, "../unmutable/")
-      }
-    }
-  });
-}
+const ChildProcess = require('child_process');
+
+exports.onPostBuild = () => {
+    console.log("Killing jest...");
+    ChildProcess.execSync("ps aux | grep jest | grep -v grep | awk '{print $2}' | xargs kill");
+    console.log("Jest is dead");
+};
