@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///./src/pages/404.js"],"names":[],"mappings":"0FACA,6CAIe,4BAAM,2BACjB,2BADW","file":"component---src-pages-404-js-93c98543d701e28918b4.js","sourcesContent":["// @flow\nimport React from 'react';\nimport Page from 'component/Page';\nimport {H1} from 'dcme-style';\n\nexport default () => <Page>\n    <H1>404</H1>\n</Page>;\n"],"sourceRoot":""}
