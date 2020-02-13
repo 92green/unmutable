@@ -82,3 +82,10 @@ Lodash/fp's main drawback is that its API is large, unwieldy and unpredictable. 
 And both of those libraries use [currying](https://hughfdjackson.com/javascript/why-curry-helps/), which unmutable deliberately avoids*.
 
 <small>Unmutable deliberately avoids currying because currying in Javascript requires functions to have fixed arity, and Unmutable cannot have fixed arity functions because it must match Immutable.js which uses optional arguments / variable arity functions.</small>
+
+## Development
+
+Unmutable is written and maintained by [Damien Clarke](https://damienclarke.me/), with feedback from others at [92green](https://github.com/92green).
+All online library discussion happens over on [Github](https://github.com/92green/unmutable).
+
+I hope this library helps solve some Javascript data manipulation problems for you. 🎉

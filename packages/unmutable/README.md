@@ -1,4 +1,4 @@
-![unmutable](https://user-images.githubusercontent.com/345320/48247150-63529400-e446-11e8-9c42-c36821b93a16.png)
+![unmutable](https://user-images.githubusercontent.com/345320/74409039-fbc99680-4e89-11ea-8d2d-d7ca7bdf1e15.png)
 
 <a href="https://www.npmjs.com/package/unmutable"><img src="https://img.shields.io/npm/v/unmutable.svg?style=flat-square"></a>
 
@@ -82,3 +82,10 @@ Lodash/fp's main drawback is that its API is large, unwieldy and unpredictable. 
 And both of those libraries use [currying](https://hughfdjackson.com/javascript/why-curry-helps/), which unmutable deliberately avoids*.
 
 <small>Unmutable deliberately avoids currying because currying in Javascript requires functions to have fixed arity, and Unmutable cannot have fixed arity functions because it must match Immutable.js which uses optional arguments / variable arity functions.</small>
+
+## Development
+
+Unmutable is written and maintained by [Damien Clarke](https://damienclarke.me/), with feedback from others at [92green](https://github.com/92green).
+All online library discussion happens over on [Github](https://github.com/92green/unmutable).
+
+I hope this library helps solve some Javascript data manipulation problems for you. 🎉
