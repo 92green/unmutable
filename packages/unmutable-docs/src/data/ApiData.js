@@ -1,35 +1,21 @@
 // @flow
-import React from 'react';
-import Layout from '../../layout/Layout';
-import ApiItem from '../../component/ApiItem';
-import ApiPage from '../../component/ApiPage';
-import MarkdownAfter from '../../docs/api/after.mdx';
-import MarkdownBefore from '../../docs/api/before.mdx';
 
-import {Typography} from 'dcme-style';
-
-import map from 'unmutable/lib/map';
-import set from 'unmutable/lib/set';
-
-const withRenderer = map(set('renderWith', ApiItem));
-
-const sections = [
+export const ApiData = [
     {
         title: "Functions",
-        description: "???",
         items: [
             {
                 title: "Persistent changes",
-                items: withRenderer([
+                items: [
                     {
-                        name: "set()",
+                        name: "set",
                         definition: "set(key: string|number, value: any) => (collection) => newCollection",
                         immutablejs: true,
                         description: "Returns a new collection also containing the new key, value pair. If an equivalent key already exists in this collection, it will be replaced."
                         + "\n\nWhen used with an indexed data type, `key` may be a negative number, which indexes back from the end of the collection."
                         + "\n\nIf index larger than size, the returned collections's size will be large enough to include the index.",
                         types: ["object", "array", "uc", "imap", "ilist", "irecord"],
-                        example: [
+                        examples: [
                             `
                                 let data = {a: 'foo', b: 'bar'};
 
@@ -48,14 +34,14 @@ const sections = [
                         ]
                     },
                     {
-                        name: "delete()",
+                        name: "delete",
                         definition: "delete(key: string|number) => (collection) => newCollection",
                         immutablejs: true,
                         description: "Returns a new collection which excludes this key."
                         + "\n\nWhen used with an indexed data type, this returns a new collection which excludes this index and with a size 1 less than this collection. Values at indices above index are shifted down by 1 to fill the position.",
                         aliases: ["remove"],
                         types: ["object", "array", "uc", "imap", "ilist", "irecord"],
-                        example: [
+                        examples: [
                             `
                                 let data = {a: 'foo', b: 'bar'};
 
@@ -74,13 +60,13 @@ const sections = [
                         ]
                     },
                     {
-                        name: "deleteAll()",
+                        name: "deleteAll",
                         definition: "deleteAll(key) => (collection) => newCollection",
                         immutablejs: true,
                         description: "Returns a new collection which excludes the provided keys.",
                         aliases: ["omit"],
                         types: ["object", "uc", "imap"],
-                        example: [
+                        examples: [
                             `
                                 let data = {a: 'foo', b: 'bar', c: 'baz'};
 
@@ -89,11 +75,11 @@ const sections = [
                         ]
                     },
                     {
-                        name: "pick()",
+                        name: "pick",
                         definition: "pick(keys: string[]|number[]) => (collection) => newCollection",
                         description: "Returns a new collection which excludes all keys that aren't listed in `keys`.",
                         types: ["object", "uc", "imap"],
-                        example: [
+                        examples: [
                             `
                                 let data = {a: 'foo', b: 'bar', c: 'baz'};
 
@@ -102,16 +88,16 @@ const sections = [
                         ]
                     },
                     {
-                        name: "insert()",
+                        name: "insert",
                         description: ""
                     },
                     {
-                        name: "clear()",
+                        name: "clear",
                         definition: "clear() => (collection) => newCollection",
                         immutablejs: true,
                         description: "Returns a new collection containing no keys or values.",
                         types: ["object", "array", "uc", "imap", "ilist", "irecord"],
-                        example: [
+                        examples: [
                             `
                                 let data = {a: 'foo', b: 'bar'};
 
@@ -125,12 +111,12 @@ const sections = [
                         ]
                     },
                     {
-                        name: "push()",
+                        name: "push",
                         definition: "push(...values: Array<any>) => (collection) => newCollection",
                         immutablejs: true,
                         description: "Returns a new collection with the provided `values` appended, starting at this collection's `size`.",
                         types: ["array", "ilist"],
-                        example: [
+                        examples: [
                             `
                                 let data = ['foo','bar','baz'];
 
@@ -139,12 +125,12 @@ const sections = [
                         ]
                     },
                     {
-                        name: "pop()",
+                        name: "pop",
                         definition: "pop() => (collection) => newCollection",
                         immutablejs: true,
                         description: "Returns a new collection with a size ones less than this collection, excluding the last index in this collection.",
                         types: ["array", "ilist"],
-                        example: [
+                        examples: [
                             `
                                 let data = ['foo','bar','baz'];
 
@@ -153,12 +139,12 @@ const sections = [
                         ]
                     },
                     {
-                        name: "unshift()",
+                        name: "unshift",
                         definition: "unshift(...values: Array<any>) => (collection) => newCollection",
                         immutablejs: true,
                         description: "Returns a new collection with the provided `values` prepended, shifting other values ahead to higher indices.",
                         types: ["array", "ilist"],
-                        example: [
+                        examples: [
                             `
                                 let data = ['foo','bar','baz'];
 
@@ -167,12 +153,12 @@ const sections = [
                         ]
                     },
                     {
-                        name: "shift()",
+                        name: "shift",
                         definition: "shift() => (collection) => newCollection",
                         immutablejs: true,
                         description: "Returns a new collection with a size ones less than this collection, excluding the first index in this collection, shifting all other values to a lower index.",
                         types: ["array", "ilist"],
-                        example: [
+                        examples: [
                             `
                                 let data = ['foo','bar','baz'];
 
@@ -181,12 +167,12 @@ const sections = [
                         ]
                     },
                     {
-                        name: "move()",
+                        name: "move",
                         definition: "move(fromIndex: number, toIndex: number) => (collection) => newCollection",
                         description: "Moves the element at `fromIndex` to the position of `toIndex`."
                     },
                     {
-                        name: "update()",
+                        name: "update",
                         definition: `update(key: string|number, notSetValue: any, updater: (value: any) => any) => (collection) => newCollection
 update(key: string|number, updater: (value: any) => any) => (collection) => newCollection
 update(updater: (collection: any) => any) => (collection) => newCollection`,
@@ -195,12 +181,12 @@ update(updater: (collection: any) => any) => (collection) => newCollection`,
                         types: ["object", "array", "uc", "imap", "ilist", "irecord"]
                     },
                     {
-                        name: "updateInto()",
+                        name: "updateInto",
                         definition: "updateInto(key: string|number, updater: (collection) => newValue) => (collection) => newCollection",
                         description: "Passes `collection` to `updater`, and will set `collection[key]` to the result of the `updater`. In practise it works a bit like `update(key, updater)`, but in this case `updater` receives `collection` instead of `collection[key]`."
                     },
                     {
-                        name: "merge()",
+                        name: "merge",
                         definition: "merge(...otherCollections: Array<Collection>) => (collection) => newCollection",
                         immutablejs: true,
                         description: "Returns a new collection resulting from merging the provided `otherCollections` into this collection. In other words, this takes each entry of each `otherCollection` and sets it on this collection.",
@@ -208,7 +194,7 @@ update(updater: (collection: any) => any) => (collection) => newCollection`,
                         types: ["object", "array", "uc", "imap", "ilist"]
                     },
                     {
-                        name: "mergeWith()",
+                        name: "mergeWith",
                         definition: `mergeWith(
     merger: (oldValue: any, newValue: any, key: string) => value,
     ...otherCollections: Array<Collection>) => (collection) => newCollection
@@ -218,51 +204,51 @@ update(updater: (collection: any) => any) => (collection) => newCollection`,
                         types: ["object", "uc", "imap"]
                     },
                     {
-                        name: "mergeDeep()",
+                        name: "mergeDeep",
                         description: ""
                     },
                     {
-                        name: "mergeDeepWith()",
+                        name: "mergeDeepWith",
                         description: ""
                     },
                     {
-                        name: "defaults()",
+                        name: "defaults",
                         description: ""
                     },
                     {
-                        name: "setSize()",
+                        name: "setSize",
                         definition: "setSize(size: number) => (collection) => newCollection",
                         immutablejs: true,
                         description: "Returns a new collection with size size. If size is less than this collection's size, the new collection will exclude values at the higher indices. If size is greater than this collection's size, the new collection will have undefined values for the newly available indices.",
                         types: ["array", "ilist"]
                     },
                     {
-                        name: "rename()",
+                        name: "rename",
                         definition: "rename(oldKey: string|number, newKey: string|number) => (collection) => newCollection",
                         description: "Changes the key of `oldKey` to the key of `newKey`"
                     },
                     {
-                        name: "swap()",
+                        name: "swap",
                         definition: "swap(keyA: string|number, keyB: string|number) => (collection) => newCollection",
                         description: "Swaps the values at the given keys. Keys that don't exist are assumed to have a value of `undefined`."
                     },
                     {
-                        name: "rotate()",
+                        name: "rotate",
                         definition: "rotate(shift: number) => (collection) => newCollection",
                         description: "Rotates the elements in arrays and `Lists` around, according to the value of `shift`. A positive `shift` will move elements to the left, appending rotated elements to the end of the array, where as a negative `shift` will move elements to the right, prepending rotated elements to the start of the array."
                     },
                     {
-                        name: "unit()",
+                        name: "unit",
                         definition: "unit(otherCollection) => (collection) => newCollection",
                         description: "Attempts to turn `otherCollection` into `collection`s data type, and returns `newCollection`."
                     },
                     {
-                        name: "setMutate()",
+                        name: "setMutate",
                         definition: "setMutate(key: string|number, value: any) => (collection) => alteredCollection",
                         immutablejs: false,
                         description: "Like `set()` but performs mutations on `value` for objects and arrays. It is less expensive than `set()`.",
                         types: ["object", "array", "uc", "imap", "ilist", "irecord"],
-                        example: [
+                        examples: [
                             `
                                 let data = {a: 'foo', b: 'bar'};
 
@@ -281,12 +267,12 @@ update(updater: (collection: any) => any) => (collection) => newCollection`,
                         ]
                     },
                     {
-                        name: "deleteMutate()",
+                        name: "deleteMutate",
                         definition: "deleteMutate(key: string|number, value: any) => (collection) => alteredCollection",
                         immutablejs: false,
                         description: "Like `delete()` but performs mutations on `value` for objects and arrays. It is less expensive than `delete()`.",
                         types: ["object", "array", "uc", "imap", "ilist", "irecord"],
-                        example: [
+                        examples: [
                             `
                                 let data = {a: 'foo', b: 'bar'};
 
@@ -303,421 +289,421 @@ update(updater: (collection: any) => any) => (collection) => newCollection`,
                                 deleteMutate(-1, 'qux')(data);
                             `
                         ]
-                    },
-                ])
+                    }
+                ]
             },
             {
                 title: "Deep persistent changes",
-                items: withRenderer([
+                items: [
                     {
-                        name: "setIn()",
+                        name: "setIn",
                         description: ""
                     },
                     {
-                        name: "deleteIn()",
+                        name: "deleteIn",
                         description: ""
                     },
                     {
-                        name: "updateIn()",
+                        name: "updateIn",
                         description: ""
                     },
                     {
-                        name: "mergeIn()",
+                        name: "mergeIn",
                         description: ""
                     },
                     {
-                        name: "mergeDeepIn()",
+                        name: "mergeDeepIn",
                         description: ""
                     }
-                ])
+                ]
             },
             {
                 title: "Sequence algorithms",
-                items: withRenderer([
+                items: [
                     {
-                        name: "concat()",
+                        name: "concat",
                         description: ""
                     },
                     {
-                        name: "map()",
+                        name: "map",
                         definition: "map(mapper: (value: any, key: string|number, original: any) => newValue) => (collection) => newCollection",
                         immutablejs: true,
                         description: "Returns a new collection with values passed through a mapper function.",
                         types: ["object", "array", "uc", "imap", "ilist", "irecord"]
                     },
                     {
-                        name: "mapKeys()",
+                        name: "mapKeys",
                         definition: "mapKeys(mapper: (key: string|number, value: any, original: any) => newKey) => (collection) => newCollection",
                         immutablejs: true,
                         description: "Returns a new collection with keys passed through a mapper function.",
                         types: ["object", "uc", "imap"]
                     },
                     {
-                        name: "mapEntries()",
+                        name: "mapEntries",
                         definition: "mapEntries(mapper: ([key, value]: any, index: number, original: any) => [newKey, newValue]) => (collection) => newCollection",
                         immutablejs: true,
                         description: "Returns a new collection with key value pairs passed through a mapper function.",
                         types: ["object", "uc", "imap"]
                     },
                     {
-                        name: "flatMap()",
+                        name: "flatMap",
                         description: ""
                     },
                     {
-                        name: "filter()",
+                        name: "filter",
                         description: ""
                     },
                     {
-                        name: "flip()",
+                        name: "flip",
                         definition: "flip() => (collection) => newCollection",
                         immutablejs: true,
                         description: "Returns a new collection with its key values pairs flipped, so values become keys and keys become values",
                         types: ["object", "uc", "imap"]
                     },
                     {
-                        name: "zip()",
+                        name: "zip",
                         description: ""
                     },
                     {
-                        name: "zipAll()",
+                        name: "zipAll",
                         description: ""
                     },
                     {
-                        name: "zipWith()",
+                        name: "zipWith",
                         description: ""
                     },
                     {
-                        name: "filterNot()",
+                        name: "filterNot",
                         description: ""
                     },
                     {
-                        name: "reverse()",
+                        name: "reverse",
                         description: ""
                     },
                     {
-                        name: "sort()",
+                        name: "sort",
                         description: ""
                     },
                     {
-                        name: "sortBy()",
+                        name: "sortBy",
                         description: ""
                     },
                     {
-                        name: "stableSortBy()",
+                        name: "stableSortBy",
                         definition: "stableSortBy(comparatorValueMapper: value => valueToCompare, comparator?: Function) => (collection) => newCollection",
                         description: "Like sortBy(), but guarantees that items are stable sorted, meaning that the order of items that produce equivalent sort values are retained."
                     },
                     {
-                        name: "groupBy()",
+                        name: "groupBy",
                         description: ""
                     },
                     {
-                        name: "chunk()",
+                        name: "chunk",
                         definition: "chunk(size: number) => (collection) => newCollection",
                         description: "Returns an array of 'chunks'. This function splits `collection` up into chunks, where each chunk is of the same type as `collection`, and contains `size` number of values."
                     },
                     {
-                        name: "chunkBy()",
+                        name: "chunkBy",
                         definition: "chunkBy(predicate: Function) => (collection) => newCollection",
                         description: "Returns an array of 'chunks'. This function splits `collection` up into chunks, where the size of each chunk is determined by the `predicate`. It iterates over `collection` and calls `predicate` for each item on the collection. Whenever `predicate` returns true, a new chunk is started. It returns an array containing all the chunks that were created."
                     },
                     {
-                        name: "deal()",
+                        name: "deal",
                         definition: "deal(groups: number) => (collection) => newCollection",
                         description: "Returns an array of 'chunks'. This function iterates over `collection`, dividing it into the number of groups specified by the `groups` argument. It works in a similar way to someone dealing out cards to a number of players, putting the first item in the first group, the second item in the second group etc. Once the last group is reached, the next item is put in the first group again, and the deal continues cyclically until no items are left."
                     },
                     {
-                        name: "keyBy()",
+                        name: "keyBy",
                         definition: "keyBy(keyer: (value) => string) => (value) => {[key: string]: value} // Object",
                         description: "Iterates over `collection` and calls `keyer` on each item, and using the result as a key on the output object. TThe corresponding value of each key is the last element responsible for generating the key."
                     },
 
                     {
-                        name: "unique()",
+                        name: "unique",
                         definition: "unique() => (collection) => newCollection",
                         description: "Filters `collection` so that any element with a duplicate value is filtered out. If the value is a collection it is compared deeply."
                     },
                     {
-                        name: "uniqueBy()",
+                        name: "uniqueBy",
                         definition: "uniqueBy(getter: (collection) => any) => (collection) => newCollection",
                         description: "Filters `collection` according to the result of `getter`, so that any element with a duplicate result of `getter` is filtered out. If a collection is returned from `getter`, it is compared deeply."
                     }
-                ])
+                ]
             },
             {
                 title: "Conversion to JavaScript types",
-                items: withRenderer([
+                items: [
                     {
-                        name: "toArray()",
+                        name: "toArray",
                         description: ""
                     },
                     {
-                        name: "toIndexed()",
+                        name: "toIndexed",
                         definition: "toIndexed() => (collection) => newCollection",
                         description: "Converts plain Javascript data types into arrays, and converts Immutable.js objects into `List`s"
                     },
                     {
-                        name: "toJS()",
+                        name: "toJS",
                         description: ""
                     },
                     {
-                        name: "toJSON()",
+                        name: "toJSON",
                         definition: "toJSON() => (collection) => any",
                         description: "Turns the `collection` into plain Javascript if it is an Immutable.js data type. Internally if `collection` is a `List` then `.toArray()` is called, and if collection is a `Map` then `toObject()` is called.",
                         aliases: ["shallowToJS()"]
                     },
                     {
-                        name: "toKeyed()",
+                        name: "toKeyed",
                         definition: "toKeyed() => (collection) => newCollection",
                         description: "Converts plain Javascript data types into objects, and converts Immutable.js objects into `Map`s."
                     },
                     {
-                        name: "toObject()",
+                        name: "toObject",
                         description: ""
                     },
                     {
-                        name: "toEntries()",
+                        name: "toEntries",
                         definition: "toEntries() => (collection) => newCollection",
                         description: "Converts collections into arrays of [key, value] tuples."
                     }
-                ])
+                ]
             },
             {
                 title: "Reading values",
-                items: withRenderer([
+                items: [
                     {
-                        name: "get()",
+                        name: "get",
                         description: ""
                     },
                     {
-                        name: "has()",
+                        name: "has",
                         description: ""
                     },
                     {
-                        name: "includes()",
+                        name: "includes",
                         description: ""
                     },
                     {
-                        name: "first()",
+                        name: "first",
                         description: ""
                     },
                     {
-                        name: "last()",
+                        name: "last",
                         description: ""
                     }
-                ])
+                ]
             },
             {
                 title: "Combination",
-                items: withRenderer([
+                items: [
                     {
-                        name: "interpose()",
+                        name: "interpose",
                         description: ""
                     },
                     {
-                        name: "interleave()",
+                        name: "interleave",
                         description: ""
                     },
                     {
-                        name: "splice()",
+                        name: "splice",
                         description: ""
                     },
                     {
-                        name: "flatten()",
+                        name: "flatten",
                         description: ""
                     },
                     {
-                        name: "pivot()",
+                        name: "pivot",
                         definition: "pivot() => (collection) => newCollection",
                         description: "Pivots the collection. The keys at the first level of nesting are moved to the second level, and the keys of the second level are moved to the first."
                     }
-                ])
+                ]
             },
             {
                 title: "Search for value",
-                items: withRenderer([
+                items: [
                     {
-                        name: "indexOf()",
+                        name: "indexOf",
                         description: ""
                     },
                     {
-                        name: "lastIndexOf()",
+                        name: "lastIndexOf",
                         description: ""
                     },
                     {
-                        name: "findIndex()",
+                        name: "findIndex",
                         description: ""
                     },
                     {
-                        name: "findLastIndex()",
+                        name: "findLastIndex",
                         description: ""
                     },
                     {
-                        name: "find()",
+                        name: "find",
                         description: ""
                     },
                     {
-                        name: "findEntry()",
+                        name: "findEntry",
                         description: ""
                     },
                     {
-                        name: "findLast()",
+                        name: "findLast",
                         description: ""
                     },
                     {
-                        name: "findLastEntry()",
+                        name: "findLastEntry",
                         description: ""
                     },
                     {
-                        name: "findKey()",
+                        name: "findKey",
                         description: ""
                     },
                     {
-                        name: "findLastKey()",
+                        name: "findLastKey",
                         description: ""
                     },
                     {
-                        name: "keyOf()",
+                        name: "keyOf",
                         description: ""
                     },
                     {
-                        name: "lastKeyOf()",
+                        name: "lastKeyOf",
                         description: ""
                     },
                     {
-                        name: "max()",
+                        name: "max",
                         description: ""
                     },
                     {
-                        name: "maxBy()",
+                        name: "maxBy",
                         description: ""
                     },
                     {
-                        name: "min()",
+                        name: "min",
                         description: ""
                     },
                     {
-                        name: "minBy()",
+                        name: "minBy",
                         description: ""
                     }
-                ])
+                ]
             },
             {
                 title: "Value equality",
-                items: withRenderer([
+                items: [
                     {
-                        name: "equals()",
+                        name: "equals",
                         definition: "`equals(otherValue) => (value) => boolean`",
                         description: "Returns `true` if `value` and `otherValue` are deeply equal, or `false` otherwise.",
                         note: "This function compares items by value, so two different class instances containing the same data in the same manner (e.g. an array and an Immutable.js List) will be regarded as equal. Consider also using equalsType() if this is a problem for you."
                     },
                     {
-                        name: "notEquals()",
+                        name: "notEquals",
                         definition: "notEquals(otherValue) => (value) => boolean",
                         description: "Returns `true` if `value` and `otherValue` are not deeply equal, or `false` otherwise."
                     },
                     {
-                        name: "strictEquals()",
+                        name: "strictEquals",
                         definition: "strictEquals(otherCollection: any) => (collection: any) => number",
                         description: "Checks if `collection` and `otherCollection` are strictly equal. This complements `equals()`, which checks for deep value equality."
                     },
                     {
-                        name: "shallowEquals()",
+                        name: "shallowEquals",
                         definition: "shallowEquals(otherCollection: any) => (collection: any) => number",
                         description: "Checks if `collection` and `otherCollection` are shallowly equal, using strict equality.",
                         note: "Use `equals()` if you want to check deep equality."
                     },
                     {
-                        name: "hashCode()",
+                        name: "hashCode",
                         description: ""
                     },
                     {
-                        name: "equalsType()",
+                        name: "equalsType",
                         definition: "`equalsType(otherValue: any) => (value: any) => boolean`",
                         description: "Returns `true` if `value` and `otherValue` are of the same type, or `false` otherwise. Class instances only count as equal if they are instances of the same class. Also unlike the type returned by `typeof`, `null` is *not* equal to objects, and are only equal to `null`."
                     }
-                ])
+                ]
             },
             {
                 title: "Reading deep values",
-                items: withRenderer([
+                items: [
                     {
-                        name: "getIn()",
+                        name: "getIn",
                         description: ""
                     },
                     {
-                        name: "hasIn()",
+                        name: "hasIn",
                         description: ""
                     }
-                ])
+                ]
             },
             {
                 title: "Iterators",
-                items: withRenderer([
+                items: [
                     {
-                        name: "keys()",
+                        name: "keys",
                         description: ""
                     },
                     {
-                        name: "values()",
+                        name: "values",
                         description: ""
                     },
                     {
-                        name: "entries()",
+                        name: "entries",
                         definition: "entriesReverse() => (collection) => Iterator",
                         description: "Works just like `entries()`, but iterates in the reverse order."
                     },
                     {
-                        name: "entriesReverse()",
+                        name: "entriesReverse",
                         description: ""
                     }
-                ])
+                ]
             },
             {
                 title: "Iterator to array",
-                items: withRenderer([
+                items: [
                     {
-                        name: "keyArray()",
+                        name: "keyArray",
                         definition: "keyArray() => (collection) => Array<key>",
                         description: "Returns an array of keys on the value. Immutable.js has no function that does this, they have `keys()` which returns an iterator, and `keySeq()` which returns an Immutable.js `Seq`."
                     },
                     {
-                        name: "valueArray()",
+                        name: "valueArray",
                         definition: "valueArray() => (collection) => Array<any>",
                         description: "Returns an array of values on the collection. Immutable.js has no function that does this, they have `values()` which returns an iterator, and `valueSeq()` which returns an Immutable.js `Seq`."
                     },
                     {
-                        name: "entryArray()",
+                        name: "entryArray",
                         definition: "entryArray() => (collection) => Array<[key, value]>",
                         description: "Returns an array of entries (e.g. `[key, value]` tuples) of the value. Immutable.js has no function that does this, they have `entries()` which returns an iterator, and `entrySeq()` which returns an Immutable.js `Seq`."
                     }
-                ])
+                ]
             },
             {
                 title: "Side effects",
-                items: withRenderer([
+                items: [
                     {
-                        name: "forEach()",
+                        name: "forEach",
                         description: ""
                     }
-                ])
+                ]
             },
             {
                 title: "Creating subsets",
-                items: withRenderer([
+                items: [
                     {
-                        name: "slice()",
+                        name: "slice",
                         description: ""
                     },
                     {
-                        name: "rest()",
+                        name: "rest",
                         description: ""
                     },
                     {
-                        name: "butLast()",
+                        name: "butLast",
                         definition: "butLast() => (collection) => newCollection",
                         description: "Returns a new collection of the same type containing all entries except the last.",
-                        example: [
+                        examples: [
                             `
                                 let data = ['foo','bar','baz'];
 
@@ -726,90 +712,90 @@ update(updater: (collection: any) => any) => (collection) => newCollection`,
                         ]
                     },
                     {
-                        name: "skip()",
+                        name: "skip",
                         description: ""
                     },
                     {
-                        name: "skipLast()",
+                        name: "skipLast",
                         description: ""
                     },
                     {
-                        name: "skipUntil()",
+                        name: "skipUntil",
                         description: ""
                     },
                     {
-                        name: "skipWhile()",
+                        name: "skipWhile",
                         description: ""
                     },
                     {
-                        name: "take()",
+                        name: "take",
                         description: ""
                     },
                     {
-                        name: "takeLast()",
+                        name: "takeLast",
                         description: ""
                     },
                     {
-                        name: "takeUntil()",
+                        name: "takeUntil",
                         description: ""
                     },
                     {
-                        name: "takeWhile()",
+                        name: "takeWhile",
                         description: ""
                     }
-                ])
+                ]
             },
             {
                 title: "Reducing a value",
-                items: withRenderer([
+                items: [
                     {
-                        name: "reduce()",
+                        name: "reduce",
                         description: ""
                     },
                     {
-                        name: "reduceRight()",
+                        name: "reduceRight",
                         description: ""
                     },
                     {
-                        name: "every()",
+                        name: "every",
                         description: ""
                     },
                     {
-                        name: "some()",
+                        name: "some",
                         description: ""
                     },
                     {
-                        name: "join()",
+                        name: "join",
                         description: ""
                     },
                     {
-                        name: "isEmpty()",
+                        name: "isEmpty",
                         definition: "isEmpty() => (collection) => boolean",
                         description: "Returns true when the `collection` is empty, such as an empty object or an array with no elements."
                     },
                     {
-                        name: "isNotEmpty()",
+                        name: "isNotEmpty",
                         definition: "isNotEmpty() => (collection) => boolean",
                         description: "Returns true when the `collection` is not empty."
                     },
                     {
-                        name: "count()",
+                        name: "count",
                         definition: "count() => (collection) => number",
                         description: "Returns the number of keys on the collection.",
                         aliases: ["size()"]
                     },
                     {
-                        name: "size()",
+                        name: "size",
                         definition: "size() => (collection) => number",
                         description: "Returns the number of keys on the collection. Immutable.js has this as a getter on their collections, Unmutable.js offers this as a function.",
                         aliases: ["count()"]
                     },
                     {
-                        name: "startsWith()",
+                        name: "startsWith",
                         definition: "startsWith(otherCollection) => (collection) => boolean",
                         description: "Returns true when the `collection` starts with `otherCollection`. The elements of `otherCollection` are compared deeply with those in `collection`.",
                         types: ["object", "array", "uc", "imap", "ilist"],
-                        example: [
+                        examples: [
                             `
                                 let data = ['foo','bar','baz'];
 
@@ -818,11 +804,11 @@ update(updater: (collection: any) => any) => (collection) => newCollection`,
                         ]
                     },
                     {
-                        name: "endsWith()",
+                        name: "endsWith",
                         definition: "endsWith(otherCollection) => (collection) => boolean",
                         description: "Returns true when the `collection` starts with `otherCollection`. The elements of `otherCollection` are compared deeply with those in `collection`.",
                         types: ["object", "array", "uc", "imap", "ilist"],
-                        example: [
+                        examples: [
                             `
                                 let data = ['foo','bar','baz'];
 
@@ -830,22 +816,22 @@ update(updater: (collection: any) => any) => (collection) => newCollection`,
                             `
                         ]
                     }
-                ])
+                ]
             },
             {
                 title: "Cloning",
-                items: withRenderer([
+                items: [
                     {
-                        name: "clone()",
+                        name: "clone",
                         definition: "clone() => (collection) => newCollection",
                         description: "Returns a clone of `collection` if `collection` is an array or object, or returns the `collection` unchanged if given an Immutable.js `Map` or `List`. Immutable.js data types are inherently immutable so do not need to be explicitly cloned."
                     },
                     {
-                        name: "replaceEqual()",
+                        name: "replaceEqual",
                         definition: "replaceEqual(otherCollection) => (collection) => newCollection",
                         description: "If `otherCollection` is deeply equal to `collection`, `otherCollection` is returned, or else `collection` is returned.\n\nThis can be useful if you have a data source that always recreates a data structure, such as `JSON.parse()`, but you want to avoid needlessly passing new instances of unchanged objects and arrays downstream.",
                         types: ["object", "array", "uc", "imap", "ilist", "irecord"],
-                        example: [
+                        examples: [
                             `
                                 let oldData = ['foo','bar','baz'];
                                 let newData = ['foo','bar','baz'];
@@ -857,11 +843,11 @@ update(updater: (collection: any) => any) => (collection) => newCollection`,
                         ]
                     },
                     {
-                        name: "replaceEqualDeep()",
+                        name: "replaceEqualDeep",
                         definition: "replaceEqualDeep(otherCollection) => (collection) => newCollection",
                         description: "If `otherCollection` is deeply equal to `collection`, `otherCollection` is returned. If not, each of `collection`s children are compared against `otherCollection`, and if they are deeply equal then that part of `otherCollection` is inserted into the result. This process continues recursively down the data structure.\n\nThis can be useful if you have a data source that always recreates a data structure, such as `JSON.parse()`, but you want to avoid needlessly passing new instances of unchanged objects and arrays downstream.",
                         types: ["object", "array", "uc", "imap", "ilist", "irecord"],
-                        example: [
+                        examples: [
                             `
                                 let oldData = [1,2,[10,20]];
                                 let newData = [3,4,[10,20]];
@@ -872,129 +858,129 @@ update(updater: (collection: any) => any) => (collection) => newCollection`,
                             `
                         ]
                     }
-                ])
+                ]
             },
             {
                 title: "Debugging",
-                items: withRenderer([
+                items: [
                     {
-                        name: "log()",
+                        name: "log",
                         definition: "log(message: string = '', type: string = 'log') => (value) => value",
                         description: "Returns an evaluator that passes the value through unchanged, but also calls `console[type](message, value)`. Useful for debugging."
                     }
-                ])
+                ]
             }
         ]
     },
     {
         title: "Utils",
         description: "Utils include functions that make Unmutable.js useable and useful, as well as plain-Javascript friendly versions of some of Immutable.js top level functions.",
-        items: withRenderer([
+        items: [
             {
                 title: "Composition",
-                items: withRenderer([
+                items: [
                     {
-                        name: "compose()",
+                        name: "compose",
                         definition: "compose(...functions: Array<Function>) => (value) => newValue",
                         description: "Composes (combines) functions together from right to left. Returns a function that's ready to accept a value and run it through all the functions in the pipe."
                     },
                     {
-                        name: "composeWith()",
+                        name: "composeWith",
                         definition: "composeWith(value, ...functions: Array<Function>) => (value) => newValue",
                         description: "Accepts an value as the first argument, and composes (combines) functions in the remaining arguments together from right to left.",
                         note: "`composeWith(value, ...functions) is equivalent to compose(...functions)(value)`"
                     },
                     {
-                        name: "pipe()",
+                        name: "pipe",
                         definition: "pipe(...functions: Array<Function>) => (value) => newValue",
                         description: "Composes (combines) functions together from left to right. Returns a function that's ready to accept a value and run it through all the functions in the pipe."
                     },
                     {
-                        name: "pipeIf()",
+                        name: "pipeIf",
                         definition: "pipeIf(condition: (value) => boolean, ...functions: Array<Function>) => (value) => newValue",
                         description: "Like `pipe()`, but the first argument is a conditional function that is passed the `value`. If a truthy value is returned from the conditional function, all functions in the pipe are executed. If a falsey value is returned, then the remaining functions in the pipe are skipped."
                     },
                     {
-                        name: "pipeWith()",
+                        name: "pipeWith",
                         definition: "pipeWith(value, ...functions: Array<Function>) => (value) => newValue",
                         description: "Accepts an value as the first argument, and composes (combines) functions in the remaining arguments together from left to right.",
                         note: "`pipeWith(value, ...functions) is equivalent to pipe(...functions)(value)`"
                     },
                     {
-                        name: "identity()",
+                        name: "identity",
                         definition: "identity() => (value) => value",
                         description: "A function that passes values through with no change. Useful for readable code."
                     }
-                ])
+                ]
             },
             {
                 title: "Predicates",
-                items: withRenderer([
+                items: [
                     {
-                        name: "isAssociative()",
+                        name: "isAssociative",
                         definition: "isAssociative(value: any) => boolean",
                         description: "Works like Immutable.js `isAssociative()` but also identifies plain Javascript arrays and objects as being associative."
                     },
                     {
-                        name: "isCollection()",
+                        name: "isCollection",
                         definition: "isCollection(value: any) => boolean",
                         description: "Works like Immutable.js `isCollection()` but also identifies plain Javascript arrays and objects as being collections.",
                         note: "Immutable.js' definition of 'collection' does *not* include Immutable.js Records."
                     },
                     {
-                        name: "isImmutable()",
+                        name: "isImmutable",
                         definition: "isImmutable(value: any) => boolean",
                         description: "Returns true if `value` is an Immutable.js data type, or false otherwise."
                     },
                     {
-                        name: "isIndexed()",
+                        name: "isIndexed",
                         definition: "isIndexed(value: any) => boolean",
                         description: "Works like Immutable.js `isIndexed()` but also identifies plain Javascript arrays as being indexed."
                     },
                     {
-                        name: "isKeyed()",
+                        name: "isKeyed",
                         definition: "isKeyed(value: any) => boolean",
                         description: "Works like Immutable.js `isKeyed()` but also identifies plain Javascript objects as being keyed."
                     },
                     {
-                        name: "isObject()",
+                        name: "isObject",
                         definition: "isObject(value: any) => boolean",
                         description: "Tests if something extends from `object` and is not primitive, which includes arrays, functions, class instances and all Immutable.js types, and does *not* include `undefined`, `null`, `string`, `number`, and `boolean`.",
                         aliases: ["isValueObject()"]
                     },
                     {
-                        name: "isOrdered()",
+                        name: "isOrdered",
                         definition: "isOrdered(value: any) => boolean",
                         description: "Works like Immutable.js `isOrdered()` but also identifies plain Javascript arrays as being ordered."
                     },
                     {
-                        name: "isPlainObject()",
+                        name: "isPlainObject",
                         definition: "isPlainObject(value: any) => boolean",
                         description: "Tests if the value is a plain object according to [is-plain-object](https://www.npmjs.com/package/is-plain-object)."
                     },
                     {
-                        name: "isRecord()",
+                        name: "isRecord",
                         definition: "isRecord(value: any) => boolean",
                         description: ""
                     },
                     {
-                        name: "isValueObject()",
+                        name: "isValueObject",
                         definition: "isValueObject(value: any) => boolean",
                         description: "An alias for `isObject()` to align with Immutable.js naming convention.",
                         aliases: ["isObject()"]
                     },
                     {
-                        name: "isWriteable()",
+                        name: "isWriteable",
                         definition: "isWriteable(value: any) => boolean",
                         description: "Tests if a data type can be used with unmutable functions that write or modify data. Returns true for any Immutable.js types, array and plain objects."
                     }
-                ])
+                ]
             },
             {
                 title: "Method creation",
-                items: withRenderer([
+                items: [
                     {
-                        name: "method()",
+                        name: "method",
                         description: "A helper function that allows you to turn any method into a point-free function.",
                         example: `// this creates a point free version of \`toLowerCase()\` that would call \`value.toLowerCase()\` once evaluated.
          import method from 'unmutable/lib/method';
@@ -1002,7 +988,7 @@ update(updater: (collection: any) => any) => (collection) => newCollection`,
          toLowerCase()("HELLO"); // "hello"`
                     },
                     {
-                        name: "overload()",
+                        name: "overload",
                         definition: "overload({[arity: string]: Function})",
                         description: "Simulates function overloading in Javascript. Pass it an object with functions as values. The objects keys should be strings of numbers that indicate how many arguments each function expects to receive.",
                         example: `import overload from 'unmutable/lib/overload';
@@ -1015,36 +1001,28 @@ update(updater: (collection: any) => any) => (collection) => newCollection`,
         fn("!", "?", "*"); // returns "(! ?) *"
         fun("!") // throws an error`
                     }
-                ])
+                ]
             },
             {
                 title: "Conditionals",
-                items: withRenderer([
+                items: [
                     {
-                        name: "doIf()",
+                        name: "doIf",
                         definition: "doIf(\n    predicate: (value) => boolean,\n    ifTrue: (value) => newValue,\n    ifFalse: (value) => newValue = ii => ii\n) => (value) => newValue",
                         description: "Passes the value to the predicate function. If the predicate returns true, the value is then passed through the `ifTrue` function and the result is returned. If the predicate returns false then the value is simply returned unchanged.\n\nIf the third argument `ifFalse` is provided, then the value will be passed through `ifFalse` when the predicate returns false."
                     }
-                ])
+                ]
             },
             {
                 title: "Dataset generation",
-                items: withRenderer([
+                items: [
                     {
-                        name: "range()",
+                        name: "range",
                         definition: "range([start = 0], end, [step = 1])",
                         description: "Helper function to generate an array of sequential numbers. Simply a re-export of [lodash.range](https://lodash.com/docs/4.17.10#range)"
                     }
-                ])
+                ]
             }
-        ])
+        ]
     }
 ];
-
-export default () => <Layout>
-    <ApiPage
-        after={<Typography><MarkdownAfter /></Typography>}
-        before={<Typography><MarkdownBefore /></Typography>}
-        sections={sections}
-    />
-</Layout>;
