@@ -4584,9 +4584,9 @@ dcme-gatsby@^1.0.8:
     rehype-slug "^2.0.3"
     remark-external-links "^5.0.0"
 
-dcme-style@^1.1.9:
-  version "1.1.9"
-  resolved "https://registry.yarnpkg.com/dcme-style/-/dcme-style-1.1.9.tgz#9487a4240900aa8c0cf93defc09dc3e56b33d6b3"
+dcme-style@^1.1.11:
+  version "1.1.11"
+  resolved "https://registry.yarnpkg.com/dcme-style/-/dcme-style-1.1.11.tgz#38b9e2dc6543192c5a9545096b95e90a3c5b7a5b"
   dependencies:
     prismjs "1.15.0"
     react "^16.8.6"

@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "dcme-gatsby": "^1.0.8",
-    "dcme-style": "^1.1.9",
+    "dcme-style": "^1.1.11",
     "gatsby": "^2.13.20",
     "unmutable": "0.47.0"
   }
