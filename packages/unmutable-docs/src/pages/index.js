@@ -39,26 +39,36 @@ const SuperDuper = styled(H1)`
     }
 `;
 
+const HeaderWrapper = styled.nav`
+    @media (min-width: ${props => props.theme.breakpoints[2]}) {
+        padding-left: ${props => props.theme.widths.nav};
+    }
+`;
+
 export default () => <Page>
-    <ContentNav>
-        <Box pt={5} pb={4}>
+    <HeaderWrapper>
+        <Box px={3} pt={5} pb={4}>
             <Text as="div" textStyle="monospace">
-                <Flex alignItems="flex-end">
+                <Flex alignItems="flex-end" flexWrap="wrap">
                     <Box mr={3}>
                         <SuperDuper>unmutable</SuperDuper>
                     </Box>
-                    <Box mr={3}>
-                        <Link href="https://www.npmjs.com/package/unmutable"><Icon icon="npm" /> npm</Link>
-                    </Box>
-                    <Box>
-                        <Link href="https://github.com/92green/unmutable"><Icon icon="github" /> github</Link>
-                    </Box>
+                    <Flex alignItems="flex-end" pt={2}>
+                        <Box mr={3}>
+                            <Link href="https://www.npmjs.com/package/unmutable"><Icon icon="npm" /> npm</Link>
+                        </Box>
+                        <Box>
+                            <Link href="https://github.com/92green/unmutable"><Icon icon="github" /> github</Link>
+                        </Box>
+                    </Flex>
                 </Flex>
             </Text>
         </Box>
-    </ContentNav>
+    </HeaderWrapper>
     <ContentNav
-        pb={6}
+        pageTop
+        pageBottom
+        mdxHeading
         pageNav={[
             '# Unmutable',
             'Installation',
