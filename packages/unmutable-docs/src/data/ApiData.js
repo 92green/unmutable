@@ -394,6 +394,11 @@ update(updater: (collection: any) => any) => (collection) => newCollection`,
                         description: "Like sortBy(), but guarantees that items are stable sorted, meaning that the order of items that produce equivalent sort values are retained."
                     },
                     {
+                        name: "sortLike",
+                        definition: "sortLike(\n    idCollection,\n    idMapper: (item) => id,\n    unmatchedIds?: boolean,\n    unmatchedItems?: boolean\n) => (collection) => newCollection",
+                        description: "This will sort `collection` so it matches the order of ids specified in `idCollection`. The `idMapper` function is used to generate ids for each item in `collection`, which are then compared against `idCollection`.\n\nAny ids in `idCollection` that have no match in `collection` will not be output, or if `unmatchedIds` is true then they will be output as `undefined`.\n\nIf `unmatched` is `true`, all items in `collection` that were not matched by `idCollection` will be output at the end of the returned collection, in the order they appear in the input `collection`."
+                    },
+                    {
                         name: "groupBy",
                         description: ""
                     },

@@ -125,6 +125,7 @@
     "some.js",
     "sort.js",
     "sortBy.js",
+    "sortLike.js",
     "splice.js",
     "stableSortBy.js",
     "startsWith.js",

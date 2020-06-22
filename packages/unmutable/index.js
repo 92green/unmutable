@@ -96,6 +96,7 @@ export {default as slice} from './lib/slice';
 export {default as some} from './lib/some';
 export {default as sortBy} from './lib/sortBy';
 export {default as sort} from './lib/sort';
+export {default as sortLike} from './lib/sortLike';
 export {default as splice} from './lib/splice';
 export {default as stableSortBy} from './lib/stableSortBy';
 export {default as startsWith} from './lib/startsWith';
