@@ -4905,8 +4905,8 @@ path-key@^2.0.0, path-key@^2.0.1:
   resolved "https://registry.yarnpkg.com/path-key/-/path-key-2.0.1.tgz#411cadb574c5a140d3a4b1910d40d80cc9f40b40"
 
 path-parse@^1.0.5, path-parse@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.6.tgz#d62dbb5679405d72c4737ec58600e9ddcf06d24c"
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.7.tgz#fbc114b60ca42b30d9daf5858e4bd68bbedb6735"
 
 path-type@^1.0.0:
   version "1.1.0"
@@ -6124,6 +6124,15 @@ union-value@^1.0.0:
 universalify@^0.1.0:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/universalify/-/universalify-0.1.2.tgz#b646f69be3942dabcecc9d6639c80dc105efaa66"
+
+unmutable@^0.48.0:
+  version "0.48.0"
+  resolved "https://registry.yarnpkg.com/unmutable/-/unmutable-0.48.0.tgz#6f1d0c009d570fb7c67d8b127393ff4d0ecc9707"
+  dependencies:
+    "@babel/runtime" "^7.1.5"
+    fast-deep-equal "^1.0.0"
+    is-plain-object "^2.0.4"
+    lodash.range "^3.2.0"
 
 unset-value@^1.0.0:
   version "1.0.0"
